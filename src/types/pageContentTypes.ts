@@ -10,6 +10,7 @@ export interface SortLink {
 
 export interface FileLink {
     image?: Image
+    emoji?: string
     name: string
     lastModified: string
     size: string

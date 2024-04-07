@@ -1,3 +1,4 @@
+import { getFileEmoji } from "@src/content/enhancers/getFileEmoji"
 import { FileLink, Image } from "@src/types/pageContentTypes"
 
 export function parseFileLinkRows(
@@ -27,9 +28,15 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         throw new Error("No image data cell found")
     }
 
+    const imageElement = imageDataCell.querySelector("img")
+
+    if (!imageElement) {
+        throw new Error("No image data found inside the cell")
+    }
+
     const image: Image = {
-        alt: imageDataCell.getAttribute("alt") || undefined,
-        src: imageDataCell.getAttribute("src") || undefined,
+        alt: imageElement.getAttribute("alt") || undefined,
+        src: imageElement.getAttribute("src") || undefined,
     }
 
     const nameDataCellAnchor = nameDataCell.querySelector("a")
@@ -59,8 +66,11 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
 
     const description = descriptionDataCell.textContent || ""
 
+    const emoji = getFileEmoji(name)
+
     return {
         name,
+        emoji,
         href,
         description,
         size,
