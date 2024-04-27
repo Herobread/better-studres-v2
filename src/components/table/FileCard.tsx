@@ -1,23 +1,25 @@
+import { FileLink } from "@src/types/pageContentTypes"
 import { Separator } from "../ui/separator"
 
 interface FileCardProps {
-	size: string
-	unit: string
+	fileLink: FileLink
 }
 
-export default function FileCard({ size, unit }: FileCardProps) {
-	return <>
-		<div>
-			<div>📕</div>
-			<div>pdf</div>
+export default function FileCard({ fileLink }: FileCardProps) {
+	const { description, href, lastModified, name, space, emoji, image } = fileLink
+
+	return <a href={href} className="grid p-3 gap-3 grid-cols-subgrid col-span-full bg-primary-foreground hover:bg-accent cursor-pointer rounded-xl items-center">
+		<div className="w-full grid">
+			<div className="text-center">{emoji}</div>
+			<div className="font-mono text-center">??</div>
 		</div>
 		<Separator orientation="vertical" />
-		<div>
-			<div>CS1006_P2_GameOfLife</div>
-			<div>Description</div>
+		<div className="grid items-center">
+			<div className="font-bold">{name}</div>
+			{/* {description ?? <div>{description}</div>} */}
 		</div>
-		<div>{size}</div>
-		<div>{unit}</div>
-		<div>2 month ago</div>
-	</>
+		<div className="text-right">{space?.size.toFixed(1)}</div>
+		<div className="ml-[-8px]">{space?.units}</div>
+		<div className="text-right">{lastModified}</div>
+	</a>
 }

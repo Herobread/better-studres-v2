@@ -13,7 +13,10 @@ export interface FileLink {
     emoji?: string
     name: string
     lastModified: string
-    size: string
+    space?: {
+        size: number
+        units: string
+    }
     description: string
     href: string
 }

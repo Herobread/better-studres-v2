@@ -18,7 +18,7 @@ module.exports = {
         },
         extend: {
             gridTemplateColumns: {
-                "files-list": "auto max-content max-content",
+                files: "max-content auto 4fr max-content max-content 3fr",
             },
             colors: {
                 border: "hsl(var(--border))",

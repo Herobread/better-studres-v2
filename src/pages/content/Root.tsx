@@ -22,9 +22,7 @@ export default function Root({ content }: { content: PageData }) {
                     <QuickLink href="/" name="root" />
                     <QuickLink href="/" name="root" />
                 </QuickLinkContainer>
-                <TableLayout>
-                    <div></div>
-                </TableLayout>
+                <TableLayout fileLinks={fileLinks} />
                 {/* <Table sortLinks={sortLinks} fileLinks={fileLinks} /> */}
             </MainLayout>
         </>

@@ -1,4 +1,5 @@
 import { getFileEmoji } from "@src/content/enhancers/getFileEmoji"
+import parseFileSize from "@src/content/utils/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
 
 export function parseFileLinkRows(
@@ -58,7 +59,8 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         throw new Error("No size cell found")
     }
 
-    const size = sizeDataCell.textContent || ""
+    const rawSize = sizeDataCell.textContent || ""
+    const space = parseFileSize(rawSize)
 
     if (!descriptionDataCell) {
         throw new Error("No descripiton cell found")
@@ -73,7 +75,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         emoji,
         href,
         description,
-        size,
+        space,
         lastModified,
         image,
     }
