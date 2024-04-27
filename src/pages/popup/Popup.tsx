@@ -3,5 +3,5 @@ export default function Popup(): JSX.Element {
         <div>
             <h1 className="text-xl">Better studres</h1>
         </div>
-    );
+    )
 }

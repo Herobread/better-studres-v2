@@ -33,24 +33,23 @@ jobs:
                   path: dist
 
     release:
-      name: Create Release
-      runs-on: ubuntu-latest
-      needs: build
-      steps:
-        - name: Get version from manifest.json
-          id: get_version
-          run: echo "::set-output name=version::$(node -e 'console.log(require("./manifest.json").version)')"
-  
-        - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ steps.get_version.outputs.version }}
-            release_name: Release ${{ steps.get_version.outputs.version }}
-            draft: false
-            prerelease: false
-            body: |
-              Release of version ${{ steps.get_version.outputs.version }}.
-                
+        name: Create Release
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Get version from manifest.json
+              id: get_version
+              run: echo "::set-output name=version::$(node -e 'console.log(require("./manifest.json").version)')"
+
+            - name: Create Release
+              id: create_release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ steps.get_version.outputs.version }}
+                  release_name: Release ${{ steps.get_version.outputs.version }}
+                  draft: false
+                  prerelease: false
+                  body: |
+                      Release of version ${{ steps.get_version.outputs.version }}.
