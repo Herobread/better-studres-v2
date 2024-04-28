@@ -1,8 +1,8 @@
-import { SortLink } from "@src/types/pageContentTypes"
+import { SortLinks } from "@src/types/pageContentTypes"
 
-export function parseHeaderRow(headerRow: HTMLTableRowElement): SortLink[] {
+export function parseHeaderRow(headerRow: HTMLTableRowElement): SortLinks {
     const sortLinkHeaders = headerRow.querySelectorAll("th")
-    const sortLinks: SortLink[] = []
+    const sortLinks: SortLinks = {}
 
     sortLinkHeaders.forEach((linkHeader) => {
         const anchor = linkHeader.querySelector("a")
@@ -14,10 +14,7 @@ export function parseHeaderRow(headerRow: HTMLTableRowElement): SortLink[] {
         const name = anchor.textContent || ""
         const href = anchor.href
 
-        sortLinks.push({
-            href,
-            name,
-        })
+        sortLinks[name] = href
     })
 
     return sortLinks

@@ -3,9 +3,8 @@ export interface Image {
     alt?: string
 }
 
-export interface SortLink {
-    name: string
-    href: string
+export interface SortLinks {
+    [name: string]: string
 }
 
 export interface FileLink {
@@ -14,6 +13,7 @@ export interface FileLink {
     name: string
     extension?: string
     lastModified: string
+    lastModifiedRelative: string
     space?: {
         size: number
         units: string
@@ -24,6 +24,6 @@ export interface FileLink {
 
 export interface PageData {
     title: string
-    sortLinks: SortLink[]
+    sortLinks: SortLinks
     fileLinks: FileLink[]
 }

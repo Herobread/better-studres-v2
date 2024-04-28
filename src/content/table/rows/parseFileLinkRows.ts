@@ -2,6 +2,7 @@ import { getFileEmoji } from "@src/content/enhancers/getFileEmoji"
 import parseFileSize from "@src/content/utils/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
 import splitFileName from "@src/content/utils/splitFileName"
+import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
 
 export function parseFileLinkRows(
     fileLinkRows: HTMLTableRowElement[],
@@ -57,6 +58,9 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     }
 
     const lastModified = lastModifiedDataCell.textContent || ""
+    const now = new Date()
+    const fileModifiedDate = new Date(lastModified)
+    const lastModifiedRelative = getTimeDifferenceString(fileModifiedDate, now)
 
     if (!sizeDataCell) {
         throw new Error("No size cell found")
@@ -87,6 +91,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         description,
         space,
         lastModified,
+        lastModifiedRelative,
         image,
     }
 }

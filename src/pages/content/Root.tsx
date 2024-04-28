@@ -19,7 +19,7 @@ export default function Root({ content }: { content: PageData }) {
                     <QuickLink href="/" name="root" />
                     <QuickLink href="/CS1006" name="CS1006" />
                 </QuickLinkContainer>
-                <Table fileLinks={fileLinks} />
+                <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                 {/* <Table sortLinks={sortLinks} fileLinks={fileLinks} /> */}
             </MainLayout>
         </>

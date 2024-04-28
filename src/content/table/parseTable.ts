@@ -1,10 +1,10 @@
-import { FileLink, SortLink } from "../../types/pageContentTypes"
+import { FileLink, SortLinks } from "../../types/pageContentTypes"
 import { getTableRows } from "./getTableRows"
 import { parseFileLinkRows } from "./rows/parseFileLinkRows"
 import { parseHeaderRow } from "./rows/parseHeaderRow"
 
 export function parseTable(content: HTMLElement): {
-    sortLinks: SortLink[]
+    sortLinks: SortLinks
     fileLinks: FileLink[]
 } {
     const tableRows = getTableRows(content)
@@ -16,7 +16,7 @@ export function parseTable(content: HTMLElement): {
     fileLinkRows.shift()
     fileLinkRows.pop()
 
-    const sortLinks: SortLink[] = parseHeaderRow(headerRow)
+    const sortLinks: SortLinks = parseHeaderRow(headerRow)
     const fileLinks: FileLink[] = parseFileLinkRows(fileLinkRows)
 
     return { sortLinks, fileLinks }
