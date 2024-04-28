@@ -1,4 +1,4 @@
-export function getFileExtension(name: string): string {
+export function getFileEmojiId(name: string): string {
     if (name === "Parent Directory") {
         return "parentDir"
     }

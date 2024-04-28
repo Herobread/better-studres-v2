@@ -1,6 +1,7 @@
 import { getFileEmoji } from "@src/content/enhancers/getFileEmoji"
 import parseFileSize from "@src/content/utils/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
+import splitFileName from "@src/content/utils/splitFileName"
 
 export function parseFileLinkRows(
     fileLinkRows: HTMLTableRowElement[],
@@ -46,7 +47,9 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         throw new Error("No name cell found")
     }
 
-    const name = nameDataCellAnchor.textContent || ""
+    const rawName = nameDataCellAnchor.textContent || ""
+    const { extension, name } = splitFileName(rawName)
+
     const href = nameDataCellAnchor.href || ""
 
     if (!lastModifiedDataCell) {
@@ -66,12 +69,19 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         throw new Error("No descripiton cell found")
     }
 
-    const description = descriptionDataCell.textContent || ""
+    let rawDescription = descriptionDataCell.textContent
 
-    const emoji = getFileEmoji(name)
+    if (rawDescription && rawDescription.replace(/\s{2,}/g, " ")) {
+        rawDescription = null
+    }
+
+    const description = rawDescription || undefined
+
+    const emoji = getFileEmoji(rawName)
 
     return {
         name,
+        extension,
         emoji,
         href,
         description,

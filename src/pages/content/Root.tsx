@@ -2,7 +2,7 @@ import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import QuickLink from "@src/components/quickAccess/QuickLink"
 import QuickLinkContainer from "@src/components/quickAccess/QuickLinkContainer"
-import TableLayout from "@src/components/table/TableLayout"
+import Table from "@src/components/table/Table"
 import Title from "@src/components/Title"
 import { PageData } from "@src/types/pageContentTypes"
 
@@ -18,11 +18,8 @@ export default function Root({ content }: { content: PageData }) {
                 <QuickLinkContainer>
                     <QuickLink href="/" name="root" />
                     <QuickLink href="/CS1006" name="CS1006" />
-                    <QuickLink href="/" name="root" />
-                    <QuickLink href="/" name="root" />
-                    <QuickLink href="/" name="root" />
                 </QuickLinkContainer>
-                <TableLayout fileLinks={fileLinks} />
+                <Table fileLinks={fileLinks} />
                 {/* <Table sortLinks={sortLinks} fileLinks={fileLinks} /> */}
             </MainLayout>
         </>

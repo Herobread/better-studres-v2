@@ -12,12 +12,13 @@ export interface FileLink {
     image?: Image
     emoji?: string
     name: string
+    extension?: string
     lastModified: string
     space?: {
         size: number
         units: string
     }
-    description: string
+    description?: string
     href: string
 }
 
