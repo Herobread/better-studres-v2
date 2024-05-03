@@ -27,3 +27,8 @@ export interface PageData {
     sortLinks: SortLinks
     fileLinks: FileLink[]
 }
+
+export interface QuickLink {
+    name: string
+    href: string
+}

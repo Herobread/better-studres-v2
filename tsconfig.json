@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "esnext",
+        "module": "esnext",
         "types": ["vite/client", "node", "chrome"],
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": false,
@@ -10,7 +11,6 @@
         "strict": true,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
-        "module": "esnext",
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "noEmit": true,

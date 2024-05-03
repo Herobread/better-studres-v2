@@ -3,5 +3,5 @@ interface QuickLinkContainerProps {
 }
 
 export default function QuickLinkContainer({ children }: QuickLinkContainerProps) {
-	return <div className="flex gap-3">{children}</div>
+	return <div className="flex gap-3 flex-wrap">{children}</div>
 }

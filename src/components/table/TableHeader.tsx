@@ -6,7 +6,6 @@ interface TableHeaderProps {
 }
 
 export default function TableHeader({ sortLinks }: TableHeaderProps) {
-	console.log(sortLinks)
 	return <div className="grid p-3 gap-3 grid-cols-subgrid col-span-full items-center">
 		<div></div> {/* icon */}
 		<div></div> {/* separator */}
