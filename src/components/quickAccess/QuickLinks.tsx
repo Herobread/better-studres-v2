@@ -1,18 +1,16 @@
 import QuickLinkContainer from "./QuickLinkContainer"
 import QuickLinkCard from "./QuickLinkCard"
-import { addQuickLink, deleteQuickLink, loadQuickLinks } from "./QuickLinkManager"
+import { deleteQuickLink, loadQuickLinks } from "./QuickLinkManager"
 import { useQuery } from "@tanstack/react-query"
 import QuickLinkButton from "./QuickLinkButton"
-import { useState } from "react"
 import generateQuickLinkInfo from "./generateQuickLinkInfo"
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
-import { Input } from "../ui/input"
-import CompactLayout from "../layouts/CompactLayout"
-import { Button } from "../ui/button"
 import AddQuickLinkForm from "./AddQuickLinkForm"
+import { useState } from "react"
+import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../ui/context-menu"
 
 export default function QuickLinks() {
-	const [isEditing, setIsEditing] = useState(false)
+	const [isOpen, setIsOpen] = useState(false)
 
 	const { data, refetch } = useQuery({
 		queryKey: ['quickLinks'],
@@ -20,44 +18,49 @@ export default function QuickLinks() {
 	})
 
 	const currentUrl = window.location.toString()
-	const isSaveable = !(data?.some(e => e.href === currentUrl))
 	const currentUrlQuickLink = generateQuickLinkInfo(currentUrl)
 
-	const handleAddQuickLink = async () => {
-		if (!isSaveable) {
-			return
-		}
-
-		await addQuickLink(currentUrlQuickLink)
+	const handleAfterAddQuickLink = async () => {
 		await refetch()
+		setIsOpen(false)
 	}
 
-	const handleRemoveQuickLink = async () => {
-		await deleteQuickLink(currentUrl)
+	const handleRemoveQuickLink = async (id: number) => {
+		await deleteQuickLink(id)
 		await refetch()
-	}
-
-	const handleSwitchEditMode = () => {
-		setIsEditing(isEditing => !isEditing)
 	}
 
 	return <QuickLinkContainer>
-		{
-			data && data.map(quickLink => {
-				// if (quickLink.name === activeUrlQuickLink.name)
-				// 	return <QuickLinkButton onClick={handleRemoveQuickLink} icon="📍" content={activeUrlQuickLink.name} />
-
-				return <QuickLinkCard quickLink={quickLink} key={quickLink.href} />
-			})
-		}
-		<Popover>
+		<Popover open={isOpen} onOpenChange={setIsOpen}>
 			<PopoverTrigger>
 				<QuickLinkButton icon="➕" content="Save" />
 			</PopoverTrigger>
 			<PopoverContent>
-				<AddQuickLinkForm href={currentUrlQuickLink.href} name={currentUrlQuickLink.name} />
+				<AddQuickLinkForm href={currentUrlQuickLink.href} name={currentUrlQuickLink.name} afterSubmit={handleAfterAddQuickLink} />
 			</PopoverContent>
 		</Popover>
-		{/* <QuickLinkButton onClick={handleSwitchEditMode} icon={isEditing ? "👌" : "✏"} /> */}
+		{
+			data && data.map(quickLink => {
+				return <ContextMenu key={quickLink.href}>
+					<ContextMenuTrigger>
+						<QuickLinkCard quickLink={quickLink} />
+					</ContextMenuTrigger>
+					<ContextMenuContent>
+						<ContextMenuItem>
+							<button onClick={() => { console.log('aaaaaaaaaaaa') }}>
+								Edit
+							</button>
+						</ContextMenuItem>
+						<ContextMenuItem>
+							<button onClick={async () => {
+								await handleRemoveQuickLink(quickLink.id)
+							}}>
+								Delete
+							</button>
+						</ContextMenuItem>
+					</ContextMenuContent>
+				</ContextMenu>
+			})
+		}
 	</QuickLinkContainer>
 }

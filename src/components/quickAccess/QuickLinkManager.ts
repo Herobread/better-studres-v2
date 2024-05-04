@@ -1,6 +1,6 @@
-import { QuickLink } from "@src/types/pageContentTypes"
+import { QuickLink, RawQuickLink } from "@src/types/pageContentTypes"
 
-export async function addQuickLink(quickLink: QuickLink) {
+export async function addQuickLink(rawQuickLink: RawQuickLink) {
     const result = await chrome.storage.local.get("quickLinks")
     let currentLinks: QuickLink[] = result.quickLinks
 
@@ -13,7 +13,11 @@ export async function addQuickLink(quickLink: QuickLink) {
         currentLinks = []
     }
 
-    currentLinks.push(quickLink)
+    const now = new Date()
+
+    currentLinks.push({ id: now.getTime(), ...rawQuickLink })
+
+    console.log(currentLinks)
 
     await chrome.storage.local.set({ quickLinks: currentLinks })
 }
@@ -28,11 +32,11 @@ export async function loadQuickLinks() {
     return quickLinks
 }
 
-export async function deleteQuickLink(href: string) {
+export async function deleteQuickLink(id: number) {
     const quickLinks = await loadQuickLinks()
 
-    const index = quickLinks.findIndex((quickLink) => quickLink.href === href)
-    quickLinks.splice(index)
+    const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
+    quickLinks.splice(index, 1)
 
     await chrome.storage.local.set({ quickLinks: quickLinks })
 }

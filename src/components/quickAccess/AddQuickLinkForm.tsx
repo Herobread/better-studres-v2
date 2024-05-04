@@ -2,23 +2,26 @@ import { z } from "zod"
 import CompactLayout from "../layouts/CompactLayout"
 import H2 from "../typography/H2"
 import { Button } from "../ui/button"
-import { Form, FormField, FormItem } from "../ui/form"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
 import { Input } from "../ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import NormalLayout from "../layouts/NormalLayout"
+import { addQuickLink } from "./QuickLinkManager"
 
 const formSchema = z.object({
-	icon: z.string().emoji().max(2),
-	name: z.string().max(50),
-	href: z.string().min(1)
+	icon: z.string().emoji().max(4, "4 emoji max"),
+	name: z.string().min(1, "Name is required").max(50),
+	href: z.string().min(1, "Link is required")
 })
 
 interface AddQuickLinkFormProps {
 	name?: string
 	href?: string
+	afterSubmit?: () => void
 }
 
-export default function AddQuickLinkForm({ href, name }: AddQuickLinkFormProps) {
+export default function AddQuickLinkForm({ href, name, afterSubmit }: AddQuickLinkFormProps) {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -28,44 +31,65 @@ export default function AddQuickLinkForm({ href, name }: AddQuickLinkFormProps) 
 		}
 	})
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+	async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
+		await addQuickLink(quickLinkData)
+
+		if (afterSubmit) {
+			afterSubmit()
+		}
 	}
 
-	return <CompactLayout>
-		<CompactLayout>
-			<H2>Add quick link</H2>
-			{/* <p>For emoji press Win + . or ctrl + . on linux or ctrl + cmd + space on mac</p> */}
-		</CompactLayout>
+	return <NormalLayout>
+		<H2>Add quick link</H2>
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)}>
-				<CompactLayout>
-					<div className="grid grid-cols-[50px_1fr] gap-2">
+			<form onSubmit={form.handleSubmit(onSubmit)} className="m-0">
+				<NormalLayout>
+					<CompactLayout>
+						<div className="grid grid-cols-[60px_1fr] gap-2">
+							<FormField
+								control={form.control}
+								name="icon"
+								render={({ field }) => {
+									return <FormItem>
+										<FormLabel>Icon(s)</FormLabel>
+										<FormControl>
+											<Input autoComplete="off" placeholder="icon" className="text-center" {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								}}
+							/>
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => {
+									return <FormItem>
+										<FormLabel>Name</FormLabel>
+										<FormControl>
+											<Input autoComplete="off" placeholder="name" defaultValue={name} {...field} />
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								}}
+							/>
+						</div>
 						<FormField
 							control={form.control}
-							name="icon"
+							name='href'
 							render={({ field }) => {
-								return <Input placeholder="name" className="text-center" {...field} />
+								return <FormItem>
+									<FormLabel>Link</FormLabel>
+									<FormControl>
+										<Input autoComplete="off" placeholder="url" defaultValue={href} {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
 							}}
 						/>
-						<FormField
-							control={form.control}
-							name="name"
-							render={({ field }) => {
-								return <Input placeholder="name" defaultValue={name} {...field} />
-							}}
-						/>
-					</div>
-					<FormField
-						control={form.control}
-						name='href'
-						render={({ field }) => {
-							return <Input placeholder="url" defaultValue={href} {...field} />
-						}}
-					/>
-					<Button type="submit">Save</Button>
-				</CompactLayout>
+					</CompactLayout>
+					<Button type="submit">Add</Button>
+				</NormalLayout>
 			</form>
 		</Form>
-	</CompactLayout>
+	</NormalLayout>
 }

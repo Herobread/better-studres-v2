@@ -29,6 +29,14 @@ export interface PageData {
 }
 
 export interface QuickLink {
+    id: number
+    icon: string
+    name: string
+    href: string
+}
+
+export interface RawQuickLink {
+    icon: string
     name: string
     href: string
 }
