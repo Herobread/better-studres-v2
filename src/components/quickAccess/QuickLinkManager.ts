@@ -32,6 +32,24 @@ export async function loadQuickLinks() {
     return quickLinks
 }
 
+export async function getQuickLink(id: number) {
+    const quickLinks = await loadQuickLinks()
+
+    const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
+
+    return quickLinks[index]
+}
+
+export async function updateQuickLink(id: number, quickLink: RawQuickLink) {
+    const quickLinks = await loadQuickLinks()
+
+    const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
+
+    quickLinks[index] = { id, ...quickLink }
+
+    await chrome.storage.local.set({ quickLinks })
+}
+
 export async function deleteQuickLink(id: number) {
     const quickLinks = await loadQuickLinks()
 

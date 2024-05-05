@@ -1,13 +1,19 @@
+import { QuickLink } from "@src/types/pageContentTypes"
 import { z } from "zod"
-import CompactLayout from "../layouts/CompactLayout"
+import NormalLayout from "../layouts/NormalLayout"
 import H2 from "../typography/H2"
-import { Button } from "../ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form"
-import { Input } from "../ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import NormalLayout from "../layouts/NormalLayout"
-import { addQuickLink } from "./QuickLinkManager"
+import { addQuickLink, updateQuickLink } from "./QuickLinkManager"
+import CompactLayout from "../layouts/CompactLayout"
+import { Input } from "../ui/input"
+import { Button } from "../ui/button"
+
+interface EditQuickLinkFormProps {
+	quickLink: QuickLink
+	afterSubmit?: () => void
+}
 
 const formSchema = z.object({
 	icon: z.string().emoji().max(4, "4 emoji max"),
@@ -15,24 +21,16 @@ const formSchema = z.object({
 	href: z.string().min(1, "Link is required")
 })
 
-interface AddQuickLinkFormProps {
-	name?: string
-	href?: string
-	afterSubmit?: () => void
-}
-
-export default function AddQuickLinkForm({ href, name, afterSubmit }: AddQuickLinkFormProps) {
+export default function EditQuickLinkForm({ quickLink, afterSubmit }: EditQuickLinkFormProps) {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			icon: '📁',
-			name,
-			href
+			...quickLink
 		}
 	})
 
 	async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
-		await addQuickLink(quickLinkData)
+		await updateQuickLink(quickLink.id, quickLinkData)
 
 		if (afterSubmit) {
 			afterSubmit()
@@ -40,7 +38,7 @@ export default function AddQuickLinkForm({ href, name, afterSubmit }: AddQuickLi
 	}
 
 	return <NormalLayout>
-		<H2>Add quick link</H2>
+		<H2>Update &quot;{quickLink.name}&quot;</H2>
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="m-0">
 				<NormalLayout>
@@ -87,7 +85,7 @@ export default function AddQuickLinkForm({ href, name, afterSubmit }: AddQuickLi
 							}}
 						/>
 					</CompactLayout>
-					<Button type="submit">Add</Button>
+					<Button type="submit">Save</Button>
 				</NormalLayout>
 			</form>
 		</Form>

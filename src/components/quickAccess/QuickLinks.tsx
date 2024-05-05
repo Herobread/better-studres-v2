@@ -8,19 +8,25 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import AddQuickLinkForm from "./AddQuickLinkForm"
 import { useState } from "react"
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../ui/context-menu"
+import { Dialog, DialogContent } from "../ui/dialog"
+import EditQuickLinkForm from "./EditQuickLinkForm"
 
 export default function QuickLinks() {
 	const [isOpen, setIsOpen] = useState(false)
+	const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
+	const [editLinkId, setEditLinkId] = useState(-1)
 
 	const { data, refetch } = useQuery({
 		queryKey: ['quickLinks'],
 		queryFn: loadQuickLinks
 	})
 
+	const quickLinkToEdit = data?.find(link => link.id === editLinkId)
+
 	const currentUrl = window.location.toString()
 	const currentUrlQuickLink = generateQuickLinkInfo(currentUrl)
 
-	const handleAfterAddQuickLink = async () => {
+	const handleQuickLinksUpdated = async () => {
 		await refetch()
 		setIsOpen(false)
 	}
@@ -36,7 +42,7 @@ export default function QuickLinks() {
 				<QuickLinkButton icon="➕" content="Save" />
 			</PopoverTrigger>
 			<PopoverContent>
-				<AddQuickLinkForm href={currentUrlQuickLink.href} name={currentUrlQuickLink.name} afterSubmit={handleAfterAddQuickLink} />
+				<AddQuickLinkForm href={currentUrlQuickLink.href} name={currentUrlQuickLink.name} afterSubmit={handleQuickLinksUpdated} />
 			</PopoverContent>
 		</Popover>
 		{
@@ -46,21 +52,34 @@ export default function QuickLinks() {
 						<QuickLinkCard quickLink={quickLink} />
 					</ContextMenuTrigger>
 					<ContextMenuContent>
-						<ContextMenuItem>
-							<button onClick={() => { console.log('aaaaaaaaaaaa') }}>
-								Edit
-							</button>
+						<ContextMenuItem onSelect={() => {
+							setEditLinkId(quickLink.id)
+							setIsEditDialogOpen(true)
+						}}>
+							Edit
 						</ContextMenuItem>
-						<ContextMenuItem>
-							<button onClick={async () => {
-								await handleRemoveQuickLink(quickLink.id)
-							}}>
-								Delete
-							</button>
+						<ContextMenuItem onSelect={async () => {
+							await handleRemoveQuickLink(quickLink.id)
+						}}>
+							Delete
 						</ContextMenuItem>
 					</ContextMenuContent>
 				</ContextMenu>
 			})
 		}
+
+		<Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+			<DialogContent>
+				{
+					quickLinkToEdit ? <EditQuickLinkForm quickLink={quickLinkToEdit} afterSubmit={() => {
+						setEditLinkId(-1)
+						setIsEditDialogOpen(false)
+						handleQuickLinksUpdated()
+					}} />
+						:
+						<p>unable to edit</p>
+				}
+			</DialogContent>
+		</Dialog>
 	</QuickLinkContainer>
 }

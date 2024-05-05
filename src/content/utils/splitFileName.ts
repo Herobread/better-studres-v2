@@ -14,6 +14,14 @@ export default function splitFileName(filename: string) {
     }
 
     const separatorPosition = filename.lastIndexOf(".")
+
+    if (separatorPosition === -1) {
+        return {
+            name: filename,
+            extension: "file",
+        }
+    }
+
     const name = filename.substring(0, separatorPosition)
     const extension = filename.substring(separatorPosition + 1, filename.length)
 
