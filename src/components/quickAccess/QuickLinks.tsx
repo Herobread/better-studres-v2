@@ -10,6 +10,7 @@ import { useState } from "react"
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../ui/context-menu"
 import { Dialog, DialogContent } from "../ui/dialog"
 import EditQuickLinkForm from "./EditQuickLinkForm"
+import { Edit2Icon, Trash2Icon } from "lucide-react"
 
 export default function QuickLinks() {
 	const [isOpen, setIsOpen] = useState(false)
@@ -56,12 +57,12 @@ export default function QuickLinks() {
 							setEditLinkId(quickLink.id)
 							setIsEditDialogOpen(true)
 						}}>
-							Edit
+							<Edit2Icon />Edit
 						</ContextMenuItem>
 						<ContextMenuItem onSelect={async () => {
 							await handleRemoveQuickLink(quickLink.id)
 						}}>
-							Delete
+							<Trash2Icon /> Delete
 						</ContextMenuItem>
 					</ContextMenuContent>
 				</ContextMenu>
@@ -77,7 +78,7 @@ export default function QuickLinks() {
 						handleQuickLinksUpdated()
 					}} />
 						:
-						<p>unable to edit</p>
+						<p>QUick link not found</p>
 				}
 			</DialogContent>
 		</Dialog>
