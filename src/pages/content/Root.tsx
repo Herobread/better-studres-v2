@@ -1,10 +1,10 @@
+import Commands from "@src/components/command/Commands"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import QuickLinks from "@src/components/quickAccess/QuickLinks"
 import Table from "@src/components/table/Table"
 import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTracker"
 import Title from "@src/components/typography/Title"
-import { Button } from "@src/components/ui/button"
 import { PageData } from "@src/types/pageContentTypes"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -16,6 +16,7 @@ export default function Root({ content, }: { content: PageData, }) {
     return (
         <>
             <QueryClientProvider client={queryClient}>
+                <Commands />
                 <MainLayout>
                     <CompactLayout>
                         <Title>{title}</Title>
