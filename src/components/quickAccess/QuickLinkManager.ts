@@ -17,8 +17,6 @@ export async function addQuickLink(rawQuickLink: RawQuickLink) {
 
     currentLinks.push({ id: now.getTime(), ...rawQuickLink })
 
-    console.log(currentLinks)
-
     await chrome.storage.local.set({ quickLinks: currentLinks })
 }
 

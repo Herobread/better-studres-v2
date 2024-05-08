@@ -57,7 +57,7 @@ export default function QuickLinks() {
 							setEditLinkId(quickLink.id)
 							setIsEditDialogOpen(true)
 						}}>
-							<Edit2Icon />Edit
+							<Edit2Icon /> Edit
 						</ContextMenuItem>
 						<ContextMenuItem onSelect={async () => {
 							await handleRemoveQuickLink(quickLink.id)

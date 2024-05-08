@@ -12,6 +12,7 @@ export interface FileLink {
     emoji?: string
     name: string
     extension?: string
+    lastModifiedDate: Date
     lastModified: string
     lastModifiedRelative: string
     space?: {
@@ -20,6 +21,18 @@ export interface FileLink {
     }
     description?: string
     href: string
+    virtualPath: string[]
+}
+
+export interface TrackedFileLinkRecord {
+    fileLink: FileLink
+    modified: Date
+}
+
+export interface TrackedFileLinkRecords {
+    history: TrackedFileLinkRecord[]
+    modified: Date
+    current: FileLink
 }
 
 export interface PageData {
