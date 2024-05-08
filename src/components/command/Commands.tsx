@@ -34,7 +34,7 @@ export default function Commands() {
 				<CommandGroup heading='Visited paths'>
 					{
 						data && data.map(item => {
-							return <CommandItem disabled={false} keywords={[item.href]} key={item.href} onSelect={() => {
+							return <CommandItem keywords={[item.href]} key={item.href} onSelect={() => {
 								window.location.replace(item.href);
 							}}>{item.name}</CommandItem>
 						})
