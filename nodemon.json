@@ -6,6 +6,7 @@
         "src",
         "utils",
         "vite.config.ts",
+        "tailwind.config.ts",
         "manifest.json",
         "manifest.dev.json"
     ],
