@@ -9,6 +9,13 @@ export const emojiMap: { [key: string]: string } = {
     "Exercises/": "🏋️‍♂️",
     "Lectures/": "🎓",
     "Tutorials/": "📝",
+    "First/": "🥇",
+    "Hons/": "🎓",
+    "MSci/": "🔬",
+    "Masters/": "🎓",
+    "Second/": "🥈",
+    "Orientation/": "🌐",
+    "Reviews/": "📝",
     // main
     file: "📄",
     folder: "📁",

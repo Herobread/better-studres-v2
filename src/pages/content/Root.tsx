@@ -6,16 +6,14 @@ import Table from "@src/components/table/Table"
 import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTracker"
 import Title from "@src/components/typography/Title"
 import { PageData } from "@src/types/pageContentTypes"
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
+import Providers from "./Providers"
 
 export default function Root({ content, }: { content: PageData, }) {
     const { fileLinks, sortLinks, title } = content
 
     return (
         <>
-            <QueryClientProvider client={queryClient}>
+            <Providers>
                 <Commands />
                 <MainLayout>
                     <CompactLayout>
@@ -25,7 +23,7 @@ export default function Root({ content, }: { content: PageData, }) {
                     <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                     <VirtualFileSystemTracker fileLinks={fileLinks} />
                 </MainLayout>
-            </QueryClientProvider>
+            </Providers>
         </>
     )
 }

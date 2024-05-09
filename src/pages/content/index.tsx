@@ -2,12 +2,9 @@ import { createRoot } from "react-dom/client"
 import "./style.css"
 import Root from "./Root"
 import { parsePageContent } from "@src/content/parser"
+import CommandsRoot from "./CommandsRoot"
 
-(async () => {
-    const div = document.createElement("div")
-    div.id = "__root"
-    document.body.appendChild(div)
-
+try {
     const rootContainer = document.body
 
     const parsedPageContent = parsePageContent(rootContainer)
@@ -17,9 +14,19 @@ import { parsePageContent } from "@src/content/parser"
 
     root.render(<Root content={parsedPageContent} />)
 
-    try {
-        console.log("content script loaded")
-    } catch (e) {
-        console.error(e)
-    }
-})();
+    console.log("Root loaded")
+} catch (e) {
+    // load only commands then
+    const div = document.createElement('div');
+    div.id = '__better_studres__root';
+    document.body.appendChild(div);
+
+    const rootContainer = document.querySelector('#__better_studres__root');
+    if (!rootContainer) throw new Error("Can't find Options root element");
+
+    const root = createRoot(rootContainer);
+
+    root.render(<CommandsRoot />)
+
+    console.log("Commands root loaded")
+}

@@ -72,6 +72,7 @@ export const moduleEmojiMap: { [key: string]: string } = {
     CS5959: "🤖",
     CS5960: "🏛️",
     CS5999: "📝",
+    ID5220: "🐛",
     ID5059: "🔎",
     IS1901: "💻",
     IS5102: "💾",

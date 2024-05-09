@@ -12,6 +12,13 @@ export function getFileEmojiId(fileName: string): string {
         "Exercises/",
         "Lectures/",
         "Tutorials/",
+        "First/",
+        "Hons/",
+        "MSci/",
+        "Masters/",
+        "Second/",
+        "Orientation/",
+        "Reviews/",
     ]
 
     if (specialNames.includes(fileName)) {
