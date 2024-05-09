@@ -2,16 +2,22 @@ import { getFiles, mapVirtualFilesToList } from "@src/content/versionControl/vir
 import { useQuery } from "@tanstack/react-query"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../components/ui/command"
 import { useEffect, useState } from "react"
+import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 
 export default function Commands() {
 	const [open, setOpen] = useState(false)
 
-	const { data } = useQuery({
+	const { data: commandsData } = useQuery({
 		queryKey: ['commands'],
 		queryFn: getFiles,
 		select(data) {
 			return mapVirtualFilesToList(data.files || {})
 		},
+	})
+
+	const { data: quickLinks } = useQuery({
+		queryKey: ['quicklinks'],
+		queryFn: loadQuickLinks
 	})
 
 	useEffect(() => {
@@ -31,9 +37,23 @@ export default function Commands() {
 			<CommandInput placeholder="Type a command or search..." />
 			<CommandList>
 				<CommandEmpty>No results found.</CommandEmpty>
+				<CommandGroup heading='Quick links'>
+					{
+						quickLinks && quickLinks.map(quickLink => {
+							const { id, href, icon, name } = quickLink
+
+							return <CommandItem key={id} onSelect={() => {
+								window.location.replace(href)
+							}}>
+								{icon} {name}
+							</CommandItem>
+						})
+					}
+				</CommandGroup>
+
 				<CommandGroup heading='Visited paths'>
 					{
-						data && data.map(item => {
+						commandsData && commandsData.map(item => {
 							return <CommandItem keywords={[item.href]} key={item.href} onSelect={() => {
 								window.location.replace(item.href);
 							}}>{item.name}</CommandItem>

@@ -1,14 +1,15 @@
 import { FileLink } from "@src/types/pageContentTypes"
+import { getFileEmoji } from "../enhancers/getFileEmoji"
+import { getModuleEmoji } from "../enhancers/getModuleEmoji"
 
-// let data = {}
-
-// export function saveFileLinks(fileLinks: FileLink[]) {}
 export async function getFiles() {
     return (await chrome.storage.local.get("files")) as VirtualFileSystem
 }
 
+const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
+
 export function convertVirtualPathToUrl(path: string[]) {
-    return "https://studres.cs.st-andrews.ac.uk/" + path.join("/") + "/"
+    return BASE_URL + path.join("/") + "/"
 }
 
 export interface VirtualFileSystem {
@@ -26,7 +27,6 @@ export function mapVirtualFilesToList(
 ): VirtualFileSystemCommand[] {
     // Initialize the array to store results
     const result: VirtualFileSystemCommand[] = []
-    const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
 
     for (const key in files) {
         // If the key is actually part of the object (as opposed to inherited properties)
@@ -34,10 +34,15 @@ export function mapVirtualFilesToList(
             // Build the full path for the current file/directory
             const currentPath = parentPath.concat(key)
 
-            let name = `${currentPath[0]}`
+            const moduleCode = currentPath[0]
+            const moduleEmoji = getModuleEmoji(moduleCode)
+            let name = `${moduleEmoji} ${moduleCode}`
 
             if (currentPath.length > 1) {
-                name = `${currentPath[0]} - ${currentPath[currentPath.length - 1]}`
+                const fileName = currentPath[currentPath.length - 1]
+                const fileEmoji = getFileEmoji(fileName)
+
+                name += ` - ${fileEmoji} ${fileName}`
             }
 
             result.push({

@@ -1,5 +1,5 @@
 import { getFileEmojiId } from "../utils/getFileEmojiId"
-import { emojiMap } from "./emojiMap"
+import { emojiMap } from "./fileEmojiMap"
 
 export function getFileEmoji(filename: string) {
     const FALLBACK_EMOJI = "📄"

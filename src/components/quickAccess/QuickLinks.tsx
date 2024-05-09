@@ -18,7 +18,7 @@ export default function QuickLinks() {
 	const [editLinkId, setEditLinkId] = useState(-1)
 
 	const { data, refetch } = useQuery({
-		queryKey: ['quickLinks'],
+		queryKey: ['quicklinks'],
 		queryFn: loadQuickLinks
 	})
 
