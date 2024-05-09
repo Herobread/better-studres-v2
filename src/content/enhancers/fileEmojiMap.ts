@@ -1,8 +1,17 @@
 export const emojiMap: { [key: string]: string } = {
+    // special
+    "Parent Directory": "🔙",
+    "ThinkingInJava/": "🧠",
+    "javascript-101/": "🌐",
+    "0-General/": "🌟",
+    "Coursework/": "📚",
+    "Examples/": "💡",
+    "Exercises/": "🏋️‍♂️",
+    "Lectures/": "🎓",
+    "Tutorials/": "📝",
     // main
     file: "📄",
     folder: "📁",
-    parentDir: "🔙",
     // text
     pdf: "📕",
     pptx: "📇",

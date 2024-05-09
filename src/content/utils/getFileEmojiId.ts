@@ -1,29 +1,34 @@
-export function getFileEmojiId(name: string): string {
-    if (name === "Parent Directory") {
-        return "parentDir"
+import splitFileName from "./splitFileName"
+
+export function getFileEmojiId(fileName: string): string {
+    // return name as it is
+    const specialNames = [
+        "Parent Directory",
+        "ThinkingInJava/",
+        "javascript-101/",
+        "0-General/",
+        "Coursework/",
+        "Examples/",
+        "Exercises/",
+        "Lectures/",
+        "Tutorials/",
+    ]
+
+    if (specialNames.includes(fileName)) {
+        return fileName
     }
 
-    if (name === "ThinkingInJava/") {
-        return "thinking"
-    }
+    fileName = fileName.toLowerCase()
 
-    if (name === "javascript-101/") {
-        return "html"
-    }
-
-    name = name.toLowerCase()
-
-    if (name.endsWith("/")) {
+    if (fileName.endsWith("/")) {
         return "folder"
     }
 
-    const parts = name.split(".")
+    const { extension, name } = splitFileName(fileName)
 
-    if (parts.length === 1) {
+    if (!extension) {
         return name
     }
-
-    const extension = parts[parts.length - 1]
 
     return extension
 }
