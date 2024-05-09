@@ -39,8 +39,13 @@ export function mapVirtualFilesToList(
             let name = `${moduleEmoji} ${moduleCode}`
 
             if (currentPath.length > 1) {
+                // works for most of the folders
+                const isFolder =
+                    !currentPath[currentPath.length - 1].includes(".")
+                const folderChar = isFolder ? "/" : ""
+
                 const fileName = currentPath[currentPath.length - 1]
-                const fileEmoji = getFileEmoji(fileName)
+                const fileEmoji = getFileEmoji(fileName + folderChar)
 
                 name += ` - ${fileEmoji} ${fileName}`
             }

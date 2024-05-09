@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import NormalLayout from "../layouts/NormalLayout"
 import { addQuickLink } from "./QuickLinkManager"
+import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
+import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
 
 const formSchema = z.object({
 	icon: z.string().emoji().max(4, "4 emoji max"),
@@ -22,14 +24,19 @@ interface AddQuickLinkFormProps {
 }
 
 export default function AddQuickLinkForm({ href, name, afterSubmit }: AddQuickLinkFormProps) {
+	const path = generateVirtualPath(href || '')
+	const moduleCode = path[0]
+	const moduleEmoji = getModuleEmoji(moduleCode)
+
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			icon: '📁',
+			icon: moduleEmoji,
 			name,
 			href
 		}
 	})
+
 
 	async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
 		await addQuickLink(quickLinkData)
