@@ -6,7 +6,7 @@ export async function getFiles() {
     return (await chrome.storage.local.get("files")) as VirtualFileSystem
 }
 
-const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
+export const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
 
 export function convertVirtualPathToUrl(path: string[]) {
     return BASE_URL + path.join("/") + "/"

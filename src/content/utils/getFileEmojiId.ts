@@ -8,6 +8,8 @@ export function getFileEmojiId(fileName: string): string {
         "javascript-101/",
         "0-General/",
         "Coursework/",
+        "Assessment/",
+        "Practicals/",
         "Examples/",
         "Exercises/",
         "Lectures/",
