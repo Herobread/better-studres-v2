@@ -18,10 +18,10 @@ try {
 } catch (e) {
     // load only commands then
     const div = document.createElement('div');
-    div.id = '__better_studres__root';
+    div.className = '__better_studres__root _tailwind_preflight_reset';
     document.body.appendChild(div);
 
-    const rootContainer = document.querySelector('#__better_studres__root');
+    const rootContainer = document.querySelector('.__better_studres__root');
     if (!rootContainer) throw new Error("Can't find Options root element");
 
     const root = createRoot(rootContainer);

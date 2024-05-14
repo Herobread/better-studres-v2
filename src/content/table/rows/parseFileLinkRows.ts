@@ -5,6 +5,8 @@ import splitFileName from "@src/content/utils/splitFileName"
 import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 
+const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp"]
+
 export function parseFileLinkRows(
     fileLinkRows: HTMLTableRowElement[],
 ): FileLink[] {
@@ -52,6 +54,14 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     const rawName = nameDataCellAnchor.textContent || ""
     const { extension, name } = splitFileName(rawName)
 
+    let isImage = false
+
+    IMAGE_FILE_EXTENSIONS.forEach((imageExtension) => {
+        if (extension === imageExtension) {
+            isImage = true
+        }
+    })
+
     const href = nameDataCellAnchor.href || ""
 
     const virtualPath = generateVirtualPath(href)
@@ -98,5 +108,6 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         lastModified,
         lastModifiedRelative,
         image,
+        isImage,
     }
 }

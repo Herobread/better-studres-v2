@@ -1,26 +1,12 @@
-import { FileLink } from "@src/types/pageContentTypes"
-import { Separator } from "../ui/separator"
+import DefaultFileCard, { DefaultFileCardProps } from "./DefaultFileCard"
+import { ImageCard } from "./ImageCard"
 
-interface FileCardProps {
-	fileLink: FileLink
-}
+export default function FileCard({ fileLink }: DefaultFileCardProps) {
+	const { isImage } = fileLink
 
-export default function FileCard({ fileLink }: FileCardProps) {
-	const { description, href, lastModified, lastModifiedRelative, name, extension, space, emoji, image } = fileLink
+	if (isImage) {
+		return <ImageCard fileLink={fileLink} />
+	}
 
-	return <a href={href} className="grid p-3 gap-3 grid-cols-subgrid col-span-full bg-primary-foreground hover:bg-accent cursor-pointer rounded-xl items-center">
-		<div className="w-full grid justify-items-center">
-			<div className="text-center leading-5">{emoji}</div>
-			{/* <img style={{ imageRendering: 'pixelated' }} alt={image?.alt} src={image?.src} /> */}
-			{extension && <div className="font-mono text-center leading-5">{extension}</div>}
-		</div>
-		<Separator orientation="vertical" />
-		<div className="grid items-center">
-			<div className="font-bold">{name}</div>
-			{description != null && <div className="italic">{description}</div>}
-		</div>
-		<div className="text-right">{space?.size.toFixed(1)}</div>
-		<div className="ml-[-8px]">{space?.units}</div>
-		<div className="text-right">{lastModifiedRelative}</div>
-	</a>
+	return <DefaultFileCard fileLink={fileLink} />
 }

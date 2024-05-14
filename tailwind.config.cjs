@@ -1,3 +1,8 @@
+import {
+    scopedPreflightStyles,
+    isolateInsideOfContainer,
+} from "tailwindcss-scoped-preflight"
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ["class"],
@@ -8,6 +13,10 @@ module.exports = {
         "./src/**/*.{ts,tsx}",
     ],
     prefix: "",
+    corePlugins: {
+        preflight: false,
+    },
+    important: true,
     theme: {
         container: {
             center: true,
@@ -76,5 +85,12 @@ module.exports = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [
+        require("tailwindcss-animate"),
+        scopedPreflightStyles({
+            isolationStrategy: isolateInsideOfContainer(
+                "._tailwind_preflight_reset",
+            ),
+        }),
+    ],
 }

@@ -9,6 +9,7 @@ export interface SortLinks {
 
 export interface FileLink {
     image?: Image
+    isImage: boolean
     emoji?: string
     name: string
     extension?: string
