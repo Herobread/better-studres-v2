@@ -9,5 +9,10 @@ export default function generateVirtualPath(href: string) {
         path.pop()
     }
 
+    // remove sort
+    if (path[path.length - 1] && path[path.length - 1].startsWith("?")) {
+        path.pop()
+    }
+
     return path
 }

@@ -79,4 +79,5 @@ export const moduleEmojiMap: { [key: string]: string } = {
     IS5103: "🌍",
     IS5104: "🔐",
     IS5110: "🏺",
+    Library: "📚",
 }
