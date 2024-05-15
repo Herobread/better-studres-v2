@@ -7,13 +7,9 @@ import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTra
 import Title from "@src/components/typography/Title"
 import { PageData } from "@src/types/pageContentTypes"
 import Providers from "./Providers"
-import getUrlData from "@src/content/fetchers/getUrlData"
 
 export default function Root({ content, }: { content: PageData, }) {
     const { fileLinks, sortLinks, title } = content
-
-    getUrlData(window.location.href)
-    getUrlData('https://studres.cs.st-andrews.ac.uk/icons/alert.black.png')
 
     return (
         <>
