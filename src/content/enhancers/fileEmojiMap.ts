@@ -24,6 +24,7 @@ export const emojiMap: { [key: string]: string } = {
     // text
     pdf: "📕",
     pptx: "📇",
+    ppt: "📇",
     odt: "📕",
     docx: "📕",
     doc: "📕",

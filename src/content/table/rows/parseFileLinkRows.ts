@@ -57,7 +57,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     let isImage = false
 
     IMAGE_FILE_EXTENSIONS.forEach((imageExtension) => {
-        if (extension === imageExtension) {
+        if (extension?.toLowerCase() === imageExtension) {
             isImage = true
         }
     })
