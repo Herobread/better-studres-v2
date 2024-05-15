@@ -17,19 +17,17 @@ export default function Root({ content, }: { content: PageData, }) {
 
     return (
         <>
-            <div className="_tailwind_preflight_reset">
-                <Providers>
-                    <Commands />
-                    <MainLayout>
-                        <CompactLayout>
-                            <Title>{title}</Title>
-                            <QuickLinks />
-                        </CompactLayout>
-                        <Table fileLinks={fileLinks} sortLinks={sortLinks} />
-                        <VirtualFileSystemTracker fileLinks={fileLinks} />
-                    </MainLayout>
-                </Providers>
-            </div>
+            <Providers>
+                <Commands />
+                <MainLayout>
+                    <CompactLayout>
+                        <Title>{title}</Title>
+                        <QuickLinks />
+                    </CompactLayout>
+                    <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                    <VirtualFileSystemTracker fileLinks={fileLinks} />
+                </MainLayout>
+            </Providers>
         </>
     )
 }
