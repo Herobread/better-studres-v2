@@ -5,7 +5,7 @@ import splitFileName from "@src/content/utils/splitFileName"
 import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 
-const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp"]
+const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg"]
 
 export function parseFileLinkRows(
     fileLinkRows: HTMLTableRowElement[],
