@@ -4,12 +4,13 @@ import MainLayout from "@src/components/layouts/MainLayout"
 import QuickLinks from "@src/components/quickAccess/QuickLinks"
 import Table from "@src/components/table/Table"
 import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTracker"
-import Title from "@src/components/typography/Title"
 import { PageData } from "@src/types/pageContentTypes"
 import Providers from "./Providers"
+import ModuleHeader from "@src/components/header/ModuleHeader"
+import SubheaderBreadCrumbs from "@src/components/header/SubheaderBreadCrumbs"
 
 export default function Root({ content, }: { content: PageData, }) {
-    const { fileLinks, sortLinks, title } = content
+    const { fileLinks, sortLinks } = content
 
     return (
         <>
@@ -17,9 +18,10 @@ export default function Root({ content, }: { content: PageData, }) {
                 <Commands />
                 <MainLayout>
                     <CompactLayout>
-                        <Title>{title}</Title>
-                        <QuickLinks />
+                        <ModuleHeader />
+                        <SubheaderBreadCrumbs />
                     </CompactLayout>
+                    <QuickLinks />
                     <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                     <VirtualFileSystemTracker fileLinks={fileLinks} />
                 </MainLayout>
