@@ -80,4 +80,9 @@ export const moduleEmojiMap: { [key: string]: string } = {
     IS5104: "🔐",
     IS5110: "🏺",
     Library: "📚",
+    icons: "🖼",
+    Teaching: "👩‍🏫",
+    Timetables: "📅",
+    _this_session: "📍",
+    PGR: "🎓",
 }

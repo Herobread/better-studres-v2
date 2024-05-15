@@ -9,7 +9,7 @@ import Providers from "./Providers"
 import ModuleHeader from "@src/components/header/ModuleHeader"
 import SubheaderBreadCrumbs from "@src/components/header/SubheaderBreadCrumbs"
 
-export default function Root({ content, }: { content: PageData, }) {
+export default function Root({ content }: { content: PageData, }) {
     const { fileLinks, sortLinks } = content
 
     return (
