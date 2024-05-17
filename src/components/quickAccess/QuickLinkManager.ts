@@ -56,3 +56,24 @@ export async function deleteQuickLink(id: number) {
 
     await chrome.storage.local.set({ quickLinks: quickLinks })
 }
+
+export async function moveQuickLink(id: number, relativeOffset: number) {
+    const quickLinks = await loadQuickLinks()
+
+    const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
+    if (index === -1) {
+        throw new Error(`Quick link with id ${id} not found`)
+    }
+
+    const newIndex = index + relativeOffset
+
+    if (newIndex < 0 || newIndex >= quickLinks.length) {
+        throw new Error(`New index ${newIndex} is out of bounds`)
+    }
+
+    // Move the quicklink
+    const [movedLink] = quickLinks.splice(index, 1)
+    quickLinks.splice(newIndex, 0, movedLink)
+
+    await chrome.storage.local.set({ quickLinks: quickLinks })
+}
