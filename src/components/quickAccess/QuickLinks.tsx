@@ -49,7 +49,7 @@ export default function QuickLinks() {
 
 	return <QuickLinkContainer>
 		<Popover open={isOpen} onOpenChange={setIsOpen}>
-			<PopoverTrigger>
+			<PopoverTrigger asChild>
 				<QuickLinkButton icon="➕" content="Save" />
 			</PopoverTrigger>
 			<PopoverContent>
