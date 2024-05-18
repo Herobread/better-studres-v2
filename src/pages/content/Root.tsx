@@ -8,6 +8,8 @@ import { PageData } from "@src/types/pageContentTypes"
 import Providers from "./Providers"
 import ModuleHeader from "@src/components/header/ModuleHeader"
 import SubheaderBreadCrumbs from "@src/components/header/SubheaderBreadCrumbs"
+import WideLayout from "@src/components/layouts/WideLayout"
+import CommandInput from "@src/components/command/CommandInput"
 
 export default function Root({ content }: { content: PageData, }) {
     const { fileLinks, sortLinks } = content
@@ -16,6 +18,9 @@ export default function Root({ content }: { content: PageData, }) {
         <>
             <Providers>
                 <Commands />
+                <WideLayout>
+                    <CommandInput />
+                </WideLayout>
                 <MainLayout>
                     <CompactLayout>
                         <ModuleHeader />
