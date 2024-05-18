@@ -6,6 +6,7 @@ import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/content/utils/redirect"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 import generateUrlFromVirtualPath from "@src/content/versionControl/generateUrlFromVirtualPath"
+import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
 
 export default function Commands() {
 	const [open, setOpen] = useState(false)
@@ -37,6 +38,9 @@ export default function Commands() {
 	const currentUrl = window.location.toString()
 	const currentVirtualPath = generateVirtualPath(currentUrl)
 
+	const moduleCode = currentVirtualPath[0]
+	const moduleEmoji = getModuleEmoji(moduleCode)
+
 	const handleGoToParent = () => {
 		currentVirtualPath.pop()
 
@@ -57,9 +61,9 @@ export default function Commands() {
 			<CommandList>
 				<CommandEmpty>No results found.</CommandEmpty>
 				<CommandGroup heading='Actions'>
-					<CommandItem onSelect={handleGoToParent}>Go to Parent Directory</CommandItem>
-					<CommandItem onSelect={handleGoToModuleRoot}>Go to Module Root</CommandItem>
-					<CommandItem onSelect={handleGoToRoot}>Go to Root</CommandItem>
+					<CommandItem onSelect={handleGoToParent}>🔙 Go to Parent Directory</CommandItem>
+					<CommandItem onSelect={handleGoToModuleRoot}>{moduleEmoji} Go to {moduleCode} root</CommandItem>
+					<CommandItem onSelect={handleGoToRoot}>🌱 Go to homepage</CommandItem>
 				</CommandGroup>
 				<CommandGroup heading='Quick links'>
 					{
@@ -76,10 +80,19 @@ export default function Commands() {
 				</CommandGroup>
 				<CommandGroup heading='Visited paths'>
 					{
-						commandsData && commandsData.map(item => {
-							return <CommandItem keywords={[item.href]} key={item.href} onSelect={() => {
-								window.location.replace(item.href);
-							}}>{item.name}</CommandItem>
+						commandsData && commandsData.map((item, i) => {
+							const virtualPath = generateVirtualPath(item.href)
+
+							return <CommandItem keywords={[item.href]} key={i} onSelect={() => {
+								redirect(item.href, 'userClick')
+							}}
+								className="grid gap-1"
+							>
+								{item.name}
+								<span className="text-muted-foreground">
+									{virtualPath.join('/')}
+								</span>
+							</CommandItem>
 						})
 					}
 				</CommandGroup>
