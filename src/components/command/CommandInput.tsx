@@ -5,11 +5,11 @@ interface CommandInputProps {
 }
 
 export default function CommandInput({ onSelect }: CommandInputProps) {
-	return <button onClick={onSelect} className="flex items-center gap-1 outline-2 outline outline-muted text-muted-foreground rounded-xl p-2">
+	return <button onClick={onSelect} className="flex items-center gap-1 outline-2 outline outline-muted text-muted-foreground rounded-xl p-1">
 		<SearchIcon />
 		<p className="flex-grow">
 			Search visited folders or run commands
 		</p>
-		<code className="font-bold">⌘K</code>
+		<kbd className="font-bold px-1">⌘K</kbd>
 	</button>
 }

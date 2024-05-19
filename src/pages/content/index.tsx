@@ -3,6 +3,7 @@ import "./style.css"
 import Root from "./Root"
 import { parsePageContent } from "@src/content/parser"
 import CommandsRoot from "./CommandsRoot"
+import Providers from "./Providers"
 
 try {
     const rootContainer = document.body
@@ -12,7 +13,11 @@ try {
     if (!rootContainer) throw new Error("Can't find Options root element")
     const root = createRoot(rootContainer)
 
-    root.render(<Root content={parsedPageContent} />)
+    root.render(
+        <Providers>
+            <Root content={parsedPageContent} />
+        </Providers>
+    )
 
     console.log("Root loaded")
 } catch (e) {

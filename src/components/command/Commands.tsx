@@ -1,15 +1,16 @@
 import { BASE_URL, getFiles, mapVirtualFilesToList } from "@src/content/versionControl/virtualFileSystem"
 import { useQuery } from "@tanstack/react-query"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../components/ui/command"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect } from "react"
 import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/content/utils/redirect"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 import generateUrlFromVirtualPath from "@src/content/versionControl/generateUrlFromVirtualPath"
 import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
+import { useCommand } from "./CommandContext"
 
 export default function Commands() {
-	const [open, setOpen] = useState(false)
+	const { open, setOpen } = useCommand()
 
 	const { data: commandsData } = useQuery({
 		queryKey: ['commands'],
@@ -24,16 +25,20 @@ export default function Commands() {
 		queryFn: loadQuickLinks
 	})
 
+	const toggleOpen = useCallback(() => {
+		setOpen(!open);
+	}, [setOpen]);
+
 	useEffect(() => {
 		const down = (e: KeyboardEvent) => {
 			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-				e.preventDefault()
-				setOpen((open) => !open)
+				e.preventDefault();
+				toggleOpen();
 			}
-		}
-		document.addEventListener("keydown", down)
-		return () => document.removeEventListener("keydown", down)
-	}, [])
+		};
+		document.addEventListener("keydown", down);
+		return () => document.removeEventListener("keydown", down);
+	}, [toggleOpen]);
 
 	const currentUrl = window.location.toString()
 	const currentVirtualPath = generateVirtualPath(currentUrl)
@@ -80,17 +85,18 @@ export default function Commands() {
 				</CommandGroup>
 				<CommandGroup heading='Visited paths'>
 					{
-						commandsData && commandsData.map((item, i) => {
+						commandsData && commandsData.map(item => {
 							const virtualPath = generateVirtualPath(item.href)
+							const virtualPathString = virtualPath.join('/')
 
-							return <CommandItem keywords={[item.href]} key={i} onSelect={() => {
+							return <CommandItem keywords={[item.href]} key={virtualPathString} onSelect={() => {
 								redirect(item.href, 'userClick')
 							}}
 								className="grid gap-1"
 							>
 								{item.name}
 								<span className="text-muted-foreground">
-									{virtualPath.join('/')}
+									{virtualPathString}
 								</span>
 							</CommandItem>
 						})

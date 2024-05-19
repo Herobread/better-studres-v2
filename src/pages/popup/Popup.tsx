@@ -1,7 +1,10 @@
+import Title from "@src/components/typography/Title";
+
 export default function Popup(): JSX.Element {
     return (
-        <div>
-            <h1 className="text-xl">Better studres</h1>
-        </div>
+        <body className="_tailwind_preflight_reset p-2 text-base">
+            <Title>Better studres</Title>
+            <button>aaaaaaaaaaaaaaa</button>
+        </body>
     )
 }

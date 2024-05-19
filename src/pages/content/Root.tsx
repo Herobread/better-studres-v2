@@ -10,27 +10,31 @@ import ModuleHeader from "@src/components/header/ModuleHeader"
 import SubheaderBreadCrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import WideLayout from "@src/components/layouts/WideLayout"
 import CommandInput from "@src/components/command/CommandInput"
+import { useCommand } from "@src/components/command/CommandContext"
 
 export default function Root({ content }: { content: PageData, }) {
     const { fileLinks, sortLinks } = content
+    const { setOpen } = useCommand()
+
+    const handleCommandActivation = () => {
+        setOpen(true)
+    }
 
     return (
         <>
-            <Providers>
-                <Commands />
-                <WideLayout>
-                    <CommandInput />
-                </WideLayout>
-                <MainLayout>
-                    <CompactLayout>
-                        <ModuleHeader />
-                        <SubheaderBreadCrumbs />
-                    </CompactLayout>
-                    <QuickLinks />
-                    <Table fileLinks={fileLinks} sortLinks={sortLinks} />
-                    <VirtualFileSystemTracker fileLinks={fileLinks} />
-                </MainLayout>
-            </Providers>
+            <Commands />
+            <WideLayout>
+                <CommandInput onSelect={handleCommandActivation} />
+            </WideLayout>
+            <MainLayout>
+                <CompactLayout>
+                    <ModuleHeader />
+                    <SubheaderBreadCrumbs />
+                </CompactLayout>
+                <QuickLinks />
+                <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                <VirtualFileSystemTracker fileLinks={fileLinks} />
+            </MainLayout>
         </>
     )
 }
