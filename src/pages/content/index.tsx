@@ -1,5 +1,4 @@
 import { createRoot } from "react-dom/client"
-import "./style.css"
 import Root from "./Root"
 import { parsePageContent } from "@src/content/parser"
 import CommandsRoot from "./CommandsRoot"
