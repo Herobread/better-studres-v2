@@ -7,6 +7,10 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@src/components/ui/form';
+import { saveConfig } from '@src/lib/storage/saveConfig';
+import { loadConfig } from '@src/lib/storage/loadConfig';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 const formSchema = z.object({
     date: z.enum(['raw', 'relative']),
@@ -14,17 +18,34 @@ const formSchema = z.object({
 })
 
 export default function Popup() {
+    const { data: config } = useQuery({
+        queryKey: ['config'],
+        queryFn: loadConfig
+    })
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             date: 'relative',
             fileIcons: 'emoji'
-        }
+        },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    const { reset, formState: { isDirty } } = form;
+
+    const isSubmitDisabled = !isDirty
+
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        await saveConfig(values)
+
+        reset(values) // make isDirty = false
     }
+
+    useEffect(() => {
+        if (config) {
+            reset(config);
+        }
+    }, [config, reset]);
 
     return (
         <body className="_tailwind_preflight_reset p-1 text-base grid gap-4 h-min">
@@ -42,7 +63,7 @@ export default function Popup() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>📅 Date display:</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} value={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder='Date display' />
@@ -63,7 +84,7 @@ export default function Popup() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>📁 File icons:</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} value={field.value}>
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder='File icons' />
@@ -78,8 +99,8 @@ export default function Popup() {
                             </FormItem>
                         )}
                     />
-                    <Button type='submit'>
-                        Save
+                    <Button type='submit' disabled={isSubmitDisabled}>
+                        {isSubmitDisabled ? 'Saved' : 'Save'}
                     </Button>
                 </form>
             </Form>
