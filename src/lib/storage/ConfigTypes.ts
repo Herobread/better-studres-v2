@@ -1,4 +1,8 @@
 export interface ConfigTypes {
-    date: "raw" | "relative"
+    date: "full" | "relative"
     fileIcons: "emoji" | "pictures"
+    imagePreviewAsIcon: boolean
+    imagePreviewOnHover: boolean
+    showQuickLinks: boolean
+    showCommandButton: boolean
 }

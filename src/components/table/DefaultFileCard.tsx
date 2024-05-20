@@ -11,7 +11,7 @@ export interface DefaultFileCardProps {
 
 const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 	({ fileLink, ...props }, ref) => {
-		const { fileIcons, date } = useContext(ConfigContext)
+		const { fileIcons, date, imagePreviewAsIcon } = useContext(ConfigContext)
 
 		const { description, href, lastModifiedRelative, name, extension, space, emoji, isImage, image, lastModified } = fileLink;
 
@@ -23,7 +23,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 				className="grid p-3 gap-3 grid-cols-subgrid col-span-full bg-primary-foreground hover:bg-accent cursor-pointer rounded-xl items-center"
 			>
 				<div className="w-full grid justify-items-center">
-					{isImage ? (
+					{(isImage && imagePreviewAsIcon) ? (
 						<img
 							src={href}
 							alt=""
