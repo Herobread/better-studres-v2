@@ -1,5 +1,4 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@src/components/ui/select';
-import '../shared-styles/style.css'
 import { Toggle } from "@src/components/ui/toggle";
 import { PowerCircleIcon } from "lucide-react";
 import { Button } from '@src/components/ui/button';

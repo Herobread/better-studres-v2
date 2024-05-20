@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import './studres-css-reset.css'
-import '../shared-styles/style.css'
+import '@src/assets/styles/studres-css-reset.css'
+import '@src/assets/styles/shadcn-ui.css'
 import { CommandProvider } from '@src/components/command/CommandContext'
 
 interface ProvidersProps {
