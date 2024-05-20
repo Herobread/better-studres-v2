@@ -1,16 +1,19 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import { Separator } from "../ui/separator";
 import { FileLink } from "@src/types/pageContentTypes";
+import { ConfigContext } from "@src/contexts/ConfigContext";
 
 export interface DefaultFileCardProps {
 	fileLink: FileLink;
 	children?: React.ReactNode;
-	[key: string]: any;
+	[key: string]: unknown;
 }
 
 const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 	({ fileLink, ...props }, ref) => {
-		const { description, href, lastModifiedRelative, name, extension, space, emoji, isImage } = fileLink;
+		const { fileIcons, date } = useContext(ConfigContext)
+
+		const { description, href, lastModifiedRelative, name, extension, space, emoji, isImage, image, lastModified } = fileLink;
 
 		return (
 			<a
@@ -28,8 +31,14 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 							className="max-w-6 max-h-6"
 						/>
 					) : (
-						<div className="text-center leading-5">{emoji}</div>
+						(fileIcons === 'emoji'
+							?
+							<div className="text-center leading-5">{emoji}</div>
+							:
+							<img src={image?.src} alt={image?.alt} className="w-5 aspect-auto" />
+						)
 					)}
+
 					{extension && <div className="font-mono text-center leading-5">{extension}</div>}
 				</div>
 				<Separator orientation="vertical" />
@@ -39,7 +48,14 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 				</div>
 				<div className="text-right">{space?.size.toFixed(1)}</div>
 				<div className="ml-[-8px]">{space?.units}</div>
-				<div className="text-right">{lastModifiedRelative}</div>
+				<div className="text-right">
+					{
+						date === 'relative' ?
+							lastModifiedRelative
+							:
+							lastModified
+					}
+				</div>
 			</a>
 		);
 	}

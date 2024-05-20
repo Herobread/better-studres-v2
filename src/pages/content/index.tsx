@@ -3,7 +3,6 @@ import Root from "./Root"
 import { parsePageContent } from "@src/content/parser"
 import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
-import { storage } from "webextension-polyfill"
 
 try {
     const rootContainer = document.body
@@ -12,10 +11,6 @@ try {
 
     if (!rootContainer) throw new Error("Can't find Options root element")
     const root = createRoot(rootContainer)
-
-    storage.onChanged.addListener(changes => {
-        console.log(changes.config.newValue)
-    })
 
     root.render(
         <Providers>
