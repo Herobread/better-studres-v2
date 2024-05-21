@@ -1,7 +1,7 @@
 {
-    "name": "vite-web-extension",
+    "name": "better-studres",
     "version": "2.0",
-    "description": "A simple chrome extension template with Vite, React, TypeScript and Tailwind CSS.",
+    "description": "Better Studres is an extension, that improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -13,6 +13,9 @@
         "format": "yarn prettier . --write"
     },
     "type": "module",
+    "engines": {
+        "node": "^20.x"
+    },
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",
         "@radix-ui/react-context-menu": "^2.1.5",

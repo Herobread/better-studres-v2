@@ -1,55 +1,36 @@
 name: Build and Zip Extension
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    build:
-        name: Build
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out code
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 2
+  build:
+    name: Build
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
-            - name: Setup Node.js environment
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 20
-                  cache: "yarn"
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'yarn'
 
-            - name: Install dependencies
-              run: yarn
+      - name: Install dependencies
+        run: yarn
 
-            - name: Build
-              run: yarn build
+      - name: Build
+        run: yarn build
 
-            - name: Upload extension artifacts
-              uses: actions/upload-artifact@v3
-              with:
-                  name: better-studres
-                  path: dist
+      - name: Zip the build folder
+        run: zip -r extension.zip dist
 
-    release:
-        name: Create Release
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-            - name: Get version from manifest.json
-              id: get_version
-              run: echo "::set-output name=version::$(node -e 'console.log(require("./manifest.json").version)')"
-
-            - name: Create Release
-              id: create_release
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              with:
-                  tag_name: ${{ steps.get_version.outputs.version }}
-                  release_name: Release ${{ steps.get_version.outputs.version }}
-                  draft: false
-                  prerelease: false
-                  body: |
-                      Release of version ${{ steps.get_version.outputs.version }}.
+      - name: Upload extension artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: better-studres
+          path: extension.zip
