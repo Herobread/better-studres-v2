@@ -1,6 +1,6 @@
 import { FileLink } from "@src/types/pageContentTypes"
-import { getFileEmoji } from "../enhancers/getFileEmoji"
-import { getModuleEmoji } from "../enhancers/getModuleEmoji"
+import { getFileEmoji } from "../enhancers/fileEmoji/getFileEmoji"
+import { getModuleEmoji } from "../enhancers/moduleEmoji/getModuleEmoji"
 
 export async function getFiles() {
     return (await chrome.storage.local.get("files")) as VirtualFileSystem

@@ -25,7 +25,7 @@ export default function QuickLinks() {
 	const quickLinkToEdit = quickLinks?.find(link => link.id === editLinkId)
 
 	const currentUrl = window.location.toString()
-	const currentUrlQuickLink = generateQuickLinkInfo(currentUrl)
+	const { href: currentQuickLinkHref, name: currentQuickLinkName } = generateQuickLinkInfo(currentUrl)
 
 	const handleQuickLinksUpdated = async () => {
 		await refetch()
@@ -53,7 +53,7 @@ export default function QuickLinks() {
 				<QuickLinkButton icon="➕" content="Save" />
 			</PopoverTrigger>
 			<PopoverContent>
-				<AddQuickLinkForm href={currentUrlQuickLink.href} name={currentUrlQuickLink.name} afterSubmit={handleQuickLinksUpdated} />
+				<AddQuickLinkForm href={currentQuickLinkHref} name={currentQuickLinkName} afterSubmit={handleQuickLinksUpdated} />
 			</PopoverContent>
 		</Popover>
 		{

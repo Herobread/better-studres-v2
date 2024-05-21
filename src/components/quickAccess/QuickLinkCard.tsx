@@ -1,4 +1,4 @@
-import { QuickLink } from "@src/types/pageContentTypes"
+import { QuickLink } from "@src/types/quickLinkTypes"
 
 interface QuickLinkCardProps {
 	quickLink: QuickLink

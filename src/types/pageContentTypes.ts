@@ -25,32 +25,8 @@ export interface FileLink {
     virtualPath: string[]
 }
 
-export interface TrackedFileLinkRecord {
-    fileLink: FileLink
-    modified: Date
-}
-
-export interface TrackedFileLinkRecords {
-    history: TrackedFileLinkRecord[]
-    modified: Date
-    current: FileLink
-}
-
 export interface PageData {
     title: string
     sortLinks: SortLinks
     fileLinks: FileLink[]
-}
-
-export interface QuickLink {
-    id: number
-    icon: string
-    name: string
-    href: string
-}
-
-export interface RawQuickLink {
-    icon: string
-    name: string
-    href: string
 }

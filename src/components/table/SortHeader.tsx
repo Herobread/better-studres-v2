@@ -1,4 +1,4 @@
-import parseUrl from "@src/content/table/parseUrl"
+import parseUrl from "@src/content/parsers/parseUrl"
 import { cva } from "class-variance-authority"
 
 interface SortHeaderProps {

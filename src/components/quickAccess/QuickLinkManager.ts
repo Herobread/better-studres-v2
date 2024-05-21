@@ -1,4 +1,4 @@
-import { QuickLink, RawQuickLink } from "@src/types/pageContentTypes"
+import { QuickLink, RawQuickLink } from "@src/types/quickLinkTypes"
 
 export async function addQuickLink(rawQuickLink: RawQuickLink) {
     const result = await chrome.storage.local.get("quickLinks")

@@ -1,4 +1,4 @@
-import { PageData } from "../types/pageContentTypes"
+import { PageData } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 import { parseTable } from "./table/parseTable"
 

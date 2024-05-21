@@ -1,7 +1,7 @@
-import { FileLink, SortLinks } from "../../types/pageContentTypes"
+import { FileLink, SortLinks } from "../../../types/pageContentTypes"
 import { getTableRows } from "./getTableRows"
-import { parseFileLinkRows } from "./rows/parseFileLinkRows"
-import { parseHeaderRow } from "./rows/parseHeaderRow"
+import { parseFileLinkRows } from "./parseFileLinkRows"
+import { parseHeaderRow } from "./parseHeaderRow"
 
 export function parseTable(content: HTMLElement): {
     sortLinks: SortLinks

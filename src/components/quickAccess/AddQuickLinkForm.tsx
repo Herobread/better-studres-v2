@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import NormalLayout from "../layouts/NormalLayout"
 import { addQuickLink } from "./QuickLinkManager"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
-import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
+import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 
 const formSchema = z.object({
 	icon: z.string().emoji().max(4, "4 emoji max"),

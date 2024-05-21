@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client"
 import Root from "./Root"
-import { parsePageContent } from "@src/content/parser"
+import { parsePageContent } from "@src/content/parsers/parser"
 import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 

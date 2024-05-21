@@ -6,7 +6,7 @@ import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/content/utils/redirect"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 import generateUrlFromVirtualPath from "@src/content/versionControl/generateUrlFromVirtualPath"
-import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
+import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
 
 export default function Commands() {

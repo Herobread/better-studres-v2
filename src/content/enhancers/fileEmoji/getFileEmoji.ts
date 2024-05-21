@@ -1,4 +1,4 @@
-import { getFileEmojiId } from "../utils/getFileEmojiId"
+import { getFileEmojiId } from "./getFileEmojiId"
 import { emojiMap } from "./fileEmojiMap"
 
 export function getFileEmoji(filename: string) {

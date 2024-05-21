@@ -1,6 +1,4 @@
-import { QuickLink } from "@src/types/pageContentTypes"
-
-export default function generateQuickLinkInfo(href: string): QuickLink {
+export default function generateQuickLinkInfo(href: string) {
     const items = href.split("/")
     let name = items[3]
 

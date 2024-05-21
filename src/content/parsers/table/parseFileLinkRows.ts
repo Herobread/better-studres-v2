@@ -1,5 +1,5 @@
-import { getFileEmoji } from "@src/content/enhancers/getFileEmoji"
-import parseFileSize from "@src/content/utils/parseFileSize"
+import { getFileEmoji } from "@src/content/enhancers/fileEmoji/getFileEmoji"
+import parseFileSize from "@src/content/parsers/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
 import splitFileName from "@src/content/utils/splitFileName"
 import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"

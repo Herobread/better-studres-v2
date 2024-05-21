@@ -1,4 +1,4 @@
-import { getModuleEmoji } from "@src/content/enhancers/getModuleEmoji"
+import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 import Title from "../typography/Title"
 

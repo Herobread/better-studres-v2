@@ -1,4 +1,3 @@
-import { QuickLink } from "@src/types/pageContentTypes"
 import { z } from "zod"
 import NormalLayout from "../layouts/NormalLayout"
 import H2 from "../typography/H2"
@@ -9,6 +8,7 @@ import { updateQuickLink } from "./QuickLinkManager"
 import CompactLayout from "../layouts/CompactLayout"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
+import { QuickLink } from "@src/types/quickLinkTypes"
 
 interface EditQuickLinkFormProps {
 	quickLink: QuickLink
