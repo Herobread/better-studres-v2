@@ -27,12 +27,15 @@ export default function SubheaderBreadCrumbs() {
 
 	return <Breadcrumb>
 		<BreadcrumbList>
+			<BreadcrumbItem >
+				<BreadcrumbLink href={BASE_URL}>Root</BreadcrumbLink>
+			</BreadcrumbItem>
 			{
-				links.map((link, i) => {
+				links.map(link => {
 					const { href, name } = link
 
 					return <Fragment key={href}>
-						{i > 0 && <BreadcrumbSeparator />}
+						<BreadcrumbSeparator />
 						<BreadcrumbItem >
 							<BreadcrumbLink href={href}>{name}</BreadcrumbLink>
 						</BreadcrumbItem>
