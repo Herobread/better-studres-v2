@@ -3,7 +3,7 @@ import { BASE_URL } from "@src/content/versionControl/virtualFileSystem"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "../ui/breadcrumb"
 import { Fragment } from "react"
 
-interface Breadcrumb {
+interface BreadcrumbType {
 	name: string
 	href: string
 }
@@ -13,7 +13,7 @@ export default function SubheaderBreadcrumbs() {
 
 	const virtualPath = generateVirtualPath(currentUrl)
 
-	const links: Breadcrumb[] = []
+	const links: BreadcrumbType[] = []
 	const currentBreadcrumbs: string[] = []
 
 	for (let i = 0; i < virtualPath.length; i++) {
