@@ -6,12 +6,12 @@ import Table from "@src/components/table/Table"
 import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTracker"
 import { PageData } from "@src/types/pageContentTypes"
 import ModuleHeader from "@src/components/header/ModuleHeader"
-import SubheaderBreadCrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import WideLayout from "@src/components/layouts/WideLayout"
 import CommandInput from "@src/components/command/CommandInput"
 import { useCommand } from "@src/components/command/CommandContext"
 import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
+import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadcrumbs"
 
 export default function Root({ content }: { content: PageData, }) {
     const { fileLinks, sortLinks } = content
@@ -35,7 +35,7 @@ export default function Root({ content }: { content: PageData, }) {
             <MainLayout>
                 <CompactLayout>
                     <ModuleHeader />
-                    <SubheaderBreadCrumbs />
+                    <SubheaderBreadcrumbs />
                 </CompactLayout>
                 {
                     showQuickLinks && <QuickLinks />

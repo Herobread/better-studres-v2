@@ -8,7 +8,7 @@ interface Breadcrumb {
 	href: string
 }
 
-export default function SubheaderBreadCrumbs() {
+export default function SubheaderBreadcrumbs() {
 	const currentUrl = location.href.toString()
 
 	const virtualPath = generateVirtualPath(currentUrl)
