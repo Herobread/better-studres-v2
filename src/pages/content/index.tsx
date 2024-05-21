@@ -5,6 +5,12 @@ import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 
 try {
+    const url = location.href.toString()
+
+    if (!url.endsWith('/')) {
+        throw new Error('not a folder')
+    }
+
     const rootContainer = document.body
 
     const parsedPageContent = parsePageContent(rootContainer)

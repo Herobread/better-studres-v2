@@ -10,7 +10,7 @@ import { useState } from "react"
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "../ui/context-menu"
 import { Dialog, DialogContent } from "../ui/dialog"
 import EditQuickLinkForm from "./EditQuickLinkForm"
-import { ChevronLeft, ChevronRight, Edit2Icon, Trash2Icon } from "lucide-react"
+import { ArrowLeftIcon, ChevronLeft, ChevronRight, Edit2Icon, Trash2Icon } from "lucide-react"
 
 export default function QuickLinks() {
 	const [isOpen, setIsOpen] = useState(false)
@@ -57,41 +57,49 @@ export default function QuickLinks() {
 			</PopoverContent>
 		</Popover>
 		{
-			quickLinks && quickLinks.map((quickLink, i) => {
-				return <ContextMenu key={quickLink.href}>
-					<ContextMenuTrigger>
-						<QuickLinkCard quickLink={quickLink} />
-					</ContextMenuTrigger>
-					<ContextMenuContent>
-						<ContextMenuItem onSelect={() => {
-							setEditLinkId(quickLink.id)
-							setIsEditDialogOpen(true)
-						}}>
-							<Edit2Icon /> Edit link
-						</ContextMenuItem>
-						<ContextMenuItem
-							disabled={i == quickLinks.length - 1}
-							onSelect={async () => {
-								await handleMoveRight(quickLink.id)
+			quickLinks && quickLinks?.length > 0
+				?
+				quickLinks.map((quickLink, i) => {
+					return <ContextMenu key={quickLink.href}>
+						<ContextMenuTrigger>
+							<QuickLinkCard quickLink={quickLink} />
+						</ContextMenuTrigger>
+						<ContextMenuContent>
+							<ContextMenuItem onSelect={() => {
+								setEditLinkId(quickLink.id)
+								setIsEditDialogOpen(true)
 							}}>
-							<ChevronRight /> Move right
-						</ContextMenuItem>
-						<ContextMenuItem
-							disabled={i == 0}
-							onSelect={async () => {
-								await handleMoveLeft(quickLink.id)
+								<Edit2Icon /> Edit link
+							</ContextMenuItem>
+							<ContextMenuItem
+								disabled={i == quickLinks.length - 1}
+								onSelect={async () => {
+									await handleMoveRight(quickLink.id)
+								}}>
+								<ChevronRight /> Move right
+							</ContextMenuItem>
+							<ContextMenuItem
+								disabled={i == 0}
+								onSelect={async () => {
+									await handleMoveLeft(quickLink.id)
+								}}>
+								<ChevronLeft /> Move left
+							</ContextMenuItem>
+							<ContextMenuSeparator />
+							<ContextMenuItem onSelect={async () => {
+								await handleRemoveQuickLink(quickLink.id)
 							}}>
-							<ChevronLeft /> Move left
-						</ContextMenuItem>
-						<ContextMenuSeparator />
-						<ContextMenuItem onSelect={async () => {
-							await handleRemoveQuickLink(quickLink.id)
-						}}>
-							<Trash2Icon /> Delete
-						</ContextMenuItem>
-					</ContextMenuContent>
-				</ContextMenu>
-			})
+								<Trash2Icon /> Delete
+							</ContextMenuItem>
+						</ContextMenuContent>
+					</ContextMenu>
+				}) :
+				<p className="text-muted-foreground text-sm flex items-center gap-1 h-full">
+					<ArrowLeftIcon strokeWidth={1} />
+					<p>
+						Add any URL to quick access by clicking the button
+					</p>
+				</p>
 		}
 
 		<Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
