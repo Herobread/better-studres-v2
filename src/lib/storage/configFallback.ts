@@ -1,4 +1,4 @@
-import { ConfigTypes } from "./ConfigTypes"
+import { ConfigTypes } from "@src/types/configTypes"
 
 export const configFallback: ConfigTypes = {
     date: "relative",

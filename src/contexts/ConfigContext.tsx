@@ -1,7 +1,7 @@
-import { ConfigTypes } from "@src/lib/storage/ConfigTypes";
 import { configFallback } from "@src/lib/storage/configFallback";
 import { loadConfig } from "@src/lib/storage/loadConfig";
 import { saveConfig } from "@src/lib/storage/saveConfig";
+import { ConfigTypes } from "@src/types/configTypes";
 import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useEffect, useState } from "react";
 import { Storage, storage } from "webextension-polyfill";

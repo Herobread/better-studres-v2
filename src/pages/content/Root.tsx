@@ -13,10 +13,14 @@ import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadcrumbs"
 
-export default function Root({ content }: { content: PageData, }) {
-    const { fileLinks, sortLinks } = content
-    const { setOpen } = useCommand()
+interface RootProps {
+    content: PageData
+}
 
+export default function Root({ content }: RootProps) {
+    const { fileLinks, sortLinks } = content
+
+    const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
 
     const handleCommandActivation = () => {

@@ -15,13 +15,12 @@
     "content_scripts": [
         {
             "matches": ["https://studres.cs.st-andrews.ac.uk/*"],
-            "js": ["src/pages/content/index.tsx"],
-            "css": ["contentStyle.css"]
+            "js": ["src/pages/content/index.tsx"]
         }
     ],
     "web_accessible_resources": [
         {
-            "resources": ["contentStyle.css", "icon-128.png", "icon-32.png"],
+            "resources": [ "icon-128.png", "icon-32.png"],
             "matches": []
         }
     ]

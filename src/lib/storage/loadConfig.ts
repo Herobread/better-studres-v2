@@ -1,4 +1,4 @@
-import { ConfigTypes } from "./ConfigTypes"
+import { ConfigTypes } from "../../types/configTypes"
 import { configFallback } from "./configFallback"
 
 export const loadConfig = async (): Promise<ConfigTypes> => {

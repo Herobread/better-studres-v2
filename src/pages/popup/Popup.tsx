@@ -39,7 +39,8 @@ export default function Popup() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         await saveConfig(values)
 
-        reset(values) // make isDirty = false
+        // make isDirty = false and therefore making button disabled
+        reset(values)
     }
 
     useEffect(() => {

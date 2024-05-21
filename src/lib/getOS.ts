@@ -1,4 +1,4 @@
-import { OperatingSystems } from "@src/types/os"
+import { OperatingSystems } from "@src/types/osTypes"
 
 export function getOS(): OperatingSystems {
     const userAgent = window.navigator.userAgent.toLowerCase()

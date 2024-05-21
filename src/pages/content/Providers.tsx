@@ -11,15 +11,13 @@ interface ProvidersProps {
 const queryClient = new QueryClient()
 
 export default function Providers({ children }: ProvidersProps) {
-	return <>
-		<div className="_tailwind_preflight_reset box-sizing-unset">
-			<QueryClientProvider client={queryClient} >
-				<CommandProvider>
-					<ConfigContextProvider>
-						{children}
-					</ConfigContextProvider>
-				</CommandProvider>
-			</QueryClientProvider >
-		</div>
-	</>
+	return <div className="_tailwind_preflight_reset box-sizing-unset">
+		<QueryClientProvider client={queryClient} >
+			<CommandProvider>
+				<ConfigContextProvider>
+					{children}
+				</ConfigContextProvider>
+			</CommandProvider>
+		</QueryClientProvider >
+	</div>
 }
