@@ -1,7 +1,7 @@
 import { getFileEmoji } from "@src/content/enhancers/fileEmoji/getFileEmoji"
 import parseFileSize from "@src/content/parsers/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
-import splitFileName from "@src/content/utils/splitFileName"
+import splitFileName from "@src/content/parsers/splitFileName"
 import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
 import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 
