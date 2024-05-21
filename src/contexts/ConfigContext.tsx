@@ -6,10 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { createContext, useEffect, useState } from "react";
 import { Storage, storage } from "webextension-polyfill";
 
-export const ConfigContext = createContext<ConfigTypes>({
-	date: 'relative',
-	fileIcons: 'emoji'
-})
+export const ConfigContext = createContext<ConfigTypes>(configFallback)
 
 interface ConfigContextProviderProps {
 	children: React.ReactNode
