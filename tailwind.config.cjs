@@ -89,7 +89,7 @@ module.exports = {
         require("tailwindcss-animate"),
         scopedPreflightStyles({
             isolationStrategy: isolateInsideOfContainer(
-                "._tailwind_preflight_reset",
+                "._tailwind_preflight_reset"
             ),
         }),
     ],

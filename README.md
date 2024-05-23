@@ -8,73 +8,73 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 
 ### Improved UI and UX
 
-- Completely redesigned interface for a modern look and feel.
-- Enhanced accessibility to ensure everyone can use the platform effectively.
+-   Completely redesigned interface for a modern look and feel.
+-   Enhanced accessibility to ensure everyone can use the platform effectively.
 
 ### QuickLinks V2
 
-- **Add Links**: Easily add links to any page, auto-filled with active page data (emoji, name, link).
-- **Edit/Delete**: Right-click to edit or delete links.
-- **Reorder**: Drag and drop to reorder links.
+-   **Add Links**: Easily add links to any page, auto-filled with active page data (emoji, name, link).
+-   **Edit/Delete**: Right-click to edit or delete links.
+-   **Reorder**: Drag and drop to reorder links.
 
 ### Universal Commands
 
-- Commands work on any StudRes page, including the root directory and file views.
-- Command allow you to:
-  - **Open QuickLinks**: Access saved links quickly.
-  - **Navigate**: Go to root, module root, or parent directory with ease.
-  - **Open any visited page**: visited paths are sstored and can be searched to quickly navigate to them
+-   Commands work on any StudRes page, including the root directory and file views.
+-   Command allow you to:
+    -   **Open QuickLinks**: Access saved links quickly.
+    -   **Navigate**: Go to root, module root, or parent directory with ease.
+    -   **Open any visited page**: visited paths are sstored and can be searched to quickly navigate to them
 
 ### Image Preview
 
-- Hover over image files to see a preview.
+-   Hover over image files to see a preview.
 
 ### More Emojis
 
-- Custom emojis for all modules.
-- Expanded emoji support for more file extensions.
+-   Custom emojis for all modules.
+-   Expanded emoji support for more file extensions.
 
 ### Better Header
 
-- **Minimal**: Displays only the module code for a cleaner look.
-- **Practical**: Breadcrumbs - allow you to navigate to any part of the current path.
+-   **Minimal**: Displays only the module code for a cleaner look.
+-   **Practical**: Breadcrumbs - allow you to navigate to any part of the current path.
 
 ### Better File Cards
 
-- **Modification Time**: Displayed relative to the current time.
-- **Bigger Hitbox**: Easier to click and interact with.
-- **Visible Sorting Icons**: Icons tell how the folders and files are sorted
+-   **Modification Time**: Displayed relative to the current time.
+-   **Bigger Hitbox**: Easier to click and interact with.
+-   **Visible Sorting Icons**: Icons tell how the folders and files are sorted
 
 ### Popp up
 
-- **Customize**: date display mode, icons, and UI elements visibility.
+-   **Customize**: date display mode, icons, and UI elements visibility.
 
 ## Tech Stack
 
-- **Vite**
-- **React**
-- **TypeScript**
-- **Tailwind CSS**
-- **shadcn UI**
-- **tanstack query** and other libraries
+-   **Vite**
+-   **React**
+-   **TypeScript**
+-   **Tailwind CSS**
+-   **shadcn UI**
+-   **tanstack query** and other libraries
 
 ## How to Run
 
 1. **Install Dependencies**
 
-   ```bash
-   yarn
-   ```
+    ```bash
+    yarn
+    ```
 
-   *Note: You might need to use `--legacy-peer-deps`.*
+    _Note: You might need to use `--legacy-peer-deps`._
 
 2. **Start the Development Server**
 
-   ```bash
-   yarn dev
-   ```
+    ```bash
+    yarn dev
+    ```
 
-   This will automatically rebuild the extension to the `dist/` directory.
+    This will automatically rebuild the extension to the `dist/` directory.
 
 3. **Refresh Extensions in Chrome**
    After running the development server, refresh your Chrome extensions and the StudRes page to see the changes.
@@ -83,15 +83,15 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 
 1. **Pre checks**
 
-   Check that the extension works in the development mode
+    Check that the extension works in the development mode
 
 2. **Build**
 
-   ```bash
-   yarn build
-   ```
+    ```bash
+    yarn build
+    ```
 
-   Ouptput will be stored in the dist/
+    Ouptput will be stored in the dist/
 
 ## Original Template
 

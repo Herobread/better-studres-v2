@@ -1,12 +1,13 @@
 import react from "@vitejs/plugin-react-swc"
 import { resolve } from "path"
-import fs from "fs"
 import { defineConfig } from "vite"
 import { crx, ManifestV3Export } from "@crxjs/vite-plugin"
 
 import manifest from "./manifest.json"
 import devManifest from "./manifest.dev.json"
 import pkg from "./package.json"
+import { viteManifestHackIssue846 } from "./vite/plugins/viteManifestHackIssue846"
+import { stripDevIcons } from "./vite/plugins/stripDevIcons"
 
 const root = resolve(__dirname, "src")
 const pagesDir = resolve(root, "pages")
@@ -23,27 +24,6 @@ const extensionManifest = {
     version: pkg.version,
 }
 
-// plugin to remove dev icons from prod build
-function stripDevIcons(apply: boolean) {
-    if (apply) return null
-
-    return {
-        name: "strip-dev-icons",
-        resolveId(source: string) {
-            return source === "virtual-module" ? source : null
-        },
-        renderStart(outputOptions: any, inputOptions: any) {
-            const outDir = outputOptions.dir
-            fs.rm(resolve(outDir, "dev-icon-32.png"), () =>
-                console.log(`Deleted dev-icon-32.png frm prod build`),
-            )
-            fs.rm(resolve(outDir, "dev-icon-128.png"), () =>
-                console.log(`Deleted dev-icon-128.png frm prod build`),
-            )
-        },
-    }
-}
-
 export default defineConfig({
     resolve: {
         alias: {
@@ -53,6 +33,8 @@ export default defineConfig({
         },
     },
     plugins: [
+        viteManifestHackIssue846,
+        stripDevIcons(isDev),
         react(),
         crx({
             manifest: extensionManifest as ManifestV3Export,
@@ -60,12 +42,11 @@ export default defineConfig({
                 injectCss: true,
             },
         }),
-        stripDevIcons(isDev),
     ],
     publicDir,
     build: {
         outDir,
-        sourcemap: isDev,
+        sourcemap: isDev ? "inline" : false,
         emptyOutDir: !isDev,
     },
 })

@@ -8,10 +8,7 @@
     },
     "web_accessible_resources": [
         {
-            "resources": [
-                "dev-icon-128.png",
-                "dev-icon-32.png"
-            ],
+            "resources": ["dev-icon-128.png", "dev-icon-32.png"],
             "matches": []
         }
     ]

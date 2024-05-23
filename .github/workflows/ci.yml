@@ -1,37 +1,37 @@
 name: Build and Zip Extension
 
 on:
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
+    build:
+        name: Build
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 2
 
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'yarn'
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  cache: "yarn"
 
-      - name: Install dependencies
-        run: yarn
+            - name: Install dependencies
+              run: yarn
 
-      - name: Build
-        run: yarn build
+            - name: Build
+              run: yarn build
 
-      - name: Zip the build folder
-        run: zip -r extension.zip dist
+            - name: Zip the build folder
+              run: zip -r extension.zip dist
 
-      - name: Upload extension artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: better-studres
-          path: extension.zip
+            - name: Upload extension artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                  name: better-studres
+                  path: extension.zip

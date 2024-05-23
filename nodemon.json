@@ -5,6 +5,7 @@
     "watch": [
         "src",
         "utils",
+        "vite",
         "vite.config.ts",
         "tailwind.config.ts",
         "manifest.json",
