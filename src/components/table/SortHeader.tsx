@@ -2,69 +2,73 @@ import parseUrl from "@src/content/parsers/parseUrl"
 import { cva } from "class-variance-authority"
 
 interface SortHeaderProps {
-	style?: "bold" | "normal" | null | undefined
-	href: string
-	column: string
-	children: React.ReactNode
+    style?: "bold" | "normal" | null | undefined
+    href: string
+    column: string
+    children: React.ReactNode
 }
 
-export default function SortHeader({ children, style, column, href }: SortHeaderProps) {
-	const header = cva(["flex", "gap-1", "group", "cursor-pointer"], {
-		defaultVariants: {
-			intent: 'normal'
-		},
-		variants: {
-			intent: {
-				normal: [],
-				bold: ["font-bold"]
-			}
-		},
-	})
+export default function SortHeader({
+    children,
+    style,
+    column,
+    href,
+}: SortHeaderProps) {
+    const header = cva(["flex", "gap-1", "group", "cursor-pointer"], {
+        defaultVariants: {
+            intent: "normal",
+        },
+        variants: {
+            intent: {
+                normal: [],
+                bold: ["font-bold"],
+            },
+        },
+    })
 
-	const sort = 'desc'
+    const sort = "desc"
 
-	const searchParams = parseUrl(window.location.href);
+    const searchParams = parseUrl(window.location.href)
 
-	const COLUMN_PARAMETER = "C"
-	const ORDER_PARAMETER = "O"
+    const COLUMN_PARAMETER = "C"
+    const ORDER_PARAMETER = "O"
 
-	const rawColumn = searchParams[COLUMN_PARAMETER] || 'N'
-	const rawOrder = searchParams[ORDER_PARAMETER] || 'A'
+    const rawColumn = searchParams[COLUMN_PARAMETER] || "N"
+    const rawOrder = searchParams[ORDER_PARAMETER] || "A"
 
-	const columns: { [key: string]: string } = {
-		"N": "Name",
-		"S": "Size",
-		"M": "Last modified",
-	}
+    const columns: { [key: string]: string } = {
+        N: "Name",
+        S: "Size",
+        M: "Last modified",
+    }
 
-	const orders: { [key: string]: string } = {
-		"A": "asc",
-		"D": "desc"
-	}
+    const orders: { [key: string]: string } = {
+        A: "asc",
+        D: "desc",
+    }
 
-	const currentColumn = columns[rawColumn]
-	const currentOrder = orders[rawOrder]
+    const currentColumn = columns[rawColumn]
+    const currentOrder = orders[rawOrder]
 
-	const sortEmoji: { [key: string]: string } = {
-		"asc": "⬆",
-		"desc": "⬇"
-	}
+    const sortEmoji: { [key: string]: string } = {
+        asc: "⬆",
+        desc: "⬇",
+    }
 
-	let emoji = ''
+    let emoji = ""
 
-	if (currentColumn === column) {
-		emoji = sortEmoji[currentOrder]
-	}
+    if (currentColumn === column) {
+        emoji = sortEmoji[currentOrder]
+    }
 
-	return <a className={header({ intent: style })} href={href}>
-		<div>
-			{children}
-		</div>
-		{
-			sort != null &&
-			<div className="opacity-50 transition-opacity duration-200 group-hover:opacity-100">
-				{emoji}
-			</div>
-		}
-	</a>
+    return (
+        <a className={header({ intent: style })} href={href}>
+            <div>{children}</div>
+            {sort != null && (
+                <div className="opacity-50 transition-opacity duration-200 group-hover:opacity-100">
+                    {emoji}
+                </div>
+            )}
+        </a>
+    )
 }

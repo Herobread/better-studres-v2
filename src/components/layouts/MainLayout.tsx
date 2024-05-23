@@ -4,7 +4,7 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
     return (
-        <div className="py-7 px-3 w-full grid gap-4 max-w-3xl mx-auto">
+        <div className="mx-auto grid w-full max-w-3xl gap-4 px-3 py-7">
             {children}
         </div>
     )

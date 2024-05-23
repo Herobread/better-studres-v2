@@ -1,11 +1,11 @@
 interface MainLayoutProps {
-	children: React.ReactNode
+    children: React.ReactNode
 }
 
 export default function WideLayout({ children }: MainLayoutProps) {
-	return (
-		<div className="px-3 w-full grid gap-8 max-w-4xl mx-auto">
-			{children}
-		</div>
-	)
+    return (
+        <div className="mx-auto grid w-full max-w-4xl gap-8 px-3">
+            {children}
+        </div>
+    )
 }

@@ -23,7 +23,7 @@ export interface VirtualFileSystemCommand {
 
 export function mapVirtualFilesToList(
     files: VirtualFileSystem,
-    parentPath: string[] = [],
+    parentPath: string[] = []
 ): VirtualFileSystemCommand[] {
     // Initialize the array to store results
     const result: VirtualFileSystemCommand[] = []
@@ -60,7 +60,7 @@ export function mapVirtualFilesToList(
                 if (subdir !== null) {
                     const subdirFiles = mapVirtualFilesToList(
                         subdir,
-                        currentPath,
+                        currentPath
                     )
                     result.push(...subdirFiles)
                 }
@@ -101,7 +101,7 @@ export async function saveFileLink(fileLink: FileLink) {
 
 export function savePathToObject(
     files: VirtualFileSystem,
-    virtualPath: string[],
+    virtualPath: string[]
 ) {
     let currentLevel: VirtualFileSystem | null = files
 

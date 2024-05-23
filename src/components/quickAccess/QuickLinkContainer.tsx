@@ -1,7 +1,9 @@
 interface QuickLinkContainerProps {
-	children: React.ReactNode
+    children: React.ReactNode
 }
 
-export default function QuickLinkContainer({ children }: QuickLinkContainerProps) {
-	return <div className="flex gap-3 flex-wrap">{children}</div>
+export default function QuickLinkContainer({
+    children,
+}: QuickLinkContainerProps) {
+    return <div className="flex flex-wrap gap-3">{children}</div>
 }

@@ -30,20 +30,17 @@ export default function Root({ content }: RootProps) {
     return (
         <>
             <Commands />
-            {
-                showCommandButton &&
+            {showCommandButton && (
                 <WideLayout>
                     <CommandInput onSelect={handleCommandActivation} />
                 </WideLayout>
-            }
+            )}
             <MainLayout>
                 <CompactLayout>
                     <ModuleHeader />
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
-                {
-                    showQuickLinks && <QuickLinks />
-                }
+                {showQuickLinks && <QuickLinks />}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                 <VirtualFileSystemTracker fileLinks={fileLinks} />
             </MainLayout>

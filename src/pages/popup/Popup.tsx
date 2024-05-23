@@ -1,20 +1,33 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@src/components/ui/select';
-import { Button } from '@src/components/ui/button';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@src/components/ui/form';
-import { saveConfig } from '@src/lib/storage/saveConfig';
-import { loadConfig } from '@src/lib/storage/loadConfig';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
-import { Switch } from '@src/components/ui/switch';
-import { configFallback } from '@src/lib/storage/configFallback';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@src/components/ui/select"
+import { Button } from "@src/components/ui/button"
+import { z } from "zod"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@src/components/ui/form"
+import { saveConfig } from "@src/lib/storage/saveConfig"
+import { loadConfig } from "@src/lib/storage/loadConfig"
+import { useQuery } from "@tanstack/react-query"
+import { useEffect } from "react"
+import { Switch } from "@src/components/ui/switch"
+import { configFallback } from "@src/lib/storage/configFallback"
 import pkg from "@src/../package.json"
 
 const formSchema = z.object({
-    date: z.enum(['full', 'relative']),
-    fileIcons: z.enum(['emoji', 'pictures']),
+    date: z.enum(["full", "relative"]),
+    fileIcons: z.enum(["emoji", "pictures"]),
     imagePreviewAsIcon: z.boolean(),
     imagePreviewOnHover: z.boolean(),
     showQuickLinks: z.boolean(),
@@ -23,8 +36,8 @@ const formSchema = z.object({
 
 export default function Popup() {
     const { data: config } = useQuery({
-        queryKey: ['config'],
-        queryFn: loadConfig
+        queryKey: ["config"],
+        queryFn: loadConfig,
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -32,7 +45,10 @@ export default function Popup() {
         defaultValues: configFallback,
     })
 
-    const { reset, formState: { isDirty } } = form;
+    const {
+        reset,
+        formState: { isDirty },
+    } = form
 
     const isSubmitDisabled = !isDirty
 
@@ -45,16 +61,16 @@ export default function Popup() {
 
     useEffect(() => {
         if (config) {
-            reset(config);
+            reset(config)
         }
-    }, [config, reset]);
+    }, [config, reset])
 
     return (
-        <body className="_tailwind_preflight_reset p-1 text-base grid gap-4 h-min">
+        <body className="_tailwind_preflight_reset grid h-min gap-4 p-1 text-base">
             <div className="flex items-center ">
-                <h1 className="text-xl font-bold flex-grow flex gap-1 items-baseline">
+                <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
                     Better studres
-                    <span className='text-sm text-muted-foreground font-normal'>
+                    <span className="text-sm font-normal text-muted-foreground">
                         {pkg.version}
                     </span>
                 </h1>
@@ -63,22 +79,32 @@ export default function Popup() {
                 </Toggle> */}
             </div>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className='grid gap-3'>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="grid gap-3"
+                >
                     <FormField
                         control={form.control}
-                        name='date'
+                        name="date"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>📅 Date display:</FormLabel>
-                                <Select onValueChange={field.onChange} value={field.value}>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    value={field.value}
+                                >
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder='Date display' />
+                                            <SelectValue placeholder="Date display" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value='relative'>Relative (N days ago)</SelectItem>
-                                        <SelectItem value='full'>Full (YYYY-MM-DD HH:MM)</SelectItem>
+                                        <SelectItem value="relative">
+                                            Relative (N days ago)
+                                        </SelectItem>
+                                        <SelectItem value="full">
+                                            Full (YYYY-MM-DD HH:MM)
+                                        </SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -87,19 +113,26 @@ export default function Popup() {
                     />
                     <FormField
                         control={form.control}
-                        name='fileIcons'
+                        name="fileIcons"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>📁 File icons:</FormLabel>
-                                <Select onValueChange={field.onChange} value={field.value}>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    value={field.value}
+                                >
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder='File icons' />
+                                            <SelectValue placeholder="File icons" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
-                                        <SelectItem value='emoji'>Emoji</SelectItem>
-                                        <SelectItem value='pictures'>Pictures</SelectItem>
+                                        <SelectItem value="emoji">
+                                            Emoji
+                                        </SelectItem>
+                                        <SelectItem value="pictures">
+                                            Pictures
+                                        </SelectItem>
                                     </SelectContent>
                                 </Select>
                                 <FormMessage />
@@ -108,10 +141,10 @@ export default function Popup() {
                     />
                     <FormField
                         control={form.control}
-                        name='imagePreviewAsIcon'
+                        name="imagePreviewAsIcon"
                         render={({ field }) => (
                             <FormItem>
-                                <div className='flex items-center gap-1'>
+                                <div className="flex items-center gap-1">
                                     <FormControl>
                                         <Switch
                                             checked={field.value}
@@ -119,10 +152,11 @@ export default function Popup() {
                                         />
                                     </FormControl>
                                     <FormLabel>
-                                        <p>
-                                            Image as file icon
+                                        <p>Image as file icon</p>
+                                        <p className="text-sm font-normal text-muted-foreground">
+                                            Replaces icons of images with very
+                                            small image preview
                                         </p>
-                                        <p className='text-sm text-muted-foreground font-normal'>Replaces icons of images with very small image preview</p>
                                     </FormLabel>
                                 </div>
                                 <FormMessage />
@@ -131,10 +165,10 @@ export default function Popup() {
                     />
                     <FormField
                         control={form.control}
-                        name='imagePreviewOnHover'
+                        name="imagePreviewOnHover"
                         render={({ field }) => (
                             <FormItem>
-                                <div className='flex items-center gap-1'>
+                                <div className="flex items-center gap-1">
                                     <FormControl>
                                         <Switch
                                             checked={field.value}
@@ -142,10 +176,11 @@ export default function Popup() {
                                         />
                                     </FormControl>
                                     <FormLabel>
-                                        <p>
-                                            Image preview on hover
+                                        <p>Image preview on hover</p>
+                                        <p className="text-sm font-normal text-muted-foreground">
+                                            Shows preview of images without
+                                            leaving studres
                                         </p>
-                                        <p className='text-sm text-muted-foreground font-normal'>Shows preview of images without leaving studres</p>
                                     </FormLabel>
                                 </div>
                                 <FormMessage />
@@ -154,10 +189,10 @@ export default function Popup() {
                     />
                     <FormField
                         control={form.control}
-                        name='showQuickLinks'
+                        name="showQuickLinks"
                         render={({ field }) => (
                             <FormItem>
-                                <div className='flex items-center gap-1'>
+                                <div className="flex items-center gap-1">
                                     <FormControl>
                                         <Switch
                                             checked={field.value}
@@ -165,10 +200,10 @@ export default function Popup() {
                                         />
                                     </FormControl>
                                     <FormLabel>
-                                        <p>
-                                            Show quick links
+                                        <p>Show quick links</p>
+                                        <p className="text-sm font-normal text-muted-foreground">
+                                            Quickly navigate between pages
                                         </p>
-                                        <p className='text-sm text-muted-foreground font-normal'>Quickly navigate between pages</p>
                                     </FormLabel>
                                 </div>
                                 <FormMessage />
@@ -177,10 +212,10 @@ export default function Popup() {
                     />
                     <FormField
                         control={form.control}
-                        name='showCommandButton'
+                        name="showCommandButton"
                         render={({ field }) => (
                             <FormItem>
-                                <div className='flex items-center gap-1'>
+                                <div className="flex items-center gap-1">
                                     <FormControl>
                                         <Switch
                                             checked={field.value}
@@ -188,22 +223,22 @@ export default function Popup() {
                                         />
                                     </FormControl>
                                     <FormLabel>
-                                        <p>
-                                            Show commands button
+                                        <p>Show commands button</p>
+                                        <p className="text-sm font-normal text-muted-foreground">
+                                            Commands still work, even if this is
+                                            disabled
                                         </p>
-                                        <p className='text-sm text-muted-foreground font-normal'>Commands still work, even if this is disabled</p>
                                     </FormLabel>
                                 </div>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type='submit' disabled={isSubmitDisabled}>
-                        {isSubmitDisabled ? 'Saved' : 'Save'}
+                    <Button type="submit" disabled={isSubmitDisabled}>
+                        {isSubmitDisabled ? "Saved" : "Save"}
                     </Button>
                 </form>
             </Form>
-
         </body>
     )
 }

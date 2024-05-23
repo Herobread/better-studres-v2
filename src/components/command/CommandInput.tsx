@@ -1,15 +1,18 @@
-import { SearchIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react"
 
 interface CommandInputProps {
-	onSelect?: () => unknown
+    onSelect?: () => unknown
 }
 
 export default function CommandInput({ onSelect }: CommandInputProps) {
-	return <button onClick={onSelect} className="flex items-center gap-1 outline-2 outline outline-muted text-muted-foreground rounded-xl p-1">
-		<SearchIcon />
-		<p className="flex-grow">
-			Search visited folders or run commands
-		</p>
-		<kbd className="font-bold px-1">⌘K</kbd>
-	</button>
+    return (
+        <button
+            onClick={onSelect}
+            className="flex items-center gap-1 rounded-xl p-1 text-muted-foreground outline outline-2 outline-muted"
+        >
+            <SearchIcon />
+            <p className="flex-grow">Search visited folders or run commands</p>
+            <kbd className="px-1 font-bold">⌘K</kbd>
+        </button>
+    )
 }

@@ -8,8 +8,8 @@ import { PageData } from "@src/types/pageContentTypes"
 try {
     const url = location.href.toString()
 
-    if (!url.endsWith('/')) {
-        throw new Error('not a folder')
+    if (!url.endsWith("/")) {
+        throw new Error("not a folder")
     }
 
     const rootContainer = document.body
@@ -30,16 +30,16 @@ try {
 } catch (e) {
     // load only commands then
 
-    const div = document.createElement('div');
-    div.className = '__better_studres__root _tailwind_preflight_reset';
-    document.body.appendChild(div);
+    const div = document.createElement("div")
+    div.className = "__better_studres__root _tailwind_preflight_reset"
+    document.body.appendChild(div)
 
-    const rootContainer = document.querySelector('.__better_studres__root');
+    const rootContainer = document.querySelector(".__better_studres__root")
     if (!rootContainer) {
-        throw new Error("Can't find Options root element");
+        throw new Error("Can't find Options root element")
     }
 
-    const root = createRoot(rootContainer);
+    const root = createRoot(rootContainer)
 
     root.render(
         <Providers>

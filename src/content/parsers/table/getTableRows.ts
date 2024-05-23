@@ -1,5 +1,5 @@
 export function getTableRows(
-    content: HTMLElement,
+    content: HTMLElement
 ): NodeListOf<HTMLTableRowElement> {
     const table = content.querySelector("tbody")
 

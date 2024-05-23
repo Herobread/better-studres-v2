@@ -8,7 +8,7 @@ import generateVirtualPath from "@src/content/versionControl/generateVirtualPath
 const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg"]
 
 export function parseFileLinkRows(
-    fileLinkRows: HTMLTableRowElement[],
+    fileLinkRows: HTMLTableRowElement[]
 ): FileLink[] {
     const fileLinks: FileLink[] = []
 

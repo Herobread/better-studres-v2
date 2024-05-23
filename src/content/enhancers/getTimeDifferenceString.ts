@@ -1,6 +1,6 @@
 export function getTimeDifferenceString(
     startDate: Date,
-    endDate: Date,
+    endDate: Date
 ): string {
     if (!isDateValid(startDate) || !isDateValid(endDate)) {
         return ""

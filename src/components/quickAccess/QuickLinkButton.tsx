@@ -1,25 +1,25 @@
-import { ButtonHTMLAttributes, forwardRef } from "react";
+import { ButtonHTMLAttributes, forwardRef } from "react"
 
 interface QuickLinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	content?: string;
-	icon: string;
+    content?: string
+    icon: string
 }
 
 const QuickLinkButton = forwardRef<HTMLButtonElement, QuickLinkButtonProps>(
-	({ content, icon, ...props }, ref) => {
-		return (
-			<button
-				{...props}
-				ref={ref}
-				className="flex gap-2 rounded-xl py-1 px-3 bg-primary-foreground hover:bg-accent cursor-pointer"
-			>
-				<div className="text-base">{icon}</div>
-				{content && <div>{content}</div>}
-			</button>
-		);
-	}
-);
+    ({ content, icon, ...props }, ref) => {
+        return (
+            <button
+                {...props}
+                ref={ref}
+                className="flex cursor-pointer gap-2 rounded-xl bg-primary-foreground px-3 py-1 hover:bg-accent"
+            >
+                <div className="text-base">{icon}</div>
+                {content && <div>{content}</div>}
+            </button>
+        )
+    }
+)
 
-QuickLinkButton.displayName = 'QuickLinkButton'
+QuickLinkButton.displayName = "QuickLinkButton"
 
-export default QuickLinkButton;
+export default QuickLinkButton

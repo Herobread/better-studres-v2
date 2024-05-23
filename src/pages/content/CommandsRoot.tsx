@@ -1,7 +1,9 @@
-import Commands from "@src/components/command/Commands";
+import Commands from "@src/components/command/Commands"
 
 export default function CommandsRoot() {
-	return <>
-		<Commands />
-	</>
+    return (
+        <>
+            <Commands />
+        </>
+    )
 }
