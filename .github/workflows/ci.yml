@@ -7,7 +7,7 @@ jobs:
     build:
         name: Build
         timeout-minutes: 15
-        runs-on: ubuntu-22.04
+        runs-on: windows-latest
 
         steps:
             - name: Check out code
@@ -28,7 +28,8 @@ jobs:
               run: yarn build
 
             - name: Zip the build folder
-              run: zip -r extension.zip dist
+              run: |
+                powershell Compress-Archive -Path dist\* -DestinationPath extension.zip
 
             - name: Upload extension artifacts
               uses: actions/upload-artifact@v3
