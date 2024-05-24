@@ -5,7 +5,7 @@ import { ConfigContext } from "@src/contexts/ConfigContext"
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../ui/context-menu";
 import { GitCompareArrowsIcon } from "lucide-react";
 import { Dialog, DialogContent } from "../ui/dialog";
-import UpdatesDialogue from "./UpdatesDialogue";
+import UpdatesDialog from "./UpdatesDialog";
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -106,7 +106,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
                 <Dialog open={isViewUpdatesDialogOpen} onOpenChange={setIsViewUpdatesDialogOpen}>
                     <DialogContent>
-                        <UpdatesDialogue fileLink={fileLink} />
+                        <UpdatesDialog fileLink={fileLink} />
                     </DialogContent>
                 </Dialog>
             </>
