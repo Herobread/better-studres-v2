@@ -1,0 +1,48 @@
+import { ChangesRecord } from "@src/content/versionControl/fileMetrics"
+import { ArrowRightIcon } from "lucide-react"
+import { Fragment } from "react/jsx-runtime"
+import ChangesList from "./ChangesList"
+
+interface ChangesRecordCardProps {
+	changeRecords: ChangesRecord[]
+}
+
+export default function ChangesRecordCard({ changeRecords }: ChangesRecordCardProps) {
+
+	return <div className="grid grid-cols-subgrid col-span-full gap-2">
+		{
+			changeRecords.map(changeRecord => {
+				const { header, changes, timestamp, version } = changeRecord
+
+				return <Fragment key={timestamp.getTime()}>
+					<span className="font-bold bg-muted px-2 rounded-lg h-min">{version}</span>
+					<div className="gap-1">
+						<p className="font-bold">{header}</p>
+						{
+							changes &&
+							<div className="flex gap-1 items-center">
+								<ChangesList changes={changes.before} />
+								{
+									changes.after &&
+									<>
+										<ArrowRightIcon size={18} strokeWidth={1} />
+										<ChangesList changes={changes.after} />
+									</>
+								}
+							</div>
+						}
+						<p className="text-muted-foreground">Observed {timestamp.toLocaleString('en-UK', {
+							year: 'numeric',
+							month: 'short',
+							day: '2-digit',
+							hour: '2-digit',
+							minute: '2-digit',
+							second: '2-digit',
+							hour12: false
+						})}</p>
+					</div>
+				</Fragment >
+			})
+		}
+	</div>
+}

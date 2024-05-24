@@ -1,15 +1,73 @@
 import { FileLink } from "@src/types/pageContentTypes"
 
-// export interface FileChange {
-// 	field: 'modified' | 'size'
-// 	info: string
-// }
-
-// export interface FileStatus {
-//     changes?: FileChange[]
-// }
-
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
+
+export interface ChangesRecord {
+    version: string
+    header: string
+    changes?: {
+        before: string[]
+        after?: string[]
+    }
+    timestamp: Date
+}
+
+export function generateChangeRecords(
+    trackedFileLinkData: TrackedFileLinkData
+) {
+    const result: ChangesRecord[] = []
+
+    const { versions } = trackedFileLinkData
+
+    // initial
+    result.push({
+        header: "First version",
+        timestamp: new Date(versions[0].detectedAt),
+        changes: {
+            before: [
+                versions[0].size + versions[0].units,
+                versions[0].lastModified,
+            ],
+        },
+        version: "v0",
+    })
+
+    for (let i = 0; i < versions.length - 1; i++) {
+        const version = versions[i]
+        const nextVersion = versions[i + 1]
+
+        const updatedFields = []
+
+        const before: string[] = []
+        const after: string[] = []
+
+        if (version.size !== nextVersion.size) {
+            before.push(version.size + version.units)
+            after.push(nextVersion.size + version.units)
+
+            updatedFields.push("Size")
+        }
+
+        if (version.lastModified !== nextVersion.lastModified) {
+            before.push(version.lastModified)
+            after.push(nextVersion.lastModified)
+
+            updatedFields.push("Modification date")
+        }
+
+        result.push({
+            changes: {
+                before,
+                after,
+            },
+            header: updatedFields.join(" and ") + " updated:",
+            timestamp: new Date(version.detectedAt),
+            version: "v" + (i + 1),
+        })
+    }
+
+    return result
+}
 
 export interface MinimizedFileLink {
     href: string
@@ -17,6 +75,7 @@ export interface MinimizedFileLink {
     lastModified: string
     size: number
     units: string
+    detectedAt: number
 }
 
 export interface TrackedFileLinkData {
@@ -76,6 +135,8 @@ export async function trackFileLinks(fileLinks: FileLink[]) {
 export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
     const { name, href, lastModified, space } = fileLink
 
+    const detectedAt = new Date().getTime()
+
     if (!space) {
         return {
             href,
@@ -83,6 +144,7 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
             lastModified,
             size: 0,
             units: "-",
+            detectedAt,
         }
     }
 
@@ -90,6 +152,7 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
         href,
         name,
         lastModified,
+        detectedAt,
         ...space,
     }
 }
@@ -116,8 +179,6 @@ export async function trackFileLink(fileLink: FileLink) {
 
     // new file
     if (!record) {
-        console.log("new file: " + fileLink.name)
-
         const newTrackedFileLink: TrackedFileLinkData = {
             latestFileLink: minimizedFileLink,
             versions: [minimizedFileLink],
@@ -137,11 +198,6 @@ export async function trackFileLink(fileLink: FileLink) {
     )
 
     if (isNewVersion) {
-        console.log("new version: " + fileLink.name)
-
-        console.log(minimizedFileLink)
-        console.log(latestFileLink)
-
         record.latestFileLink = minimizedFileLink
         versions.push(minimizedFileLink)
 
@@ -150,7 +206,6 @@ export async function trackFileLink(fileLink: FileLink) {
         return true
     }
 
-    console.log("no updates found for " + minimizedFileLink.name)
     // same as old file - do nothing
     return false
 }

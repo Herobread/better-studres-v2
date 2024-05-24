@@ -13,9 +13,6 @@ import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadcrumbs"
 import FileMeticsTracker from "@src/components/versionControl/FileMeticsTracker"
-import { useQuery } from "@tanstack/react-query"
-import { getTrackedFileLinkMap } from "@src/content/versionControl/fileMetrics"
-import { Button } from "@src/components/ui/button"
 
 interface RootProps {
     content: PageData
@@ -24,33 +21,15 @@ interface RootProps {
 export default function Root({ content }: RootProps) {
     const { fileLinks, sortLinks } = content
 
-    const { data, isLoading } = useQuery({
-        queryKey: ['aa'],
-        queryFn: getTrackedFileLinkMap
-    })
-
     const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
-
-    if (isLoading) {
-        return null
-    }
 
     const handleCommandActivation = () => {
         setOpen(true)
     }
 
-    console.log(data?.trackedFileLinkMap)
-
     return (
         <>
-            <Button onClick={() => {
-                chrome.storage.local.set({ 'trackedFileLinkMap': {} })
-            }}>Clear</Button>
-            <Button onClick={async () => {
-                const data = await chrome.storage.local.get('trackedFileLinkMap')
-                console.log(data)
-            }}>Get</Button>
             <Commands />
             {showCommandButton && (
                 <WideLayout>
