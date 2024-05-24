@@ -83,7 +83,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     const space = parseFileSize(rawSize)
 
     if (!descriptionDataCell) {
-        throw new Error("No descripiton cell found")
+        throw new Error("No description cell found")
     }
 
     let rawDescription = descriptionDataCell.textContent
