@@ -8,8 +8,7 @@ interface TableHeaderProps {
 export default function TableHeader({ sortLinks }: TableHeaderProps) {
     return (
         <div className="col-span-full grid grid-cols-subgrid items-center gap-3 p-3">
-            <div></div> {/* icon */}
-            <div></div> {/* separator */}
+            <span className="col-span-2"></span> {/* empty cell to replace icon and Separator */}
             <SortHeader column="Name" href={sortLinks["Name"]} style={"bold"}>
                 Name
             </SortHeader>
