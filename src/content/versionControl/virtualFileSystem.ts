@@ -2,13 +2,19 @@ import { FileLink } from "@src/types/pageContentTypes"
 import { getFileEmoji } from "../enhancers/fileEmoji/getFileEmoji"
 import { getModuleEmoji } from "../enhancers/moduleEmoji/getModuleEmoji"
 
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export async function getFiles() {
     return (await chrome.storage.local.get("files")) as VirtualFileSystem
 }
 
 export const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
 
-export function convertVirtualPathToUrl(path: string[]) {
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
+export function converturlSegmentsToUrl(path: string[]) {
     return BASE_URL + path.join("/") + "/"
 }
 
@@ -21,6 +27,9 @@ export interface VirtualFileSystemCommand {
     href: string
 }
 
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export function mapVirtualFilesToList(
     files: VirtualFileSystem,
     parentPath: string[] = []
@@ -71,6 +80,9 @@ export function mapVirtualFilesToList(
     return result
 }
 
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export async function saveFileLinks(fileLinks: FileLink[]) {
     let { files }: VirtualFileSystem = await chrome.storage.local.get("files")
 
@@ -79,34 +91,40 @@ export async function saveFileLinks(fileLinks: FileLink[]) {
     }
 
     fileLinks.forEach((fileLink) => {
-        const { virtualPath } = fileLink
-        savePathToObject(files, virtualPath)
+        const { urlSegments } = fileLink
+        savePathToObject(files, urlSegments)
     })
 
     await chrome.storage.local.set({ files })
 }
 
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export async function saveFileLink(fileLink: FileLink) {
-    const { virtualPath } = fileLink
+    const { urlSegments } = fileLink
     let { files }: VirtualFileSystem = await chrome.storage.local.get("files")
 
     if (!files) {
         files = {}
     }
 
-    savePathToObject(files, virtualPath)
+    savePathToObject(files, urlSegments)
 
     await chrome.storage.local.set({ files })
 }
 
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export function savePathToObject(
     files: VirtualFileSystem,
-    virtualPath: string[]
+    urlSegments: string[]
 ) {
     let currentLevel: VirtualFileSystem | null = files
 
-    for (let i = 0; i < virtualPath.length; i++) {
-        const pathItem = virtualPath[i]
+    for (let i = 0; i < urlSegments.length; i++) {
+        const pathItem = urlSegments[i]
 
         if (!currentLevel) {
             break
@@ -117,7 +135,7 @@ export function savePathToObject(
         }
 
         // reached the limit of what the path can give us
-        if (i === virtualPath.length - 1) {
+        if (i === urlSegments.length - 1) {
             // currentLevel[pathItem] = null
             break
         }

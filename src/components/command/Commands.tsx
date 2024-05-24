@@ -15,10 +15,9 @@ import {
 import { useCallback, useEffect } from "react"
 import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/lib/redirect"
-import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
-import generateUrlFromVirtualPath from "@src/content/versionControl/generateUrlFromVirtualPath"
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
+import extractUrlSegments, { convertUrlSegmentsToUrl } from "@src/content/versionControl/urlSegments"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -52,19 +51,19 @@ export default function Commands() {
     }, [toggleOpen])
 
     const currentUrl = window.location.toString()
-    const currentVirtualPath = generateVirtualPath(currentUrl)
+    const currentUrlSegments = extractUrlSegments(currentUrl)
 
-    const moduleCode = currentVirtualPath[0]
+    const moduleCode = currentUrlSegments[0]
     const moduleEmoji = getModuleEmoji(moduleCode)
 
     const handleGoToParent = () => {
-        currentVirtualPath.pop()
+        currentUrlSegments.pop()
 
-        redirect(generateUrlFromVirtualPath(currentVirtualPath), "userClick")
+        redirect(convertUrlSegmentsToUrl(currentUrlSegments), "userClick")
     }
 
     const handleGoToModuleRoot = () => {
-        redirect(generateUrlFromVirtualPath([currentVirtualPath[0]]))
+        redirect(convertUrlSegmentsToUrl([currentUrlSegments[0]]))
     }
 
     const handleGoToRoot = () => {
@@ -107,13 +106,13 @@ export default function Commands() {
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
                         commandsData.map((item) => {
-                            const virtualPath = generateVirtualPath(item.href)
-                            const virtualPathString = virtualPath.join("/")
+                            const urlSegments = extractUrlSegments(item.href)
+                            const urlSegmentsString = urlSegments.join("/")
 
                             return (
                                 <CommandItem
                                     keywords={[item.href]}
-                                    key={virtualPathString}
+                                    key={urlSegmentsString}
                                     onSelect={() => {
                                         redirect(item.href, "userClick")
                                     }}
@@ -121,7 +120,7 @@ export default function Commands() {
                                 >
                                     {item.name}
                                     <span className="text-muted-foreground">
-                                        {virtualPathString}
+                                        {urlSegmentsString}
                                     </span>
                                 </CommandItem>
                             )

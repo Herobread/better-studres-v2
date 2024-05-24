@@ -1,13 +1,13 @@
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
-import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
 import Title from "../typography/Title"
+import extractUrlSegments from "@src/content/versionControl/urlSegments"
 
 export default function ModuleHeader() {
     const currentUrl = location.href.toString()
 
-    const virtualPath = generateVirtualPath(currentUrl)
+    const urlSegments = extractUrlSegments(currentUrl)
 
-    const moduleCode = virtualPath[0]
+    const moduleCode = urlSegments[0]
 
     const moduleEmoji = getModuleEmoji(moduleCode)
 

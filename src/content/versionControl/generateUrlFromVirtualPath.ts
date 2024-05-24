@@ -1,5 +1,8 @@
 import { BASE_URL } from "./virtualFileSystem"
 
-export default function generateUrlFromVirtualPath(virtualPath: string[]) {
-    return BASE_URL + virtualPath.join("/")
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
+export default function generateUrlFromVirtualPath(urlSegments: string[]) {
+    return BASE_URL + urlSegments.join("/")
 }

@@ -211,5 +211,5 @@ export async function trackFileLink(fileLink: FileLink) {
 }
 
 export function generateFileLinkKey(fileLink: FileLink) {
-    return fileLink.virtualPath.join("/")
+    return fileLink.urlSegments.join("/")
 }

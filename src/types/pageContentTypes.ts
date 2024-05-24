@@ -1,3 +1,5 @@
+import { UrlSegments } from "@src/content/versionControl/urlSegments"
+
 export interface Image {
     src?: string
     alt?: string
@@ -22,7 +24,7 @@ export interface FileLink {
     }
     description?: string
     href: string
-    virtualPath: string[]
+    urlSegments: UrlSegments
 }
 
 export interface PageData {

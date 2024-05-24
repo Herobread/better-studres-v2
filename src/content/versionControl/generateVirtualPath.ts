@@ -1,3 +1,6 @@
+/**
+ * @deprecated Will be deleted in version 2.1
+ */
 export default function generateVirtualPath(href: string) {
     const path = href.split("/")
 

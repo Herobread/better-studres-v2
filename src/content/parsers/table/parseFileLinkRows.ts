@@ -3,7 +3,7 @@ import parseFileSize from "@src/content/parsers/parseFileSize"
 import { FileLink, Image } from "@src/types/pageContentTypes"
 import splitFileName from "@src/content/parsers/splitFileName"
 import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
-import generateVirtualPath from "@src/content/versionControl/generateVirtualPath"
+import extractUrlSegments from "@src/content/versionControl/urlSegments"
 
 const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg"]
 
@@ -64,7 +64,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
 
     const href = nameDataCellAnchor.href || ""
 
-    const virtualPath = generateVirtualPath(href)
+    const urlSegments = extractUrlSegments(href)
 
     if (!lastModifiedDataCell) {
         throw new Error("No last modified cell found")
@@ -101,7 +101,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         extension,
         emoji,
         href,
-        virtualPath,
+        urlSegments,
         description,
         space,
         lastModifiedDate,
