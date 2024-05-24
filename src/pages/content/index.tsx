@@ -16,6 +16,10 @@ try {
 
     const parsedPageContent: PageData = parsePageContent(rootContainer)
 
+    if (parsedPageContent.fileLinks.length === 0) {
+        throw new Error('No file links found')
+    }
+
     if (!rootContainer) {
         throw new Error("Can't find Options root element")
     }

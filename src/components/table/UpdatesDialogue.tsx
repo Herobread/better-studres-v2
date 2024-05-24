@@ -13,7 +13,7 @@ export default function UpdatesDialogue({ fileLink }: UpdatesDialogueProps) {
 		queryFn: async () => { return await getTrackedFileLink(generateFileLinkKey(fileLink)) }
 	})
 
-	console.log(fileLink)
+
 
 	return <div className="space-y-3">
 		<div className="space-y-1">
