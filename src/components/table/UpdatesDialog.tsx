@@ -15,8 +15,8 @@ export default function UpdatesDialog({ fileLink }: UpdatesDialogProps) {
 
 	const filename = fileLink.name + (fileLink.extension ? '.' + fileLink.extension : '')
 
-	return <div className="space-y-3">
-		<div className="space-y-1">
+	return <div className="space-y-5">
+		<div>
 			<h2 className="text-xl font-bold">Version history of {fileLink.emoji}{filename}</h2>
 			<p className="text-muted-foreground">Note: updates are only tracked locally.</p>
 		</div>
