@@ -13,9 +13,11 @@ export default function UpdatesDialogue({ fileLink }: UpdatesDialogueProps) {
 		queryFn: async () => { return await getTrackedFileLink(generateFileLinkKey(fileLink)) }
 	})
 
+	console.log(fileLink)
+
 	return <div className="space-y-3">
 		<div className="space-y-1">
-			<h2 className="text-xl font-bold">Version history of CS1006_P2_GameOfLife.html</h2>
+			<h2 className="text-xl font-bold">Version history of {fileLink.emoji}{fileLink.name}</h2>
 			<p className="text-muted-foreground">All updates are only tracked locally.</p>
 		</div>
 		<div className="grid grid-cols-[max-content_1fr] gap-2">
