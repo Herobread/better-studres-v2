@@ -8,7 +8,11 @@ export interface FileLinkPath {
     href: string
 }
 
-export async function getFilesList(): Promise<FileLinkPath[]> {
+/**
+ * Retrieves a list of files with their paths and formatted names.
+ * @returns {Promise<FileLinkPath[]>} A promise that resolves to an array of file link paths.
+ */
+export async function getFormattedFilesList(): Promise<FileLinkPath[]> {
     const trackedFileLinkMap = await getTrackedFileLinkMap()
     const result: FileLinkPath[] = []
 

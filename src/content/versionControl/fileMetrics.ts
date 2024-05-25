@@ -12,6 +12,11 @@ export interface ChangesRecord {
     timestamp: Date
 }
 
+/**
+ * Generates change records based on tracked file link data.
+ * @param {TrackedFileLinkData} trackedFileLinkData - The tracked file link data.
+ * @returns {ChangesRecord[]} An array of change records.
+ */
 export function generateChangeRecords(
     trackedFileLinkData: TrackedFileLinkData
 ) {
@@ -90,6 +95,11 @@ export interface TrackedFileLinkMap {
     [key: string]: TrackedFileLinkData
 }
 
+/**
+ * Retrieves a tracked file link by key.
+ * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
+ * @returns {Promise<TrackedFileLinkData>} A promise that resolves to the tracked file link data.
+ */
 export async function getTrackedFileLink(
     key: string
 ): Promise<TrackedFileLinkData> {
@@ -98,6 +108,10 @@ export async function getTrackedFileLink(
     return trackedFileLinkMap[key]
 }
 
+/**
+ * Retrieves the tracked file link map from storage.
+ * @returns {Promise<TrackedFileLinkMap>} A promise that resolves to the tracked file link map.
+ */
 export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
     const { trackedFileLinkMap: trackedFileLinkMapString } =
         await chrome.storage.local.get(TRACKED_FILE_LINK_MAP)
@@ -107,10 +121,16 @@ export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
 
 export const UNTRACKED_FILE_NAMES = ["../"]
 
+/**
+ * Saves tracked file link data to storage.
+ * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
+ * @param {TrackedFileLinkData} trackedFileLinkData - The tracked file link data to save.
+ * @returns {Promise<void>} A promise that resolves when the data has been saved.
+ */
 export async function saveTrackedFileLinkToStorage(
     key: string,
     trackedFileLinkData: TrackedFileLinkData
-) {
+): Promise<void> {
     if (
         UNTRACKED_FILE_NAMES.includes(trackedFileLinkData.latestFileLink.name)
     ) {
@@ -128,12 +148,22 @@ export async function saveTrackedFileLinkToStorage(
     })
 }
 
-export async function trackFileLinks(fileLinks: FileLink[]) {
+/**
+ * Tracks multiple file links.
+ * @param {FileLink[]} fileLinks - The file links to track.
+ * @returns {Promise<void>} A promise that resolves when all file links have been tracked.
+ */
+export async function trackFileLinks(fileLinks: FileLink[]): Promise<void> {
     for (const fileLink of fileLinks) {
         await trackFileLink(fileLink)
     }
 }
 
+/**
+ * Minimizes a file link.
+ * @param {FileLink} fileLink - The file link to minimize.
+ * @returns {MinimizedFileLink} The minimized file link.
+ */
 export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
     const { name, href, lastModified, space } = fileLink
 
@@ -159,6 +189,12 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
     }
 }
 
+/**
+ * Compares two minimized file links.
+ * @param {MinimizedFileLink} minimizedFileLink1 - The first minimized file link.
+ * @param {MinimizedFileLink} minimizedFileLink2 - The second minimized file link.
+ * @returns {boolean} True if the file links are the same, false otherwise.
+ */
 export function compareMinimizedFileLinks(
     minimizedFileLink1: MinimizedFileLink,
     minimizedFileLink2: MinimizedFileLink
@@ -172,7 +208,12 @@ export function compareMinimizedFileLinks(
     )
 }
 
-export async function trackFileLink(fileLink: FileLink) {
+/**
+ * Tracks a file link.
+ * @param {FileLink} fileLink - The file link to track.
+ * @returns {Promise<boolean>} A promise that resolves to true if the file link is a new version, false otherwise.
+ */
+export async function trackFileLink(fileLink: FileLink): Promise<boolean> {
     const minimizedFileLink: MinimizedFileLink = minimizeFileLink(fileLink)
 
     const key = generateFileLinkKey(fileLink)
@@ -212,6 +253,11 @@ export async function trackFileLink(fileLink: FileLink) {
     return false
 }
 
+/**
+ * Generates a key for a file link.
+ * @param {FileLink} fileLink - The file link to generate a key for.
+ * @returns {string} The generated key.
+ */
 export function generateFileLinkKey(fileLink: FileLink) {
     return fileLink.urlSegments.join("/")
 }

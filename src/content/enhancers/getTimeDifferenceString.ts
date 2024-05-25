@@ -1,3 +1,9 @@
+/**
+ * Calculates the time difference between two dates and returns a human-readable string.
+ * @param {Date} startDate - The start date.
+ * @param {Date} endDate - The end date.
+ * @returns {string} A string representing the time difference.
+ */
 export function getTimeDifferenceString(
     startDate: Date,
     endDate: Date

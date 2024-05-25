@@ -3,6 +3,11 @@ import { getTableRows } from "./getTableRows"
 import { parseFileLinkRows } from "./parseFileLinkRows"
 import { parseHeaderRow } from "./parseHeaderRow"
 
+/**
+ * Parses a table to extract sort links and file links.
+ * @param {HTMLElement} content - The content of the table to parse.
+ * @returns {{ sortLinks: SortLinks, fileLinks: FileLink[] }} An object containing the sort links and file links.
+ */
 export function parseTable(content: HTMLElement): {
     sortLinks: SortLinks
     fileLinks: FileLink[]
