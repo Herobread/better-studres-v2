@@ -6,6 +6,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } 
 import { GitCompareArrowsIcon } from "lucide-react";
 import { Dialog, DialogContent } from "../ui/dialog";
 import UpdatesDialog from "./UpdatesDialog";
+import { UNTRACKED_FILE_NAMES } from "@src/content/versionControl/fileMetrics";
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -32,6 +33,8 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             image,
             lastModified,
         } = fileLink
+
+        const isVersionHistoryAvailable = !UNTRACKED_FILE_NAMES.includes(name)
 
         return (
             <>
@@ -82,7 +85,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         </a>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
-                        <ContextMenuItem onSelect={() => { setIsViewUpdatesDialogOpen(true) }}>
+                        <ContextMenuItem onSelect={() => { setIsViewUpdatesDialogOpen(true) }} disabled={!isVersionHistoryAvailable}>
                             <GitCompareArrowsIcon /> View update history
                         </ContextMenuItem>
                         {/* <ContextMenuSub>

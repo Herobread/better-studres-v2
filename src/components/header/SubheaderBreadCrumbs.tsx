@@ -1,4 +1,4 @@
-import { BASE_URL } from "@src/content/versionControl/virtualFileSystem"
+import { BASE_URL } from "@src/content/versionControl/urlSegments"
 import {
     Breadcrumb,
     BreadcrumbItem,

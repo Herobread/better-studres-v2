@@ -3,7 +3,6 @@ import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import QuickLinks from "@src/components/quickAccess/QuickLinks"
 import Table from "@src/components/table/Table"
-import VirtualFileSystemTracker from "@src/components/table/VirtualFileSystemTracker"
 import { PageData } from "@src/types/pageContentTypes"
 import ModuleHeader from "@src/components/header/ModuleHeader"
 import WideLayout from "@src/components/layouts/WideLayout"
@@ -43,7 +42,6 @@ export default function Root({ content }: RootProps) {
                 </CompactLayout>
                 {showQuickLinks && <QuickLinks />}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
-                <VirtualFileSystemTracker fileLinks={fileLinks} />
                 <FileMeticsTracker fileLinks={fileLinks} />
             </MainLayout>
         </>

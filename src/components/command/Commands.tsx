@@ -1,8 +1,4 @@
-import {
-    BASE_URL,
-    getFiles,
-    mapVirtualFilesToList,
-} from "@src/content/versionControl/virtualFileSystem"
+import { BASE_URL } from "@src/content/versionControl/urlSegments"
 import { useQuery } from "@tanstack/react-query"
 import {
     CommandDialog,
@@ -18,16 +14,14 @@ import redirect from "@src/lib/redirect"
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
 import extractUrlSegments, { convertUrlSegmentsToUrl } from "@src/content/versionControl/urlSegments"
+import { getFilesList } from "@src/content/versionControl/files"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
 
     const { data: commandsData } = useQuery({
         queryKey: ["commands"],
-        queryFn: getFiles,
-        select(data) {
-            return mapVirtualFilesToList(data.files || {})
-        },
+        queryFn: getFilesList,
     })
 
     const { data: quickLinks } = useQuery({

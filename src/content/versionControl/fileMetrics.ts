@@ -21,7 +21,7 @@ export function generateChangeRecords(
 
     // initial
     result.push({
-        header: "First version",
+        header: "Initial version",
         timestamp: new Date(versions[0].detectedAt),
         changes: {
             before: [
@@ -41,9 +41,12 @@ export function generateChangeRecords(
         const before: string[] = []
         const after: string[] = []
 
-        if (version.size !== nextVersion.size) {
+        if (
+            version.size !== nextVersion.size ||
+            version.units !== nextVersion.units
+        ) {
             before.push(version.size + version.units)
-            after.push(nextVersion.size + version.units)
+            after.push(nextVersion.size + nextVersion.units)
 
             updatedFields.push("Size")
         }
@@ -102,10 +105,18 @@ export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
     return trackedFileLinkMapString
 }
 
+export const UNTRACKED_FILE_NAMES = ["../"]
+
 export async function saveTrackedFileLinkToStorage(
     key: string,
     trackedFileLinkData: TrackedFileLinkData
 ) {
+    if (
+        UNTRACKED_FILE_NAMES.includes(trackedFileLinkData.latestFileLink.name)
+    ) {
+        return
+    }
+
     const currentData = await getTrackedFileLinkMap()
 
     const newData = currentData || {}
@@ -123,15 +134,6 @@ export async function trackFileLinks(fileLinks: FileLink[]) {
     }
 }
 
-// export function compareFileLinks(fileLink1: FileLink, fileLink2: FileLink) {
-//     // why not just deepEqual()?
-//     // chrome serializes in weird way and doesn't properly save objects, classes
-//     return (
-//         fileLink1.lastModified === fileLink2.lastModified &&
-//         fileLink1.lastModified === fileLink2.lastModified
-//     )
-// }
-
 export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
     const { name, href, lastModified, space } = fileLink
 
@@ -143,7 +145,7 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
             name,
             lastModified,
             size: 0,
-            units: "-",
+            units: "B",
             detectedAt,
         }
     }
