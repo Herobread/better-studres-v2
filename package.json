@@ -1,7 +1,7 @@
 {
     "name": "better-studres",
     "version": "2.1",
-    "description": "Better Studres is an extension, that improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.",
+    "description": "Improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX.",
     "license": "MIT",
     "repository": {
         "type": "git",
