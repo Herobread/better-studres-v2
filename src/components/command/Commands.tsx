@@ -12,7 +12,11 @@ import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/lib/redirect"
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
-import { extractUrlSegments, convertUrlSegmentsToUrl, BASE_URL } from "@src/content/versionControl"
+import {
+    extractUrlSegments,
+    convertUrlSegmentsToUrl,
+    BASE_URL,
+} from "@src/content/versionControl"
 import { getFormattedFilesList } from "@src/content/versionControl/files"
 
 export default function Commands() {

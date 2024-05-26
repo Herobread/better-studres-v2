@@ -2,12 +2,17 @@ import React, { forwardRef, useContext, useState } from "react"
 import { Separator } from "../ui/separator"
 import { FileLink } from "@src/types/pageContentTypes"
 import { ConfigContext } from "@src/contexts/ConfigContext"
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } from "../ui/context-menu";
-import { GitCompareArrowsIcon } from "lucide-react";
-import { Dialog, DialogContent } from "../ui/dialog";
-import UpdatesDialog from "./UpdatesDialog";
-import { isFileLinkTracked, isUrlTracked } from "@src/content/versionControl";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import {
+    ContextMenu,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuTrigger,
+} from "../ui/context-menu"
+import { GitCompareArrowsIcon } from "lucide-react"
+import { Dialog, DialogContent } from "../ui/dialog"
+import UpdatesDialog from "./UpdatesDialog"
+import { isFileLinkTracked, isUrlTracked } from "@src/content/versionControl"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -20,7 +25,8 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         const { fileIcons, date, imagePreviewAsIcon } =
             useContext(ConfigContext)
 
-        const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] = useState(false)
+        const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
+            useState(false)
 
         const {
             description,
@@ -39,9 +45,16 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         const isToolTipWhyDisabledShown = !isUrlTracked(fileLink.href)
 
         const ViewUpdateHistoryContextMenuItem = () => {
-            return <ContextMenuItem onSelect={() => { setIsViewUpdatesDialogOpen(true) }} disabled={!isVersionHistoryAvailable}>
-                <GitCompareArrowsIcon /> View update history
-            </ContextMenuItem>
+            return (
+                <ContextMenuItem
+                    onSelect={() => {
+                        setIsViewUpdatesDialogOpen(true)
+                    }}
+                    disabled={!isVersionHistoryAvailable}
+                >
+                    <GitCompareArrowsIcon /> View update history
+                </ContextMenuItem>
+            )
         }
 
         return (
@@ -63,7 +76,9 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                         className="max-h-6 max-w-6"
                                     />
                                 ) : fileIcons === "emoji" ? (
-                                    <div className="text-center leading-5">{emoji}</div>
+                                    <div className="text-center leading-5">
+                                        {emoji}
+                                    </div>
                                 ) : (
                                     <img
                                         src={image?.src}
@@ -85,27 +100,31 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                     <div className="italic">{description}</div>
                                 )}
                             </div>
-                            <div className="text-right">{space?.size.toFixed(1)}</div>
+                            <div className="text-right">
+                                {space?.size.toFixed(1)}
+                            </div>
                             <div className="ml-[-8px]">{space?.units}</div>
                             <div className="text-right">
-                                {date === "relative" ? lastModifiedRelative : lastModified}
+                                {date === "relative"
+                                    ? lastModifiedRelative
+                                    : lastModified}
                             </div>
                         </a>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
-                        {
-                            isToolTipWhyDisabledShown ?
-                                <Tooltip delayDuration={0}>
-                                    <TooltipTrigger >
-                                        <ViewUpdateHistoryContextMenuItem />
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        Version tracking is disabled for archived years.
-                                    </TooltipContent>
-                                </Tooltip>
-                                :
-                                <ViewUpdateHistoryContextMenuItem />
-                        }
+                        {isToolTipWhyDisabledShown ? (
+                            <Tooltip delayDuration={0}>
+                                <TooltipTrigger>
+                                    <ViewUpdateHistoryContextMenuItem />
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    Version tracking is disabled for archived
+                                    years.
+                                </TooltipContent>
+                            </Tooltip>
+                        ) : (
+                            <ViewUpdateHistoryContextMenuItem />
+                        )}
                         {/* <ContextMenuSub>
                         <ContextMenuSubTrigger>
                             <CopyIcon /> Copy commands
@@ -125,7 +144,10 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                     </ContextMenuContent>
                 </ContextMenu>
 
-                <Dialog open={isViewUpdatesDialogOpen} onOpenChange={setIsViewUpdatesDialogOpen}>
+                <Dialog
+                    open={isViewUpdatesDialogOpen}
+                    onOpenChange={setIsViewUpdatesDialogOpen}
+                >
                     <DialogContent>
                         <UpdatesDialog fileLink={fileLink} />
                     </DialogContent>

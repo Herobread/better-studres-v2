@@ -17,7 +17,7 @@ try {
     const parsedPageContent: PageData = parsePageContent(rootContainer)
 
     if (parsedPageContent.fileLinks.length === 0) {
-        throw new Error('No file links found')
+        throw new Error("No file links found")
     }
 
     if (!rootContainer) {
