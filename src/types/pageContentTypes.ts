@@ -1,4 +1,4 @@
-import { UrlSegments } from "@src/content/versionControl/urlSegments"
+import { UrlSegments } from "@src/content/versionControl"
 
 export interface Image {
     src?: string

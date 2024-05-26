@@ -1,4 +1,3 @@
-import { BASE_URL } from "@src/content/versionControl/urlSegments"
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -7,7 +6,7 @@ import {
     BreadcrumbSeparator,
 } from "../ui/breadcrumb"
 import { Fragment } from "react"
-import extractUrlSegments from "@src/content/versionControl/urlSegments"
+import { extractUrlSegments, BASE_URL } from "@src/content/versionControl/"
 
 interface BreadcrumbType {
     name: string

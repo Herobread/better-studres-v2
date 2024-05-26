@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import ChangesRecordCard from "./ChangesRecordCard"
-import { generateChangeRecords, generateFileLinkKey, getTrackedFileLink } from "@src/content/versionControl/fileMetrics"
+import { generateChangeRecords, generateFileLinkKey, getTrackedFileLink } from "@src/content/versionControl"
 import { FileLink } from "@src/types/pageContentTypes"
 
 interface UpdatesDialogProps {

@@ -11,7 +11,7 @@ import { useCommand } from "@src/components/command/CommandContext"
 import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadcrumbs"
-import FileMeticsTracker from "@src/components/versionControl/FileMeticsTracker"
+import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 
 interface RootProps {
     content: PageData
@@ -42,7 +42,7 @@ export default function Root({ content }: RootProps) {
                 </CompactLayout>
                 {showQuickLinks && <QuickLinks />}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
-                <FileMeticsTracker fileLinks={fileLinks} />
+                <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </>
     )

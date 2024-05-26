@@ -1,8 +1,9 @@
-import { trackFileLinks } from "@src/content/versionControl/fileMetrics"
+
+import { trackFileLinks } from "@src/content/versionControl"
 import { FileLink } from "@src/types/pageContentTypes"
 import { useEffect } from "react"
 
-interface FileMeticsTrackerProps {
+interface FileMetricsTrackerProps {
 	fileLinks: FileLink[]
 }
 
@@ -10,10 +11,10 @@ interface FileMeticsTrackerProps {
  * A component that tracks file metrics.
  * Used for command pallette and version control 
  * 
- * @param {FileMetricsTrackerProps} props - The props for the component.
+ * @param {FileMetricsTracker} props - The props for the component.
  * @returns {null} This component does not render anything.
  */
-export default function FileMeticsTracker({ fileLinks }: FileMeticsTrackerProps) {
+export default function FileMetricsTracker({ fileLinks }: FileMetricsTrackerProps): null {
 	useEffect(() => {
 		trackFileLinks(fileLinks)
 	})

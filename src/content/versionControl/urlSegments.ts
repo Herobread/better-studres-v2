@@ -25,7 +25,7 @@ export function convertUrlSegmentsToUrl(segments: UrlSegments): string {
  * @param url - The full URL to extract segments from.
  * @returns An array of URL segments.
  */
-export default function extractUrlSegments(url: string): UrlSegments {
+export function extractUrlSegments(url: string): UrlSegments {
     const segments = url.split("/")
 
     // Remove the protocol and domain parts

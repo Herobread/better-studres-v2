@@ -1,7 +1,7 @@
 import { getFileEmoji } from "../enhancers/fileEmoji/getFileEmoji"
 import { getModuleEmoji } from "../enhancers/moduleEmoji/getModuleEmoji"
-import { getTrackedFileLinkMap } from "./fileMetrics"
-import extractUrlSegments, { BASE_URL } from "./urlSegments"
+import { getTrackedFileLinkMap } from "./storage"
+import { extractUrlSegments, BASE_URL } from "./urlSegments"
 
 export interface FileLinkPath {
     name: string

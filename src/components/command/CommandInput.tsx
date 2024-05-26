@@ -7,7 +7,7 @@ interface CommandInputProps {
 export default function CommandInput({ onSelect }: CommandInputProps) {
     return (
         <button
-            onClick={onSelect}
+            onMouseDown={onSelect}
             className="flex items-center gap-1 rounded-xl p-1 text-muted-foreground outline outline-2 outline-muted"
         >
             <SearchIcon />
