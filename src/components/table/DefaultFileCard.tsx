@@ -6,7 +6,8 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } 
 import { GitCompareArrowsIcon } from "lucide-react";
 import { Dialog, DialogContent } from "../ui/dialog";
 import UpdatesDialog from "./UpdatesDialog";
-import { isFileLinkTracked } from "@src/content/versionControl";
+import { isFileLinkTracked, isUrlTracked } from "@src/content/versionControl";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -35,6 +36,13 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         } = fileLink
 
         const isVersionHistoryAvailable = isFileLinkTracked(fileLink)
+        const isToolTipWhyDisabledShown = !isUrlTracked(fileLink.href)
+
+        const ViewUpdateHistoryContextMenuItem = () => {
+            return <ContextMenuItem onSelect={() => { setIsViewUpdatesDialogOpen(true) }} disabled={!isVersionHistoryAvailable}>
+                <GitCompareArrowsIcon /> View update history
+            </ContextMenuItem>
+        }
 
         return (
             <>
@@ -85,9 +93,19 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         </a>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
-                        <ContextMenuItem onSelect={() => { setIsViewUpdatesDialogOpen(true) }} disabled={!isVersionHistoryAvailable}>
-                            <GitCompareArrowsIcon /> View update history
-                        </ContextMenuItem>
+                        {
+                            isToolTipWhyDisabledShown ?
+                                <Tooltip delayDuration={0}>
+                                    <TooltipTrigger >
+                                        <ViewUpdateHistoryContextMenuItem />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        Version tracking is disabled for archived years.
+                                    </TooltipContent>
+                                </Tooltip>
+                                :
+                                <ViewUpdateHistoryContextMenuItem />
+                        }
                         {/* <ContextMenuSub>
                         <ContextMenuSubTrigger>
                             <CopyIcon /> Copy commands
