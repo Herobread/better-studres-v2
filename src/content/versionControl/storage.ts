@@ -1,5 +1,4 @@
 import { FileLink } from "@src/types/pageContentTypes"
-import { isFileNameTracked } from "./ignore"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
@@ -76,10 +75,6 @@ export async function saveTrackedFileLinkToStorage(
     key: string,
     trackedFileLinkData: TrackedFileLinkData
 ): Promise<void> {
-    if (isFileNameTracked(trackedFileLinkData.latestFileLink.name)) {
-        return
-    }
-
     const currentData = await getTrackedFileLinkMap()
 
     const newData = currentData || {}
