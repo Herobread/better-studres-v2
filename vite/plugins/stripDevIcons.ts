@@ -13,12 +13,10 @@ export function stripDevIcons(apply: boolean) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
         renderStart(outputOptions: any, inputOptions: any) {
             const outDir = outputOptions.dir
-            fs.rm(resolve(outDir, "dev-icon-32.png"), () =>
-                console.log(`Deleted dev-icon-32.png from production build`)
-            )
-            fs.rm(resolve(outDir, "dev-icon-128.png"), () =>
-                console.log(`Deleted dev-icon-128.png from production build`)
-            )
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            fs.rm(resolve(outDir, "dev-icon-32.png"), () => {})
+            // eslint-disable-next-line @typescript-eslint/no-empty-function
+            fs.rm(resolve(outDir, "dev-icon-128.png"), () => {})
         },
     }
 }

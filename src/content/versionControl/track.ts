@@ -8,6 +8,7 @@ import {
     saveTrackedFileLinkToStorage,
 } from "./storage"
 import { compareMinimizedFileLinks } from "./fileMetrics"
+import { isFileLinkTracked } from "./ignore"
 
 /**
  * Tracks multiple file links.
@@ -23,9 +24,12 @@ export async function trackFileLinks(fileLinks: FileLink[]): Promise<void> {
 /**
  * Tracks a file link.
  * @param {FileLink} fileLink - The file link to track.
- * @returns {Promise<boolean>} A promise that resolves to true if the file link is a new version, false otherwise.
  */
-export async function trackFileLink(fileLink: FileLink): Promise<boolean> {
+export async function trackFileLink(fileLink: FileLink) {
+    if (!isFileLinkTracked(fileLink)) {
+        return
+    }
+
     const minimizedFileLink: MinimizedFileLink = minimizeFileLink(fileLink)
 
     const key = generateFileLinkKey(fileLink)
@@ -41,7 +45,7 @@ export async function trackFileLink(fileLink: FileLink): Promise<boolean> {
 
         await saveTrackedFileLinkToStorage(key, newTrackedFileLink)
 
-        return false
+        return
     }
 
     // file exists
@@ -58,9 +62,6 @@ export async function trackFileLink(fileLink: FileLink): Promise<boolean> {
 
         await saveTrackedFileLinkToStorage(key, record)
 
-        return true
+        return
     }
-
-    // same as old file - do nothing
-    return false
 }

@@ -6,7 +6,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuTrigger } 
 import { GitCompareArrowsIcon } from "lucide-react";
 import { Dialog, DialogContent } from "../ui/dialog";
 import UpdatesDialog from "./UpdatesDialog";
-import { isFileNameTracked } from "@src/content/versionControl";
+import { isFileLinkTracked } from "@src/content/versionControl";
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -34,7 +34,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             lastModified,
         } = fileLink
 
-        const isVersionHistoryAvailable = !isFileNameTracked(name)
+        const isVersionHistoryAvailable = isFileLinkTracked(fileLink)
 
         return (
             <>

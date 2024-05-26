@@ -61,6 +61,8 @@ export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
     const { trackedFileLinkMap: trackedFileLinkMapString } =
         await chrome.storage.local.get(TRACKED_FILE_LINK_MAP)
 
+    // await chrome.storage.local.set({ [TRACKED_FILE_LINK_MAP]: {} })
+
     return trackedFileLinkMapString
 }
 
@@ -85,7 +87,7 @@ export async function saveTrackedFileLinkToStorage(
     newData[key] = trackedFileLinkData
 
     await chrome.storage.local.set({
-        trackedFileLinkMap: newData,
+        [TRACKED_FILE_LINK_MAP]: newData,
     })
 }
 /**
