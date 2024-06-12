@@ -10,8 +10,8 @@ import CommandInput from "@src/components/command/CommandInput"
 import { useCommand } from "@src/components/command/CommandContext"
 import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
-import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadcrumbs"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
+import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 
 interface RootProps {
     content: PageData

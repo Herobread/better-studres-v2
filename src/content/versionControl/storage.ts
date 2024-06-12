@@ -46,10 +46,14 @@ export function generateFileLinkKey(fileLink: FileLink) {
  */
 export async function getTrackedFileLink(
     key: string
-): Promise<TrackedFileLinkData> {
-    const trackedFileLinkMap = await getTrackedFileLinkMap()
+): Promise<TrackedFileLinkData | undefined> {
+    const trackedFileLinkMap = (await getTrackedFileLinkMap()) || {}
 
-    return trackedFileLinkMap[key]
+    if (key in trackedFileLinkMap) {
+        return trackedFileLinkMap[key]
+    }
+
+    return undefined
 }
 
 /**
