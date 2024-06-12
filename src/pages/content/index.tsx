@@ -6,12 +6,6 @@ import CommandsRoot from "./CommandsRoot"
 import { PageData } from "@src/types/pageContentTypes"
 
 try {
-    const url = location.href.toString()
-
-    if (!url.endsWith("/")) {
-        throw new Error("not a folder")
-    }
-
     const rootContainer = document.body
 
     const parsedPageContent: PageData = parsePageContent(rootContainer)
