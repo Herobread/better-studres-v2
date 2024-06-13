@@ -1,5 +1,6 @@
 import parseUrl from "@src/content/parsers/parseUrl"
 import { cva } from "class-variance-authority"
+import Link from "../router/Link"
 
 interface SortHeaderProps {
     style?: "bold" | "normal" | null | undefined
@@ -62,13 +63,13 @@ export default function SortHeader({
     }
 
     return (
-        <a className={header({ intent: style })} href={href}>
+        <Link className={header({ intent: style })} href={href}>
             <div>{children}</div>
             {sort != null && (
                 <div className="opacity-50 transition-opacity duration-200 group-hover:opacity-100">
                     {emoji}
                 </div>
             )}
-        </a>
+        </Link>
     )
 }

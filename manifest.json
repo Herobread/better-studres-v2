@@ -11,11 +11,7 @@
     "icons": {
         "128": "icon-128.png"
     },
-    "background": {
-        "service_worker": "src/pages/background/index.ts",
-        "type": "module"
-    },
-    "permissions": ["storage", "webNavigation"],
+    "permissions": ["storage"],
     "content_scripts": [
         {
             "matches": ["https://studres.cs.st-andrews.ac.uk/*"],

@@ -13,6 +13,7 @@ import { Dialog, DialogContent } from "../ui/dialog"
 import UpdatesDialog from "./UpdatesDialog"
 import { isFileLinkTracked, isUrlTracked } from "@src/content/versionControl"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import Link from "../router/Link"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -61,7 +62,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             <>
                 <ContextMenu>
                     <ContextMenuTrigger asChild>
-                        <a
+                        <Link
                             ref={ref}
                             {...props}
                             href={href}
@@ -109,7 +110,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                     ? lastModifiedRelative
                                     : lastModified}
                             </div>
-                        </a>
+                        </Link>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
                         {isToolTipWhyDisabledShown ? (
