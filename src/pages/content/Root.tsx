@@ -13,6 +13,7 @@ import { ConfigContext } from "@src/contexts/ConfigContext"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import { PageStateContext } from "@src/contexts/PageStateContext"
+import TableSkeleton from "@src/components/table/TableSkeleton"
 
 interface RootProps {
     initialContent: PageData
@@ -42,10 +43,12 @@ export default function Root({ initialContent }: RootProps) {
                     <ModuleHeader />
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
-                {isLoading ? "loading" : "done"}
-                {/* {JSON.stringify(pageData)} */}
                 {showQuickLinks && <QuickLinks />}
-                <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                {isLoading ? (
+                    <TableSkeleton />
+                ) : (
+                    <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </>

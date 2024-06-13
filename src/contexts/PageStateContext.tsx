@@ -8,7 +8,7 @@ interface PageStateTypes {
     setPageData: Dispatch<SetStateAction<PageData | undefined>>
 }
 
-const pageStateFallback: PageStateTypes | undefined = {
+const pageStateFallback: PageStateTypes = {
     isLoading: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     setIsLoading: () => {},
@@ -26,7 +26,9 @@ interface PageStateContextProviderProps {
 export function PageStateContextProvider({
     children,
 }: PageStateContextProviderProps) {
-    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [isLoading, setIsLoading] = useState<boolean>(
+        pageStateFallback.isLoading
+    )
     const [pageData, setPageData] = useState<PageData | undefined>(undefined)
 
     return (
