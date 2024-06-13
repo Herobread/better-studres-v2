@@ -12,13 +12,16 @@ import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
+import { PageStateContext } from "@src/contexts/PageStateContext"
+import TableSkeleton from "@src/components/table/TableSkeleton"
 
 interface RootProps {
-    content: PageData
+    initialContent: PageData
 }
 
-export default function Root({ content }: RootProps) {
-    const { fileLinks, sortLinks } = content
+export default function Root({ initialContent }: RootProps) {
+    const { isLoading, pageData } = useContext(PageStateContext)
+    const { fileLinks, sortLinks } = pageData || initialContent
 
     const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
@@ -41,7 +44,11 @@ export default function Root({ content }: RootProps) {
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
                 {showQuickLinks && <QuickLinks />}
-                <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                {isLoading ? (
+                    <TableSkeleton />
+                ) : (
+                    <Table fileLinks={fileLinks} sortLinks={sortLinks} />
+                )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </>

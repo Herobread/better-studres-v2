@@ -4,6 +4,7 @@ import "@src/assets/styles/shadcn-ui.css"
 import { CommandProvider } from "@src/components/command/CommandContext"
 import ConfigContextProvider from "@src/contexts/ConfigContext"
 import { TooltipProvider } from "@src/components/ui/tooltip"
+import { PageStateContextProvider } from "@src/contexts/PageStateContext"
 
 interface ProvidersProps {
     children: React.ReactNode
@@ -15,13 +16,15 @@ export default function Providers({ children }: ProvidersProps) {
     return (
         <div className="box-sizing-unset _tailwind_preflight_reset">
             <QueryClientProvider client={queryClient}>
-                <TooltipProvider>
-                    <CommandProvider>
-                        <ConfigContextProvider>
-                            {children}
-                        </ConfigContextProvider>
-                    </CommandProvider>
-                </TooltipProvider>
+                <PageStateContextProvider>
+                    <TooltipProvider>
+                        <CommandProvider>
+                            <ConfigContextProvider>
+                                {children}
+                            </ConfigContextProvider>
+                        </CommandProvider>
+                    </TooltipProvider>
+                </PageStateContextProvider>
             </QueryClientProvider>
         </div>
     )
