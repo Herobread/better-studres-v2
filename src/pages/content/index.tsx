@@ -4,6 +4,15 @@ import { parsePageContent } from "@src/content/parsers/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
 import { PageData } from "@src/types/pageContentTypes"
+import redirect from "@src/lib/redirect"
+
+window.addEventListener("popstate", (e) => {
+    e.preventDefault()
+
+    console.log("ok")
+    console.log(window.location.toString())
+    redirect(window.location.toString())
+})
 
 try {
     const rootContainer = document.body

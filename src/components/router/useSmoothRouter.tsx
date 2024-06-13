@@ -7,10 +7,10 @@ const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
 
     const navigateToPage = async (href: string) => {
-        setIsLoading(true)
         try {
-            const now = new Date()
-            history.pushState({ a: now.getTime() }, "", href)
+            setIsLoading(true)
+
+            history.pushState(null, "", href)
 
             const data = await fetch(href)
 
@@ -28,6 +28,7 @@ const useSmoothRouter = () => {
 
             document.title = title
         } catch (error) {
+            console.warn(error)
             setIsLoading(false)
             redirect(href)
         }
