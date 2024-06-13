@@ -58,6 +58,8 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             )
         }
 
+        const isLongExtensionName = extension && extension?.length > 4
+
         return (
             <>
                 <ContextMenu>
@@ -87,8 +89,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                         className="aspect-auto w-5"
                                     />
                                 )}
-
-                                {extension && (
+                                {!isLongExtensionName && (
                                     <div className="text-center font-mono leading-5">
                                         {extension}
                                     </div>
@@ -96,7 +97,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             </div>
                             <Separator orientation="vertical" />
                             <div className="grid items-center">
-                                <div className="font-bold">{name}</div>
+                                <div className="font-bold">{name}{isLongExtensionName && ('.' + extension)}</div>
                                 {description != null && (
                                     <div className="italic">{description}</div>
                                 )}
