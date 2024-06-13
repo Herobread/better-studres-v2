@@ -1,6 +1,5 @@
-import { parsePageContent } from "@src/content/parsers/parser";
-import redirect from "@src/lib/redirect";
-import React, { AnchorHTMLAttributes, MouseEvent, forwardRef } from "react";
+import { AnchorHTMLAttributes, MouseEvent, forwardRef } from "react";
+import useSmoothRouter from "./useSmoothRouter";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> { }
@@ -8,27 +7,16 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> { }
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
 	const { href } = props
 
+	const { navigateToPage } = useSmoothRouter()
+
 	const handleNavigation = async (e: MouseEvent<HTMLAnchorElement>) => {
-		console.log('handling navigation to ' + href)
 		e.preventDefault()
 
 		if (!href) {
-			console.log('no href, wtf')
-			return
+			return;
 		}
 
-		const data = await fetch(href)
-
-		if (!data.ok) {
-			redirect(href)
-		}
-
-		const htmlText = await data.text()
-		const parser = new DOMParser();
-		const { body } = parser.parseFromString(htmlText, 'text/html');
-		const pageData = parsePageContent(body)
-
-		console.log(pageData)
+		navigateToPage(href)
 	}
 
 	return <a ref={ref} {...props} onClick={handleNavigation} />;

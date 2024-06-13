@@ -12,6 +12,7 @@ import { useContext } from "react"
 import { ConfigContext } from "@src/contexts/ConfigContext"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
+import { PageStateContext } from "@src/contexts/PageStateContext"
 
 interface RootProps {
     content: PageData
@@ -22,6 +23,8 @@ export default function Root({ content }: RootProps) {
 
     const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
+
+    const { isLoading, pageData } = useContext(PageStateContext)
 
     const handleCommandActivation = () => {
         setOpen(true)
@@ -40,6 +43,8 @@ export default function Root({ content }: RootProps) {
                     <ModuleHeader />
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
+                {isLoading ? 'loading' : 'done'}
+                {JSON.stringify(pageData)}
                 {showQuickLinks && <QuickLinks />}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                 <FileMetricsTracker fileLinks={fileLinks} />
