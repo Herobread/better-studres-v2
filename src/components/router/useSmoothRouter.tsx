@@ -1,34 +1,41 @@
-import { useContext } from "react";
-import { parsePageContent } from "@src/content/parsers/parser";
-import redirect from "@src/lib/redirect";
-import { PageStateContext } from "@src/contexts/PageStateContext";
+import { useContext } from "react"
+import { parsePageContent } from "@src/content/parsers/parser"
+import redirect from "@src/lib/redirect"
+import { PageStateContext } from "@src/contexts/PageStateContext"
 
 const useSmoothRouter = () => {
-	const { setIsLoading, setPageData } = useContext(PageStateContext);
+    const { setIsLoading, setPageData } = useContext(PageStateContext)
 
-	const navigateToPage = async (href: string) => {
-		console.log('handling navigation to ' + href);
+    const navigateToPage = async (href: string) => {
+        console.log("handling navigation to " + href)
 
-		setIsLoading(true);
-		const data = await fetch(href);
+        setIsLoading(true)
+        try {
+            const data = await fetch(href)
 
-		if (!data.ok) {
-			redirect(href);
-			return; // Make sure to return if redirecting
-		}
+            const htmlText = await data.text()
+            const parser = new DOMParser()
+            const { body, title } = parser.parseFromString(
+                htmlText,
+                "text/html"
+            )
+            const pageData = parsePageContent(body)
 
-		const htmlText = await data.text();
-		const parser = new DOMParser();
-		const { body } = parser.parseFromString(htmlText, 'text/html');
-		const pageData = parsePageContent(body);
+            setPageData(pageData)
+            setIsLoading(false)
 
-		setPageData(pageData);
-		setIsLoading(false);
+            const now = new Date()
+            document.title = now.getTime() + ""
 
-		window.history.pushState({}, '', href);
-	};
+            // window.history.pushState({ title: now.getTime() + "" }, "", href)
+            window.history.replaceState(null, "", href)
+        } catch (error) {
+            setIsLoading(false)
+            redirect(href)
+        }
+    }
 
-	return { navigateToPage };
-};
+    return { navigateToPage }
+}
 
-export default useSmoothRouter;
+export default useSmoothRouter
