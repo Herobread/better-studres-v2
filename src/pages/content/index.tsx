@@ -9,13 +9,15 @@ import redirect from "@src/lib/redirect"
 window.addEventListener("popstate", (e) => {
     e.preventDefault()
 
-    console.log("ok")
+    console.log("popstate thing")
     console.log(window.location.toString())
     redirect(window.location.toString())
 })
 
 try {
     const rootContainer = document.body
+
+	rootContainer.style.overflowY = 'scroll' // show scroll bar
 
     const parsedPageContent: PageData = parsePageContent(rootContainer)
 
