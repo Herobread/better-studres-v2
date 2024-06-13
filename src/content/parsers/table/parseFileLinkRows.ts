@@ -64,6 +64,9 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
 
     const href = nameDataCellAnchor.href || ""
 
+    console.log("location " + location.href)
+    console.log("parsed " + href)
+
     const urlSegments = extractUrlSegments(href)
 
     if (!lastModifiedDataCell) {

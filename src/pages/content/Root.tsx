@@ -15,16 +15,15 @@ import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import { PageStateContext } from "@src/contexts/PageStateContext"
 
 interface RootProps {
-    content: PageData
+    initialContent: PageData
 }
 
-export default function Root({ content }: RootProps) {
-    const { fileLinks, sortLinks } = content
+export default function Root({ initialContent }: RootProps) {
+    const { isLoading, pageData } = useContext(PageStateContext)
+    const { fileLinks, sortLinks } = pageData || initialContent
 
     const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
-
-    const { isLoading, pageData } = useContext(PageStateContext)
 
     const handleCommandActivation = () => {
         setOpen(true)
@@ -43,8 +42,8 @@ export default function Root({ content }: RootProps) {
                     <ModuleHeader />
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
-                {isLoading ? 'loading' : 'done'}
-                {JSON.stringify(pageData)}
+                {isLoading ? "loading" : "done"}
+                {/* {JSON.stringify(pageData)} */}
                 {showQuickLinks && <QuickLinks />}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                 <FileMetricsTracker fileLinks={fileLinks} />

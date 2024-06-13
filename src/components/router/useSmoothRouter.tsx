@@ -11,6 +11,9 @@ const useSmoothRouter = () => {
 
         setIsLoading(true)
         try {
+            console.log("setting url to " + href)
+            history.pushState(null, "", href)
+
             const data = await fetch(href)
 
             const htmlText = await data.text()
@@ -19,16 +22,13 @@ const useSmoothRouter = () => {
                 htmlText,
                 "text/html"
             )
+
             const pageData = parsePageContent(body)
 
             setPageData(pageData)
             setIsLoading(false)
 
-            const now = new Date()
-            document.title = now.getTime() + ""
-
-            // window.history.pushState({ title: now.getTime() + "" }, "", href)
-            window.history.replaceState(null, "", href)
+            document.title = title
         } catch (error) {
             setIsLoading(false)
             redirect(href)
