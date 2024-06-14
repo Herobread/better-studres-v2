@@ -1,6 +1,5 @@
 import { useEffect } from "react"
 import useSmoothRouter from "./useSmoothRouter"
-import { PageData } from "@src/types/pageContentTypes"
 
 export function SmoothRouterListener() {
     const { navigateToPage } = useSmoothRouter()
