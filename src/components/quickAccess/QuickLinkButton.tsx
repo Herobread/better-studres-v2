@@ -11,7 +11,7 @@ const QuickLinkButton = forwardRef<HTMLButtonElement, QuickLinkButtonProps>(
             <button
                 {...props}
                 ref={ref}
-                className="flex cursor-pointer gap-2 rounded-xl bg-primary-foreground px-3 py-1 hover:bg-accent"
+                className="bg-background-layer-1 flex cursor-pointer gap-2 rounded-xl px-3 py-1 hover:bg-accent"
             >
                 <div className="text-base">{icon}</div>
                 {content && <div>{content}</div>}

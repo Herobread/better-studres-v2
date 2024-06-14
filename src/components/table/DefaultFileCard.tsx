@@ -68,7 +68,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             ref={ref}
                             {...props}
                             href={href}
-                            className="col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-primary-foreground p-3 hover:bg-accent"
+                            className="bg-background-layer-1 col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl p-3 hover:bg-accent"
                         >
                             <div className="grid w-full justify-items-center">
                                 {isImage && imagePreviewAsIcon ? (
