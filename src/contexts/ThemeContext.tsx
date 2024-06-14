@@ -36,7 +36,6 @@ export function ThemeProvider({
         )
 
         if (!root) {
-            console.log("no root el detected")
             return
         }
 
