@@ -5,6 +5,7 @@ import { CommandProvider } from "@src/components/command/CommandContext"
 import ConfigContextProvider from "@src/contexts/ConfigContext"
 import { TooltipProvider } from "@src/components/ui/tooltip"
 import { PageStateContextProvider } from "@src/contexts/PageStateContext"
+import { SmoothRouterListener } from "@src/components/router/SmoothRouterListener"
 
 interface ProvidersProps {
     children: React.ReactNode
@@ -17,6 +18,7 @@ export default function Providers({ children }: ProvidersProps) {
         <div className="box-sizing-unset _tailwind_preflight_reset">
             <QueryClientProvider client={queryClient}>
                 <PageStateContextProvider>
+                    <SmoothRouterListener />
                     <TooltipProvider>
                         <CommandProvider>
                             <ConfigContextProvider>

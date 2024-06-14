@@ -1,38 +1,50 @@
-import { useContext } from "react"
+import { useContext, useCallback } from "react"
 import { parsePageContent } from "@src/content/parsers/parser"
 import redirect from "@src/lib/redirect"
 import { PageStateContext } from "@src/contexts/PageStateContext"
+import { PageData } from "@src/types/pageContentTypes"
 
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
 
-    const navigateToPage = async (href: string) => {
-        try {
-            setIsLoading(true)
+    const navigateToPage = useCallback(
+        async (href: string, state?: PageData) => {
+            try {
+                setIsLoading(true)
 
-            history.pushState(null, "", href)
+                let pageData
+                let title = "Studres"
 
-            const data = await fetch(href)
+                if (state) {
+                    pageData = state
+                } else {
+                    history.pushState(null, "", href)
 
-            const htmlText = await data.text()
-            const parser = new DOMParser()
-            const { body, title } = parser.parseFromString(
-                htmlText,
-                "text/html"
-            )
+                    const data = await fetch(href)
+                    const htmlText = await data.text()
+                    const parser = new DOMParser()
+                    const document = parser.parseFromString(
+                        htmlText,
+                        "text/html"
+                    )
 
-            const pageData = parsePageContent(body)
+                    pageData = parsePageContent(document.body)
+                    title = document.title
 
-            setPageData(pageData)
-            setIsLoading(false)
+                    history.replaceState({ ...pageData }, "", href)
+                }
 
-            document.title = title
-        } catch (error) {
-            console.warn(error)
-            setIsLoading(false)
-            redirect(href)
-        }
-    }
+                document.title = title
+
+                setPageData(pageData)
+                setIsLoading(false)
+            } catch (error) {
+                setIsLoading(false)
+                redirect(href)
+            }
+        },
+        [setIsLoading, setPageData]
+    )
 
     return { navigateToPage }
 }

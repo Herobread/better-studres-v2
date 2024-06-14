@@ -11,10 +11,14 @@ interface PageStateTypes {
 const pageStateFallback: PageStateTypes = {
     isLoading: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setIsLoading: () => {},
+    setIsLoading: () => {
+        throw new Error("setIsLoading not initialized")
+    },
     pageData: undefined,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    setPageData: () => {},
+    setPageData: () => {
+        throw new Error("setPageData not initialized")
+    },
 }
 
 export const PageStateContext = createContext<PageStateTypes>(pageStateFallback)
