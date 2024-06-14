@@ -97,7 +97,10 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             </div>
                             <Separator orientation="vertical" />
                             <div className="grid items-center">
-                                <div className="font-bold">{name}{isLongExtensionName && ('.' + extension)}</div>
+                                <div className="font-bold">
+                                    {name}
+                                    {isLongExtensionName && "." + extension}
+                                </div>
                                 {description != null && (
                                     <div className="italic">{description}</div>
                                 )}

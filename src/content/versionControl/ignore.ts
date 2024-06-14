@@ -12,7 +12,7 @@ export const UNTRACKED_FILENAME_PATTERNS = [
 // List of URL patterns that are not tracked
 export const UNTRACKED_URL_PATTERNS = [
     /.*\d{4}_\d{4}.*/, // Matches 4 digits, an underscore, another 4 digits, and any other characters
-    /.*_this_session.*/ // Matches any string that contains '_this_session'
+    /.*_this_session.*/, // Matches any string that contains '_this_session'
 ]
 
 /**
