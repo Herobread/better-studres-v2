@@ -31,7 +31,13 @@ export function ThemeProvider({
     )
 
     useEffect(() => {
-        const root = window.document.documentElement
+        const root = window.document.getElementById(
+            "__better_studres_folder_root"
+        )
+
+        if (!root) {
+            return
+        }
 
         root.classList.remove("light", "dark")
 

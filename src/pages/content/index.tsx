@@ -24,6 +24,8 @@ try {
 
     const root = createRoot(rootContainer)
 
+    rootContainer.setAttribute("id", "__better_studres_folder_root")
+
     root.render(
         <Providers>
             <Root initialContent={parsedPageContent} />
