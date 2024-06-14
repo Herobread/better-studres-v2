@@ -115,7 +115,9 @@ export default function EditQuickLinkForm({
                                 }}
                             />
                         </CompactLayout>
-                        <Button type="submit">Save</Button>
+                        <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                            <Button type="submit">Save</Button>
+                        </div>
                     </NormalLayout>
                 </form>
             </Form>

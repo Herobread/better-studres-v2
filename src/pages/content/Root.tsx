@@ -13,6 +13,7 @@ import { ConfigContext } from "@src/contexts/ConfigContext"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import { PageStateContext } from "@src/contexts/PageStateContext"
+import { ThemeToggle } from "@src/components/ui/theme-toggle"
 
 interface RootProps {
     initialContent: PageData
@@ -38,8 +39,11 @@ export default function Root({ initialContent }: RootProps) {
                 </WideLayout>
             )}
             <MainLayout>
-                <CompactLayout>
-                    <ModuleHeader />
+            <CompactLayout>
+                    <div className="grid grid-cols-[1fr_max-content]">
+                        <ModuleHeader />
+                        <ThemeToggle />
+                    </div>
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
                 {showQuickLinks && <QuickLinks />}
