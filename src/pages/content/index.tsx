@@ -24,7 +24,7 @@ try {
 
     const root = createRoot(rootContainer)
 
-    rootContainer.setAttribute("id", "__better_studres_folder_root")
+    rootContainer.setAttribute("id", "__better_studres_theme_root")
 
     root.render(
         <Providers>

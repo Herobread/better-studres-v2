@@ -32,10 +32,11 @@ export function ThemeProvider({
 
     useEffect(() => {
         const root = window.document.getElementById(
-            "__better_studres_folder_root"
+            "__better_studres_theme_root"
         )
 
         if (!root) {
+            console.log("no root el detected")
             return
         }
 
