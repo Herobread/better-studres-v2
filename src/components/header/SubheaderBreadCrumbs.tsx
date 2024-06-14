@@ -26,7 +26,7 @@ export default function SubheaderBreadcrumbs() {
 
         links.push({
             href: BASE_URL + currentBreadcrumbs.join("/") + "/",
-            name: urlSegments[i],
+            name: decodeURI(urlSegments[i]),
         })
     }
 
