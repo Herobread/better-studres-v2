@@ -16,7 +16,7 @@ const queryClient = new QueryClient()
 
 export default function Providers({ children }: ProvidersProps) {
     return (
-        <div className="box-sizing-unset _tailwind_preflight_reset min-h-screen bg-background py-2 text-foreground">
+        <div className="box-sizing-unset _tailwind_preflight_reset">
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
                     <PageStateContextProvider>

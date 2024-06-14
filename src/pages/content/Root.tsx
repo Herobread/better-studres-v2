@@ -31,7 +31,7 @@ export default function Root({ initialContent }: RootProps) {
     }
 
     return (
-        <>
+        <div className="min-h-screen bg-background py-2 text-foreground">
             <Commands />
             {showCommandButton && (
                 <WideLayout>
@@ -39,7 +39,7 @@ export default function Root({ initialContent }: RootProps) {
                 </WideLayout>
             )}
             <MainLayout>
-            <CompactLayout>
+                <CompactLayout>
                     <div className="grid grid-cols-[1fr_max-content]">
                         <ModuleHeader />
                         <ThemeToggle />
@@ -54,6 +54,6 @@ export default function Root({ initialContent }: RootProps) {
                 />
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
-        </>
+        </div>
     )
 }
