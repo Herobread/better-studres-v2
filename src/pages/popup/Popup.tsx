@@ -66,7 +66,7 @@ export default function Popup() {
     }, [config, reset])
 
     return (
-        <body className="_tailwind_preflight_reset grid h-min gap-4 p-1 text-base">
+        <body className="_tailwind_preflight_reset grid h-min gap-4 p-2 text-base">
             <div className="flex items-center ">
                 <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
                     Better studres
