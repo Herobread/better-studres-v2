@@ -7,6 +7,7 @@ import { TooltipProvider } from "@src/components/ui/tooltip"
 import { PageStateContextProvider } from "@src/contexts/PageStateContext"
 import { SmoothRouterListener } from "@src/components/router/SmoothRouterListener"
 import { ThemeProvider } from "@src/contexts/ThemeContext"
+import { Toaster } from "@src/components/ui/toaster"
 
 interface ProvidersProps {
     children: React.ReactNode
@@ -25,6 +26,7 @@ export default function Providers({ children }: ProvidersProps) {
                             <CommandProvider>
                                 <ConfigContextProvider>
                                     {children}
+                                    <Toaster/>
                                 </ConfigContextProvider>
                             </CommandProvider>
                         </TooltipProvider>

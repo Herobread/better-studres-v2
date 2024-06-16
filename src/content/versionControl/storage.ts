@@ -118,3 +118,9 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
         ...space,
     }
 }
+
+export async function clearVersionTrackingData() {
+    await chrome.storage.local.set({
+        [TRACKED_FILE_LINK_MAP]: {}
+    })
+}

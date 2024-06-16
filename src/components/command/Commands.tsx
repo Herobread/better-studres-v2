@@ -18,6 +18,7 @@ import {
     BASE_URL,
 } from "@src/content/versionControl"
 import { getFormattedFilesList } from "@src/content/versionControl/files"
+import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -67,12 +68,8 @@ export default function Commands() {
         redirect(BASE_URL)
     }
 
-    const handleClearVersionTrackingData = () => {
-        console.log('clear cache')
-    }
-
     const handleSwitchTheme = () => {
-        console.log('switching theme')
+        console.log("switching theme")
     }
 
     return (
@@ -108,11 +105,14 @@ export default function Commands() {
                             )
                         })}
                 </CommandGroup>
-                <CommandGroup heading='Commands'>
-                    <CommandItem onSelect={handleClearVersionTrackingData}>
-                        🗑️ Clear version tracking cache
-                    </CommandItem>
-                    <CommandItem onSelect={handleSwitchTheme} keywords={['theme']}>
+                <CommandGroup heading="Commands">
+                    <ClearVersionTrackingDataCommand
+                        setIsCommandOpen={setOpen}
+                    />
+                    <CommandItem
+                        onSelect={handleSwitchTheme}
+                        keywords={["theme"]}
+                    >
                         ☀ Toggle dark/light mode
                     </CommandItem>
                 </CommandGroup>
