@@ -19,6 +19,7 @@ import {
 } from "@src/content/versionControl"
 import { getFormattedFilesList } from "@src/content/versionControl/files"
 import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
+import ToggleThemeCommand from "./ToggleThemeCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -68,10 +69,6 @@ export default function Commands() {
         redirect(BASE_URL)
     }
 
-    const handleSwitchTheme = () => {
-        console.log("switching theme")
-    }
-
     return (
         <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
@@ -109,12 +106,7 @@ export default function Commands() {
                     <ClearVersionTrackingDataCommand
                         setIsCommandOpen={setOpen}
                     />
-                    <CommandItem
-                        onSelect={handleSwitchTheme}
-                        keywords={["theme"]}
-                    >
-                        ☀ Toggle dark/light mode
-                    </CommandItem>
+                    <ToggleThemeCommand setIsCommandOpen={setOpen} />
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
