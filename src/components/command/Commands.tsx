@@ -67,6 +67,14 @@ export default function Commands() {
         redirect(BASE_URL)
     }
 
+    const handleClearVersionTrackingData = () => {
+        console.log('clear cache')
+    }
+
+    const handleSwitchTheme = () => {
+        console.log('switching theme')
+    }
+
     return (
         <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Type a command or search..." />
@@ -99,6 +107,14 @@ export default function Commands() {
                                 </CommandItem>
                             )
                         })}
+                </CommandGroup>
+                <CommandGroup heading='Commands'>
+                    <CommandItem onSelect={handleClearVersionTrackingData}>
+                        🗑️ Clear version tracking cache
+                    </CommandItem>
+                    <CommandItem onSelect={handleSwitchTheme} keywords={['theme']}>
+                        ☀ Toggle dark/light mode
+                    </CommandItem>
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
