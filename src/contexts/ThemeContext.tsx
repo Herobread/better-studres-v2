@@ -1,16 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light"
+type PreferredTheme = "dark" | "light" | "system"
 
 type ThemeProviderProps = {
     children: React.ReactNode
-    defaultTheme?: Theme
+    defaultTheme?: PreferredTheme
     storageKey?: string
 }
 
 type ThemeProviderState = {
-    theme: Theme
-    setTheme: (theme: Theme) => void
+    theme: PreferredTheme
+    setTheme: (theme: PreferredTheme) => void
 }
 
 const initialState: ThemeProviderState = {
@@ -20,14 +21,31 @@ const initialState: ThemeProviderState = {
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
+/**
+ * if the theme is set to system, it will determine real theme
+ *
+ * @param theme
+ * @returns 'dark' or 'light'
+ */
+export function getCurrentTheme(theme: PreferredTheme): Theme {
+    if (theme === "system") {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+    }
+
+    return theme
+}
+
 export function ThemeProvider({
     children,
     defaultTheme = "system",
     storageKey = "vite-ui-theme",
     ...props
 }: ThemeProviderProps) {
-    const [theme, setTheme] = useState<Theme>(
-        () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+    const [theme, setTheme] = useState<PreferredTheme>(
+        () =>
+            (localStorage.getItem(storageKey) as PreferredTheme) || defaultTheme
     )
 
     useEffect(() => {
@@ -42,11 +60,7 @@ export function ThemeProvider({
         root.classList.remove("light", "dark")
 
         if (theme === "system") {
-            const systemTheme = window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            ).matches
-                ? "dark"
-                : "light"
+            const systemTheme = getCurrentTheme(theme)
 
             root.classList.add(systemTheme)
             root.style.colorScheme = systemTheme
@@ -59,7 +73,7 @@ export function ThemeProvider({
 
     const value = {
         theme,
-        setTheme: (theme: Theme) => {
+        setTheme: (theme: PreferredTheme) => {
             localStorage.setItem(storageKey, theme)
             setTheme(theme)
         },

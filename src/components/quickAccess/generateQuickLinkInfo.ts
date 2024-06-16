@@ -1,3 +1,6 @@
+import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
+import { extractUrlSegments } from "@src/content/versionControl"
+
 export default function generateQuickLinkInfo(href: string) {
     const items = href.split("/")
     let name = items[3]
@@ -6,8 +9,13 @@ export default function generateQuickLinkInfo(href: string) {
         name = items[3] + " - " + items[items.length - 2]
     }
 
+    const urlSegments = extractUrlSegments(href || "")
+    const moduleCode = urlSegments[0]
+    const icon = getModuleEmoji(moduleCode)
+
     return {
         href,
         name,
+        icon,
     }
 }

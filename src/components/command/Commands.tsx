@@ -18,6 +18,9 @@ import {
     BASE_URL,
 } from "@src/content/versionControl"
 import { getFormattedFilesList } from "@src/content/versionControl/files"
+import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
+import ToggleThemeCommand from "./ToggleThemeCommand"
+import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -72,7 +75,7 @@ export default function Commands() {
             <CommandInput placeholder="Type a command or search..." />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Actions">
+                <CommandGroup heading="Navigation">
                     <CommandItem onSelect={handleGoToParent}>
                         🔙 Go to Parent Directory
                     </CommandItem>
@@ -99,6 +102,13 @@ export default function Commands() {
                                 </CommandItem>
                             )
                         })}
+                    <SaveQuickLinkCommand setIsCommandOpen={setOpen} />
+                </CommandGroup>
+                <CommandGroup heading="Commands">
+                    <ToggleThemeCommand setIsCommandOpen={setOpen} />
+                    <ClearVersionTrackingDataCommand
+                        setIsCommandOpen={setOpen}
+                    />
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
