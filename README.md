@@ -2,6 +2,8 @@
 
 [![wakatime](https://wakatime.com/badge/user/9572a36f-d8ee-4307-9f1b-ae487130d025/project/018eb88f-13da-4546-a0fb-cc9693bcb2be.svg)](https://wakatime.com/badge/user/9572a36f-d8ee-4307-9f1b-ae487130d025/project/018eb88f-13da-4546-a0fb-cc9693bcb2be)
 
+![Better studres](https://github.com/Herobread/better-studres-v2/assets/52717777/b352a9ed-3bac-47c0-a058-f4af46984282)
+
 Better StudRes v2 is a chrome extension, that improves appearence of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities. This will help you understand the features and get started with running the project.
 
 [chrome web store](https://chromewebstore.google.com/detail/better-studres/kamnhbpjhhhjlbandgpngdnplledombg)
@@ -11,15 +13,21 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 ### Improved UI and UX
 
 - Completely redesigned interface for a modern look and feel.
-- Enhanced accessibility to ensure everyone can use the platform effectively.
+- Added dark mode
+
+![dark mode](https://github.com/Herobread/better-studres-v2/assets/52717777/0624c561-1491-474d-b83f-41956bde1075)
 
 ### QuickLinks V2
 
+![QuickLinks v2](https://github.com/Herobread/better-studres-v2/assets/52717777/ab1f30ce-5c10-4962-b40a-9c2d02995c49)
+
 - **Add Links**: Easily add links to any page, auto-filled with active page data (emoji, name, link).
 - **Edit/Delete**: Right-click to edit or delete links.
-- **Reorder**: Drag and drop to reorder links.
+- **Reorder**.
 
-### Universal Commands
+### Commands
+
+![Commands](https://github.com/Herobread/better-studres-v2/assets/52717777/341a4186-c191-4878-a8e8-3a9decaf29e9)
 
 - Commands work on any StudRes page, including the root directory and file views.
 - Command allow you to:
