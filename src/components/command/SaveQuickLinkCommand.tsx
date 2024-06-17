@@ -1,5 +1,9 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { addQuickLink, getQuickLinks } from "../quickAccess/QuickLinkManager"
+import {
+    addQuickLink,
+    deleteQuickLink,
+    getQuickLinks,
+} from "../quickAccess/QuickLinkManager"
 import generateQuickLinkInfo from "../quickAccess/generateQuickLinkInfo"
 import { CommandItem } from "../ui/command"
 import { useToast } from "../ui/use-toast"
@@ -21,17 +25,45 @@ export default function SaveQuickLinkCommand({
         queryFn: getQuickLinks,
     })
 
-    const isPresent = quickLinks?.find((quickLink) => {
+    const currentPageQuickLink = quickLinks?.find((quickLink) => {
         if (quickLink.href === currentUrl) {
-            return true
+            return quickLink.id
         }
     })
 
-    if (isPresent) {
-        return null
+    const { href, name, icon } = generateQuickLinkInfo(currentUrl)
+
+    const handleRemoveQuickLink = async () => {
+        try {
+            if (!currentPageQuickLink) {
+                throw new Error("Quick link doesn't exist")
+            }
+
+            await deleteQuickLink(currentPageQuickLink.id)
+
+            queryClient.refetchQueries({ queryKey: ["quicklinks"] })
+
+            toast({
+                title: "✅ Success",
+                description: `Removed ${icon} ${name} from quick links`,
+            })
+        } catch (error) {
+            toast({
+                title: "❌ Error",
+                description: "Failed to delete quick link. Please try again.",
+            })
+        }
+
+        setIsCommandOpen(false)
     }
 
-    const { href, name, icon } = generateQuickLinkInfo(currentUrl)
+    if (currentPageQuickLink) {
+        return (
+            <CommandItem onSelect={handleRemoveQuickLink}>
+                ➖ Remove {icon} {name}
+            </CommandItem>
+        )
+    }
 
     const handleSaveQuickLink = async () => {
         try {
