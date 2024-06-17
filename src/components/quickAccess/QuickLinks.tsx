@@ -2,7 +2,7 @@ import QuickLinkContainer from "./QuickLinkContainer"
 import QuickLinkCard from "./QuickLinkCard"
 import {
     deleteQuickLink,
-    loadQuickLinks,
+    getQuickLinks,
     moveQuickLink,
 } from "./QuickLinkManager"
 import { useQuery } from "@tanstack/react-query"
@@ -35,7 +35,7 @@ export default function QuickLinks() {
 
     const { data: quickLinks, refetch } = useQuery({
         queryKey: ["quicklinks"],
-        queryFn: loadQuickLinks,
+        queryFn: getQuickLinks,
     })
 
     const quickLinkToEdit = quickLinks?.find((link) => link.id === editLinkId)

@@ -8,7 +8,7 @@ import {
     CommandList,
 } from "../../components/ui/command"
 import { useCallback, useEffect } from "react"
-import { loadQuickLinks } from "../quickAccess/QuickLinkManager"
+import { getQuickLinks } from "../quickAccess/QuickLinkManager"
 import redirect from "@src/lib/redirect"
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
@@ -32,7 +32,7 @@ export default function Commands() {
 
     const { data: quickLinks } = useQuery({
         queryKey: ["quicklinks"],
-        queryFn: loadQuickLinks,
+        queryFn: getQuickLinks,
     })
 
     const toggleOpen = useCallback(() => {

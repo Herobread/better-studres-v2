@@ -20,7 +20,7 @@ export async function addQuickLink(rawQuickLink: RawQuickLink) {
     await chrome.storage.local.set({ quickLinks: currentLinks })
 }
 
-export async function loadQuickLinks() {
+export async function getQuickLinks() {
     const quickLinks: QuickLink[] = await chrome.storage.local
         .get("quickLinks")
         .then((result) => {
@@ -31,7 +31,7 @@ export async function loadQuickLinks() {
 }
 
 export async function getQuickLink(id: number) {
-    const quickLinks = await loadQuickLinks()
+    const quickLinks = await getQuickLinks()
 
     const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
 
@@ -39,7 +39,7 @@ export async function getQuickLink(id: number) {
 }
 
 export async function updateQuickLink(id: number, quickLink: RawQuickLink) {
-    const quickLinks = await loadQuickLinks()
+    const quickLinks = await getQuickLinks()
 
     const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
 
@@ -49,7 +49,7 @@ export async function updateQuickLink(id: number, quickLink: RawQuickLink) {
 }
 
 export async function deleteQuickLink(id: number) {
-    const quickLinks = await loadQuickLinks()
+    const quickLinks = await getQuickLinks()
 
     const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
     quickLinks.splice(index, 1)
@@ -58,7 +58,7 @@ export async function deleteQuickLink(id: number) {
 }
 
 export async function moveQuickLink(id: number, relativeOffset: number) {
-    const quickLinks = await loadQuickLinks()
+    const quickLinks = await getQuickLinks()
 
     const index = quickLinks.findIndex((quickLink) => quickLink.id === id)
     if (index === -1) {
