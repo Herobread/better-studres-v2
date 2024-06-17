@@ -15,13 +15,12 @@ export default function ClearVersionTrackingDataCommand({
         try {
             await clearVersionTrackingData()
             toast({
-                title: "Success",
-                description:
-                    "Version tracking data has been successfully cleared.",
+                title: "✅ Success",
+                description: "Version tracking data has been cleared.",
             })
         } catch (error) {
             toast({
-                title: "Error",
+                title: "❌ Error",
                 description:
                     "Failed to clear version tracking data. Please try again.",
             })

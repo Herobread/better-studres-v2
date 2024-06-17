@@ -27,13 +27,13 @@ export default function SaveQuickLinkCommand({
             queryClient.refetchQueries({ queryKey: ["quicklinks"] })
 
             toast({
-                title: "Success",
-                description: `Successfully added ${icon} ${name}`,
+                title: "✅ Success",
+                description: `Saved ${icon} ${name} to quick links`,
             })
         } catch (error) {
             toast({
-                title: "Error",
-                description: "Failed to add quick link. Please try again.",
+                title: "❌ Error",
+                description: "Failed to save quick link. Please try again.",
             })
         }
 
