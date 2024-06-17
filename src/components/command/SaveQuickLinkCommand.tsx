@@ -1,5 +1,5 @@
-import { useQueryClient } from "@tanstack/react-query"
-import { addQuickLink } from "../quickAccess/QuickLinkManager"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { addQuickLink, getQuickLinks } from "../quickAccess/QuickLinkManager"
 import generateQuickLinkInfo from "../quickAccess/generateQuickLinkInfo"
 import { CommandItem } from "../ui/command"
 import { useToast } from "../ui/use-toast"
@@ -14,7 +14,24 @@ export default function SaveQuickLinkCommand({
     const { toast } = useToast()
     const queryClient = useQueryClient()
 
-    const { href, name, icon } = generateQuickLinkInfo(location.href.toString())
+    const currentUrl = location.href.toString()
+
+    const { data: quickLinks } = useQuery({
+        queryKey: ["quicklinks"],
+        queryFn: getQuickLinks,
+    })
+
+    const isPresent = quickLinks?.find((quickLink) => {
+        if (quickLink.href === currentUrl) {
+            return true
+        }
+    })
+
+    if (isPresent) {
+        return null
+    }
+
+    const { href, name, icon } = generateQuickLinkInfo(currentUrl)
 
     const handleSaveQuickLink = async () => {
         try {
