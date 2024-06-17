@@ -69,6 +69,10 @@ export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
     return trackedFileLinkMapString
 }
 
+export async function setTrackedFileLinkMap(map: TrackedFileLinkMap) {
+    await chrome.storage.local.set({ [TRACKED_FILE_LINK_MAP]: map })
+}
+
 /**
  * Saves tracked file link data to storage.
  * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
@@ -121,6 +125,6 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
 
 export async function clearVersionTrackingData() {
     await chrome.storage.local.set({
-        [TRACKED_FILE_LINK_MAP]: {}
+        [TRACKED_FILE_LINK_MAP]: {},
     })
 }
