@@ -1,4 +1,4 @@
-import { PageData } from "@src/types/pageContentTypes"
+import { PageData } from "@src/content/parsers/parser"
 import { Dispatch, SetStateAction, createContext, useState } from "react"
 
 interface PageStateTypes {

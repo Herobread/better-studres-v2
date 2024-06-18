@@ -26,9 +26,3 @@ export interface FileLink {
     href: string
     urlSegments: UrlSegments
 }
-
-export interface PageData {
-    title: string
-    sortLinks: SortLinks
-    fileLinks: FileLink[]
-}

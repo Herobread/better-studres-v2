@@ -3,7 +3,6 @@ import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import QuickLinks from "@src/components/quickAccess/QuickLinks"
 import Table from "@src/components/table/Table"
-import { PageData } from "@src/types/pageContentTypes"
 import ModuleHeader from "@src/components/header/ModuleHeader"
 import WideLayout from "@src/components/layouts/WideLayout"
 import CommandInput from "@src/components/command/CommandInput"
@@ -14,17 +13,33 @@ import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracke
 import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import { PageStateContext } from "@src/contexts/PageStateContext"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
+import { PageData } from "@src/content/parsers/parser"
+import NotFound from "./pages/NotFound"
 
 interface RootProps {
-    initialContent: PageData
+    initialPageData: PageData
 }
 
-export default function Root({ initialContent }: RootProps) {
-    const { isLoading, pageData } = useContext(PageStateContext)
-    const { fileLinks, sortLinks } = pageData || initialContent
+export default function Root({ initialPageData }: RootProps) {
+    const { isLoading, pageData: contextPageData } =
+        useContext(PageStateContext)
+
+    const pageData = contextPageData || initialPageData
 
     const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
+
+    if (pageData.type === "not found") {
+        return <NotFound />
+    }
+
+    if (pageData.type !== "folder") {
+        throw new Error("unhandled page")
+    }
+
+    const { content } = pageData
+
+    const { fileLinks, sortLinks } = content
 
     const handleCommandActivation = () => {
         setOpen(true)
