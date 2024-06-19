@@ -1,21 +1,23 @@
 import { createRoot } from "react-dom/client"
 import Root from "./Root"
-import { parsePageContent } from "@src/content/parsers/parser"
+import { PageData, parsePageContent } from "@src/content/parsers/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
-import { PageData } from "@src/types/pageContentTypes"
 
 try {
     const rootContainer = document.body
 
     rootContainer.style.overflowY = "scroll" // show scroll bar
 
-    const parsedPageContent: PageData = parsePageContent(rootContainer)
+    const pageData: PageData = parsePageContent(rootContainer)
+    history.replaceState({ ...pageData }, "", location.href.toString())
 
-    history.replaceState({ ...parsedPageContent }, "", location.href.toString())
+    if (pageData.type === "unknown") {
+        throw new Error("unknown page type")
+    }
 
-    if (parsedPageContent.fileLinks.length === 0) {
-        throw new Error("No file links found")
+    if (pageData.type === "root") {
+        throw new Error("root page")
     }
 
     if (!rootContainer) {
@@ -28,12 +30,11 @@ try {
 
     root.render(
         <Providers>
-            <Root initialContent={parsedPageContent} />
+            <Root initialPageData={pageData} />
         </Providers>
     )
 } catch (e) {
     // load only commands then
-
     const div = document.createElement("div")
     div.className = "__better_studres__root _tailwind_preflight_reset"
     document.body.appendChild(div)
