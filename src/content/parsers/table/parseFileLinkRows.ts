@@ -96,8 +96,12 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
 
     const emoji = getFileEmoji(rawName)
 
+    const isFolder =
+        rawName.endsWith("/") || rawName.includes("Parent Directory")
+
     return {
         name,
+        isFolder,
         extension,
         emoji,
         href,

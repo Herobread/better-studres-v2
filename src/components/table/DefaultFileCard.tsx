@@ -38,6 +38,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             space,
             emoji,
             isImage,
+            isFolder,
             image,
             lastModified,
         } = fileLink
@@ -65,6 +66,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                 <ContextMenu>
                     <ContextMenuTrigger asChild>
                         <Link
+                            isHard={!isFolder}
                             ref={ref}
                             {...props}
                             href={href}

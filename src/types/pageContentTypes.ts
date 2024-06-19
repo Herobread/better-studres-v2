@@ -12,6 +12,7 @@ export interface SortLinks {
 export interface FileLink {
     image?: Image
     isImage: boolean
+    isFolder: boolean
     emoji?: string
     name: string
     extension?: string
