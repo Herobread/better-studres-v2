@@ -19,7 +19,7 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 
 ### QuickLinks V2
 
-![QuickLinks v2](https://github.com/Herobread/better-studres-v2/assets/52717777/ab1f30ce-5c10-4962-b40a-9c2d02995c49)
+![quicklinks](https://github.com/Herobread/better-studres-v2/assets/52717777/a3401d2a-5109-4b53-9400-e52fcdc889e5)
 
 - **Add Links**: Easily add links to any page, auto-filled with active page data (emoji, name, link).
 - **Edit/Delete**: Right-click to edit or delete links.
