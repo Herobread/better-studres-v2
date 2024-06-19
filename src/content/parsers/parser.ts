@@ -10,13 +10,15 @@ export interface BasePageData {
     type: PageType
 }
 
+export interface FolderContent {
+    title: string
+    sortLinks: SortLinks
+    fileLinks: FileLink[]
+}
+
 export interface FolderPageData extends BasePageData {
     type: "folder"
-    content: {
-        title: string
-        sortLinks: SortLinks
-        fileLinks: FileLink[]
-    }
+    content: FolderContent
 }
 
 export interface NotFoundPageData extends BasePageData {
