@@ -16,6 +16,10 @@ try {
         throw new Error("unknown page type")
     }
 
+    if (pageData.type === "root") {
+        throw new Error("root page")
+    }
+
     if (!rootContainer) {
         throw new Error("Can't find Options root element")
     }

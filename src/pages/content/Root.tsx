@@ -20,5 +20,6 @@ export default function Root({ initialPageData }: RootProps) {
     if (pageData.type === "folder") {
         return <Folder content={pageData.content} />
     }
+
     throw new Error("unhandled page")
 }
