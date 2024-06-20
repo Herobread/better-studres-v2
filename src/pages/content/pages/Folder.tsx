@@ -20,7 +20,7 @@ interface FolderProps {
 }
 
 export default function Folder({ content }: FolderProps) {
-    const { fileLinks, sortLinks } = content
+    const { fileLinks, sortLinks, extraContent } = content
 
     const { isLoading } = useContext(PageStateContext)
 
@@ -53,6 +53,9 @@ export default function Folder({ content }: FolderProps) {
                     fileLinks={fileLinks}
                     sortLinks={sortLinks}
                 />
+                {extraContent && !isLoading && (
+                    <div className="prose w-full">{extraContent}</div>
+                )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </div>

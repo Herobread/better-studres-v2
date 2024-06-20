@@ -10,7 +10,8 @@ try {
     rootContainer.style.overflowY = "scroll" // show scroll bar
 
     const pageData: PageData = parsePageContent(rootContainer)
-    history.replaceState({ ...pageData }, "", location.href.toString())
+    const now = new Date().getTime()
+    history.replaceState({ now }, "", location.href.toString())
 
     if (pageData.type === "unknown") {
         throw new Error("unknown page type")
@@ -35,6 +36,8 @@ try {
     )
 } catch (e) {
     // load only commands then
+    console.log("fallback")
+    console.log(e)
     const div = document.createElement("div")
     div.className = "__better_studres__root _tailwind_preflight_reset"
     document.body.appendChild(div)
