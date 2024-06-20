@@ -1,12 +1,12 @@
+import { Fragment } from "react"
+import { extractUrlSegments, BASE_URL } from "@src/features/versionControl"
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
     BreadcrumbSeparator,
-} from "../ui/breadcrumb"
-import { Fragment } from "react"
-import { extractUrlSegments, BASE_URL } from "@src/features/versionControl"
+} from "@src/components/ui/breadcrumb"
 
 interface BreadcrumbType {
     name: string

@@ -2,8 +2,6 @@ import parse from "html-react-parser"
 import { useCommand } from "@src/components/command/CommandContext"
 import CommandInput from "@src/components/command/CommandInput"
 import Commands from "@src/components/command/Commands"
-import ModuleHeader from "@src/components/header/ModuleHeader"
-import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
@@ -15,6 +13,8 @@ import { FolderContent } from "@src/features/parser"
 import { useContext } from "react"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import { ConfigContext } from "@src/features/config"
+import ModuleHeader from "@src/features/header/ModuleHeader"
+import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
 
 interface FolderProps {
     content: FolderContent

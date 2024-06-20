@@ -1,5 +1,5 @@
+import Title from "@src/components/typography/Title"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import Title from "../typography/Title"
 import { extractUrlSegments } from "@src/features/versionControl"
 
 export default function ModuleHeader() {
