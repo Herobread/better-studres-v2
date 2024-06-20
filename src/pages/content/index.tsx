@@ -3,7 +3,7 @@ import Root from "./Root"
 import { PageData, parsePageContent } from "@src/features/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
-import { THEME_STORAGE_KEY } from "@src/contexts/ThemeContext"
+import { THEME_STORAGE_KEY } from "@src/features/theme"
 
 async function initialize() {
     try {
