@@ -48,6 +48,7 @@
     },
     "devDependencies": {
         "@crxjs/vite-plugin": "^1.0.14",
+        "@tailwindcss/typography": "^0.5.13",
         "@tanstack/eslint-plugin-query": "^5.32.1",
         "@types/chrome": "^0.0.253",
         "@types/node": "^18.17.1",

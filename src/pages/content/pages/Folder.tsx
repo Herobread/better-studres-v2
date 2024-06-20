@@ -53,7 +53,7 @@ export default function Folder({ content }: FolderProps) {
                     fileLinks={fileLinks}
                     sortLinks={sortLinks}
                 />
-                {extraContent}
+                <div className="prose">{extraContent}</div>
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </div>

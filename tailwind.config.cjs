@@ -90,6 +90,7 @@ module.exports = {
     },
     plugins: [
         require("tailwindcss-animate"),
+        require("@tailwindcss/typography"),
         scopedPreflightStyles({
             isolationStrategy: isolateInsideOfContainer(
                 "._tailwind_preflight_reset"
