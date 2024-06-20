@@ -55,7 +55,6 @@ export default function Popup() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         await saveConfig(values)
 
-        // make isDirty = false and therefore making button disabled
         reset(values)
     }
 
@@ -71,12 +70,20 @@ export default function Popup() {
             id="__better_studres_theme_root"
         >
             <div className="flex items-center ">
-                <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
-                    Better studres
-                    <span className="text-sm font-normal text-muted-foreground">
-                        {pkg.version}
-                    </span>
-                </h1>
+                <div className="space-y-1">
+                    <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
+                        Better studres
+                        <span className="text-sm font-normal text-muted-foreground">
+                            {pkg.version}
+                        </span>
+                    </h1>
+                    <a
+                        href="https://github.com/Herobread/better-studres-v2"
+                        className="text-sm text-muted-foreground"
+                    >
+                        Contribute on GitHub
+                    </a>
+                </div>
                 {/* <Toggle>
                     <PowerCircleIcon />
                 </Toggle> */}
