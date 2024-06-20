@@ -1,5 +1,5 @@
 import { QuickLink } from "@src/types/quickLinkTypes"
-import Link from "../router/Link"
+import Link from "../../features/router/Link"
 
 interface QuickLinkCardProps {
     quickLink: QuickLink

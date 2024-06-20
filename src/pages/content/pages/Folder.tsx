@@ -1,3 +1,4 @@
+import parse from 'html-react-parser'
 import { useCommand } from "@src/components/command/CommandContext"
 import CommandInput from "@src/components/command/CommandInput"
 import Commands from "@src/components/command/Commands"
@@ -54,7 +55,7 @@ export default function Folder({ content }: FolderProps) {
                     sortLinks={sortLinks}
                 />
                 {extraContent && !isLoading && (
-                    <div className="prose w-full">{extraContent}</div>
+                    <div className="prose w-full">{parse(extraContent)}</div>
                 )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>

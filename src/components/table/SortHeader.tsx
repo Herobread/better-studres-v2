@@ -1,6 +1,6 @@
 import parseUrl from "@src/content/parsers/parseUrl"
 import { cva } from "class-variance-authority"
-import Link from "../router/Link"
+import Link from "../../features/router/Link"
 
 interface SortHeaderProps {
     style?: "bold" | "normal" | null | undefined

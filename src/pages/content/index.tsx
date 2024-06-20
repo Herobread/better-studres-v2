@@ -12,8 +12,7 @@ async function initialize() {
         rootContainer.style.overflowY = "scroll" // show scroll bar
 
         const pageData: PageData = parsePageContent(rootContainer)
-        const now = new Date().getTime()
-        history.replaceState({ now }, "", location.href.toString())
+        history.replaceState({ ...pageData}, "", location.href.toString())
 
         if (pageData.type === "unknown") {
             throw new Error("unknown page type")

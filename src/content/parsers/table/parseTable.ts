@@ -1,4 +1,3 @@
-import { ReactNode } from "react"
 import { FileLink, SortLinks } from "../../../types/pageContentTypes"
 import { getExtraContent } from "./getExtraContent"
 import { getTableRows } from "./getTableRows"
@@ -13,7 +12,7 @@ import { parseHeaderRow } from "./parseHeaderRow"
 export function parseTable(content: HTMLElement): {
     sortLinks: SortLinks
     fileLinks: FileLink[]
-    extraContent: ReactNode
+    extraContent: string
 } {
     const tableRows = getTableRows(content)
     const extraContent = getExtraContent(content)

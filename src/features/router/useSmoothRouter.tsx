@@ -30,8 +30,7 @@ const useSmoothRouter = () => {
                     pageData = parsePageContent(document.body)
                     title = document.title
 
-                    const now = new Date().getTime()
-                    history.replaceState({ now }, "", href)
+                    history.replaceState({ ...pageData }, "", href)
                 }
 
                 document.title = title

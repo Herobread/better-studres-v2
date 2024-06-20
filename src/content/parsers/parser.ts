@@ -1,9 +1,8 @@
-import { isNotFoundPage } from "@src/components/router/isNotFoundPage"
+import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { FileLink, SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 import { parseTable } from "./table/parseTable"
-import { isRootPage } from "@src/components/router/isRootPage"
-import { ReactNode } from "react"
+import { isRootPage } from "@src/features/router/isRootPage"
 
 export type PageType = "folder" | "not found" | "root" | "unknown"
 
@@ -15,7 +14,7 @@ export interface FolderContent {
     title: string
     sortLinks: SortLinks
     fileLinks: FileLink[]
-    extraContent: ReactNode
+    extraContent: string
 }
 
 export interface FolderPageData extends BasePageData {

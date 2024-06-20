@@ -1,7 +1,4 @@
-import parse from "html-react-parser"
-import { ReactNode } from "react"
-
-export function getExtraContent(htmlElement: HTMLElement): ReactNode {
+export function getExtraContent(htmlElement: HTMLElement): string {
     // Save the original innerHTML
     const originalHTML = htmlElement.innerHTML
 
@@ -17,7 +14,7 @@ export function getExtraContent(htmlElement: HTMLElement): ReactNode {
             firstTable.remove()
         }
 
-        return parse(htmlElement.innerHTML)
+        return htmlElement.innerHTML
     } finally {
         // Restore the original innerHTML
         htmlElement.innerHTML = originalHTML
