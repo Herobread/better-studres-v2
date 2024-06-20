@@ -1,18 +1,22 @@
 import React, { forwardRef, useContext, useState } from "react"
-import { Separator } from "../ui/separator"
+import { Separator } from "../../components/ui/separator"
 import { FileLink } from "@src/types/pageContentTypes"
 import {
     ContextMenu,
     ContextMenuContent,
     ContextMenuItem,
     ContextMenuTrigger,
-} from "../ui/context-menu"
+} from "../../components/ui/context-menu"
 import { GitCompareArrowsIcon } from "lucide-react"
-import { Dialog, DialogContent } from "../ui/dialog"
+import { Dialog, DialogContent } from "../../components/ui/dialog"
 import UpdatesDialog from "./UpdatesDialog"
 import { isFileLinkTracked, isUrlTracked } from "@src/features/versionControl"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
-import Link from "../../features/router/Link"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "../../components/ui/tooltip"
+import Link from "../router/Link"
 import { ConfigContext } from "@src/features/config"
 
 export interface DefaultFileCardProps {

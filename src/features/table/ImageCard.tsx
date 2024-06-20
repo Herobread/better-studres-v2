@@ -1,4 +1,8 @@
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "../../components/ui/hover-card"
 import DefaultFileCard, { DefaultFileCardProps } from "./DefaultFileCard"
 
 export function ImageCard({ fileLink, ...props }: DefaultFileCardProps) {
