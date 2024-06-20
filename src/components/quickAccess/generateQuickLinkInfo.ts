@@ -1,4 +1,4 @@
-import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/versionControl"
 
 export default function generateQuickLinkInfo(href: string) {

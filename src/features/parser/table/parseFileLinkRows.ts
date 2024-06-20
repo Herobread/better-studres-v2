@@ -1,8 +1,9 @@
-import { getFileEmoji } from "@src/content/enhancers/fileEmoji/getFileEmoji"
 import { FileLink, Image } from "@src/types/pageContentTypes"
-import { getTimeDifferenceString } from "@src/content/enhancers/getTimeDifferenceString"
+
 import { extractUrlSegments } from "@src/features/versionControl"
 import { splitFileName, parseFileSize } from "@src/features/parser"
+import { getTimeDifferenceString } from "@src/features/contentEnhancers/getTimeDifferenceString"
+import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"
 
 const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg"]
 

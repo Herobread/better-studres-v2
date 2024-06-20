@@ -15,7 +15,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import NormalLayout from "../layouts/NormalLayout"
 import { addQuickLink } from "./QuickLinkManager"
-import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/versionControl"
 
 const formSchema = z.object({

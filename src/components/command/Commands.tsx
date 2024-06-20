@@ -9,7 +9,7 @@ import {
 } from "../../components/ui/command"
 import { useCallback, useEffect } from "react"
 import { getQuickLinks } from "../quickAccess/QuickLinkManager"
-import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { useCommand } from "./CommandContext"
 import {
     extractUrlSegments,

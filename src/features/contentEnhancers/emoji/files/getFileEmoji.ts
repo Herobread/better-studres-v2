@@ -1,5 +1,5 @@
-import { getFileEmojiId } from "./getFileEmojiId"
 import { EMOJI_MAP } from "./fileEmojiMap"
+import { getFileEmojiId } from "./getFileEmojiId"
 
 /**
  * Retrieves the emoji associated with a given filename.
