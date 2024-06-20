@@ -15,6 +15,7 @@ export interface FileLink {
     isFolder: boolean
     emoji?: string
     name: string
+    fullName: string
     extension?: string
     lastModifiedDate: Date
     lastModified: string
