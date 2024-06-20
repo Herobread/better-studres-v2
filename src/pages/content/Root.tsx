@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import { PageStateContext } from "@src/contexts/PageStateContext"
 import { PageData } from "@src/features/parser"
 import NotFound from "./pages/NotFound"
 import Folder from "./pages/Folder"
+import { PageStateContext } from "@src/features/router/PageStateContext"
 
 interface RootProps {
     initialPageData: PageData

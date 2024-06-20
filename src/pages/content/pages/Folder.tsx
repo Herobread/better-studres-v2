@@ -1,4 +1,4 @@
-import parse from 'html-react-parser'
+import parse from "html-react-parser"
 import { useCommand } from "@src/components/command/CommandContext"
 import CommandInput from "@src/components/command/CommandInput"
 import Commands from "@src/components/command/Commands"
@@ -13,8 +13,8 @@ import { ThemeToggle } from "@src/components/ui/theme-toggle"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import { FolderContent } from "@src/features/parser"
 import { ConfigContext } from "@src/contexts/ConfigContext"
-import { PageStateContext } from "@src/contexts/PageStateContext"
 import { useContext } from "react"
+import { PageStateContext } from "@src/features/router/PageStateContext"
 
 interface FolderProps {
     content: FolderContent

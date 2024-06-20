@@ -1,3 +1,3 @@
-export * from './isNotFoundPage'
-export * from './isRootPage'
-export * from './redirect'
+export * from "./isNotFoundPage"
+export * from "./isRootPage"
+export * from "./redirect"

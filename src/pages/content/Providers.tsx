@@ -4,10 +4,10 @@ import "@src/assets/styles/shadcn-ui.css"
 import { CommandProvider } from "@src/components/command/CommandContext"
 import ConfigContextProvider from "@src/contexts/ConfigContext"
 import { TooltipProvider } from "@src/components/ui/tooltip"
-import { PageStateContextProvider } from "@src/contexts/PageStateContext"
 import { SmoothRouterListener } from "@src/features/router/SmoothRouterListener"
 import { PreferredTheme, ThemeProvider } from "@src/contexts/ThemeContext"
 import { Toaster } from "@src/components/ui/toaster"
+import { PageStateContextProvider } from "@src/features/router/PageStateContext"
 
 interface ProvidersProps {
     children: React.ReactNode
