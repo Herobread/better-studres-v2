@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
-type Theme = "dark" | "light"
-type PreferredTheme = "dark" | "light" | "system"
+export type Theme = "dark" | "light"
+export type PreferredTheme = "dark" | "light" | "system"
 
 type ThemeProviderProps = {
     children: React.ReactNode
     defaultTheme?: PreferredTheme
+    overrideTheme?: PreferredTheme
     storageKey?: string
 }
 
@@ -37,16 +38,24 @@ export function getCurrentTheme(theme: PreferredTheme): Theme {
     return theme
 }
 
+export const THEME_STORAGE_KEY = "vite-ui-theme"
+
 export function ThemeProvider({
     children,
     defaultTheme = "system",
-    storageKey = "vite-ui-theme",
+    overrideTheme,
     ...props
 }: ThemeProviderProps) {
-    const [theme, setTheme] = useState<PreferredTheme>(
-        () =>
-            (localStorage.getItem(storageKey) as PreferredTheme) || defaultTheme
-    )
+    const [theme, setTheme] = useState<PreferredTheme>(() => {
+        if (overrideTheme) {
+            return overrideTheme
+        }
+
+        return (
+            (localStorage.getItem(THEME_STORAGE_KEY) as PreferredTheme) ||
+            defaultTheme
+        )
+    })
 
     useEffect(() => {
         const root = window.document.getElementById(
@@ -73,8 +82,9 @@ export function ThemeProvider({
 
     const value = {
         theme,
-        setTheme: (theme: PreferredTheme) => {
-            localStorage.setItem(storageKey, theme)
+        setTheme: async (theme: PreferredTheme) => {
+            localStorage.setItem(THEME_STORAGE_KEY, theme)
+            await chrome.storage.local.set({ [THEME_STORAGE_KEY]: theme })
             setTheme(theme)
         },
     }

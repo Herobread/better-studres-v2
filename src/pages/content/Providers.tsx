@@ -6,27 +6,34 @@ import ConfigContextProvider from "@src/contexts/ConfigContext"
 import { TooltipProvider } from "@src/components/ui/tooltip"
 import { PageStateContextProvider } from "@src/contexts/PageStateContext"
 import { SmoothRouterListener } from "@src/components/router/SmoothRouterListener"
-import { ThemeProvider } from "@src/contexts/ThemeContext"
+import { PreferredTheme, ThemeProvider } from "@src/contexts/ThemeContext"
 import { Toaster } from "@src/components/ui/toaster"
 
 interface ProvidersProps {
     children: React.ReactNode
+    overrideTheme?: PreferredTheme
 }
 
 const queryClient = new QueryClient()
 
-export default function Providers({ children }: ProvidersProps) {
+export default function Providers({ children, overrideTheme }: ProvidersProps) {
+    overrideTheme ??= "system"
+
     return (
         <div className="box-sizing-unset _tailwind_preflight_reset">
             <QueryClientProvider client={queryClient}>
-                <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+                <ThemeProvider
+                    defaultTheme={"system"}
+                    overrideTheme={overrideTheme}
+                    storageKey="vite-ui-theme"
+                >
                     <PageStateContextProvider>
                         <SmoothRouterListener />
                         <TooltipProvider>
                             <CommandProvider>
                                 <ConfigContextProvider>
                                     {children}
-                                    <Toaster/>
+                                    <Toaster />
                                 </ConfigContextProvider>
                             </CommandProvider>
                         </TooltipProvider>
