@@ -3,6 +3,7 @@ import { FileLink, SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 import { parseTable } from "./table/parseTable"
 import { isRootPage } from "@src/components/router/isRootPage"
+import { ReactNode } from "react"
 
 export type PageType = "folder" | "not found" | "root" | "unknown"
 
@@ -14,6 +15,7 @@ export interface FolderContent {
     title: string
     sortLinks: SortLinks
     fileLinks: FileLink[]
+    extraContent: ReactNode
 }
 
 export interface FolderPageData extends BasePageData {
@@ -59,7 +61,7 @@ export function parsePageContent(content: HTMLElement): PageData {
 
     try {
         const title = getPageHeader(content)
-        const { fileLinks, sortLinks } = parseTable(content)
+        const { fileLinks, sortLinks, extraContent } = parseTable(content)
 
         if (fileLinks.length > 0) {
             return {
@@ -68,6 +70,7 @@ export function parsePageContent(content: HTMLElement): PageData {
                     title,
                     fileLinks,
                     sortLinks,
+                    extraContent,
                 },
             }
         }
