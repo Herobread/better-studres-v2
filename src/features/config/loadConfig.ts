@@ -1,5 +1,5 @@
 import { ConfigTypes } from "../../types/configTypes"
-import { configFallback } from "./configFallback"
+import { CONFIG_FALLBACK } from "./configFallback"
 
 /**
  * Loads the configuration settings.
@@ -10,5 +10,5 @@ export const loadConfig = async (): Promise<ConfigTypes> => {
         config: ConfigTypes
     }
 
-    return config.config || configFallback
+    return config.config || CONFIG_FALLBACK
 }

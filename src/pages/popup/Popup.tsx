@@ -17,13 +17,13 @@ import {
     FormLabel,
     FormMessage,
 } from "@src/components/ui/form"
-import { saveConfig } from "@src/lib/storage/saveConfig"
-import { loadConfig } from "@src/lib/storage/loadConfig"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
 import { Switch } from "@src/components/ui/switch"
-import { configFallback } from "@src/lib/storage/configFallback"
 import pkg from "@src/../package.json"
+import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
+import { saveConfig } from "@src/features/config/saveConfig"
+import { loadConfig } from "@src/features/config/loadConfig"
 
 const formSchema = z.object({
     date: z.enum(["full", "relative"]),
@@ -42,7 +42,7 @@ export default function Popup() {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: configFallback,
+        defaultValues: CONFIG_FALLBACK,
     })
 
     const {

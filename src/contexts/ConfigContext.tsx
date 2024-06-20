@@ -1,12 +1,12 @@
-import { configFallback } from "@src/lib/storage/configFallback"
-import { loadConfig } from "@src/lib/storage/loadConfig"
-import { saveConfig } from "@src/lib/storage/saveConfig"
+import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
+import { loadConfig } from "@src/features/config/loadConfig"
+import { saveConfig } from "@src/features/config/saveConfig"
 import { ConfigTypes } from "@src/types/configTypes"
 import { useQuery } from "@tanstack/react-query"
 import React, { createContext, useEffect, useState } from "react"
 import { Storage, storage } from "webextension-polyfill"
 
-export const ConfigContext = createContext<ConfigTypes>(configFallback)
+export const ConfigContext = createContext<ConfigTypes>(CONFIG_FALLBACK)
 
 interface ConfigContextProviderProps {
     children: React.ReactNode
@@ -18,7 +18,7 @@ export default function ConfigContextProvider({
     const { data: initialConfig } = useQuery({
         queryKey: ["config"],
         queryFn: loadConfig,
-        initialData: configFallback,
+        initialData: CONFIG_FALLBACK,
     })
 
     const [config, setConfig] = useState<ConfigTypes>(initialConfig)

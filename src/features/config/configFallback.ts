@@ -10,7 +10,7 @@ import { ConfigTypes } from "@src/types/configTypes"
  * @property {boolean} showQuickLinks - Display quick links.
  * @property {boolean} showCommandButton - Display command button.
  */
-export const configFallback: ConfigTypes = {
+export const CONFIG_FALLBACK: ConfigTypes = {
     date: "relative",
     fileIcons: "emoji",
     imagePreviewAsIcon: true,
