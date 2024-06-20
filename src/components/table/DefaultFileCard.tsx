@@ -1,7 +1,6 @@
 import React, { forwardRef, useContext, useState } from "react"
 import { Separator } from "../ui/separator"
 import { FileLink } from "@src/types/pageContentTypes"
-import { ConfigContext } from "@src/contexts/ConfigContext"
 import {
     ContextMenu,
     ContextMenuContent,
@@ -14,6 +13,7 @@ import UpdatesDialog from "./UpdatesDialog"
 import { isFileLinkTracked, isUrlTracked } from "@src/features/versionControl"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Link from "../../features/router/Link"
+import { ConfigContext } from "@src/features/config"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink

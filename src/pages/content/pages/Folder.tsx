@@ -12,9 +12,9 @@ import Table from "@src/components/table/Table"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
 import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
 import { FolderContent } from "@src/features/parser"
-import { ConfigContext } from "@src/contexts/ConfigContext"
 import { useContext } from "react"
 import { PageStateContext } from "@src/features/router/PageStateContext"
+import { ConfigContext } from "@src/features/config"
 
 interface FolderProps {
     content: FolderContent

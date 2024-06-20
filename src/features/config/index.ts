@@ -1,5 +1,4 @@
-import { CONFIG_FALLBACK } from "./configFallback";
-import { loadConfig } from "./loadConfig";
-import { saveConfig } from "./saveConfig";
-
-export default {configFallback: CONFIG_FALLBACK, loadConfig, saveConfig}
+export * from "./ConfigContext"
+export * from "./configFallback"
+export * from "./loadConfig"
+export * from "./saveConfig"

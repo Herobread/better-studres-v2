@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import DefaultFileCard, { DefaultFileCardProps } from "./DefaultFileCard"
 import { ImageCard } from "./ImageCard"
-import { ConfigContext } from "@src/contexts/ConfigContext"
+import { ConfigContext } from "@src/features/config"
 
 export default function FileCard({ fileLink }: DefaultFileCardProps) {
     const { isImage } = fileLink
