@@ -26,6 +26,13 @@ module.exports = {
             },
         },
         extend: {
+            typography: {
+                DEFAULT: {
+                    css: {
+                        maxWidth: "100ch",
+                    },
+                },
+            },
             gridTemplateColumns: {
                 files: "max-content auto 4fr max-content max-content 3fr",
             },
