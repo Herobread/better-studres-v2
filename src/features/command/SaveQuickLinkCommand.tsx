@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { CommandItem } from "../ui/command"
-import { useToast } from "../ui/use-toast"
+import { CommandItem } from "../../components/ui/command"
+import { useToast } from "../../components/ui/use-toast"
 import {
     addQuickLink,
     deleteQuickLink,

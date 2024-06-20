@@ -3,9 +3,9 @@ import {
     getTrackedFileLinkMap,
     setTrackedFileLinkMap,
 } from "@src/features/versionControl"
-import { useToast } from "../ui/use-toast"
-import { CommandItem } from "../ui/command"
-import { ToastAction } from "../ui/toast"
+import { useToast } from "../../components/ui/use-toast"
+import { CommandItem } from "../../components/ui/command"
+import { ToastAction } from "../../components/ui/toast"
 
 interface ClearVersionTrackingDataCommandProps {
     setIsCommandOpen: (open: boolean) => void

@@ -1,4 +1,4 @@
-import { CommandItem } from "../ui/command"
+import { CommandItem } from "../../components/ui/command"
 import { getCurrentTheme, useTheme } from "@src/features/theme"
 
 interface ToggleThemeCommandProps {
