@@ -7,7 +7,7 @@ import {
     ContextMenuItem,
     ContextMenuTrigger,
 } from "../../components/ui/context-menu"
-import { GitCompareArrowsIcon } from "lucide-react"
+import { DownloadIcon, GitCompareArrowsIcon } from "lucide-react"
 import { Dialog, DialogContent } from "../../components/ui/dialog"
 import UpdatesDialog from "./UpdatesDialog"
 import { isFileLinkTracked, isUrlTracked } from "@src/features/versionControl"
@@ -18,6 +18,7 @@ import {
 } from "../../components/ui/tooltip"
 import Link from "../router/Link"
 import { ConfigContext } from "@src/features/config"
+import CopyPathMenuItem from "./contextMenuItems/CopyPathMenuItem"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -136,6 +137,10 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         ) : (
                             <ViewUpdateHistoryContextMenuItem />
                         )}
+                        <CopyPathMenuItem href={href} />
+                        <ContextMenuItem>
+                            <DownloadIcon /> Download file
+                        </ContextMenuItem>
                         {/* <ContextMenuSub>
                         <ContextMenuSubTrigger>
                             <CopyIcon /> Copy commands
