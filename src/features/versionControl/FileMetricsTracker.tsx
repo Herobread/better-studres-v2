@@ -13,7 +13,7 @@ interface FileMetricsTrackerProps {
  * @param {FileMetricsTracker} props - The props for the component.
  * @returns {null} This component does not render anything.
  */
-export default function FileMetricsTracker({
+export function FileMetricsTracker({
     fileLinks,
 }: FileMetricsTrackerProps): null {
     useEffect(() => {
