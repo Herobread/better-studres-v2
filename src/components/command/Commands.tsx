@@ -8,7 +8,7 @@ import {
     CommandList,
 } from "../../components/ui/command"
 import { useCallback, useEffect } from "react"
-import { getQuickLinks } from "../quickAccess/QuickLinkManager"
+import { getQuickLinks } from "../../features/quickAccess"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { useCommand } from "./CommandContext"
 import {

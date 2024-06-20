@@ -1,7 +1,7 @@
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/versionControl"
 
-export default function generateQuickLinkInfo(href: string) {
+export function generateQuickLinkInfo(href: string) {
     const items = href.split("/")
     let name = items[3]
 

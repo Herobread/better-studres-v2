@@ -1,5 +1,3 @@
-import QuickLinkContainer from "./QuickLinkContainer"
-import QuickLinkCard from "./QuickLinkCard"
 import {
     deleteQuickLink,
     getQuickLinks,
@@ -7,8 +5,11 @@ import {
 } from "./QuickLinkManager"
 import { useQuery } from "@tanstack/react-query"
 import QuickLinkButton from "./QuickLinkButton"
-import generateQuickLinkInfo from "./generateQuickLinkInfo"
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "../../components/ui/popover"
 import AddQuickLinkForm from "./AddQuickLinkForm"
 import { useState } from "react"
 import {
@@ -17,8 +18,8 @@ import {
     ContextMenuItem,
     ContextMenuSeparator,
     ContextMenuTrigger,
-} from "../ui/context-menu"
-import { Dialog, DialogContent } from "../ui/dialog"
+} from "../../components/ui/context-menu"
+import { Dialog, DialogContent } from "../../components/ui/dialog"
 import EditQuickLinkForm from "./EditQuickLinkForm"
 import {
     ArrowLeftIcon,
@@ -27,8 +28,11 @@ import {
     Edit2Icon,
     Trash2Icon,
 } from "lucide-react"
+import { QuickLinkContainer } from "./QuickLinkContainer"
+import { QuickLinkCard } from "./QuickLinkCard"
+import { generateQuickLinkInfo } from "./generateQuickLinkInfo"
 
-export default function QuickLinks() {
+export function QuickLinks() {
     const [isOpen, setIsOpen] = useState(false)
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
     const [editLinkId, setEditLinkId] = useState(-1)

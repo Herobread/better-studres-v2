@@ -1,7 +1,6 @@
 import { z } from "zod"
-import CompactLayout from "../layouts/CompactLayout"
-import H2 from "../typography/H2"
-import { Button } from "../ui/button"
+import NormalLayout from "../../components/layouts/NormalLayout"
+import H2 from "../../components/typography/H2"
 import {
     Form,
     FormControl,
@@ -9,14 +8,19 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "../ui/form"
-import { Input } from "../ui/input"
+} from "../../components/ui/form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import NormalLayout from "../layouts/NormalLayout"
-import { addQuickLink } from "./QuickLinkManager"
-import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { extractUrlSegments } from "@src/features/versionControl"
+import { updateQuickLink } from "./QuickLinkManager"
+import CompactLayout from "../../components/layouts/CompactLayout"
+import { Input } from "../../components/ui/input"
+import { Button } from "../../components/ui/button"
+import { QuickLink } from "@src/types/quickLinkTypes"
+
+interface EditQuickLinkFormProps {
+    quickLink: QuickLink
+    afterSubmit?: () => void
+}
 
 const formSchema = z.object({
     icon: z.string().emoji().max(4, "4 emoji max"),
@@ -24,32 +28,19 @@ const formSchema = z.object({
     href: z.string().min(1, "Link is required"),
 })
 
-interface AddQuickLinkFormProps {
-    name?: string
-    href?: string
-    afterSubmit?: () => void
-}
-
-export default function AddQuickLinkForm({
-    href,
-    name,
+export default function EditQuickLinkForm({
+    quickLink,
     afterSubmit,
-}: AddQuickLinkFormProps) {
-    const urlSegments = extractUrlSegments(href || "")
-    const moduleCode = urlSegments[0]
-    const moduleEmoji = getModuleEmoji(moduleCode)
-
+}: EditQuickLinkFormProps) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            icon: moduleEmoji,
-            name,
-            href,
+            ...quickLink,
         },
     })
 
     async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
-        await addQuickLink(quickLinkData)
+        await updateQuickLink(quickLink.id, quickLinkData)
 
         if (afterSubmit) {
             afterSubmit()
@@ -58,7 +49,7 @@ export default function AddQuickLinkForm({
 
     return (
         <NormalLayout>
-            <H2>Add quick link</H2>
+            <H2>Update &quot;{quickLink.name}&quot;</H2>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="m-0">
                     <NormalLayout>
@@ -124,7 +115,9 @@ export default function AddQuickLinkForm({
                                 }}
                             />
                         </CompactLayout>
-                        <Button type="submit">Add</Button>
+                        <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                            <Button type="submit">Save</Button>
+                        </div>
                     </NormalLayout>
                 </form>
             </Form>

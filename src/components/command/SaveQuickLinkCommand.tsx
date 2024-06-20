@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { CommandItem } from "../ui/command"
+import { useToast } from "../ui/use-toast"
 import {
     addQuickLink,
     deleteQuickLink,
     getQuickLinks,
-} from "../quickAccess/QuickLinkManager"
-import generateQuickLinkInfo from "../quickAccess/generateQuickLinkInfo"
-import { CommandItem } from "../ui/command"
-import { useToast } from "../ui/use-toast"
+} from "@src/features/quickAccess"
+import { generateQuickLinkInfo } from "@src/features/quickAccess"
 
 interface SaveQuickLinkCommandProps {
     setIsCommandOpen: (open: boolean) => void

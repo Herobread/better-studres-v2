@@ -1,11 +1,11 @@
 import { QuickLink } from "@src/types/quickLinkTypes"
-import Link from "../../features/router/Link"
+import Link from "../router/Link"
 
 interface QuickLinkCardProps {
     quickLink: QuickLink
 }
 
-export default function QuickLinkCard({ quickLink }: QuickLinkCardProps) {
+export function QuickLinkCard({ quickLink }: QuickLinkCardProps) {
     const { href, name, icon } = quickLink
 
     return (

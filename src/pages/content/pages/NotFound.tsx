@@ -4,9 +4,11 @@ import Commands from "@src/components/command/Commands"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
-import QuickLinkCard from "@src/components/quickAccess/QuickLinkCard"
-import QuickLinkContainer from "@src/components/quickAccess/QuickLinkContainer"
-import { getQuickLinks } from "@src/components/quickAccess/QuickLinkManager"
+import {
+    getQuickLinks,
+    QuickLinkContainer,
+    QuickLinkCard,
+} from "@src/features/quickAccess"
 import Title from "@src/components/typography/Title"
 import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/versionControl"
