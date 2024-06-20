@@ -2,7 +2,7 @@ import {
     clearVersionTrackingData,
     getTrackedFileLinkMap,
     setTrackedFileLinkMap,
-} from "@src/content/versionControl"
+} from "@src/features/versionControl"
 import { useToast } from "../ui/use-toast"
 import { CommandItem } from "../ui/command"
 import { ToastAction } from "../ui/toast"

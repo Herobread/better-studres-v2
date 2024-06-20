@@ -1,4 +1,4 @@
-import { ChangesRecord } from "@src/content/versionControl"
+import { ChangesRecord } from "@src/features/versionControl"
 import { ArrowRightIcon } from "lucide-react"
 import { Fragment } from "react/jsx-runtime"
 import ChangesList from "./ChangesList"

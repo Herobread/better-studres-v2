@@ -1,4 +1,4 @@
-import { trackFileLinks } from "@src/content/versionControl"
+import { trackFileLinks } from "@src/features/versionControl"
 import { FileLink } from "@src/types/pageContentTypes"
 import { useEffect } from "react"
 

@@ -11,7 +11,7 @@ import {
 import { GitCompareArrowsIcon } from "lucide-react"
 import { Dialog, DialogContent } from "../ui/dialog"
 import UpdatesDialog from "./UpdatesDialog"
-import { isFileLinkTracked, isUrlTracked } from "@src/content/versionControl"
+import { isFileLinkTracked, isUrlTracked } from "@src/features/versionControl"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import Link from "../../features/router/Link"
 

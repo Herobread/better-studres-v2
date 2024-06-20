@@ -1,6 +1,6 @@
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import Title from "../typography/Title"
-import { extractUrlSegments } from "@src/content/versionControl"
+import { extractUrlSegments } from "@src/features/versionControl"
 
 export default function ModuleHeader() {
     const currentUrl = location.href.toString()

@@ -1,5 +1,5 @@
-import { getFileEmoji } from "../enhancers/fileEmoji/getFileEmoji"
-import { getModuleEmoji } from "../enhancers/moduleEmoji/getModuleEmoji"
+import { getFileEmoji } from "../../content/enhancers/fileEmoji/getFileEmoji"
+import { getModuleEmoji } from "../../content/enhancers/moduleEmoji/getModuleEmoji"
 import { getTrackedFileLinkMap } from "./storage"
 import { extractUrlSegments, BASE_URL } from "./urlSegments"
 

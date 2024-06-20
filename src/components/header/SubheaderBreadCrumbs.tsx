@@ -6,7 +6,7 @@ import {
     BreadcrumbSeparator,
 } from "../ui/breadcrumb"
 import { Fragment } from "react"
-import { extractUrlSegments, BASE_URL } from "@src/content/versionControl/"
+import { extractUrlSegments, BASE_URL } from "@src/features/versionControl"
 
 interface BreadcrumbType {
     name: string
