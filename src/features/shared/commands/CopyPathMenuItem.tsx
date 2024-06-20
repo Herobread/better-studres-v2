@@ -14,7 +14,7 @@ export default function CopyPathMenuItem({ href }: CopyPathMenuItemProps) {
 
         toast({
             title: "✅ Success",
-            description: "Copied file URL to clipboard.",
+            description: "Copied URL to clipboard.",
         })
     }
 
