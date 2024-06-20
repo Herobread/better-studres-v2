@@ -1,4 +1,4 @@
-import Commands from "@src/components/command/Commands"
+import Commands from "@src/features/command/Commands"
 
 export default function CommandsRoot() {
     return (

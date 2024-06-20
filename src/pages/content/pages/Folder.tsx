@@ -1,19 +1,20 @@
-import { useCommand } from "@src/components/command/CommandContext"
-import CommandInput from "@src/components/command/CommandInput"
-import Commands from "@src/components/command/Commands"
-import ModuleHeader from "@src/components/header/ModuleHeader"
-import SubheaderBreadcrumbs from "@src/components/header/SubheaderBreadCrumbs"
+import parse from "html-react-parser"
+import { useCommand } from "@src/features/command/CommandContext"
+import CommandInput from "@src/features/command/CommandInput"
+import Commands from "@src/features/command/Commands"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
-import QuickLinks from "@src/components/quickAccess/QuickLinks"
-import Table from "@src/components/table/Table"
+import { QuickLinks } from "@src/features/quickAccess/"
+import Table from "@src/features/table/Table"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
-import FileMetricsTracker from "@src/components/versionControl/FileMetricsTracker"
-import { FolderContent } from "@src/content/parsers/parser"
-import { ConfigContext } from "@src/contexts/ConfigContext"
-import { PageStateContext } from "@src/contexts/PageStateContext"
+import { FileMetricsTracker } from "@src/features/versionControl"
+import { FolderContent } from "@src/features/parser"
 import { useContext } from "react"
+import { PageStateContext } from "@src/features/router/PageStateContext"
+import { ConfigContext } from "@src/features/config"
+import ModuleHeader from "@src/features/header/ModuleHeader"
+import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
 
 interface FolderProps {
     content: FolderContent
@@ -54,7 +55,7 @@ export default function Folder({ content }: FolderProps) {
                     sortLinks={sortLinks}
                 />
                 {extraContent && !isLoading && (
-                    <div className="prose w-full">{extraContent}</div>
+                    <div className="prose w-full">{parse(extraContent)}</div>
                 )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>

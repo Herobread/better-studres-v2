@@ -1,15 +1,17 @@
-import { useCommand } from "@src/components/command/CommandContext"
-import CommandInput from "@src/components/command/CommandInput"
-import Commands from "@src/components/command/Commands"
+import { useCommand } from "@src/features/command/CommandContext"
+import CommandInput from "@src/features/command/CommandInput"
+import Commands from "@src/features/command/Commands"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
-import QuickLinkCard from "@src/components/quickAccess/QuickLinkCard"
-import QuickLinkContainer from "@src/components/quickAccess/QuickLinkContainer"
-import { getQuickLinks } from "@src/components/quickAccess/QuickLinkManager"
-import Title from "@src/components/typography/Title"
-import { BASE_URL } from "@src/content/versionControl"
-import { ConfigContext } from "@src/contexts/ConfigContext"
+import {
+    getQuickLinks,
+    QuickLinkContainer,
+    QuickLinkCard,
+} from "@src/features/quickAccess"
+import H1 from "@src/components/typography/H1"
+import { ConfigContext } from "@src/features/config"
+import { BASE_URL } from "@src/features/versionControl"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
@@ -61,7 +63,7 @@ export default function NotFound() {
                 <CompactLayout>
                     <div className="flex items-center gap-2">
                         <TriangleAlert />
-                        <Title>Not Found</Title>
+                        <H1>Not Found</H1>
                     </div>
                     <p className="text-muted-foreground">
                         Requested url
