@@ -29,10 +29,10 @@ jobs:
 
             - name: Zip the build folder
               run: |
-                  powershell Compress-Archive -Path dist\* -DestinationPath extension.zip
+                  powershell Compress-Archive -Path dist\* -DestinationPath better-studres.zip
 
             - name: Upload extension artifacts
               uses: actions/upload-artifact@v3
               with:
                   name: better-studres
-                  path: extension.zip
+                  path: better-studres.zip
