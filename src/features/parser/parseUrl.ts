@@ -3,7 +3,7 @@
  * @param {string} url - The URL to parse.
  * @returns {{ [key: string]: string }} An object containing the query parameters as key-value pairs.
  */
-export default function parseUrl(url: string): { [key: string]: string } {
+export function parseUrl(url: string): { [key: string]: string } {
     const queryString = url.split("?")[1]
 
     if (!queryString) {

@@ -3,7 +3,7 @@
  * @param {string} rawFileSize - The raw file size string to parse.
  * @returns {{ size: number, units: string } | undefined} An object containing the size and units, or undefined for folders.
  */
-export default function parseFileSize(rawFileSize: string) {
+export function parseFileSize(rawFileSize: string) {
     // folder
     if (rawFileSize === "  - ") {
         return undefined

@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client"
 import Root from "./Root"
-import { PageData, parsePageContent } from "@src/content/parsers/parser"
+import { PageData, parsePageContent } from "@src/features/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
 import { THEME_STORAGE_KEY } from "@src/contexts/ThemeContext"
@@ -12,7 +12,7 @@ async function initialize() {
         rootContainer.style.overflowY = "scroll" // show scroll bar
 
         const pageData: PageData = parsePageContent(rootContainer)
-        history.replaceState({ ...pageData}, "", location.href.toString())
+        history.replaceState({ ...pageData }, "", location.href.toString())
 
         if (pageData.type === "unknown") {
             throw new Error("unknown page type")

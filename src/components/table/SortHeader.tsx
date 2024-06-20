@@ -1,4 +1,4 @@
-import parseUrl from "@src/content/parsers/parseUrl"
+import { parseUrl } from "@src/features/parser"
 import { cva } from "class-variance-authority"
 import Link from "../../features/router/Link"
 

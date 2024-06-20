@@ -1,4 +1,4 @@
-export const moduleEmojiMap: { [key: string]: string } = {
+export const MODULE_EMOJI_MAP: { [key: string]: string } = {
     CS1002: "💻",
     CS1003: "📊",
     CS1006: "👥",

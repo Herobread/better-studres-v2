@@ -1,5 +1,5 @@
 import { getFileEmojiId } from "./getFileEmojiId"
-import { emojiMap } from "./fileEmojiMap"
+import { EMOJI_MAP } from "./fileEmojiMap"
 
 /**
  * Retrieves the emoji associated with a given filename.
@@ -11,5 +11,5 @@ export function getFileEmoji(filename: string): string {
 
     const emojiId = getFileEmojiId(filename)
 
-    return emojiMap[emojiId] || FALLBACK_EMOJI
+    return EMOJI_MAP[emojiId] || FALLBACK_EMOJI
 }

@@ -1,4 +1,4 @@
-import splitFileName from "../../parsers/splitFileName"
+import { splitFileName } from "@src/features/parser"
 
 export function getFileEmojiId(fileName: string): string {
     // return name as it is

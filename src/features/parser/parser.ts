@@ -1,7 +1,7 @@
 import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { FileLink, SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
-import { parseTable } from "./table/parseTable"
+import { parseTable } from "@src/features/parser"
 import { isRootPage } from "@src/features/router/isRootPage"
 
 export type PageType = "folder" | "not found" | "root" | "unknown"

@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { PageStateContext } from "@src/contexts/PageStateContext"
-import { PageData } from "@src/content/parsers/parser"
+import { PageData } from "@src/features/parser"
 import NotFound from "./pages/NotFound"
 import Folder from "./pages/Folder"
 

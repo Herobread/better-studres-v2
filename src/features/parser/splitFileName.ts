@@ -3,7 +3,7 @@
  * @param {string} filename - The filename to split.
  * @returns {{ name: string, extension: string | undefined }} An object containing the name and extension of the file.
  */
-export default function splitFileName(filename: string) {
+export function splitFileName(filename: string) {
     if (filename === "Parent Directory") {
         return {
             name: "../",

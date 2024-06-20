@@ -1,4 +1,4 @@
-export const emojiMap: { [key: string]: string } = {
+export const EMOJI_MAP: { [key: string]: string } = {
     // special
     "Parent Directory": "🔙",
     "ThinkingInJava/": "🧠",

@@ -1,4 +1,4 @@
-import { moduleEmojiMap } from "./moduleEmojiMap"
+import { MODULE_EMOJI_MAP } from "./moduleEmojiMap"
 
 /**
  * Retrieves the emoji associated with a given module code.
@@ -14,5 +14,5 @@ export function getModuleEmoji(moduleCode: string): string {
 
     moduleCode = moduleCode.replaceAll("/", "")
 
-    return moduleEmojiMap[moduleCode] || FALLBACK_EMOJI
+    return MODULE_EMOJI_MAP[moduleCode] || FALLBACK_EMOJI
 }
