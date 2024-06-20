@@ -9,7 +9,6 @@ import {
 } from "../../components/ui/command"
 import { useCallback, useEffect } from "react"
 import { getQuickLinks } from "../quickAccess/QuickLinkManager"
-import redirect from "@src/lib/redirect"
 import { getModuleEmoji } from "@src/content/enhancers/moduleEmoji/getModuleEmoji"
 import { useCommand } from "./CommandContext"
 import {
@@ -21,6 +20,7 @@ import { getFormattedFilesList } from "@src/features/versionControl/files"
 import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
 import ToggleThemeCommand from "./ToggleThemeCommand"
 import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
+import { redirect } from "@src/features/router/"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()

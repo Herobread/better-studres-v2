@@ -3,7 +3,7 @@
  * @param {string} href - The URL to redirect to.
  * @param {"userClick" | "http"} [type] - The type of redirection. Defaults to "userClick".
  */
-export default function redirect(href: string, type?: "userClick" | "http") {
+export function redirect(href: string, type?: "userClick" | "http") {
     if (!type || type === "userClick") {
         window.location.href = href
         return

@@ -1,7 +1,7 @@
 import { useContext, useCallback } from "react"
 import { PageData, parsePageContent } from "@src/content/parsers/parser"
-import redirect from "@src/lib/redirect"
 import { PageStateContext } from "@src/contexts/PageStateContext"
+import { redirect } from "@src/features/router/"
 
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)

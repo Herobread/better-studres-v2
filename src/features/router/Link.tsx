@@ -4,7 +4,7 @@ import {
     BASE_URL,
     checkIfStringMatchesStringPatterns,
 } from "@src/features/versionControl"
-import redirect from "@src/lib/redirect"
+import { redirect } from "@src/features/router/"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
