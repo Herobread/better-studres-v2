@@ -1,4 +1,4 @@
-import Title from "@src/components/typography/Title"
+import H1 from "@src/components/typography/H1"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/versionControl"
 
@@ -11,5 +11,5 @@ export default function ModuleHeader() {
 
     const moduleEmoji = getModuleEmoji(moduleCode)
 
-    return <Title>{moduleCode + " " + moduleEmoji}</Title>
+    return <H1>{moduleCode + " " + moduleEmoji}</H1>
 }

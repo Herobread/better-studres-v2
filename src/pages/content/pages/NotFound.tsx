@@ -9,7 +9,7 @@ import {
     QuickLinkContainer,
     QuickLinkCard,
 } from "@src/features/quickAccess"
-import Title from "@src/components/typography/Title"
+import H1 from "@src/components/typography/H1"
 import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/versionControl"
 import { QuickLink } from "@src/types/quickLinkTypes"
@@ -63,7 +63,7 @@ export default function NotFound() {
                 <CompactLayout>
                     <div className="flex items-center gap-2">
                         <TriangleAlert />
-                        <Title>Not Found</Title>
+                        <H1>Not Found</H1>
                     </div>
                     <p className="text-muted-foreground">
                         Requested url
