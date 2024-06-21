@@ -54,7 +54,7 @@ async function initialize() {
         }
 
         const root = createRoot(rootContainer)
-        
+
         root.render(
             <Providers>
                 <CommandsRoot />
