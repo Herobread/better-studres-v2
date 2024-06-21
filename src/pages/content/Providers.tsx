@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import "@src/assets/styles/studres-css-reset.css"
 import "@src/assets/styles/shadcn-ui.css"
 import { CommandProvider } from "@src/features/command/CommandContext"
 import { TooltipProvider } from "@src/components/ui/tooltip"

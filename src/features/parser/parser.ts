@@ -46,6 +46,8 @@ export type PageData =
  * @returns {BasePageData} An object containing the parsed page data.
  */
 export function parsePageContent(content: HTMLElement): PageData {
+    content = content.cloneNode(true) as HTMLElement
+
     if (isNotFoundPage(content)) {
         return {
             type: "not found",

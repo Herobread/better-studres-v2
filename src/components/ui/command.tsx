@@ -28,7 +28,7 @@ interface CommandDialogProps extends DialogProps {}
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
     return (
         <Dialog {...props}>
-            <DialogContent className="overflow-hidden p-0 shadow-lg ">
+            <DialogContent className="_tailwind_preflight_reset overflow-hidden p-0 shadow-lg">
                 <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
                     {children}
                 </Command>
@@ -42,7 +42,7 @@ const CommandInput = React.forwardRef<
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
     <div
-        className="flex items-center border-b border-muted px-3"
+        className="_tailwind_preflight_reset flex items-center border-b border-muted px-3"
         // eslint-disable-next-line react/no-unknown-property
         cmdk-input-wrapper=""
     >
@@ -67,7 +67,7 @@ const CommandList = React.forwardRef<
     <CommandPrimitive.List
         ref={ref}
         className={cn(
-            "max-h-[300px] overflow-y-auto overflow-x-hidden",
+            "_tailwind_preflight_reset max-h-[300px] overflow-y-auto overflow-x-hidden",
             className
         )}
         {...props}
@@ -82,7 +82,7 @@ const CommandEmpty = React.forwardRef<
 >((props, ref) => (
     <CommandPrimitive.Empty
         ref={ref}
-        className="py-6 text-center text-sm"
+        className="_tailwind_preflight_reset py-6 text-center text-sm"
         {...props}
     />
 ))
@@ -96,7 +96,7 @@ const CommandGroup = React.forwardRef<
     <CommandPrimitive.Group
         ref={ref}
         className={cn(
-            "overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
+            "_tailwind_preflight_reset overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground",
             className
         )}
         {...props}
@@ -124,7 +124,7 @@ const CommandItem = React.forwardRef<
     <CommandPrimitive.Item
         ref={ref}
         className={cn(
-            "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
+            "_tailwind_preflight_reset relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
             className
         )}
         {...props}
@@ -140,7 +140,7 @@ const CommandShortcut = ({
     return (
         <span
             className={cn(
-                "ml-auto text-xs tracking-widest text-muted-foreground",
+                "_tailwind_preflight_reset ml-auto text-xs tracking-widest text-muted-foreground",
                 className
             )}
             {...props}

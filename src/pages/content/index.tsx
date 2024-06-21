@@ -12,19 +12,22 @@ async function initialize() {
         rootContainer.style.overflowY = "scroll" // show scroll bar
 
         const pageData: PageData = parsePageContent(rootContainer)
-        history.replaceState({ ...pageData }, "", location.href.toString())
 
         if (pageData.type === "unknown") {
             throw new Error("unknown page type")
         }
 
         if (pageData.type === "root") {
+            resetStyles()
+
             throw new Error("root page")
         }
 
         if (!rootContainer) {
             throw new Error("Can't find Options root element")
         }
+
+        history.replaceState({ ...pageData }, "", location.href.toString())
 
         const root = createRoot(rootContainer)
 
@@ -51,7 +54,7 @@ async function initialize() {
         }
 
         const root = createRoot(rootContainer)
-
+        
         root.render(
             <Providers>
                 <CommandsRoot />
@@ -61,3 +64,13 @@ async function initialize() {
 }
 
 initialize()
+
+function resetStyles() {
+    const style = document.createElement("style")
+    style.textContent = `
+        html {
+            font-size: 16px !important;
+        }
+    `
+    document.head.appendChild(style)
+}
