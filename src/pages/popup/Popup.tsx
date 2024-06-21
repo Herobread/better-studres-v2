@@ -24,6 +24,9 @@ import pkg from "@src/../package.json"
 import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
 import { saveConfig } from "@src/features/config/saveConfig"
 import { loadConfig } from "@src/features/config/loadConfig"
+import { Toggle } from "@src/components/ui/toggle"
+import { PowerCircleIcon } from "lucide-react"
+import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
 
 const formSchema = z.object({
     date: z.enum(["full", "relative"]),
@@ -70,7 +73,7 @@ export default function Popup() {
             id="__better_studres_theme_root"
         >
             <div className="flex items-center ">
-                <div className="space-y-1">
+                <div className="w-full space-y-1">
                     <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
                         Better studres
                         <span className="text-sm font-normal text-muted-foreground">
@@ -86,9 +89,7 @@ export default function Popup() {
                         Contribute on GitHub
                     </a>
                 </div>
-                {/* <Toggle>
-                    <PowerCircleIcon />
-                </Toggle> */}
+                <ExtensionToggle />
             </div>
             <Form {...form}>
                 <form
