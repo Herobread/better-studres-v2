@@ -21,5 +21,5 @@ export default function Root({ initialPageData }: RootProps) {
         return <Folder content={pageData.content} />
     }
 
-    throw new Error("unhandled page")
+    location.reload()
 }
