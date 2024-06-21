@@ -80,6 +80,8 @@ export default function Popup() {
                     <a
                         href="https://github.com/Herobread/better-studres-v2"
                         className="text-sm text-muted-foreground"
+                        target="_blank"
+                        rel="noreferrer"
                     >
                         Contribute on GitHub
                     </a>
