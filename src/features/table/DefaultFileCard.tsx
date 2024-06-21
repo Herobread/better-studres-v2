@@ -18,6 +18,8 @@ import {
 } from "../../components/ui/tooltip"
 import Link from "../router/Link"
 import { ConfigContext } from "@src/features/config"
+import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
+import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -43,6 +45,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             emoji,
             isImage,
             isFolder,
+            fullName,
             image,
             lastModified,
         } = fileLink
@@ -136,6 +139,12 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         ) : (
                             <ViewUpdateHistoryContextMenuItem />
                         )}
+                        <CopyPathMenuItem href={href} />
+                        <DownloadFileMenuItem
+                            href={href}
+                            isFolder={isFolder}
+                            fileName={fullName}
+                        />
                         {/* <ContextMenuSub>
                         <ContextMenuSubTrigger>
                             <CopyIcon /> Copy commands

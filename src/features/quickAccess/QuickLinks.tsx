@@ -31,6 +31,7 @@ import {
 import { QuickLinkContainer } from "./QuickLinkContainer"
 import { QuickLinkCard } from "./QuickLinkCard"
 import { generateQuickLinkInfo } from "./generateQuickLinkInfo"
+import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 
 export function QuickLinks() {
     const [isOpen, setIsOpen] = useState(false)
@@ -98,6 +99,7 @@ export function QuickLinks() {
                                 >
                                     <Edit2Icon /> Edit link
                                 </ContextMenuItem>
+                                <CopyPathMenuItem href={quickLink.href} />
                                 <ContextMenuItem
                                     disabled={i == quickLinks.length - 1}
                                     onSelect={async () => {

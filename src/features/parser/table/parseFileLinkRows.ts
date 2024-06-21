@@ -99,7 +99,10 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     const isFolder =
         rawName.endsWith("/") || rawName.includes("Parent Directory")
 
+    const fullName = rawName
+
     return {
+        fullName,
         name,
         isFolder,
         extension,
