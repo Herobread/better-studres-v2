@@ -18,11 +18,8 @@ async function initialize() {
         })
     }
 
-    // Event listener for changes in the storage
     chrome.storage.local.onChanged.addListener((changes) => {
         if (changes[EXTENSION_STATE_STORAGE_KEY]) {
-            const newValue = changes[EXTENSION_STATE_STORAGE_KEY].newValue
-
             location.reload()
         }
     })
