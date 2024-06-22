@@ -13,5 +13,5 @@ export async function getExtensionState() {
 
     const isOn = isOnObject[EXTENSION_STATE_STORAGE_KEY]
 
-    return isOn || true
+    return isOn
 }
