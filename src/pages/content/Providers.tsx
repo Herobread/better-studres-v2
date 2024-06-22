@@ -28,7 +28,7 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
                 >
                     <PageStateContextProvider>
                         <SmoothRouterListener />
-                        <TooltipProvider>
+                        <TooltipProvider delayDuration={0}>
                             <CommandProvider>
                                 <ConfigContextProvider>
                                     {children}
