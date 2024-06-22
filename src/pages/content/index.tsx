@@ -4,8 +4,35 @@ import { PageData, parsePageContent } from "@src/features/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
 import { THEME_STORAGE_KEY } from "@src/features/theme"
+import { EXTENSION_STATE_STORAGE_KEY } from "@src/features/extensionToggle/extensionState"
 
 async function initialize() {
+    const checkInitialState = () => {
+        return new Promise((resolve) => {
+            chrome.storage.local.get(
+                [EXTENSION_STATE_STORAGE_KEY],
+                (result) => {
+                    resolve(result[EXTENSION_STATE_STORAGE_KEY])
+                }
+            )
+        })
+    }
+
+    // Event listener for changes in the storage
+    chrome.storage.local.onChanged.addListener((changes) => {
+        if (changes[EXTENSION_STATE_STORAGE_KEY]) {
+            const newValue = changes[EXTENSION_STATE_STORAGE_KEY].newValue
+
+            location.reload()
+        }
+    })
+
+    const isEnabled = await checkInitialState()
+
+    if (!isEnabled) {
+        return
+    }
+
     try {
         const rootContainer = document.body
 

@@ -24,8 +24,6 @@ import pkg from "@src/../package.json"
 import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
 import { saveConfig } from "@src/features/config/saveConfig"
 import { loadConfig } from "@src/features/config/loadConfig"
-import { Toggle } from "@src/components/ui/toggle"
-import { PowerCircleIcon } from "lucide-react"
 import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
 
 const formSchema = z.object({

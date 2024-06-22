@@ -3,6 +3,11 @@ import { Toggle } from "@src/components/ui/toggle"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { PowerCircleIcon } from "lucide-react"
 import { getExtensionState, setExtensionState } from "./extensionState"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@src/components/ui/tooltip"
 
 const EXTENSION_STATE_QUERY_KEY = "extensionState"
 
@@ -13,7 +18,8 @@ export default function ExtensionToggle() {
         queryFn: getExtensionState,
     })
 
-    const [localExtensionState, setLocalExtensionState] = useState(false)
+    const [localExtensionState, setLocalExtensionState] =
+        useState(extensionState)
 
     useEffect(() => {
         if (extensionState !== undefined) {
@@ -31,16 +37,29 @@ export default function ExtensionToggle() {
     }
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return (
+            <Toggle size={"sm"} disabled>
+                <PowerCircleIcon />
+            </Toggle>
+        )
     }
 
     return (
-        <Toggle
-            size={"sm"}
-            pressed={localExtensionState}
-            onPressedChange={handleClick}
-        >
-            <PowerCircleIcon />
-        </Toggle>
+        <Tooltip>
+            <TooltipTrigger>
+                <Toggle
+                    size={"sm"}
+                    pressed={localExtensionState}
+                    onPressedChange={handleClick}
+                >
+                    <PowerCircleIcon />
+                </Toggle>
+            </TooltipTrigger>
+            <TooltipContent>
+                {localExtensionState
+                    ? "Extension is enabled"
+                    : "Extension is disabled"}
+            </TooltipContent>
+        </Tooltip>
     )
 }
