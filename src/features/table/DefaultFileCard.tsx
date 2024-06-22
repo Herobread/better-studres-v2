@@ -127,7 +127,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                     </ContextMenuTrigger>
                     <ContextMenuContent>
                         {isToolTipWhyDisabledShown ? (
-                            <Tooltip delayDuration={0}>
+                            <Tooltip>
                                 <TooltipTrigger>
                                     <ViewUpdateHistoryContextMenuItem />
                                 </TooltipTrigger>
