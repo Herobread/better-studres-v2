@@ -1,20 +1,15 @@
 import { QuickLink } from "@src/types/quickLinkTypes"
-import Link from "../router/Link"
+import Link, { LinkProps } from "../router/Link"
+import { QuickLinkCardBase } from "./QuickLinkCardBase"
 
-interface QuickLinkCardProps {
+interface QuickLinkCardProps extends LinkProps {
     quickLink: QuickLink
 }
 
-export function QuickLinkCard({ quickLink }: QuickLinkCardProps) {
-    const { href, name, icon } = quickLink
-
+export function QuickLinkCard({ quickLink, ...props }: QuickLinkCardProps) {
     return (
-        <Link
-            href={href}
-            className="flex cursor-pointer gap-2 rounded-xl bg-background-layer-1 px-3 py-1 hover:bg-accent"
-        >
-            <div className="text-base">{icon}</div>
-            <div>{name}</div>
+        <Link href={quickLink.href} {...props}>
+            <QuickLinkCardBase quickLink={quickLink} />
         </Link>
     )
 }

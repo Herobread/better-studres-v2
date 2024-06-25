@@ -7,7 +7,7 @@ import {
 import { redirect } from "@src/features/router/"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     isHard?: boolean
 }
 
@@ -22,7 +22,7 @@ const EXCLUDED_SMOOTH_NAVIGATION_HREF_PATTERNS = [
 ]
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
-    const { href, isHard } = props
+    const { href, isHard, target } = props
 
     const { navigateToPage } = useSmoothRouter()
 
@@ -33,7 +33,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
             return
         }
 
-        if (isHard) {
+        if (isHard || (target && target === "_blank")) {
             redirect(href)
             return
         }

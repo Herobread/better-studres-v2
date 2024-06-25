@@ -3,6 +3,11 @@
  */
 export const BASE_URL = "https://studres.cs.st-andrews.ac.uk/"
 
+export const MMS_BASE_URL = "https://mms.st-andrews.ac.uk/mms/"
+
+export const MY_SAINT_BASE_URL =
+    "https://mysaint.st-andrews.ac.uk/uPortal/f/home/normal/render.uP"
+
 /**
  * Type alias for representing segments of a URL.
  */

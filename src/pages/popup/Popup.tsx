@@ -27,6 +27,12 @@ import { loadConfig } from "@src/features/config/loadConfig"
 import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
 import BlacklistToggle from "@src/features/extensionToggle/BlacklistToggle"
 import "@src/assets/styles/css-reset.css"
+import {
+    ACTIVE_TAB_QUERY_KEY,
+    getActiveTab,
+} from "@src/features/extensionToggle/getActiveTab"
+import { BASE_URL } from "@src/features/versionControl"
+import PopupFallback from "./PopupFallBack"
 
 const formSchema = z.object({
     date: z.enum(["full", "relative"]),
@@ -66,6 +72,16 @@ export default function Popup() {
             reset(config)
         }
     }, [config, reset])
+
+    const { data: activeTab } = useQuery({
+        queryKey: [ACTIVE_TAB_QUERY_KEY],
+        queryFn: getActiveTab,
+    })
+    const url = activeTab?.url
+
+    if (!url?.includes(BASE_URL)) {
+        return <PopupFallback />
+    }
 
     return (
         <body
