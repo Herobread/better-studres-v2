@@ -4,31 +4,34 @@ import { PageData, parsePageContent } from "@src/features/parser"
 import Providers from "./Providers"
 import CommandsRoot from "./CommandsRoot"
 import { THEME_STORAGE_KEY } from "@src/features/theme"
-import { EXTENSION_STATE_STORAGE_KEY } from "@src/features/extensionToggle/extensionState"
+import {
+    EXTENSION_STATE_STORAGE_KEY,
+    getExtensionState,
+} from "@src/features/extensionToggle/extensionState"
+import {
+    BLACK_LIST_STORAGE_KEY,
+    checkIsUrlBlackListed,
+} from "@src/features/extensionToggle/blacklist"
 
 async function initialize() {
-    const checkInitialState = () => {
-        return new Promise((resolve) => {
-            chrome.storage.local.get(
-                [EXTENSION_STATE_STORAGE_KEY],
-                (result) => {
-                    resolve(result[EXTENSION_STATE_STORAGE_KEY])
-                }
-            )
-        })
+    const isUrlBlackListed = await checkIsUrlBlackListed(location.href)
+    if (isUrlBlackListed) {
+        return
+    }
+
+    const isExtensionEnabled = await getExtensionState()
+    if (!isExtensionEnabled) {
+        return
     }
 
     chrome.storage.local.onChanged.addListener((changes) => {
-        if (changes[EXTENSION_STATE_STORAGE_KEY]) {
+        if (
+            changes[EXTENSION_STATE_STORAGE_KEY] ||
+            changes[BLACK_LIST_STORAGE_KEY]
+        ) {
             location.reload()
         }
     })
-
-    const isEnabled = await checkInitialState()
-
-    if (!isEnabled) {
-        return
-    }
 
     try {
         const rootContainer = document.body

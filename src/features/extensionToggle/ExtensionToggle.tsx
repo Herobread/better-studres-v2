@@ -8,6 +8,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@src/components/ui/tooltip"
+import { reload } from "./reload"
 
 const EXTENSION_STATE_QUERY_KEY = "extensionState"
 
@@ -34,6 +35,8 @@ export default function ExtensionToggle() {
         queryClient.invalidateQueries({
             queryKey: [EXTENSION_STATE_QUERY_KEY],
         })
+
+        reload()
     }
 
     if (isLoading) {
