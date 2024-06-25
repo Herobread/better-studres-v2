@@ -26,6 +26,7 @@ import { saveConfig } from "@src/features/config/saveConfig"
 import { loadConfig } from "@src/features/config/loadConfig"
 import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
 import BlacklistToggle from "@src/features/extensionToggle/BlacklistToggle"
+import "@src/assets/styles/css-reset.css"
 
 const formSchema = z.object({
     date: z.enum(["full", "relative"]),
@@ -88,7 +89,7 @@ export default function Popup() {
                         Contribute on GitHub
                     </a>
                 </div>
-                <BlacklistToggle/>
+                <BlacklistToggle />
                 <ExtensionToggle />
             </div>
             <Form {...form}>

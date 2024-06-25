@@ -45,7 +45,7 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
-            resetStyles()
+            resetRootStyles()
 
             throw new Error("root page")
         }
@@ -62,6 +62,8 @@ async function initialize() {
 
         const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
         const theme = themeObject[THEME_STORAGE_KEY]
+
+        resetFolderStyles()
 
         root.render(
             <Providers overrideTheme={theme}>
@@ -92,12 +94,23 @@ async function initialize() {
 
 initialize()
 
-function resetStyles() {
+function resetRootStyles() {
     const style = document.createElement("style")
     style.textContent = `
         html {
             font-size: 16px !important;
         }
+    `
+    document.head.appendChild(style)
+}
+
+function resetFolderStyles() {
+    const style = document.createElement("style")
+    style.textContent = `
+        * {
+        margin: 0;
+        padding: 0;
+    }
     `
     document.head.appendChild(style)
 }
