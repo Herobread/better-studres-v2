@@ -62,7 +62,7 @@ export default function ClearVersionTrackingDataCommand({
     return (
         <CommandItem
             onSelect={handleClearVersionTrackingData}
-            keywords={["reset", "data"]}
+            keywords={["reset", "data", "vcs","version"]}
         >
             🗑️ Clear version tracking data
         </CommandItem>

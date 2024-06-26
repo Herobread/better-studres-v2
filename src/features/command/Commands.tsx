@@ -21,6 +21,7 @@ import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
 import ToggleThemeCommand from "./ToggleThemeCommand"
 import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
 import { redirect } from "@src/features/router/"
+import ClearBlackListCommand from "./ClearBlackListCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -107,6 +108,9 @@ export default function Commands() {
                 <CommandGroup heading="Commands">
                     <ToggleThemeCommand setIsCommandOpen={setOpen} />
                     <ClearVersionTrackingDataCommand
+                        setIsCommandOpen={setOpen}
+                    />
+                    <ClearBlackListCommand 
                         setIsCommandOpen={setOpen}
                     />
                 </CommandGroup>
