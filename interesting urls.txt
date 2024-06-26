@@ -30,3 +30,16 @@ https://studres.cs.st-andrews.ac.uk/CS1007/Exercises/W02/files2/
 
 icons
 https://studres.cs.st-andrews.ac.uk/icons/
+
+page with description
+https://studres.cs.st-andrews.ac.uk/Library/ProjectLibrary/
+
+80 gb file
+https://studres.cs.st-andrews.ac.uk/Library/datasets/CS5052/P1/?C=S;O=D
+
+CS1004
+https://studres.cs.st-andrews.ac.uk/2012_2013/Teaching/Teaching_UG/SubHons/Level_1/CS1004-IP/
+
+CS1005 Computer Science in Everyday Life (CSEL)
+https://studres.cs.st-andrews.ac.uk/2013_2014/Teaching/Teaching_UG/SubHons/Level_1/CS1005-CSEL/
+https://studres.cs.st-andrews.ac.uk/2017_2018/CS1005/

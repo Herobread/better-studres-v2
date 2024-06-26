@@ -55,7 +55,9 @@ export default function Folder({ content }: FolderProps) {
                     sortLinks={sortLinks}
                 />
                 {extraContent && !isLoading && (
-                    <div className="prose w-full">{parse(extraContent)}</div>
+                    <div className="prose w-full dark:prose-invert">
+                        {parse(extraContent)}
+                    </div>
                 )}
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>

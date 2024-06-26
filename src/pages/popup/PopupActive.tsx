@@ -142,7 +142,7 @@ export default function PopupActive() {
                                             Emoji
                                         </SelectItem>
                                         <SelectItem value="pictures">
-                                            Pictures
+                                            Original icons
                                         </SelectItem>
                                     </SelectContent>
                                 </Select>

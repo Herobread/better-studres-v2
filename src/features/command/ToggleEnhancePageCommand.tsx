@@ -11,7 +11,7 @@ export function ToggleEnhancePageCommand() {
             onSelect={handleSelect}
             keywords={["not", "improve", "disable"]}
         >
-            {"📃 Don't enhance this page"}
+            {"📃 Don't enhance this page / Add to blacklist"}
         </CommandItem>
     )
 }
