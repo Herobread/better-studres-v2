@@ -19,10 +19,7 @@ export default function PopupFallback() {
     })
 
     return (
-        <body
-            className="_tailwind_preflight_reset grid h-min gap-4 bg-background p-2 text-base text-foreground"
-            id="__better_studres_theme_root"
-        >
+        <body className="_tailwind_preflight_reset grid h-min gap-4 bg-background p-2 text-base text-foreground">
             <div className="space-y-1">
                 <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
                     Better studres

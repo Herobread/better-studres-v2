@@ -49,7 +49,9 @@ export function ThemeProvider({
     })
 
     useEffect(() => {
-        const root = window.document.documentElement // use documentElement for better compatibility
+        const root = window.document.getElementById(
+            "__better_studres_theme_root"
+        )
 
         if (!root) {
             return
