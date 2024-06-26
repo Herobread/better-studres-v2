@@ -15,8 +15,10 @@ const useSmoothRouter = () => {
 
                 const isBlackListed = await checkIsUrlBlackListed(href)
 
-                if ( isBlackListed) {
+                if (isBlackListed) {
+                    setIsLoading(false)
                     redirect(href)
+                    return
                 }
 
                 let pageData
