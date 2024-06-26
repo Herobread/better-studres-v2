@@ -74,7 +74,7 @@ export default function PopupFallback() {
                     </a>
                 </QuickLinkContainer>
             </CompactLayout>
-            {quickLinks && (
+            {quickLinks && quickLinks?.length > 0 && (
                 <>
                     <CompactLayout>
                         <p>Or your quick links:</p>
