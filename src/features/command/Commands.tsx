@@ -22,6 +22,7 @@ import ToggleThemeCommand from "./ToggleThemeCommand"
 import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
 import { redirect } from "@src/features/router/"
 import ClearBlackListCommand from "./ClearBlackListCommand"
+import { ToggleEnhancePageCommand } from "./ToggleEnhancePageCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
@@ -107,12 +108,11 @@ export default function Commands() {
                 </CommandGroup>
                 <CommandGroup heading="Commands">
                     <ToggleThemeCommand setIsCommandOpen={setOpen} />
+                    <ToggleEnhancePageCommand />
                     <ClearVersionTrackingDataCommand
                         setIsCommandOpen={setOpen}
                     />
-                    <ClearBlackListCommand 
-                        setIsCommandOpen={setOpen}
-                    />
+                    <ClearBlackListCommand setIsCommandOpen={setOpen} />
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
