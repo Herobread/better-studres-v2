@@ -25,11 +25,16 @@ async function initialize() {
     }
 
     chrome.storage.local.onChanged.addListener((changes) => {
-        if (
-            changes[EXTENSION_STATE_STORAGE_KEY] ||
-            changes[BLACK_LIST_STORAGE_KEY]
-        ) {
+        if (changes[EXTENSION_STATE_STORAGE_KEY]) {
             location.reload()
+        }
+
+        if (changes[BLACK_LIST_STORAGE_KEY]) {
+            const blackList = changes[BLACK_LIST_STORAGE_KEY].newValue
+
+            if (blackList.includes(location.href)) {
+                location.reload()
+            }
         }
     })
 

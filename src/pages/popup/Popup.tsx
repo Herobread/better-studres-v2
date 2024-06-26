@@ -5,8 +5,8 @@ import {
     getActiveTab,
 } from "@src/features/extensionToggle/getActiveTab"
 import { BASE_URL } from "@src/features/versionControl"
-import PopupFallback from "./PopupFallBack"
 import PopupActive from "./PopupActive"
+import PopupFallback from "./PopupFallback"
 
 export default function Popup() {
     const { data: activeTab } = useQuery({

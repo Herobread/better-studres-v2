@@ -3,6 +3,7 @@ import { useContext, useCallback } from "react"
 import { redirect } from "@src/features/router/"
 import { PageData, parsePageContent } from "@src/features/parser"
 import { PageStateContext } from "./PageStateContext"
+import { checkIsUrlBlackListed } from "../extensionToggle/blacklist"
 
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
@@ -11,6 +12,12 @@ const useSmoothRouter = () => {
         async (href: string, state?: PageData) => {
             try {
                 setIsLoading(true)
+
+                const isBlackListed = await checkIsUrlBlackListed(href)
+
+                if ( isBlackListed) {
+                    redirect(href)
+                }
 
                 let pageData
                 let title = "Studres"
