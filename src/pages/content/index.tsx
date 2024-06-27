@@ -41,7 +41,6 @@ async function initialize() {
     try {
         const rootContainer = document.body
 
-        rootContainer.style.overflowY = "scroll" // show scroll bar
 
         const pageData: PageData = parsePageContent(rootContainer)
 
@@ -69,6 +68,8 @@ async function initialize() {
         const theme = themeObject[THEME_STORAGE_KEY]
 
         resetFolderStyles()
+
+        rootContainer.style.overflowY = "scroll" // show scroll bar
 
         root.render(
             <Providers overrideTheme={theme}>
