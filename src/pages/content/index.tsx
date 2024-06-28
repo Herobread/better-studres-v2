@@ -41,7 +41,6 @@ async function initialize() {
     try {
         const rootContainer = document.body
 
-
         const pageData: PageData = parsePageContent(rootContainer)
 
         if (pageData.type === "unknown") {
