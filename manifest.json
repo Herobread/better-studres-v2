@@ -23,5 +23,11 @@
             "resources": ["icon-128.png", "icon-32.png"],
             "matches": []
         }
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{944C2CBF-7DB1-4401-93A9-A2484F9DBC36}",
+            "strict_min_version": "109.0"
+        }
+    }
 }
