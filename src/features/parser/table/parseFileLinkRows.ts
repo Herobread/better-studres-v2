@@ -62,7 +62,10 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         }
     })
 
+    // href is full link
     const href = nameDataCellAnchor.href || ""
+    // this might be full link or "/some/path"
+    const hrefAttributeValue = nameDataCellAnchor.getAttribute('href') || ''
 
     const urlSegments = extractUrlSegments(href)
 
@@ -108,6 +111,7 @@ function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
         extension,
         emoji,
         href,
+        hrefAttributeValue,
         urlSegments,
         description,
         space,

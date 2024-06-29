@@ -26,5 +26,6 @@ export interface FileLink {
     }
     description?: string
     href: string
+    hrefAttributeValue: string
     urlSegments: UrlSegments
 }
