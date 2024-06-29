@@ -4,6 +4,7 @@ import { redirect } from "@src/features/router/"
 import { PageData, parsePageContent } from "@src/features/parser"
 import { PageStateContext } from "./PageStateContext"
 import { checkIsUrlBlackListed } from "../extensionToggle/blacklist"
+import { parseDocumentFromText } from "../fileDownload/parseDocumentFromText"
 
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
@@ -29,13 +30,9 @@ const useSmoothRouter = () => {
                 } else {
                     history.pushState(null, "", href)
 
-                    const data = await fetch(href)
-                    const htmlText = await data.text()
-                    const parser = new DOMParser()
-                    const document = parser.parseFromString(
-                        htmlText,
-                        "text/html"
-                    )
+                    const response = await fetch(href)
+                    const htmlText = await response.text()
+                    const document = await parseDocumentFromText(htmlText)
 
                     pageData = parsePageContent(document.body)
                     title = document.title
