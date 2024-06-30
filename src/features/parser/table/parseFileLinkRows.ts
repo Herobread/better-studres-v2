@@ -1,6 +1,6 @@
 import { FileLink, Image } from "@src/types/pageContentTypes"
 
-import { extractUrlSegments } from "@src/features/versionControl"
+import { extractUrlSegments } from "@src/features/files"
 import { splitFileName, parseFileSize } from "@src/features/parser"
 import { getTimeDifferenceString } from "@src/features/contentEnhancers/getTimeDifferenceString"
 import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"

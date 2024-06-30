@@ -1,6 +1,6 @@
 import H1 from "@src/components/typography/H1"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { extractUrlSegments } from "@src/features/versionControl"
+import { extractUrlSegments } from "@src/features/files"
 
 export default function ModuleHeader() {
     const currentUrl = location.href.toString()

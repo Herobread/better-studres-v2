@@ -11,7 +11,7 @@ import {
 } from "@src/features/quickAccess"
 import H1 from "@src/components/typography/H1"
 import { ConfigContext } from "@src/features/config"
-import { BASE_URL } from "@src/features/versionControl"
+import { BASE_URL } from "@src/features/files"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"

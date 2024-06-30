@@ -4,7 +4,7 @@ import {
     ACTIVE_TAB_QUERY_KEY,
     getActiveTab,
 } from "@src/features/extensionToggle/getActiveTab"
-import { BASE_URL } from "@src/features/versionControl"
+import { BASE_URL } from "@src/features/files"
 import PopupActive from "./PopupActive"
 import PopupFallback from "./PopupFallback"
 

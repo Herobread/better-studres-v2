@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import { extractUrlSegments, BASE_URL } from "@src/features/versionControl"
+import { extractUrlSegments, BASE_URL } from "@src/features/files"
 import {
     Breadcrumb,
     BreadcrumbItem,

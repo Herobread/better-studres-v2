@@ -10,7 +10,7 @@ import {
 import { GitCompareArrowsIcon } from "lucide-react"
 import { Dialog, DialogContent } from "../../components/ui/dialog"
 import UpdatesDialog from "./UpdatesDialog"
-import { isFileLinkTracked, isUrlTracked } from "@src/features/versionControl"
+import { isFileLinkTracked, isUrlTracked } from "@src/features/files"
 import {
     Tooltip,
     TooltipContent,

@@ -4,7 +4,7 @@ import {
     generateChangeRecords,
     generateFileLinkKey,
     getTrackedFileLink,
-} from "@src/features/versionControl"
+} from "@src/features/files"
 import { FileLink } from "@src/types/pageContentTypes"
 
 interface UpdatesDialogProps {
