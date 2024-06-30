@@ -1,4 +1,5 @@
 import { FileLink } from "@src/types/pageContentTypes"
+import { getFileData, saveFileData } from "../shared/storage"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
@@ -39,6 +40,8 @@ export function generateFileLinkKey(fileLink: FileLink) {
     return fileLink.urlSegments.join("/")
 }
 
+export const VERSION_CONTROL_FILE_DATA_KEY = "version-control-data"
+
 /**
  * Retrieves a tracked file link by key.
  * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
@@ -47,51 +50,24 @@ export function generateFileLinkKey(fileLink: FileLink) {
 export async function getTrackedFileLink(
     key: string
 ): Promise<TrackedFileLinkData | undefined> {
-    const trackedFileLinkMap = (await getTrackedFileLinkMap()) || {}
-
-    if (key in trackedFileLinkMap) {
-        return trackedFileLinkMap[key]
-    }
-
-    return undefined
-}
-
-/**
- * Retrieves the tracked file link map from storage.
- * @returns {Promise<TrackedFileLinkMap>} A promise that resolves to the tracked file link map.
- */
-export async function getTrackedFileLinkMap(): Promise<TrackedFileLinkMap> {
-    const { trackedFileLinkMap: trackedFileLinkMapString } =
-        await chrome.storage.local.get(TRACKED_FILE_LINK_MAP)
-
-    // await chrome.storage.local.set({ [TRACKED_FILE_LINK_MAP]: {} })
-
-    return trackedFileLinkMapString
-}
-
-export async function setTrackedFileLinkMap(map: TrackedFileLinkMap) {
-    await chrome.storage.local.set({ [TRACKED_FILE_LINK_MAP]: map })
+    return await getFileData(key, VERSION_CONTROL_FILE_DATA_KEY)
 }
 
 /**
  * Saves tracked file link data to storage.
- * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
+ * @param {string} fileKey - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
  * @param {TrackedFileLinkData} trackedFileLinkData - The tracked file link data to save.
  * @returns {Promise<void>} A promise that resolves when the data has been saved.
  */
 export async function saveTrackedFileLinkToStorage(
-    key: string,
+    fileKey: string,
     trackedFileLinkData: TrackedFileLinkData
 ): Promise<void> {
-    const currentData = await getTrackedFileLinkMap()
-
-    const newData = currentData || {}
-
-    newData[key] = trackedFileLinkData
-
-    await chrome.storage.local.set({
-        [TRACKED_FILE_LINK_MAP]: newData,
-    })
+    await saveFileData(
+        fileKey,
+        VERSION_CONTROL_FILE_DATA_KEY,
+        trackedFileLinkData
+    )
 }
 /**
  * Minimizes a file link.
@@ -124,7 +100,9 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
 }
 
 export async function clearVersionTrackingData() {
-    await chrome.storage.local.set({
-        [TRACKED_FILE_LINK_MAP]: {},
-    })
+    throw new Error("Method not implemented")
+
+    // await chrome.storage.local.set({
+    //     [TRACKED_FILE_LINK_MAP]: {},
+    // })
 }
