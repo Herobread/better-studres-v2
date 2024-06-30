@@ -12,6 +12,10 @@ export async function getFileDataMap(): Promise<FileDataMap> {
     return fileData
 }
 
+export async function setFileDataMap(fileDataMap: FileDataMap) {
+    await chrome.storage.local.set({ [FILE_DATA_STORAGE_KEY]: fileDataMap })
+}
+
 /**
  * Saves a property to a specified file in Chrome local storage.
  * @param {string} fileKey - The key representing the file.
