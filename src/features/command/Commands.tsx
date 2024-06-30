@@ -15,8 +15,8 @@ import {
     extractUrlSegments,
     convertUrlSegmentsToUrl,
     BASE_URL,
-} from "@src/features/versionControl"
-import { getFormattedFilesList } from "@src/features/versionControl/files"
+} from "@src/features/files"
+import { getFormattedFilesList } from "@src/features/files"
 import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
 import ToggleThemeCommand from "./ToggleThemeCommand"
 import SaveQuickLinkCommand from "./SaveQuickLinkCommand"

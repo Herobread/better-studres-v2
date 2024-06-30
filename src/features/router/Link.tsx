@@ -3,7 +3,7 @@ import useSmoothRouter from "./useSmoothRouter"
 import {
     BASE_URL,
     checkIfStringMatchesStringPatterns,
-} from "@src/features/versionControl"
+} from "@src/features/files"
 import { redirect } from "@src/features/router/"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
