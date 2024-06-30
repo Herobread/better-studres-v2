@@ -77,7 +77,6 @@ async function initialize() {
         )
     } catch (e) {
         // load only commands then
-        console.log("fallback")
         const div = document.createElement("div")
         div.className = "__better_studres__root _tailwind_preflight_reset"
         document.body.appendChild(div)

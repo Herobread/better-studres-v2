@@ -1,7 +1,7 @@
 import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { getTrackedFileLinkMap } from "./storage"
 import { extractUrlSegments, BASE_URL } from "../shared/urlSegments"
+import { getFileDataMap } from "../shared/storage"
 
 export interface FileLinkPath {
     name: string
@@ -13,7 +13,7 @@ export interface FileLinkPath {
  * @returns {Promise<FileLinkPath[]>} A promise that resolves to an array of file link paths.
  */
 export async function getFormattedFilesList(): Promise<FileLinkPath[]> {
-    const trackedFileLinkMap = await getTrackedFileLinkMap()
+    const trackedFileLinkMap = await getFileDataMap()
     const result: FileLinkPath[] = []
 
     for (const filePath in trackedFileLinkMap) {
