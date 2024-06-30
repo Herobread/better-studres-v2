@@ -15,8 +15,6 @@ import { PageStateContext } from "@src/features/router/PageStateContext"
 import { ConfigContext } from "@src/features/config"
 import ModuleHeader from "@src/features/header/ModuleHeader"
 import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
-import { Button } from "@src/components/ui/button"
-import { fetchFileBlob, fetchFolder, saveFolder } from "@src/features/fileDownload"
 
 interface FolderProps {
     content: FolderContent
@@ -61,14 +59,6 @@ export default function Folder({ content }: FolderProps) {
                         {parse(extraContent)}
                     </div>
                 )}
-                <Button onClick={async () => {
-                    // const fileUrl = 'https://studres.cs.st-andrews.ac.uk/CS1002/Coursework/Assignment2/css/v2-img_header_crest_1413.gif'
-                    // const folderUrl = 'https://studres.cs.st-andrews.ac.uk/CS1002/Coursework/Assignment2/'
-                    // const current = location.href
-                    // const res = await fetchFolder(current)
-                    // console.log(res)
-                    await saveFolder(location.href)
-                }}>Download test files</Button>
                 <FileMetricsTracker fileLinks={fileLinks} />
             </MainLayout>
         </div>
