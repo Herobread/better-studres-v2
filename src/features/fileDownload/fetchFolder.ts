@@ -2,6 +2,7 @@ import { parsePageContent } from "../parser"
 import { parseDocumentFromText } from "./parseDocumentFromText"
 import JSZip from "jszip"
 import { saveAs } from "file-saver"
+import { generateQuickLinkInfo } from "../quickAccess"
 
 export interface FolderContent {
     [key: string]: FolderContent | Blob | undefined
@@ -57,20 +58,27 @@ export async function fetchFolder(
     return result
 }
 
-export async function archiveAndSaveBlobs(folderContent: FolderContent) {
+export async function archiveAndSaveBlobs(
+    folderContent: FolderContent,
+    name?: string
+) {
     const zip = new JSZip()
+
+    name ??= "archive"
+
+    const rootFolder = zip.folder(name)!
 
     for (const [path, blob] of Object.entries(folderContent)) {
         if (blob instanceof Blob) {
-            zip.file(path, blob)
+            rootFolder.file(path, blob)
         } else if (typeof blob === "object") {
-            const folder = zip.folder(path)
+            const folder = rootFolder.folder(path)
             addFolderToZip(folder!, blob)
         }
     }
 
     zip.generateAsync({ type: "blob" }).then((content) => {
-        saveAs(content, "archive.zip")
+        saveAs(content, name + ".zip")
     })
 }
 
@@ -87,5 +95,7 @@ function addFolderToZip(zipFolder: JSZip, folderContent: FolderContent) {
 
 export async function saveFolder(url: string) {
     const folderContent = await fetchFolder(url)
-    await archiveAndSaveBlobs(folderContent)
+    let { name } = generateQuickLinkInfo(url)
+    name = name.replaceAll(" - ", "-").replaceAll(" ", "_")
+    await archiveAndSaveBlobs(folderContent, name)
 }
