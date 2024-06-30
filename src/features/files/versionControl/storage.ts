@@ -1,5 +1,5 @@
 import { FileLink } from "@src/types/pageContentTypes"
-import { getFileData, saveFileData } from "../shared/storage"
+import { getFileData, getFileDataMap, saveFileData } from "../shared/storage"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
@@ -100,7 +100,9 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
 }
 
 export async function clearVersionTrackingData() {
-    throw new Error("Method not implemented")
+    const fileData = await getFileDataMap()
+
+    console.log(fileData)
 
     // await chrome.storage.local.set({
     //     [TRACKED_FILE_LINK_MAP]: {},

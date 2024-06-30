@@ -1,12 +1,13 @@
-export const FILE_DATA_STORAGE_KEY = "file-data"
+import { FILE_DATA_STORAGE_KEY, FileDataMap, FilePropertyKey } from "./types"
 
 /**
  * Retrieves all information about files from Chrome local storage.
  * @returns {Promise<Object>} A promise that resolves to an object containing file data.
  */
-export async function getFileDataMap() {
+export async function getFileDataMap(): Promise<FileDataMap> {
     const fileDataObject = await chrome.storage.local.get(FILE_DATA_STORAGE_KEY)
-    const fileData = fileDataObject[FILE_DATA_STORAGE_KEY] || {}
+    const fileData =
+        (fileDataObject[FILE_DATA_STORAGE_KEY] as FileDataMap) || {}
 
     return fileData
 }
@@ -20,7 +21,7 @@ export async function getFileDataMap() {
  */
 export async function saveFileData(
     fileKey: string,
-    filePropertyKey: string,
+    filePropertyKey: FilePropertyKey,
     fileProperty: any
 ): Promise<void> {
     let fileData = await getFileDataMap()
@@ -42,7 +43,7 @@ export async function saveFileData(
  */
 export async function getFileData(
     fileKey: string,
-    filePropertyKey?: string
+    filePropertyKey?: FilePropertyKey
 ): Promise<any | null> {
     let fileData = await getFileDataMap()
 
