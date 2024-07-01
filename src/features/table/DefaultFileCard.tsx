@@ -1,25 +1,25 @@
-import React, { forwardRef, useContext, useState } from "react"
-import { Separator } from "../../components/ui/separator"
+import { ConfigContext } from "@src/features/config"
+import { isFileLinkTracked, isUrlTracked } from "@src/features/files"
 import { FileLink } from "@src/types/pageContentTypes"
+import React, { forwardRef, useContext, useState } from "react"
 import {
     ContextMenu,
     ContextMenuContent,
-    ContextMenuItem,
     ContextMenuTrigger,
 } from "../../components/ui/context-menu"
-import { GitCompareArrowsIcon } from "lucide-react"
-import { Dialog, DialogContent } from "../../components/ui/dialog"
-import UpdatesDialog from "./UpdatesDialog"
-import { isFileLinkTracked, isUrlTracked } from "@src/features/files"
+import { Separator } from "../../components/ui/separator"
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from "../../components/ui/tooltip"
 import Link from "../router/Link"
-import { ConfigContext } from "@src/features/config"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
+import { TagFileMenuContextItem } from "./contextMenuItems/TagFileMenuContextItem"
+import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuItem"
+import { TagFileMenuDialog } from "./dialogs/TagFileMenuDialog"
+import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -34,6 +34,8 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
         const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
             useState(false)
+
+        const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
 
         const {
             description,
@@ -52,19 +54,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
         const isVersionHistoryAvailable = isFileLinkTracked(fileLink)
         const isToolTipWhyDisabledShown = !isUrlTracked(fileLink.href)
-
-        const ViewUpdateHistoryContextMenuItem = () => {
-            return (
-                <ContextMenuItem
-                    onSelect={() => {
-                        setIsViewUpdatesDialogOpen(true)
-                    }}
-                    disabled={!isVersionHistoryAvailable}
-                >
-                    <GitCompareArrowsIcon /> View update history
-                </ContextMenuItem>
-            )
-        }
 
         const isLongExtensionName = extension && extension?.length > 4
 
@@ -129,7 +118,14 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         {isToolTipWhyDisabledShown ? (
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <ViewUpdateHistoryContextMenuItem />
+                                    <UpdatesContextMenuItem
+                                        isVersionHistoryAvailable={
+                                            isVersionHistoryAvailable
+                                        }
+                                        setIsViewUpdatesDialogOpen={
+                                            setIsViewUpdatesDialogOpen
+                                        }
+                                    />
                                 </TooltipTrigger>
                                 <TooltipContent>
                                     Version tracking is disabled for archived
@@ -137,7 +133,14 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                 </TooltipContent>
                             </Tooltip>
                         ) : (
-                            <ViewUpdateHistoryContextMenuItem />
+                            <UpdatesContextMenuItem
+                                isVersionHistoryAvailable={
+                                    isVersionHistoryAvailable
+                                }
+                                setIsViewUpdatesDialogOpen={
+                                    setIsViewUpdatesDialogOpen
+                                }
+                            />
                         )}
                         <CopyPathMenuItem href={href} />
                         <DownloadFileMenuItem
@@ -145,33 +148,22 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             isFolder={isFolder}
                             fileName={fullName}
                         />
-                        {/* <ContextMenuSub>
-                        <ContextMenuSubTrigger>
-                            <CopyIcon /> Copy commands
-                        </ContextMenuSubTrigger>
-                        <ContextMenuSubContent>
-                            <ContextMenuItem>
-                                <FolderIcon /> cd to file
-                            </ContextMenuItem>
-                            <ContextMenuItem>
-                                <CloudDownloadIcon /> SSH download
-                            </ContextMenuItem>
-                            <ContextMenuItem>
-                                <DownloadIcon /> Copy local
-                            </ContextMenuItem>
-                        </ContextMenuSubContent>
-                    </ContextMenuSub> */}
+                        <TagFileMenuContextItem
+                            setIsTagMenuOpen={setIsTagMenuOpen}
+                            fileLink={fileLink}
+                        />
                     </ContextMenuContent>
                 </ContextMenu>
 
-                <Dialog
+                <UpdatesDialog
+                    fileLink={fileLink}
                     open={isViewUpdatesDialogOpen}
                     onOpenChange={setIsViewUpdatesDialogOpen}
-                >
-                    <DialogContent>
-                        <UpdatesDialog fileLink={fileLink} />
-                    </DialogContent>
-                </Dialog>
+                />
+                <TagFileMenuDialog
+                    open={isTagMenuOpen}
+                    onOpenChange={setIsTagMenuOpen}
+                />
             </>
         )
     }
