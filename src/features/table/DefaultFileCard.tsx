@@ -5,6 +5,7 @@ import React, { forwardRef, useContext, useState } from "react"
 import {
     ContextMenu,
     ContextMenuContent,
+    ContextMenuSeparator,
     ContextMenuTrigger,
 } from "../../components/ui/context-menu"
 import { Separator } from "../../components/ui/separator"
@@ -148,6 +149,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             isFolder={isFolder}
                             fileName={fullName}
                         />
+                        <ContextMenuSeparator />
                         <TagFileMenuContextItem
                             setIsTagMenuOpen={setIsTagMenuOpen}
                             fileLink={fileLink}
@@ -161,6 +163,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                     onOpenChange={setIsViewUpdatesDialogOpen}
                 />
                 <TagFileMenuDialog
+                    fileLink={fileLink}
                     open={isTagMenuOpen}
                     onOpenChange={setIsTagMenuOpen}
                 />
