@@ -1,6 +1,4 @@
-import { Tooltip } from "@radix-ui/react-tooltip"
 import { ContextMenuItem } from "@src/components/ui/context-menu"
-import { TooltipContent, TooltipTrigger } from "@src/components/ui/tooltip"
 import { useToast } from "@src/components/ui/use-toast"
 import { saveFolder } from "@src/features/fileDownload"
 import { generateQuickLinkInfo } from "@src/features/quickAccess"
@@ -21,7 +19,7 @@ export default function DownloadFileMenuItem({
     const { toast } = useToast()
 
     const handleFolderDownload = async () => {
-        const { icon, name } = generateQuickLinkInfo(href)
+        const { name } = generateQuickLinkInfo(href)
         toast({
             title: "📥 Downloading",
             description: "Fetching and archiving files.",
