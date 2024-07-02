@@ -117,7 +117,18 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                         {name}
                                         {isLongExtensionName && "." + extension}
                                     </span>
-                                    {tags && <Badge>{tags[0].name}</Badge>}
+                                    {tags &&
+                                        tags?.length > 0 &&
+                                        tags.map((tag) => {
+                                            return (
+                                                <Badge
+                                                    key={tag.id}
+                                                    variant={"secondary"}
+                                                >
+                                                    {tag.name}
+                                                </Badge>
+                                            )
+                                        })}
                                 </div>
                                 {description != null && (
                                     <div className="italic">{description}</div>
@@ -170,6 +181,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         />
                         <ContextMenuSeparator />
                         <TagFileMenuContextItem
+                            fileTags={tags}
                             setIsTagMenuOpen={setIsTagMenuOpen}
                             fileLink={fileLink}
                         />
