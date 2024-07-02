@@ -49,6 +49,11 @@ export function generateFileLinkKey(fileLink: FileLink) {
 export const VERSION_CONTROL_FILE_DATA_KEY = "version-control-data"
 
 /**
+ * add fileLink.href to the key to create full key
+ */
+export const GET_TRACKED_FILE_LINK_QUERY_KEY_BASE = "fileLink"
+
+/**
  * Retrieves a tracked file link by key.
  * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
  * @returns {Promise<TrackedFileLinkData>} A promise that resolves to the tracked file link data.
