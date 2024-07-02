@@ -41,10 +41,64 @@ export async function getTags() {
 
 export const TAGS_FILE_DATA_KEY = "tags"
 
+export async function setTags(fileKey: string, tags: Tag[]) {
+    await saveFileData(fileKey, TAGS_FILE_DATA_KEY, tags)
+}
+
+export async function compareTags(tag1: Tag, tag2: Tag, compareId?: boolean) {
+    const isDataEqual = tag1.icon === tag2.icon && tag1.name === tag2.name
+
+    return compareId ? isDataEqual && tag1.id === tag2.id : isDataEqual
+}
+
 export async function addTag(fileKey: string, tag: Tag) {
-    await saveFileData(fileKey, TAGS_FILE_DATA_KEY, [tag])
+    const tags = await getFileTags(fileKey)
+
+    if (!tags) {
+        await saveFileData(fileKey, TAGS_FILE_DATA_KEY, [tag])
+        return
+    }
+
+    tags?.push(tag)
+
+    await saveFileData(fileKey, TAGS_FILE_DATA_KEY, tags)
 }
 
 export async function getFileTags(fileKey: string) {
-    return (await getFileData(fileKey, TAGS_FILE_DATA_KEY)) as Tag[]
+    return (await getFileData(fileKey, TAGS_FILE_DATA_KEY)) as Tag[] | undefined
+}
+
+export async function removeFileTag(fileKey: string, tagId: number) {
+    const tags = await getFileTags(fileKey)
+
+    if (!tags) {
+        return
+    }
+
+    const filteredTags = tags.filter((tag) => {
+        return tag.id !== tagId
+    })
+
+    await setTags(fileKey, filteredTags)
+}
+
+export async function toggleFileTag(fileKey: string, tag: Tag) {
+    const tags = await getFileTags(fileKey)
+
+    console.log(tags)
+
+    if (!tags) {
+        await addTag(fileKey, tag)
+        return
+    }
+
+    const isDupe = !!tags.find((tag_) => {
+        return tag_.id === tag.id
+    })
+
+    if (isDupe) {
+        await removeFileTag(fileKey, tag.id)
+    }
+
+    await addTag(fileKey, tag)
 }
