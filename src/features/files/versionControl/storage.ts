@@ -5,7 +5,7 @@ import {
     saveFileData,
     setFileDataMap,
 } from "../shared/storage"
-import { FILE_DATA_STORAGE_KEY } from "../shared/types"
+import { VERSION_CONTROL_FILE_DATA_KEY } from "../shared/types"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
@@ -116,8 +116,8 @@ export async function clearVersionTrackingData() {
     for (const fileKey in fileDataMap) {
         const fileData = fileDataMap[fileKey]
 
-        if (fileData[FILE_DATA_STORAGE_KEY]) {
-            delete fileData[FILE_DATA_STORAGE_KEY]
+        if (fileData[VERSION_CONTROL_FILE_DATA_KEY]) {
+            delete fileData[VERSION_CONTROL_FILE_DATA_KEY]
         }
     }
 
