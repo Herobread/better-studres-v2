@@ -17,8 +17,8 @@ import {
 import Link from "../router/Link"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
-import { TagFileMenuContextItem } from "./contextMenuItems/TagFileMenuContextItem"
 import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuItem"
+import { TagFileMenuContextItem } from "./contextMenuItems/tags/TagFileMenuContextItem"
 import { TagFileMenuDialog } from "./dialogs/TagFileMenuDialog"
 import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
 
@@ -33,6 +33,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         const { fileIcons, date, imagePreviewAsIcon } =
             useContext(ConfigContext)
 
+        const [isContextMenuOpen, setIsContextMenuOpen] = useState(false)
         const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
             useState(false)
 
@@ -60,7 +61,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
         return (
             <>
-                <ContextMenu>
+                <ContextMenu onOpenChange={setIsContextMenuOpen}>
                     <ContextMenuTrigger asChild>
                         <Link
                             isHard={!isFolder}
