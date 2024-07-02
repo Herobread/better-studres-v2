@@ -1,6 +1,12 @@
+import { Badge } from "@src/components/ui/badge"
 import { ConfigContext } from "@src/features/config"
-import { isFileLinkTracked, isUrlTracked } from "@src/features/files"
+import {
+    generateFileLinkKey,
+    isFileLinkTracked,
+    isUrlTracked,
+} from "@src/features/files"
 import { FileLink } from "@src/types/pageContentTypes"
+import { useQuery } from "@tanstack/react-query"
 import React, { forwardRef, useContext, useState } from "react"
 import {
     ContextMenu,
@@ -14,6 +20,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "../../components/ui/tooltip"
+import { TAGS_QUERY_KEY, getFileTags } from "../files/tags/storage"
 import Link from "../router/Link"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
@@ -33,7 +40,15 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         const { fileIcons, date, imagePreviewAsIcon } =
             useContext(ConfigContext)
 
-        const [isContextMenuOpen, setIsContextMenuOpen] = useState(false)
+        const fileKey = generateFileLinkKey(fileLink)
+
+        const { data: tags } = useQuery({
+            queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
+            queryFn: async () => {
+                return await getFileTags(fileKey)
+            },
+        })
+
         const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
             useState(false)
 
@@ -61,7 +76,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
         return (
             <>
-                <ContextMenu onOpenChange={setIsContextMenuOpen}>
+                <ContextMenu>
                     <ContextMenuTrigger asChild>
                         <Link
                             isHard={!isFolder}
@@ -97,9 +112,12 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             </div>
                             <Separator orientation="vertical" />
                             <div className="grid items-center">
-                                <div className="font-bold">
-                                    {name}
-                                    {isLongExtensionName && "." + extension}
+                                <div className="space-x-2">
+                                    <span className="font-bold">
+                                        {name}
+                                        {isLongExtensionName && "." + extension}
+                                    </span>
+                                    {tags && <Badge>{tags[0].name}</Badge>}
                                 </div>
                                 {description != null && (
                                     <div className="italic">{description}</div>
