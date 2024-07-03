@@ -29,6 +29,7 @@ import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuIte
 import { TagFileMenuContextItem } from "./contextMenuItems/tags/TagFileMenuContextItem"
 import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
 import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
+import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
@@ -54,6 +55,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             useState(false)
 
         const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
+        const [isManageTagsMenuOpen, setIsManageTagsMenuOpen] = useState(false)
 
         const {
             description,
@@ -200,6 +202,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             fileTags={tags}
                             setIsTagMenuOpen={setIsTagMenuOpen}
                             fileLink={fileLink}
+                            setIsManageTagsMenuOpen={setIsManageTagsMenuOpen}
                         />
                     </ContextMenuContent>
                 </ContextMenu>
@@ -213,6 +216,10 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                     fileLink={fileLink}
                     open={isTagMenuOpen}
                     onOpenChange={setIsTagMenuOpen}
+                />
+                <ManageTagsDialog
+                    open={isManageTagsMenuOpen}
+                    onOpenChange={setIsManageTagsMenuOpen}
                 />
             </>
         )

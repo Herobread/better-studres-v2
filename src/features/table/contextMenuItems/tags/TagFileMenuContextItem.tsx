@@ -15,16 +15,18 @@ import {
 } from "@src/features/files/tags/storage"
 import { FileLink } from "@src/types/pageContentTypes"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { CirclePlusIcon, TagsIcon } from "lucide-react"
+import { TagsIcon } from "lucide-react"
 
 interface TagFileMenuContextItemProps {
     setIsTagMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setIsManageTagsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
     fileLink: FileLink
     fileTags: Tag[] | undefined
 }
 
 export function TagFileMenuContextItem({
     setIsTagMenuOpen,
+    setIsManageTagsMenuOpen,
     fileLink,
     fileTags,
 }: TagFileMenuContextItemProps) {
@@ -64,9 +66,13 @@ export function TagFileMenuContextItem({
     //     )
     // }
 
+    const handleManageTags = () => {
+        setIsManageTagsMenuOpen(true)
+    }
+
     const handleCreateNewTag = () => {
         setIsTagMenuOpen(true)
-        queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
+        // queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
     }
 
     return (
@@ -105,10 +111,10 @@ export function TagFileMenuContextItem({
                         )
                     })}
                 <ContextMenuSeparator />
-                <ContextMenuItem onSelect={handleCreateNewTag}>
-                    <CirclePlusIcon /> new tag
+                <ContextMenuItem inset onSelect={handleCreateNewTag}>
+                    new tag
                 </ContextMenuItem>
-                <ContextMenuItem inset disabled onSelect={() => {}}>
+                <ContextMenuItem inset onSelect={handleManageTags}>
                     manage tags
                 </ContextMenuItem>
             </ContextMenuSubContent>
