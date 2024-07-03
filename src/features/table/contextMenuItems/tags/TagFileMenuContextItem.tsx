@@ -80,7 +80,14 @@ export function TagFileMenuContextItem({
             <ContextMenuSubTrigger>
                 <TagsIcon /> Tags
             </ContextMenuSubTrigger>
-            <ContextMenuSubContent>
+            <ContextMenuSubContent className="max-h-[300px] w-48 overflow-auto">
+                <ContextMenuItem inset onSelect={handleCreateNewTag}>
+                    Create new tag
+                </ContextMenuItem>
+                <ContextMenuItem inset onSelect={handleManageTags}>
+                    Manage tags
+                </ContextMenuItem>
+                <ContextMenuSeparator />
                 {allTags &&
                     allTags.map((tag) => {
                         const isChecked = !!fileTags?.find((tag_) => {
@@ -110,13 +117,6 @@ export function TagFileMenuContextItem({
                             </ContextMenuCheckboxItem>
                         )
                     })}
-                <ContextMenuSeparator />
-                <ContextMenuItem inset onSelect={handleCreateNewTag}>
-                    new tag
-                </ContextMenuItem>
-                <ContextMenuItem inset onSelect={handleManageTags}>
-                    manage tags
-                </ContextMenuItem>
             </ContextMenuSubContent>
         </ContextMenuSub>
     )
