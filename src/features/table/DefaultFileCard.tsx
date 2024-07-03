@@ -11,6 +11,7 @@ import React, { forwardRef, useContext, useState } from "react"
 import {
     ContextMenu,
     ContextMenuContent,
+    ContextMenuLabel,
     ContextMenuSeparator,
     ContextMenuTrigger,
 } from "../../components/ui/context-menu"
@@ -26,7 +27,7 @@ import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
 import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuItem"
 import { TagFileMenuContextItem } from "./contextMenuItems/tags/TagFileMenuContextItem"
-import { TagFileMenuDialog } from "./dialogs/TagFileMenuDialog"
+import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
 import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
 
 export interface DefaultFileCardProps {
@@ -146,6 +147,21 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                         </Link>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
+                        <ContextMenuLabel>
+                            <div className="flex gap-1">
+                                <p>{fullName}</p>
+                                {space && (
+                                    <span className="text-muted-foreground">
+                                        {space?.size}
+                                        {space?.units}
+                                    </span>
+                                )}
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                {fileKey}
+                            </p>
+                        </ContextMenuLabel>
+                        <ContextMenuSeparator />
                         {isToolTipWhyDisabledShown ? (
                             <Tooltip>
                                 <TooltipTrigger>

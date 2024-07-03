@@ -1,4 +1,5 @@
 import {
+    ContextMenuCheckboxItem,
     ContextMenuItem,
     ContextMenuSeparator,
     ContextMenuSub,
@@ -14,8 +15,7 @@ import {
 } from "@src/features/files/tags/storage"
 import { FileLink } from "@src/types/pageContentTypes"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { TagsIcon } from "lucide-react"
-import { TagContextMenuCheckboxItem } from "./TagContextMenuCheckboxItem"
+import { CirclePlusIcon, TagsIcon } from "lucide-react"
 
 interface TagFileMenuContextItemProps {
     setIsTagMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -81,10 +81,11 @@ export function TagFileMenuContextItem({
                             return tag_.id === tag.id
                         })
 
-                        const { icon, id, name } = tag
+                        const { id, name } = tag
 
                         const handleToggleTag = async () => {
                             await toggleFileTag(fileKey, tag)
+
                             queryClient.invalidateQueries({
                                 queryKey: [TAGS_QUERY_KEY],
                             })
@@ -94,18 +95,18 @@ export function TagFileMenuContextItem({
                         }
 
                         return (
-                            <TagContextMenuCheckboxItem
+                            <ContextMenuCheckboxItem
                                 checked={isChecked}
                                 onSelect={handleToggleTag}
                                 key={id}
-                                icon={icon}
-                                name={name}
-                            />
+                            >
+                                {name}
+                            </ContextMenuCheckboxItem>
                         )
                     })}
                 <ContextMenuSeparator />
-                <ContextMenuItem inset onSelect={handleCreateNewTag}>
-                    new tag
+                <ContextMenuItem onSelect={handleCreateNewTag}>
+                    <CirclePlusIcon /> new tag
                 </ContextMenuItem>
                 <ContextMenuItem inset disabled onSelect={() => {}}>
                     manage tags
