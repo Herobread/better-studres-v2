@@ -2,19 +2,16 @@ import { getFileData, saveFileData } from "../shared/storage"
 
 export interface Tag {
     id: number
-    icon: string
     name: string
 }
 
 export const TAGS_QUERY_KEY = "tags"
 export const TAGS_STORAGE_KEY = "tags"
 
-export async function createTag(icon: string, name: string) {
+export async function createTag(name: string) {
     const tags = await getTags()
 
-    const isDuplicateTag = tags.find(
-        (someTag) => someTag.icon === icon && someTag.name === name
-    )
+    const isDuplicateTag = tags.find((someTag) => someTag.name === name)
 
     if (isDuplicateTag) {
         throw new Error("Tag already exists.")
@@ -23,7 +20,7 @@ export async function createTag(icon: string, name: string) {
     const now = new Date()
     const id = now.getTime()
 
-    const tag: Tag = { id, icon, name }
+    const tag: Tag = { id, name }
 
     tags.push(tag)
 
@@ -46,7 +43,7 @@ export async function setTags(fileKey: string, tags: Tag[]) {
 }
 
 export async function compareTags(tag1: Tag, tag2: Tag, compareId?: boolean) {
-    const isDataEqual = tag1.icon === tag2.icon && tag1.name === tag2.name
+    const isDataEqual = tag1.name === tag2.name
 
     return compareId ? isDataEqual && tag1.id === tag2.id : isDataEqual
 }
@@ -85,8 +82,6 @@ export async function removeFileTag(fileKey: string, tagId: number) {
 export async function toggleFileTag(fileKey: string, tag: Tag) {
     const tags = await getFileTags(fileKey)
 
-    console.log(tags)
-
     if (!tags) {
         await addTag(fileKey, tag)
         return
@@ -98,6 +93,7 @@ export async function toggleFileTag(fileKey: string, tag: Tag) {
 
     if (isDupe) {
         await removeFileTag(fileKey, tag.id)
+        return
     }
 
     await addTag(fileKey, tag)
