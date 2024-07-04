@@ -1,7 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import H2 from "@src/components/typography/H2"
 import { Button } from "@src/components/ui/button"
-import { Dialog, DialogContent, DialogTitle } from "@src/components/ui/dialog"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@src/components/ui/dialog"
 import {
     Form,
     FormControl,
@@ -23,9 +28,9 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 interface TagFileMenuDialogProps {
+    fileLink: FileLink
     open: boolean
     onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
-    fileLink: FileLink
 }
 
 const formSchema = z.object({
@@ -38,7 +43,7 @@ export function TagFileMenuDialog({
     fileLink,
 }: TagFileMenuDialogProps) {
     const { fullName } = fileLink
-
+    console.log("rerender triggered")
     const queryClient = useQueryClient()
 
     const fileKey = generateFileLinkKey(fileLink)
@@ -65,40 +70,40 @@ export function TagFileMenuDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent>
-                <DialogTitle>Add new tag</DialogTitle>
-                <DialogContent>
-                    <H2>Add new tag to {`"${fullName}"`}</H2>
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(onSubmit)}
-                            className="space-y-3"
-                        >
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => {
-                                    return (
-                                        <FormItem>
-                                            <FormLabel>Tag name</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    autoComplete="off"
-                                                    placeholder="name"
-                                                    {...field}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )
-                                }}
-                            />
-                            <div className="flex justify-end">
-                                <Button type="submit">Add</Button>
-                            </div>
-                        </form>
-                    </Form>
-                </DialogContent>
+            <DialogContent aria-describedby="dialog-description">
+                <DialogHeader>
+                    <DialogTitle>Create New Tag</DialogTitle>
+                    <DialogDescription id="dialog-description">
+                        Enter a tag name to add a new tag to {`"${fullName}"`}.
+                    </DialogDescription>
+                </DialogHeader>
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-3"
+                    >
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Tag Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            autoComplete="off"
+                                            placeholder="e.g., important, todo, c++"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <div className="flex justify-end">
+                            <Button type="submit">Add Tag</Button>
+                        </div>
+                    </form>
+                </Form>
             </DialogContent>
         </Dialog>
     )
