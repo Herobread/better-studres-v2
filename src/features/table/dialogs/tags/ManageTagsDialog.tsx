@@ -33,7 +33,7 @@ export function ManageTagsDialog({
                         return (
                             <>
                                 <div
-                                    className="grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2"
+                                    className="grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2 group"
                                     key={id}
                                 >
                                     <div>
@@ -42,7 +42,7 @@ export function ManageTagsDialog({
                                     <p className="text-muted-foreground">
                                         ? files
                                     </p>
-                                    <div className="flex justify-end gap-1">
+                                    <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100">
                                         <Button variant={"ghost"}>
                                             <EditIcon size={20} />
                                         </Button>
