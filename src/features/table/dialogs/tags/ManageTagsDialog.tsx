@@ -1,4 +1,3 @@
-import { Badge } from "@src/components/ui/badge"
 import { Button } from "@src/components/ui/button"
 import {
     Dialog,
@@ -15,7 +14,8 @@ import {
 } from "@src/features/files/tags/stats"
 import { TAGS_QUERY_KEY, getTags } from "@src/features/files/tags/storage"
 import { useQuery } from "@tanstack/react-query"
-import { EditIcon, Trash2Icon } from "lucide-react"
+import { Fragment } from "react/jsx-runtime"
+import { ManageTagCard } from "./ManageTagCard"
 
 interface ManageTagsDialogProps {
     open: boolean
@@ -47,35 +47,16 @@ export function ManageTagsDialog({
                 </DialogHeader>
                 <ScrollArea className="max-h-96">
                     {tags?.map((tag, i) => {
-                        const { id, name } = tag
+                        const { id } = tag
 
                         return (
-                            <>
-                                <div
-                                    className="group grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2 pr-[10px]"
-                                    key={id}
-                                >
-                                    <div>
-                                        <Badge>{name}</Badge>
-                                    </div>
-                                    <p className="text-muted-foreground">
-                                        {stats ? stats[id] || 0 : "0"} file
-                                        {stats && stats[id] > 1 && "s"}
-                                    </p>
-                                    <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100">
-                                        <Button variant={"ghost"} size={"icon"}>
-                                            <EditIcon size={20} />
-                                        </Button>
-                                        <Button
-                                            variant={"destructiveGhost"}
-                                            size={"icon"}
-                                        >
-                                            <Trash2Icon size={20} />
-                                        </Button>
-                                    </div>
-                                </div>
+                            <Fragment key={id}>
+                                <ManageTagCard
+                                    tag={tag}
+                                    files={stats && stats[id]}
+                                />
                                 {i < tags.length - 1 && <Separator />}
-                            </>
+                            </Fragment>
                         )
                     })}
                 </ScrollArea>
