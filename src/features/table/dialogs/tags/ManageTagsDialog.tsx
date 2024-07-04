@@ -42,7 +42,7 @@ export function ManageTagsDialog({
                         return (
                             <>
                                 <div
-                                    className="group grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2"
+                                    className="group grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2 pr-[10px]"
                                     key={id}
                                 >
                                     <div>
@@ -53,10 +53,13 @@ export function ManageTagsDialog({
                                         {stats && stats[id] > 1 && "s"}
                                     </p>
                                     <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100">
-                                        <Button variant={"ghost"}>
+                                        <Button variant={"ghost"} size={"icon"}>
                                             <EditIcon size={20} />
                                         </Button>
-                                        <Button variant={"destructiveGhost"}>
+                                        <Button
+                                            variant={"destructiveGhost"}
+                                            size={"icon"}
+                                        >
                                             <Trash2Icon size={20} />
                                         </Button>
                                     </div>
