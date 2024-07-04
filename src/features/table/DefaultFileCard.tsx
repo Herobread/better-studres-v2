@@ -27,18 +27,22 @@ import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
 import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuItem"
 import { TagFileMenuContextItem } from "./contextMenuItems/tags/TagFileMenuContextItem"
-import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
 import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
-import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
+import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
 
 export interface DefaultFileCardProps {
     fileLink: FileLink
     children?: React.ReactNode
+    isManageTagsMenuOpen: boolean
+    setIsManageTagsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
     [key: string]: unknown
 }
 
 const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
-    ({ fileLink, ...props }, ref) => {
+    (
+        { fileLink, isManageTagsMenuOpen, setIsManageTagsMenuOpen, ...props },
+        ref
+    ) => {
         const { fileIcons, date, imagePreviewAsIcon } =
             useContext(ConfigContext)
 
@@ -55,7 +59,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             useState(false)
 
         const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
-        const [isManageTagsMenuOpen, setIsManageTagsMenuOpen] = useState(false)
 
         const {
             description,
@@ -216,10 +219,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                     fileLink={fileLink}
                     open={isTagMenuOpen}
                     onOpenChange={setIsTagMenuOpen}
-                />
-                <ManageTagsDialog
-                    open={isManageTagsMenuOpen}
-                    onOpenChange={setIsManageTagsMenuOpen}
                 />
             </>
         )

@@ -1,8 +1,9 @@
 import { FileLink, SortLinks } from "@src/types/pageContentTypes"
+import { useEffect, useState } from "react"
 import FileCard from "./FileCard"
 import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
-import { useEffect, useState } from "react"
+import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 
 interface TableProps {
     fileLinks: FileLink[]
@@ -13,6 +14,8 @@ interface TableProps {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
     const [state, setState] = useState<"open" | "closed">("closed")
+
+    const [isManageTagsMenuOpen, setIsManageTagsMenuOpen] = useState(false)
 
     useEffect(() => {
         if (!isLoading) {
@@ -39,11 +42,19 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
                         {fileLinks.map((fileLink) => {
                             return (
                                 <FileCard
+                                    isManageTagsMenuOpen={isManageTagsMenuOpen}
+                                    setIsManageTagsMenuOpen={
+                                        setIsManageTagsMenuOpen
+                                    }
                                     fileLink={fileLink}
                                     key={fileLink.href}
                                 />
                             )
                         })}
+                        <ManageTagsDialog
+                            onOpenChange={setIsManageTagsMenuOpen}
+                            open={isManageTagsMenuOpen}
+                        />
                     </>
                 </div>
             )}
