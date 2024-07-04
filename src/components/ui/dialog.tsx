@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
+import * as React from "react"
 
 import { cn } from "@src/lib/utils"
 
@@ -87,7 +87,7 @@ const DialogTitle = React.forwardRef<
     <DialogPrimitive.Title
         ref={ref}
         className={cn(
-            "text-lg font-semibold leading-none tracking-tight",
+            "text-xl font-bold leading-none tracking-tight",
             className
         )}
         {...props}
@@ -109,13 +109,13 @@ DialogDescription.displayName = DialogPrimitive.Description.displayName
 
 export {
     Dialog,
-    DialogPortal,
-    DialogOverlay,
     DialogClose,
-    DialogTrigger,
     DialogContent,
-    DialogHeader,
-    DialogFooter,
-    DialogTitle,
     DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogOverlay,
+    DialogPortal,
+    DialogTitle,
+    DialogTrigger,
 }

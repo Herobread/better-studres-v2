@@ -57,7 +57,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
 
         const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
             useState(false)
-
         const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
 
         const {
