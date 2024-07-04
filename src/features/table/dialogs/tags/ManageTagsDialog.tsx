@@ -1,7 +1,12 @@
-import H2 from "@src/components/typography/H2"
 import { Badge } from "@src/components/ui/badge"
 import { Button } from "@src/components/ui/button"
-import { Dialog, DialogContent } from "@src/components/ui/dialog"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@src/components/ui/dialog"
 import { ScrollArea } from "@src/components/ui/scroll-area"
 import { Separator } from "@src/components/ui/separator"
 import {
@@ -33,8 +38,13 @@ export function ManageTagsDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent>
-                <H2>Manage tags</H2>
+            <DialogContent aria-describedby="dialog-description">
+                <DialogHeader>
+                    <DialogTitle>Manage tags</DialogTitle>
+                    <DialogDescription id="dialog-description">
+                        Rename or delete tags and view their usage.
+                    </DialogDescription>
+                </DialogHeader>
                 <ScrollArea className="max-h-96">
                     {tags?.map((tag, i) => {
                         const { id, name } = tag
