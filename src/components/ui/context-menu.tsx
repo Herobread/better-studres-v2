@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import * as React from "react"
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
+import * as React from "react"
 
 import { cn } from "@src/lib/utils"
 
@@ -95,7 +95,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     <ContextMenuPrimitive.CheckboxItem
         ref={ref}
         className={cn(
-            "_tailwind_preflight_reset relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+            "_tailwind_preflight_reset cursor-pointer relative flex select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
             className
         )}
         checked={checked}
@@ -181,19 +181,9 @@ const ContextMenuShortcut = ({
 ContextMenuShortcut.displayName = "ContextMenuShortcut"
 
 export {
-    ContextMenu,
-    ContextMenuTrigger,
-    ContextMenuContent,
-    ContextMenuItem,
-    ContextMenuCheckboxItem,
-    ContextMenuRadioItem,
-    ContextMenuLabel,
-    ContextMenuSeparator,
-    ContextMenuShortcut,
-    ContextMenuGroup,
-    ContextMenuPortal,
-    ContextMenuSub,
+    ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuPortal, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator,
+    ContextMenuShortcut, ContextMenuSub,
     ContextMenuSubContent,
-    ContextMenuSubTrigger,
-    ContextMenuRadioGroup,
+    ContextMenuSubTrigger, ContextMenuTrigger
 }
+
