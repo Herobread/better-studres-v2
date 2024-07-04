@@ -1,7 +1,8 @@
 import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { extractUrlSegments, BASE_URL } from "../shared/urlSegments"
 import { getFileDataMap } from "../shared/storage"
+import { FILE_DATA_STORAGE_KEY } from "../shared/types"
+import { BASE_URL, extractUrlSegments } from "../shared/urlSegments"
 
 export interface FileLinkPath {
     name: string
@@ -17,7 +18,13 @@ export async function getFormattedFilesList(): Promise<FileLinkPath[]> {
     const result: FileLinkPath[] = []
 
     for (const filePath in trackedFileLinkMap) {
-        const minimizedFileLink = trackedFileLinkMap[filePath]
+        const minimizedFileLink =
+            trackedFileLinkMap[filePath][FILE_DATA_STORAGE_KEY]
+
+        if (!minimizedFileLink) {
+            continue
+        }
+
         const urlSegments = extractUrlSegments(
             minimizedFileLink.latestFileLink.href
         )
