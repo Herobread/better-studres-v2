@@ -1,10 +1,10 @@
-import { AnchorHTMLAttributes, MouseEvent, forwardRef } from "react"
-import useSmoothRouter from "./useSmoothRouter"
 import {
     BASE_URL,
     checkIfStringMatchesStringPatterns,
 } from "@src/features/files"
 import { redirect } from "@src/features/router/"
+import { AnchorHTMLAttributes, MouseEvent, forwardRef } from "react"
+import useSmoothRouter from "./useSmoothRouter"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -22,12 +22,16 @@ const EXCLUDED_SMOOTH_NAVIGATION_HREF_PATTERNS = [
 ]
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
-    const { href, isHard, target } = props
+    const { href, isHard, target, onClick } = props
 
     const { navigateToPage } = useSmoothRouter()
 
     const handleNavigation = async (e: MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault()
+
+        if (onClick) {
+            onClick(e)
+        }
 
         if (!href) {
             return

@@ -1,3 +1,4 @@
+import { Badge } from "@src/components/ui/badge"
 import {
     Dialog,
     DialogContent,
@@ -6,6 +7,7 @@ import {
     DialogTitle,
 } from "@src/components/ui/dialog"
 import { ScrollArea } from "@src/components/ui/scroll-area"
+import { Separator } from "@src/components/ui/separator"
 import { convertFileKeysToMinimizedFileLinks } from "@src/features/files"
 import {
     GET_FILES_TAGGED_QUERY_KEY,
@@ -14,15 +16,17 @@ import {
     getFilesTagged,
 } from "@src/features/files/tags/storage"
 import { useQuery } from "@tanstack/react-query"
+import { Fragment } from "react/jsx-runtime"
+import { MinimizedTaggedLinkPreview } from "./MinimizedTaggedLinkPreview"
 
 interface ViewTaggedFilesDialogProps {
     open: boolean
-    onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+    setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     tag: Tag
 }
 
 export function ViewTaggedFilesDialog({
-    onOpenChange,
+    setIsOpen,
     open,
     tag,
 }: ViewTaggedFilesDialogProps) {
@@ -37,17 +41,35 @@ export function ViewTaggedFilesDialog({
     })
 
     return (
-        <Dialog onOpenChange={onOpenChange} open={open}>
+        <Dialog onOpenChange={setIsOpen} open={open}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Files tagged {name}</DialogTitle>
+                    <DialogTitle>
+                        Files tagged <Badge variant={"secondary"}>{name}</Badge>
+                    </DialogTitle>
                     <DialogDescription id="dialog-description">
                         Files tagged {name}
                     </DialogDescription>
                     <ScrollArea className="max-h-96">
-                        {minimizedFileLinks?.map((minimizedFileLink) => {
-                            return <p>{JSON.stringify(minimizedFileLink)}</p>
-                        })}
+                        <div className="grid gap-2">
+                            {minimizedFileLinks?.map((minimizedFileLink, i) => {
+                                return (
+                                    <Fragment key={minimizedFileLink.href}>
+                                        <MinimizedTaggedLinkPreview
+                                            onClick={() => {
+                                                setIsOpen(false)
+                                            }}
+                                            minimizedFileLink={
+                                                minimizedFileLink
+                                            }
+                                        />
+                                        {i < minimizedFileLinks.length - 1 && (
+                                            <Separator />
+                                        )}
+                                    </Fragment>
+                                )
+                            })}
+                        </div>
                     </ScrollArea>
                 </DialogHeader>
             </DialogContent>
