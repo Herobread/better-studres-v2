@@ -241,7 +241,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                 <TagFileMenuDialog
                     fileLink={fileLink}
                     open={isTagMenuOpen}
-                    onOpenChange={setIsTagMenuOpen}
+                    setIsTagFileMenuDialogOpen={setIsTagMenuOpen}
                 />
             </>
         )

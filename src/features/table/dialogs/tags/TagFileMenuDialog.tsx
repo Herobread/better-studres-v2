@@ -16,6 +16,7 @@ import {
     FormMessage,
 } from "@src/components/ui/form"
 import { Input } from "@src/components/ui/input"
+import { useToast } from "@src/components/ui/use-toast"
 import { generateFileLinkKey } from "@src/features/files"
 import {
     TAGS_QUERY_KEY,
@@ -30,7 +31,7 @@ import { z } from "zod"
 interface TagFileMenuDialogProps {
     fileLink: FileLink
     open: boolean
-    onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+    setIsTagFileMenuDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const formSchema = z.object({
@@ -39,10 +40,12 @@ const formSchema = z.object({
 
 export function TagFileMenuDialog({
     open,
-    onOpenChange,
+    setIsTagFileMenuDialogOpen,
     fileLink,
 }: TagFileMenuDialogProps) {
     const { fullName } = fileLink
+
+    const { toast } = useToast()
 
     const queryClient = useQueryClient()
 
@@ -55,21 +58,30 @@ export function TagFileMenuDialog({
     async function onSubmit(tagData: z.infer<typeof formSchema>) {
         const { name } = tagData
 
-        const tag = await createTag(name)
-
-        await addTag(fileKey, tag)
-        queryClient.invalidateQueries({
-            queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
-        })
-        queryClient.refetchQueries({
-            queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
-        })
-
-        onOpenChange(false)
+        try {
+            const tag = await createTag(name)
+            await addTag(fileKey, tag)
+            queryClient.invalidateQueries({
+                queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
+            })
+            queryClient.refetchQueries({
+                queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
+            })
+            setIsTagFileMenuDialogOpen(false)
+            toast({
+                title: "✅ Success",
+                description: `Added ${name} to ${fullName}.`,
+            })
+        } catch (error) {
+            toast({
+                title: "❌ Error",
+                description: `${error}`,
+            })
+        }
     }
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog open={open} onOpenChange={setIsTagFileMenuDialogOpen}>
             <DialogContent aria-describedby="dialog-description">
                 <DialogHeader>
                     <DialogTitle>Create New Tag</DialogTitle>
