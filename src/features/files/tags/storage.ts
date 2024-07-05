@@ -1,4 +1,4 @@
-import { getFileData, saveFileData } from "../shared/storage"
+import { getFileData, getFileDataMap, saveFileData } from "../shared/storage"
 
 export interface Tag {
     id: number
@@ -97,4 +97,29 @@ export async function toggleFileTag(fileKey: string, tag: Tag) {
     }
 
     await addTag(fileKey, tag)
+}
+
+export const GET_FILES_TAGGED_QUERY_KEY = "getFilesTagged"
+
+export async function getFilesTagged(tagId: number) {
+    const fileDataMap = await getFileDataMap()
+    const filesKeysThatUseTag: string[] = []
+
+    for (const fileKey in fileDataMap) {
+        const fileTags = fileDataMap[fileKey][TAGS_FILE_DATA_KEY]
+
+        if (!fileTags) {
+            continue
+        }
+
+        const isTagFound = !!fileTags.find((tag) => {
+            return tag.id === tagId
+        })
+
+        if (isTagFound) {
+            filesKeysThatUseTag.push(fileKey)
+        }
+    }
+
+    return filesKeysThatUseTag
 }
