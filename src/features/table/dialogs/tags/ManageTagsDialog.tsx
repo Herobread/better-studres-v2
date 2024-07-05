@@ -11,18 +11,24 @@ import {
     GET_TOTAL_TAGGED_FILES_MAP_QUERY_KEY,
     getTotalTaggedFilesMap,
 } from "@src/features/files/tags/stats"
-import { TAGS_QUERY_KEY, getTags } from "@src/features/files/tags/storage"
+import { TAGS_QUERY_KEY, Tag, getTags } from "@src/features/files/tags/storage"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react/jsx-runtime"
 import { ManageTagCard } from "./ManageTagCard"
 
 interface ManageTagsDialogProps {
     open: boolean
-    onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
+    setIsManageTagsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setActiveTag: React.Dispatch<React.SetStateAction<Tag>>
+    setIsViewTaggedFilesDialogOpen: React.Dispatch<
+        React.SetStateAction<boolean>
+    >
 }
 
 export function ManageTagsDialog({
-    onOpenChange,
+    setIsManageTagsDialogOpen,
+    setIsViewTaggedFilesDialogOpen,
+    setActiveTag,
     open,
 }: ManageTagsDialogProps) {
     const { data: tags } = useQuery({
@@ -36,7 +42,7 @@ export function ManageTagsDialog({
     })
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog open={open} onOpenChange={setIsManageTagsDialogOpen}>
             <DialogContent aria-describedby="dialog-description">
                 <DialogHeader>
                     <DialogTitle>Manage tags</DialogTitle>
@@ -51,6 +57,13 @@ export function ManageTagsDialog({
                         return (
                             <Fragment key={id}>
                                 <ManageTagCard
+                                    setActiveTag={setActiveTag}
+                                    setIsManageTagsDialogOpen={
+                                        setIsManageTagsDialogOpen
+                                    }
+                                    setIsViewTaggedFilesDialogOpen={
+                                        setIsViewTaggedFilesDialogOpen
+                                    }
                                     tag={tag}
                                     files={stats && stats[id]}
                                 />

@@ -65,7 +65,13 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
                             )
                         })}
                         <ManageTagsDialog
-                            onOpenChange={setIsManageTagsDialogOpen}
+                            setIsViewTaggedFilesDialogOpen={
+                                setIsViewTaggedFilesDialogOpen
+                            }
+                            setActiveTag={setActiveTag}
+                            setIsManageTagsDialogOpen={
+                                setIsManageTagsDialogOpen
+                            }
                             open={isManageTagsMenuOpen}
                         />
                         <ViewTaggedFilesDialog
