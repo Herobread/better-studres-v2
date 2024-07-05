@@ -1,9 +1,11 @@
 import { FileLink, SortLinks } from "@src/types/pageContentTypes"
 import { useEffect, useState } from "react"
+import { Tag } from "../files/tags/storage"
 import FileCard from "./FileCard"
 import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
 import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
+import { ViewTaggedFilesDialog } from "./dialogs/tags/ViewTaggedFilesDialog"
 
 interface TableProps {
     fileLinks: FileLink[]
@@ -15,7 +17,11 @@ interface TableProps {
 export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
     const [state, setState] = useState<"open" | "closed">("closed")
 
-    const [isManageTagsMenuOpen, setIsManageTagsMenuOpen] = useState(false)
+    const [isManageTagsMenuOpen, setIsManageTagsDialogOpen] = useState(false)
+    const [isViewTaggedFilesDialogOpen, setIsViewTaggedFilesDialogOpen] =
+        useState(false)
+
+    const [activeTag, setActiveTag] = useState<Tag>({ id: 0, name: "tag" })
 
     useEffect(() => {
         if (!isLoading) {
@@ -42,9 +48,16 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
                         {fileLinks.map((fileLink) => {
                             return (
                                 <FileCard
+                                    setActiveTag={setActiveTag}
+                                    isViewTaggedFilesDialogOpen={
+                                        isViewTaggedFilesDialogOpen
+                                    }
+                                    setIsViewTaggedFilesDialogOpen={
+                                        setIsViewTaggedFilesDialogOpen
+                                    }
                                     isManageTagsMenuOpen={isManageTagsMenuOpen}
                                     setIsManageTagsMenuOpen={
-                                        setIsManageTagsMenuOpen
+                                        setIsManageTagsDialogOpen
                                     }
                                     fileLink={fileLink}
                                     key={fileLink.href}
@@ -52,8 +65,13 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
                             )
                         })}
                         <ManageTagsDialog
-                            onOpenChange={setIsManageTagsMenuOpen}
+                            onOpenChange={setIsManageTagsDialogOpen}
                             open={isManageTagsMenuOpen}
+                        />
+                        <ViewTaggedFilesDialog
+                            onOpenChange={setIsViewTaggedFilesDialogOpen}
+                            open={isViewTaggedFilesDialogOpen}
+                            tag={activeTag}
                         />
                     </>
                 </div>
