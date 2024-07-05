@@ -17,10 +17,8 @@ export function MinimizedTaggedLinkPreview({
             className="w-full rounded-lg p-2 hover:bg-background-layer-1"
             {...props}
         >
-            <div>
-                <p className="font-bold">{name}</p>
-                <p className="text-sm text-muted-foreground">{href}</p>
-            </div>
+            <p className="font-bold">{name}</p>
+            <p className="text-sm text-muted-foreground">{href}</p>
         </Link>
     )
 }
