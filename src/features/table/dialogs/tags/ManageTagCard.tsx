@@ -14,6 +14,7 @@ import { useToast } from "@src/components/ui/use-toast"
 import {
     TAGS_QUERY_KEY,
     Tag,
+    deleteTag,
     updateTagName,
 } from "@src/features/files/tags/storage"
 import { useQueryClient } from "@tanstack/react-query"
@@ -115,6 +116,23 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
         )
     }
 
+    const handleDeleteTag = async () => {
+        try {
+            await deleteTag(id)
+            queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
+            queryClient.refetchQueries({ queryKey: [TAGS_QUERY_KEY] })
+            toast({
+                title: "✅ Success",
+                description: `Deleted tag ${name}`,
+            })
+        } catch (error) {
+            toast({
+                title: "❌ Error",
+                description: "Failed to delete tag.",
+            })
+        }
+    }
+
     return (
         <div
             className="group grid w-full grid-cols-[1fr_max-content_1fr] items-center gap-2 pr-[10px]"
@@ -134,7 +152,11 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
                 >
                     <EditIcon size={20} />
                 </Button>
-                <Button variant={"destructiveGhost"} size={"icon"}>
+                <Button
+                    variant={"destructiveGhost"}
+                    size={"icon"}
+                    onClick={handleDeleteTag}
+                >
                     <Trash2Icon size={20} />
                 </Button>
             </div>

@@ -167,3 +167,38 @@ export async function updateTagName(tagId: number, newTagName: string) {
     await setFileDataMap(fileDataMap)
     await setTags(tags)
 }
+
+export async function deleteTag(tagId: number) {
+    let tags = await getTags()
+
+    const updateTagInArray = (tags: Tag[]) => {
+        const tagIndex = tags.findIndex((tag) => {
+            return tag.id === tagId
+        })
+
+        if (tagIndex === -1) {
+            return tags
+        }
+
+        tags.splice(tagIndex, 1)
+
+        return tags
+    }
+
+    tags = updateTagInArray(tags)
+
+    const fileDataMap = await getFileDataMap()
+
+    for (const fileKey in fileDataMap) {
+        const tagsData = fileDataMap[fileKey][TAGS_FILE_DATA_KEY]
+
+        if (!tagsData) {
+            continue
+        }
+
+        fileDataMap[fileKey][TAGS_FILE_DATA_KEY] = updateTagInArray(tagsData)
+    }
+
+    await setFileDataMap(fileDataMap)
+    await setTags(tags)
+}
