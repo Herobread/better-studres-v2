@@ -1,4 +1,9 @@
-import { getFileData, getFileDataMap, saveFileData } from "../shared/storage"
+import {
+    getFileData,
+    getFileDataMap,
+    saveFileData,
+    setFileDataMap,
+} from "../shared/storage"
 
 export interface Tag {
     id: number
@@ -36,9 +41,13 @@ export async function getTags() {
     return tags as Tag[]
 }
 
+export async function setTags(tags: Tag[]) {
+    await chrome.storage.local.set({ [TAGS_STORAGE_KEY]: tags })
+}
+
 export const TAGS_FILE_DATA_KEY = "tags"
 
-export async function setTags(fileKey: string, tags: Tag[]) {
+export async function setFileTags(fileKey: string, tags: Tag[]) {
     await saveFileData(fileKey, TAGS_FILE_DATA_KEY, tags)
 }
 
@@ -76,7 +85,7 @@ export async function removeFileTag(fileKey: string, tagId: number) {
         return tag.id !== tagId
     })
 
-    await setTags(fileKey, filteredTags)
+    await setFileTags(fileKey, filteredTags)
 }
 
 export async function toggleFileTag(fileKey: string, tag: Tag) {
@@ -122,4 +131,39 @@ export async function getFilesTagged(tagId: number) {
     }
 
     return filesKeysThatUseTag
+}
+
+export async function updateTagName(tagId: number, newTagName: string) {
+    let tags = await getTags()
+
+    const updateTagInArray = (tags: Tag[]) => {
+        const tagIndex = tags.findIndex((tag) => {
+            return tag.id === tagId
+        })
+
+        if (tagIndex === -1) {
+            return tags
+        }
+
+        tags[tagIndex].name = newTagName
+
+        return tags
+    }
+
+    tags = updateTagInArray(tags)
+
+    const fileDataMap = await getFileDataMap()
+
+    for (const fileKey in fileDataMap) {
+        const tagsData = fileDataMap[fileKey][TAGS_FILE_DATA_KEY]
+
+        if (!tagsData) {
+            continue
+        }
+
+        fileDataMap[fileKey][TAGS_FILE_DATA_KEY] = updateTagInArray(tagsData)
+    }
+
+    await setFileDataMap(fileDataMap)
+    await setTags(tags)
 }

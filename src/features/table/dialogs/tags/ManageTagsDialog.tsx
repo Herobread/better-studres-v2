@@ -1,4 +1,3 @@
-import { Button } from "@src/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -60,9 +59,6 @@ export function ManageTagsDialog({
                         )
                     })}
                 </ScrollArea>
-                <div className="flex justify-end">
-                    <Button>Save</Button>
-                </div>
             </DialogContent>
         </Dialog>
     )
