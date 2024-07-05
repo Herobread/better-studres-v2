@@ -80,6 +80,7 @@ export async function saveTrackedFileLinkToStorage(
         trackedFileLinkData
     )
 }
+
 /**
  * Minimizes a file link.
  * @param {FileLink} fileLink - The file link to minimize.

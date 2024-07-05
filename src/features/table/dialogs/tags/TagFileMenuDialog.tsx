@@ -43,7 +43,7 @@ export function TagFileMenuDialog({
     fileLink,
 }: TagFileMenuDialogProps) {
     const { fullName } = fileLink
-    console.log("rerender triggered")
+
     const queryClient = useQueryClient()
 
     const fileKey = generateFileLinkKey(fileLink)
