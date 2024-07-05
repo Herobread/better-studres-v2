@@ -26,13 +26,24 @@ import { z } from "zod"
 interface ManageTagCardProps {
     tag: Tag
     files?: number
+    setActiveTag: React.Dispatch<React.SetStateAction<Tag>>
+    setIsManageTagsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setIsViewTaggedFilesDialogOpen: React.Dispatch<
+        React.SetStateAction<boolean>
+    >
 }
 
 const formSchema = z.object({
     tagName: z.string(),
 })
 
-export function ManageTagCard({ tag, files }: ManageTagCardProps) {
+export function ManageTagCard({
+    tag,
+    files,
+    setIsManageTagsDialogOpen,
+    setActiveTag,
+    setIsViewTaggedFilesDialogOpen,
+}: ManageTagCardProps) {
     const { id, name } = tag
 
     const { toast } = useToast()
@@ -67,6 +78,12 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
 
     const handleCancelEditing = () => {
         setIsEditing(false)
+    }
+
+    const handleOpenFilePreviews = () => {
+        setActiveTag(tag)
+        setIsManageTagsDialogOpen(false)
+        setIsViewTaggedFilesDialogOpen(true)
     }
 
     files ??= 0
@@ -141,7 +158,12 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
             <div>
                 <Badge>{name}</Badge>
             </div>
-            <p className="text-muted-foreground">{fileUsageDescription}</p>
+            <button
+                onClick={handleOpenFilePreviews}
+                className="text-muted-foreground"
+            >
+                {fileUsageDescription}
+            </button>
             <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100">
                 <Button
                     variant={"ghost"}
