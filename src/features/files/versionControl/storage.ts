@@ -5,7 +5,7 @@ import {
     saveFileData,
     setFileDataMap,
 } from "../shared/storage"
-import { VERSION_CONTROL_FILE_DATA_KEY } from "../shared/types"
+import { BASE_URL } from "../shared/urlSegments"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
@@ -108,6 +108,34 @@ export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
         detectedAt,
         ...space,
     }
+}
+
+export async function convertFileKeysToMinimizedFileLinks(fileKeys: string[]) {
+    const fileDataMap = await getFileDataMap()
+
+    const minimizedFileData: MinimizedFileLink[] = fileKeys.map((fileKey) => {
+        const minimizedFileData =
+            fileDataMap[fileKey][VERSION_CONTROL_FILE_DATA_KEY]?.latestFileLink
+
+        if (!minimizedFileData) {
+            const placeholderLinkData: MinimizedFileLink = {
+                detectedAt: 0,
+                href: BASE_URL + fileKey,
+                lastModified: "unknown",
+                name: fileKey,
+                size: 0,
+                units: "",
+            }
+
+            return placeholderLinkData
+        }
+
+        return {
+            ...minimizedFileData,
+        }
+    })
+
+    return minimizedFileData
 }
 
 export async function clearVersionTrackingData() {
