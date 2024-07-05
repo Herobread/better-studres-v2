@@ -21,7 +21,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "../../components/ui/tooltip"
-import { TAGS_QUERY_KEY, getFileTags } from "../files/tags/storage"
+import { TAGS_QUERY_KEY, Tag, getFileTags } from "../files/tags/storage"
 import Link from "../router/Link"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
@@ -33,14 +33,27 @@ import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
 export interface DefaultFileCardProps {
     fileLink: FileLink
     children?: React.ReactNode
+    setActiveTag: React.Dispatch<React.SetStateAction<Tag>>
     isManageTagsMenuOpen: boolean
     setIsManageTagsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
+    isViewTaggedFilesDialogOpen: boolean
+    setIsViewTaggedFilesDialogOpen: React.Dispatch<
+        React.SetStateAction<boolean>
+    >
     [key: string]: unknown
 }
 
 const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
     (
-        { fileLink, isManageTagsMenuOpen, setIsManageTagsMenuOpen, ...props },
+        {
+            fileLink,
+            setActiveTag,
+            isManageTagsMenuOpen,
+            setIsManageTagsMenuOpen,
+            isViewTaggedFilesDialogOpen,
+            setIsViewTaggedFilesDialogOpen,
+            ...props
+        },
         ref
     ) => {
         const { fileIcons, date, imagePreviewAsIcon } =
@@ -126,12 +139,23 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                         tags?.length > 0 &&
                                         tags.map((tag) => {
                                             return (
-                                                <Badge
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.preventDefault()
+                                                        e.stopPropagation()
+                                                        setIsViewTaggedFilesDialogOpen(
+                                                            true
+                                                        )
+                                                        setActiveTag(tag)
+                                                    }}
                                                     key={tag.id}
-                                                    variant={"secondary"}
                                                 >
-                                                    {tag.name}
-                                                </Badge>
+                                                    <Badge
+                                                        variant={"secondary"}
+                                                    >
+                                                        {tag.name}
+                                                    </Badge>
+                                                </button>
                                             )
                                         })}
                                 </div>
