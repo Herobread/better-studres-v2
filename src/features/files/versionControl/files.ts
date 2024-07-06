@@ -37,7 +37,7 @@ export async function getFormattedFilesListForCommand(): Promise<
         }
 
         const urlSegments = extractUrlSegments(
-            minimizedFileLink.latestFileLink.href
+            minimizedFileLink.latestFileLink.rawHref
         )
         const moduleCode = urlSegments[0]
         const moduleEmoji = getModuleEmoji(moduleCode)

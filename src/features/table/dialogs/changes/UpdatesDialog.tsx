@@ -5,12 +5,12 @@ import {
     generateFileLinkKeyDeprecated,
     getTrackedFileLink,
 } from "@src/features/files"
-import { FileLink } from "@src/types/pageContentTypes"
+import { FullFileLink } from "@src/features/parser"
 import { useQuery } from "@tanstack/react-query"
 import ChangesRecordCard from "./ChangesRecordCard"
 
 interface UpdatesDialogProps {
-    fileLink: FileLink
+    fileLink: FullFileLink
     open: boolean
     onOpenChange: React.Dispatch<React.SetStateAction<boolean>>
 }

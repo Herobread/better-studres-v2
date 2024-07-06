@@ -6,14 +6,13 @@ import {
     ContextMenuSubContent,
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
-import { generateFileLinkKeyDeprecated } from "@src/features/files"
 import {
     TAGS_QUERY_KEY,
     Tag,
     getTags,
     toggleFileTag,
 } from "@src/features/files/tags/storage"
-import { FileLink } from "@src/types/pageContentTypes"
+import { FullFileLink } from "@src/features/parser"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { TagsIcon } from "lucide-react"
 import { ComponentProps } from "react"
@@ -22,7 +21,7 @@ interface TagFileMenuContextItemProps
     extends ComponentProps<typeof ContextMenuSub> {
     setIsTagMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
     setIsManageTagsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
-    fileLink: FileLink
+    fileLink: FullFileLink
     fileTags: Tag[] | undefined
 }
 
@@ -33,7 +32,7 @@ export function TagFileMenuContextItem({
     fileTags,
     ...props
 }: TagFileMenuContextItemProps) {
-    const fileKey = generateFileLinkKeyDeprecated(fileLink)
+    const fileKey = fileLink.fileKey
     const queryClient = useQueryClient()
 
     const { data: allTags, isLoading } = useQuery({

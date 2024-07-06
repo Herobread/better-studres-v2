@@ -21,10 +21,7 @@ export function generateChangeRecords(
         header: "Initial version",
         timestamp: new Date(versions[0].detectedAt),
         changes: {
-            before: [
-                versions[0].size + versions[0].units,
-                versions[0].lastModified,
-            ],
+            before: [versions[0].rawSize, versions[0].rawLastModified],
         },
         version: "v0",
     })
@@ -38,19 +35,16 @@ export function generateChangeRecords(
         const before: string[] = []
         const after: string[] = []
 
-        if (
-            version.size !== nextVersion.size ||
-            version.units !== nextVersion.units
-        ) {
-            before.push(version.size + version.units)
-            after.push(nextVersion.size + nextVersion.units)
+        if (version.rawSize !== nextVersion.rawSize) {
+            before.push(version.rawSize)
+            after.push(nextVersion.rawSize)
 
             updatedFields.push("Size")
         }
 
-        if (version.lastModified !== nextVersion.lastModified) {
-            before.push(version.lastModified)
-            after.push(nextVersion.lastModified)
+        if (version.rawLastModified !== nextVersion.rawLastModified) {
+            before.push(version.rawLastModified)
+            after.push(nextVersion.rawLastModified)
 
             updatedFields.push("Modification date")
         }
@@ -80,10 +74,16 @@ export function compareTrackedMinimizedFileLinks(
     minimizedFileLink2: TrackedMinimizedFileLink
 ) {
     return (
-        minimizedFileLink1.href === minimizedFileLink2.href &&
-        minimizedFileLink1.name === minimizedFileLink2.name &&
-        minimizedFileLink1.lastModified === minimizedFileLink2.lastModified &&
-        minimizedFileLink1.size === minimizedFileLink2.size &&
-        minimizedFileLink1.units === minimizedFileLink2.units
+        minimizedFileLink1.detectedAt === minimizedFileLink2.detectedAt &&
+        minimizedFileLink1.rawDescription ===
+            minimizedFileLink2.rawDescription &&
+        minimizedFileLink1.rawHref === minimizedFileLink2.rawHref &&
+        minimizedFileLink1.rawHrefAttribute ===
+            minimizedFileLink2.rawHrefAttribute &&
+        minimizedFileLink1.rawImage === minimizedFileLink2.rawImage &&
+        minimizedFileLink1.rawLastModified ===
+            minimizedFileLink2.rawLastModified &&
+        minimizedFileLink1.rawName === minimizedFileLink2.rawName &&
+        minimizedFileLink1.rawSize === minimizedFileLink2.rawSize
     )
 }

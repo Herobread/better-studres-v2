@@ -17,19 +17,18 @@ import {
 } from "@src/components/ui/form"
 import { Input } from "@src/components/ui/input"
 import { useToast } from "@src/components/ui/use-toast"
-import { generateFileLinkKeyDeprecated } from "@src/features/files"
 import {
     TAGS_QUERY_KEY,
     addTag,
     createTag,
 } from "@src/features/files/tags/storage"
-import { FileLink } from "@src/types/pageContentTypes"
+import { FullFileLink } from "@src/features/parser"
 import { useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 interface TagFileMenuDialogProps {
-    fileLink: FileLink
+    fileLink: FullFileLink
     open: boolean
     setIsTagFileMenuDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -49,7 +48,7 @@ export function TagFileMenuDialog({
 
     const queryClient = useQueryClient()
 
-    const fileKey = generateFileLinkKeyDeprecated(fileLink)
+    const fileKey = fileLink.fileKey
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

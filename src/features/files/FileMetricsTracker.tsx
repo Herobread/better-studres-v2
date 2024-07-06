@@ -1,11 +1,11 @@
-import { FileLink } from "@src/types/pageContentTypes"
 import { useQueryClient } from "@tanstack/react-query"
 import { useEffect } from "react"
+import { FullFileLink } from "../parser"
 import { GET_TRACKED_FILE_LINK_QUERY_KEY_BASE } from "./versionControl/storage"
 import { trackFileLinks } from "./versionControl/track"
 
 interface FileMetricsTrackerProps {
-    fileLinks: FileLink[]
+    fileLinks: FullFileLink[]
 }
 
 /**

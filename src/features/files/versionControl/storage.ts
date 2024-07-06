@@ -1,4 +1,4 @@
-import { FileLink } from "@src/types/pageContentTypes"
+import { BaseFileLink, FullFileLink } from "@src/features/parser"
 import {
     getFileData,
     getFileDataMap,
@@ -9,7 +9,7 @@ import { BASE_URL } from "../shared/urlSegments"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
-export type MinimizedFileLink = {
+export type MinimizedFileLinkDeprecated = {
     href: string
     name: string
     size: number
@@ -17,11 +17,10 @@ export type MinimizedFileLink = {
 }
 
 export type TrackerData = {
-    lastModified: string
     detectedAt: number
 }
 
-export type TrackedMinimizedFileLink = MinimizedFileLink & TrackerData
+export type TrackedMinimizedFileLink = BaseFileLink & TrackerData
 
 export type TrackedFileLinkData = {
     latestFileLink: TrackedMinimizedFileLink
@@ -44,10 +43,10 @@ export type ChangesRecord = {
 
 /**
  * Generates a key for a file link.
- * @param {FileLink} fileLink - The file link to generate a key for.
+ * @param {FullFileLink} fileLink - The file link to generate a key for.
  * @returns {string} The generated key.
  */
-export function generateFileLinkKeyDeprecated(fileLink: FileLink) {
+export function generateFileLinkKeyDeprecated(fileLink: FullFileLink) {
     return fileLink.urlSegments.join("/")
 }
 
@@ -92,49 +91,41 @@ export async function saveTrackedFileLinkToStorage(
 
 /**
  * Minimizes a file link.
- * @param {FileLink} fileLink - The file link to minimize.
+ * @param {FullFileLink} fileLink - The file link to minimize.
  * @returns {TrackedMinimizedFileLink} The minimized file link.
  */
 export function minimizeAndTrackFileLink(
-    fileLink: FileLink
+    fileLink: FullFileLink
 ): TrackedMinimizedFileLink {
-    const { name, href, lastModified, space } = fileLink
+    const baseFileLink = fileLink.base
 
     const detectedAt = new Date().getTime()
 
-    if (!space) {
-        return {
-            href,
-            name,
-            lastModified,
-            size: 0,
-            units: "B",
-            detectedAt,
-        }
-    }
-
     return {
-        href,
-        name,
-        lastModified,
         detectedAt,
-        ...space,
+        ...baseFileLink,
     }
 }
 
 export async function convertFileKeysToMinimizedFileLinks(fileKeys: string[]) {
     const fileDataMap = await getFileDataMap()
 
-    const minimizedFileData: MinimizedFileLink[] = fileKeys.map((fileKey) => {
+    const minimizedFileData: BaseFileLink[] = fileKeys.map((fileKey) => {
         const minimizedFileData =
             fileDataMap[fileKey][VERSION_CONTROL_FILE_DATA_KEY]?.latestFileLink
 
         if (!minimizedFileData) {
-            const placeholderLinkData: MinimizedFileLink = {
-                href: BASE_URL + fileKey,
-                name: fileKey,
-                size: 0,
-                units: "",
+            const placeholderLinkData: BaseFileLink = {
+                rawHref: BASE_URL + fileKey,
+                rawHrefAttribute: BASE_URL + fileKey,
+                rawDescription: "",
+                rawName: fileKey,
+                rawImage: {
+                    alt: "",
+                    src: "",
+                },
+                rawLastModified: "",
+                rawSize: "",
             }
 
             return placeholderLinkData
