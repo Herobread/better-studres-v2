@@ -1,4 +1,3 @@
-import { FileLink } from "@src/types/pageContentTypes"
 import { compareTrackedMinimizedFileLinks } from "./fileMetrics"
 import { isFileLinkTracked } from "./ignore"
 import {
@@ -9,13 +8,14 @@ import {
     minimizeAndTrackFileLink,
     saveTrackedFileLinkToStorage,
 } from "./storage"
+import { FullFileLink } from "@src/features/parser"
 
 /**
  * Tracks multiple file links.
  * @param {FileLink[]} fileLinks - The file links to track.
  * @returns {Promise<void>} A promise that resolves when all file links have been tracked.
  */
-export async function trackFileLinks(fileLinks: FileLink[]): Promise<void> {
+export async function trackFileLinks(fileLinks: FullFileLink[]): Promise<void> {
     for (const fileLink of fileLinks) {
         await trackFileLink(fileLink)
     }
@@ -25,7 +25,7 @@ export async function trackFileLinks(fileLinks: FileLink[]): Promise<void> {
  * Tracks a file link.
  * @param {FileLink} fileLink - The file link to track.
  */
-export async function trackFileLink(fileLink: FileLink) {
+export async function trackFileLink(fileLink: FullFileLink) {
     if (!isFileLinkTracked(fileLink)) {
         return
     }

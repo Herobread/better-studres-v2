@@ -1,8 +1,8 @@
-import { parsePageContent } from "../parser"
-import { parseDocumentFromText } from "./parseDocumentFromText"
-import JSZip from "jszip"
 import { saveAs } from "file-saver"
+import JSZip from "jszip"
+import { parsePageContent } from "../parser"
 import { generateQuickLinkInfo } from "../quickAccess"
+import { parseDocumentFromText } from "./parseDocumentFromText"
 
 export interface FolderContent {
     [key: string]: FolderContent | Blob | undefined
@@ -41,7 +41,7 @@ export async function fetchFolder(
             }
 
             const folderContent = await fetchFolder(
-                url + fileLink.hrefAttributeValue,
+                url + fileLink.hrefAttribute,
                 baseUrl
             )
 

@@ -118,6 +118,8 @@ export type FullFileLink = {
     base: BaseFileLink
 
     // File data
+    href: string
+    hrefAttribute: string
     /** emoji that represents the format of the file */
     emoji: string
     /** file name with extension */
@@ -182,6 +184,8 @@ export function expandBaseFileLink(baseFileLink: BaseFileLink): FullFileLink {
     }
 
     return {
+        href: rawHref,
+        hrefAttribute: rawHrefAttribute,
         base: baseFileLink,
         extension,
         name,

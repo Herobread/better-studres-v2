@@ -1,16 +1,14 @@
-import { ConfigContext } from "@src/features/config"
-import { useContext } from "react"
-import DefaultFileCard, { DefaultFileCardProps } from "./DefaultFileCard"
-import { ImageCard } from "./ImageCard"
+import { FullFileLink } from "../parser"
 
-export default function FileCard({ fileLink, ...props }: DefaultFileCardProps) {
-    const { isImage } = fileLink
+export default function FileCard({ fileLink }: { fileLink: FullFileLink }) {
+    return <>{JSON.stringify(fileLink)}</>
+    // const { isImage } = fileLink
 
-    const { imagePreviewOnHover } = useContext(ConfigContext)
+    // const { imagePreviewOnHover } = useContext(ConfigContext)
 
-    if (isImage && imagePreviewOnHover) {
-        return <ImageCard fileLink={fileLink} {...props} />
-    }
+    // if (isImage && imagePreviewOnHover) {
+    //     return <ImageCard fileLink={fileLink} {...props} />
+    // }
 
-    return <DefaultFileCard fileLink={fileLink} {...props} />
+    // return <DefaultFileCard fileLink={fileLink} {...props} />
 }

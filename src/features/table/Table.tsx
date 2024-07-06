@@ -1,6 +1,7 @@
-import { FileLink, SortLinks } from "@src/types/pageContentTypes"
+import { SortLinks } from "@src/types/pageContentTypes"
 import { useEffect, useState } from "react"
 import { Tag } from "../files/tags/storage"
+import { FullFileLink } from "../parser"
 import FileCard from "./FileCard"
 import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
@@ -8,7 +9,7 @@ import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 import { ViewTaggedFilesDialog } from "./dialogs/tags/ViewTaggedFilesDialog"
 
 interface TableProps {
-    fileLinks: FileLink[]
+    fileLinks: FullFileLink[]
     sortLinks: SortLinks
     isLoading: boolean
 }
@@ -48,19 +49,19 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
                         {fileLinks.map((fileLink) => {
                             return (
                                 <FileCard
-                                    setActiveTag={setActiveTag}
-                                    isViewTaggedFilesDialogOpen={
-                                        isViewTaggedFilesDialogOpen
-                                    }
-                                    setIsViewTaggedFilesDialogOpen={
-                                        setIsViewTaggedFilesDialogOpen
-                                    }
-                                    isManageTagsMenuOpen={isManageTagsMenuOpen}
-                                    setIsManageTagsMenuOpen={
-                                        setIsManageTagsDialogOpen
-                                    }
+                                    // setActiveTag={setActiveTag}
+                                    // isViewTaggedFilesDialogOpen={
+                                    //     isViewTaggedFilesDialogOpen
+                                    // }
+                                    // setIsViewTaggedFilesDialogOpen={
+                                    //     setIsViewTaggedFilesDialogOpen
+                                    // }
+                                    // isManageTagsMenuOpen={isManageTagsMenuOpen}
+                                    // setIsManageTagsMenuOpen={
+                                    //     setIsManageTagsDialogOpen
+                                    // }
                                     fileLink={fileLink}
-                                    key={fileLink.href}
+                                    key={fileLink.fileKey}
                                 />
                             )
                         })}

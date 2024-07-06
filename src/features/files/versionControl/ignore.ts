@@ -1,6 +1,6 @@
-import { FileLink } from "@src/types/pageContentTypes"
+import { FullFileLink } from "@src/features/parser"
 
-export function isFileLinkTracked(fileLink: FileLink) {
+export function isFileLinkTracked(fileLink: FullFileLink) {
     return isFileNameTracked(fileLink.name) && isUrlTracked(fileLink.href)
 }
 

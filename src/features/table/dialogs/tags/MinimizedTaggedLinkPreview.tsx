@@ -1,8 +1,8 @@
-import { MinimizedFileLink } from "../../../files"
+import { MinimizedFileLinkDeprecated } from "../../../files"
 import Link, { LinkProps } from "../../../router/Link"
 
 interface MinimizedTaggedLinkPreviewProps extends LinkProps {
-    minimizedFileLink: MinimizedFileLink
+    minimizedFileLink: MinimizedFileLinkDeprecated
 }
 
 export function MinimizedTaggedLinkPreview({
