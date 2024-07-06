@@ -130,7 +130,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             </div>
                             <Separator orientation="vertical" />
                             <div className="grid items-center">
-                                <div className="space-x-2">
+                                <div className="flex flex-wrap gap-2">
                                     <span className="font-bold">
                                         {name}
                                         {isLongExtensionName && "." + extension}
