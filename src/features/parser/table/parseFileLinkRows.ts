@@ -139,6 +139,7 @@ export type FullFileLink = {
         /** time difference string in human readable format */
         difference: string
     }
+    description?: string
 
     // extra
     /** file key used for accessing locally stored data bout the file */
@@ -190,6 +191,7 @@ export function expandBaseFileLink(baseFileLink: BaseFileLink): FullFileLink {
         extension,
         name,
         fullName: rawName,
+        description: rawDescription,
         emoji: getFileEmoji(rawName),
         fileKey: generateFileKey(urlSegments),
         icon: rawImage,
