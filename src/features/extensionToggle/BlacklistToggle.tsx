@@ -3,13 +3,13 @@ import { Toggle } from "@src/components/ui/toggle"
 import { Tooltip, TooltipContent } from "@src/components/ui/tooltip"
 import { useQuery } from "@tanstack/react-query"
 import { SparklesIcon } from "lucide-react"
-import { ACTIVE_TAB_QUERY_KEY, getActiveTab } from "./getActiveTab"
+import { useEffect, useState } from "react"
 import {
     IS_URL_BLACK_LISTED_QUERY_KEY,
     checkIsUrlBlackListed,
     toggleBlackListForUrl,
 } from "./blacklist"
-import { useEffect, useState } from "react"
+import { ACTIVE_TAB_QUERY_KEY, getActiveTab } from "./getActiveTab"
 import { reload } from "./reload"
 
 export default function BlacklistToggle() {

@@ -1,5 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
+import { extractUrlSegments } from "@src/features/files"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
 import CompactLayout from "../../components/layouts/CompactLayout"
+import NormalLayout from "../../components/layouts/NormalLayout"
 import H2 from "../../components/typography/H2"
 import { Button } from "../../components/ui/button"
 import {
@@ -11,12 +16,7 @@ import {
     FormMessage,
 } from "../../components/ui/form"
 import { Input } from "../../components/ui/input"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import NormalLayout from "../../components/layouts/NormalLayout"
 import { addQuickLink } from "./QuickLinkManager"
-import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { extractUrlSegments } from "@src/features/files"
 
 const formSchema = z.object({
     icon: z.string().emoji().max(4, "4 emoji max"),

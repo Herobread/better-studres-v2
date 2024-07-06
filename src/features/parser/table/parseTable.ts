@@ -1,17 +1,17 @@
-import { FileLink, SortLinks } from "../../../types/pageContentTypes"
+import { SortLinks } from "../../../types/pageContentTypes"
 import { getExtraContent } from "./getExtraContent"
 import { getTableRows } from "./getTableRows"
-import { parseFileLinkRows } from "./parseFileLinkRows"
+import { FullFileLink, parseFileLinkRows } from "./parseFileLinkRows"
 import { parseHeaderRow } from "./parseHeaderRow"
 
 /**
  * Parses a table to extract sort links and file links.
  * @param {HTMLElement} content - The content of the table to parse.
- * @returns {{ sortLinks: SortLinks, fileLinks: FileLink[], extraContent: ReactNode }}
+ * @returns {{ sortLinks: SortLinks, fileLinks: FullFileLink[], extraContent: ReactNode }}
  */
 export function parseTable(content: HTMLElement): {
     sortLinks: SortLinks
-    fileLinks: FileLink[]
+    fileLinks: FullFileLink[]
     extraContent: string
 } {
     const tableRows = getTableRows(content)
@@ -25,7 +25,7 @@ export function parseTable(content: HTMLElement): {
     fileLinkRows.pop()
 
     const sortLinks: SortLinks = parseHeaderRow(headerRow)
-    const fileLinks: FileLink[] = parseFileLinkRows(fileLinkRows)
+    const fileLinks: FullFileLink[] = parseFileLinkRows(fileLinkRows)
 
     return { sortLinks, fileLinks, extraContent }
 }

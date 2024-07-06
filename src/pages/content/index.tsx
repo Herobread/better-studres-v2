@@ -1,17 +1,17 @@
-import { createRoot } from "react-dom/client"
-import Root from "./Root"
-import { PageData, parsePageContent } from "@src/features/parser"
-import Providers from "./Providers"
-import CommandsRoot from "./CommandsRoot"
-import { THEME_STORAGE_KEY } from "@src/features/theme"
-import {
-    EXTENSION_STATE_STORAGE_KEY,
-    getExtensionState,
-} from "@src/features/extensionToggle/extensionState"
 import {
     BLACK_LIST_STORAGE_KEY,
     checkIsUrlBlackListed,
 } from "@src/features/extensionToggle/blacklist"
+import {
+    EXTENSION_STATE_STORAGE_KEY,
+    getExtensionState,
+} from "@src/features/extensionToggle/extensionState"
+import { PageData, parsePageContent } from "@src/features/parser"
+import { THEME_STORAGE_KEY } from "@src/features/theme"
+import { createRoot } from "react-dom/client"
+import CommandsRoot from "./CommandsRoot"
+import Providers from "./Providers"
+import Root from "./Root"
 
 async function initialize() {
     const isUrlBlackListed = await checkIsUrlBlackListed(location.href)

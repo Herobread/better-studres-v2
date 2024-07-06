@@ -21,13 +21,13 @@ export function parseFileSize(rawFileSize: string) {
         number = items[0]
     }
 
-    const size = parseFloat(number)
-    let units = items[2]
+    const value = parseFloat(number)
+    let measure = items[2]
 
     // If units are empty, set it to "B"
-    if (!units) {
-        units = "B"
+    if (!measure) {
+        measure = "B"
     }
 
-    return { size, units }
+    return { value, measure }
 }

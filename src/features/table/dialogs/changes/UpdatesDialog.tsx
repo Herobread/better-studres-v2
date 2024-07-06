@@ -2,7 +2,7 @@ import { Dialog, DialogContent } from "@src/components/ui/dialog"
 import {
     GET_TRACKED_FILE_LINK_QUERY_KEY_BASE,
     generateChangeRecords,
-    generateFileLinkKey,
+    generateFileLinkKeyDeprecated,
     getTrackedFileLink,
 } from "@src/features/files"
 import { FileLink } from "@src/types/pageContentTypes"
@@ -20,7 +20,7 @@ export default function UpdatesDialog({
     onOpenChange,
     open,
 }: UpdatesDialogProps) {
-    const fileKey = generateFileLinkKey(fileLink)
+    const fileKey = generateFileLinkKeyDeprecated(fileLink)
 
     const { data } = useQuery({
         queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE, fileKey],

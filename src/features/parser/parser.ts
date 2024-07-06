@@ -1,8 +1,8 @@
+import { FullFileLink, parseTable } from "@src/features/parser"
 import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
-import { FileLink, SortLinks } from "../../types/pageContentTypes"
-import { getPageHeader } from "./getPageHeader"
-import { parseTable } from "@src/features/parser"
 import { isRootPage } from "@src/features/router/isRootPage"
+import { SortLinks } from "../../types/pageContentTypes"
+import { getPageHeader } from "./getPageHeader"
 
 export type PageType = "folder" | "not found" | "root" | "unknown"
 
@@ -13,7 +13,7 @@ export interface BasePageData {
 export interface FolderContent {
     title: string
     sortLinks: SortLinks
-    fileLinks: FileLink[]
+    fileLinks: FullFileLink[]
     extraContent: string
 }
 

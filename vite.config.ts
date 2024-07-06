@@ -1,13 +1,13 @@
+import { crx, ManifestV3Export } from "@crxjs/vite-plugin"
 import react from "@vitejs/plugin-react-swc"
 import { resolve } from "path"
 import { defineConfig } from "vite"
-import { crx, ManifestV3Export } from "@crxjs/vite-plugin"
 
-import manifest from "./manifest.json"
 import devManifest from "./manifest.dev.json"
+import manifest from "./manifest.json"
 import pkg from "./package.json"
-import { viteManifestHackIssue846 } from "./vite/plugins/viteManifestHackIssue846"
 import { stripDevIcons } from "./vite/plugins/stripDevIcons"
+import { viteManifestHackIssue846 } from "./vite/plugins/viteManifestHackIssue846"
 
 const root = resolve(__dirname, "src")
 const pagesDir = resolve(root, "pages")

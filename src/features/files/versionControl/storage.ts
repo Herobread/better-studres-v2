@@ -47,8 +47,12 @@ export type ChangesRecord = {
  * @param {FileLink} fileLink - The file link to generate a key for.
  * @returns {string} The generated key.
  */
-export function generateFileLinkKey(fileLink: FileLink) {
+export function generateFileLinkKeyDeprecated(fileLink: FileLink) {
     return fileLink.urlSegments.join("/")
+}
+
+export function generateFileKey(urlSegments: string[]) {
+    return urlSegments.join("/")
 }
 
 export const VERSION_CONTROL_FILE_DATA_KEY = "version-control-data"
@@ -60,7 +64,7 @@ export const GET_TRACKED_FILE_LINK_QUERY_KEY_BASE = "getTrackedFileLink"
 
 /**
  * Retrieves a tracked file link by key.
- * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
+ * @param {string} key - The key of the tracked file link. You can use {@link generateFileLinkKeyDeprecated} to generate the key.
  * @returns {Promise<TrackedFileLinkData>} A promise that resolves to the tracked file link data.
  */
 export async function getTrackedFileLink(
@@ -71,7 +75,7 @@ export async function getTrackedFileLink(
 
 /**
  * Saves tracked file link data to storage.
- * @param {string} fileKey - The key of the tracked file link. You can use {@link generateFileLinkKey} to generate the key.
+ * @param {string} fileKey - The key of the tracked file link. You can use {@link generateFileLinkKeyDeprecated} to generate the key.
  * @param {TrackedFileLinkData} trackedFileLinkData - The tracked file link data to save.
  * @returns {Promise<void>} A promise that resolves when the data has been saved.
  */

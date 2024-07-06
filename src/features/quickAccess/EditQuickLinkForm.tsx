@@ -1,6 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod"
+import { QuickLink } from "@src/types/quickLinkTypes"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
+import CompactLayout from "../../components/layouts/CompactLayout"
 import NormalLayout from "../../components/layouts/NormalLayout"
 import H2 from "../../components/typography/H2"
+import { Button } from "../../components/ui/button"
 import {
     Form,
     FormControl,
@@ -9,13 +14,8 @@ import {
     FormLabel,
     FormMessage,
 } from "../../components/ui/form"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { updateQuickLink } from "./QuickLinkManager"
-import CompactLayout from "../../components/layouts/CompactLayout"
 import { Input } from "../../components/ui/input"
-import { Button } from "../../components/ui/button"
-import { QuickLink } from "@src/types/quickLinkTypes"
+import { updateQuickLink } from "./QuickLinkManager"
 
 interface EditQuickLinkFormProps {
     quickLink: QuickLink
