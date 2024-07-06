@@ -68,10 +68,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             },
         })
 
-        const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
-            useState(false)
-        const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
-
         const {
             description,
             href,
@@ -86,6 +82,11 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
             image,
             lastModified,
         } = fileLink
+
+        const [isViewUpdatesDialogOpen, setIsViewUpdatesDialogOpen] =
+            useState(false)
+        const [isTagMenuOpen, setIsTagMenuOpen] = useState(false)
+        const isTagContextMenuDisabled = fullName === "Parent Directory"
 
         const isVersionHistoryAvailable = isFileLinkTracked(fileLink)
         const isToolTipWhyDisabledShown = !isUrlTracked(fileLink.href)
@@ -135,7 +136,8 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                         {name}
                                         {isLongExtensionName && "." + extension}
                                     </span>
-                                    {tags &&
+                                    {!isTagContextMenuDisabled &&
+                                        tags &&
                                         tags?.length > 0 &&
                                         tags.map((tag) => {
                                             return (
@@ -223,13 +225,19 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             isFolder={isFolder}
                             fileName={fullName}
                         />
-                        <ContextMenuSeparator />
-                        <TagFileMenuContextItem
-                            fileTags={tags}
-                            setIsTagMenuOpen={setIsTagMenuOpen}
-                            fileLink={fileLink}
-                            setIsManageTagsMenuOpen={setIsManageTagsMenuOpen}
-                        />
+                        {!isTagContextMenuDisabled && (
+                            <>
+                                <ContextMenuSeparator />
+                                <TagFileMenuContextItem
+                                    fileTags={tags}
+                                    setIsTagMenuOpen={setIsTagMenuOpen}
+                                    fileLink={fileLink}
+                                    setIsManageTagsMenuOpen={
+                                        setIsManageTagsMenuOpen
+                                    }
+                                />
+                            </>
+                        )}
                     </ContextMenuContent>
                 </ContextMenu>
 
