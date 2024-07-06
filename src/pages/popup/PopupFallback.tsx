@@ -5,11 +5,7 @@ import {
     QuickLinkContainer,
     getQuickLinks,
 } from "@src/features/quickAccess"
-import {
-    BASE_URL,
-    MMS_BASE_URL,
-    MY_SAINT_BASE_URL,
-} from "@src/features/files"
+import { BASE_URL, MMS_BASE_URL, MY_SAINT_BASE_URL } from "@src/features/files"
 import { useQuery } from "@tanstack/react-query"
 
 export default function PopupFallback() {
