@@ -2,6 +2,7 @@ import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { getFileDataMap } from "../shared/storage"
 import { BASE_URL, extractUrlSegments } from "../shared/urlSegments"
+import { VERSION_CONTROL_FILE_DATA_KEY } from "./storage"
 
 export interface FileLinkPath {
     name: string
@@ -17,24 +18,27 @@ export async function getFormattedFilesList(): Promise<FileLinkPath[]> {
     const result: FileLinkPath[] = []
 
     for (const filePath in fileDataMap) {
-        // const minimizedFileLink = fileDataMap[filePath][VERSION_CONTROL_FILE_DATA_KEY]
-        const urlSegments = extractUrlSegments(filePath)
+        const minimizedFileLink =
+            fileDataMap[filePath][VERSION_CONTROL_FILE_DATA_KEY]
 
+        if (!minimizedFileLink) {
+            continue
+        }
+
+        const urlSegments = extractUrlSegments(
+            minimizedFileLink.latestFileLink.href
+        )
         const moduleCode = urlSegments[0]
         const moduleEmoji = getModuleEmoji(moduleCode)
         let name = `${moduleEmoji} ${moduleCode}`
-
         if (urlSegments.length > 1) {
             // works for most of the folders
             const isFolder = !urlSegments[urlSegments.length - 1].includes(".")
             const folderChar = isFolder ? "/" : ""
-
             const fileName = decodeURI(urlSegments[urlSegments.length - 1])
             const fileEmoji = getFileEmoji(fileName + folderChar)
-
             name += ` - ${fileEmoji} ${fileName}`
         }
-
         result.push({
             href: BASE_URL + filePath,
             name,
