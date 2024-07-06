@@ -36,7 +36,31 @@ export async function createTag(name: string) {
 
 export async function getTags() {
     const tagsObject = await chrome.storage.local.get(TAGS_STORAGE_KEY)
-    const tags = tagsObject[TAGS_STORAGE_KEY] || []
+
+    const EXAMPLE_TAGS: Tag[] = [
+        {
+            id: 0,
+            name: "Important",
+        },
+        {
+            id: 1,
+            name: "Todo",
+        },
+        {
+            id: 2,
+            name: "Completed",
+        },
+        {
+            id: 3,
+            name: "Question",
+        },
+    ]
+
+    if (!tagsObject[TAGS_STORAGE_KEY]) {
+        await setTags(EXAMPLE_TAGS)
+    }
+
+    const tags = tagsObject[TAGS_STORAGE_KEY] || EXAMPLE_TAGS
 
     return tags as Tag[]
 }

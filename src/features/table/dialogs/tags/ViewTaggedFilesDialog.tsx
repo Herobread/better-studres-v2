@@ -52,23 +52,32 @@ export function ViewTaggedFilesDialog({
                     </DialogDescription>
                     <ScrollArea className="max-h-96">
                         <div className="grid gap-2">
-                            {minimizedFileLinks?.map((minimizedFileLink, i) => {
-                                return (
-                                    <Fragment key={minimizedFileLink.href}>
-                                        <MinimizedTaggedLinkPreview
-                                            onClick={() => {
-                                                setIsOpen(false)
-                                            }}
-                                            minimizedFileLink={
-                                                minimizedFileLink
-                                            }
-                                        />
-                                        {i < minimizedFileLinks.length - 1 && (
-                                            <Separator />
-                                        )}
-                                    </Fragment>
+                            {minimizedFileLinks &&
+                            minimizedFileLinks.length > 0 ? (
+                                minimizedFileLinks.map(
+                                    (minimizedFileLink, i) => {
+                                        return (
+                                            <Fragment
+                                                key={minimizedFileLink.href}
+                                            >
+                                                <MinimizedTaggedLinkPreview
+                                                    onClick={() => {
+                                                        setIsOpen(false)
+                                                    }}
+                                                    minimizedFileLink={
+                                                        minimizedFileLink
+                                                    }
+                                                />
+                                                {i <
+                                                    minimizedFileLinks.length -
+                                                        1 && <Separator />}
+                                            </Fragment>
+                                        )
+                                    }
                                 )
-                            })}
+                            ) : (
+                                <p>No tagged files or folders found.</p>
+                            )}
                         </div>
                     </ScrollArea>
                 </DialogHeader>
