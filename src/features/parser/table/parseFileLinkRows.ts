@@ -1,9 +1,9 @@
 import { FileLink, Image } from "@src/types/pageContentTypes"
 
-import { extractUrlSegments } from "@src/features/files"
-import { splitFileName, parseFileSize } from "@src/features/parser"
-import { getTimeDifferenceString } from "@src/features/contentEnhancers/getTimeDifferenceString"
 import { getFileEmoji } from "@src/features/contentEnhancers/emoji/files"
+import { getTimeDifferenceString } from "@src/features/contentEnhancers/getTimeDifferenceString"
+import { extractUrlSegments } from "@src/features/files"
+import { parseFileSize, splitFileName } from "@src/features/parser"
 
 const IMAGE_FILE_EXTENSIONS = ["png", "jpg", "jpeg", "gif", "webp", "svg"]
 
@@ -18,6 +18,12 @@ export function parseFileLinkRows(
 
     return fileLinks
 }
+
+// function parseRowToMinimizedFileLink(
+//     fileLinkRows: HTMLTableRowElement
+// ): MinimizedFileLink {
+//     const minimizedFileLink
+// }
 
 function parseFileLinkRow(fileLinkRows: HTMLTableRowElement): FileLink {
     const fields = fileLinkRows.querySelectorAll("td")

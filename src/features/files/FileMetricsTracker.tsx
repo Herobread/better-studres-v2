@@ -1,6 +1,8 @@
-import { trackFileLinks } from "@src/features/files"
 import { FileLink } from "@src/types/pageContentTypes"
+import { useQueryClient } from "@tanstack/react-query"
 import { useEffect } from "react"
+import { GET_TRACKED_FILE_LINK_QUERY_KEY_BASE } from "./versionControl/storage"
+import { trackFileLinks } from "./versionControl/track"
 
 interface FileMetricsTrackerProps {
     fileLinks: FileLink[]
@@ -16,8 +18,20 @@ interface FileMetricsTrackerProps {
 export function FileMetricsTracker({
     fileLinks,
 }: FileMetricsTrackerProps): null {
+    const queryClient = useQueryClient()
+
     useEffect(() => {
-        trackFileLinks(fileLinks)
+        async function track() {
+            await trackFileLinks(fileLinks)
+            queryClient.invalidateQueries({
+                queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+            })
+            queryClient.refetchQueries({
+                queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+            })
+        }
+
+        track()
     })
 
     return null

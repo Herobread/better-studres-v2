@@ -9,25 +9,30 @@ import { BASE_URL } from "../shared/urlSegments"
 
 export const TRACKED_FILE_LINK_MAP = "trackedFileLinkMap"
 
-export interface MinimizedFileLink {
+export type MinimizedFileLink = {
     href: string
     name: string
-    lastModified: string
     size: number
     units: string
+}
+
+export type TrackerData = {
+    lastModified: string
     detectedAt: number
 }
 
-export interface TrackedFileLinkData {
-    latestFileLink: MinimizedFileLink
-    versions: MinimizedFileLink[]
+export type TrackedMinimizedFileLink = MinimizedFileLink & TrackerData
+
+export type TrackedFileLinkData = {
+    latestFileLink: TrackedMinimizedFileLink
+    versions: TrackedMinimizedFileLink[]
 }
 
-export interface TrackedFileLinkMap {
+export type TrackedFileLinkMap = {
     [key: string]: TrackedFileLinkData
 }
 
-export interface ChangesRecord {
+export type ChangesRecord = {
     version: string
     header: string
     changes?: {
@@ -51,7 +56,7 @@ export const VERSION_CONTROL_FILE_DATA_KEY = "version-control-data"
 /**
  * add fileLink.href to the key to create full key
  */
-export const GET_TRACKED_FILE_LINK_QUERY_KEY_BASE = "fileLink"
+export const GET_TRACKED_FILE_LINK_QUERY_KEY_BASE = "getTrackedFileLink"
 
 /**
  * Retrieves a tracked file link by key.
@@ -84,9 +89,11 @@ export async function saveTrackedFileLinkToStorage(
 /**
  * Minimizes a file link.
  * @param {FileLink} fileLink - The file link to minimize.
- * @returns {MinimizedFileLink} The minimized file link.
+ * @returns {TrackedMinimizedFileLink} The minimized file link.
  */
-export function minimizeFileLink(fileLink: FileLink): MinimizedFileLink {
+export function minimizeAndTrackFileLink(
+    fileLink: FileLink
+): TrackedMinimizedFileLink {
     const { name, href, lastModified, space } = fileLink
 
     const detectedAt = new Date().getTime()
@@ -120,9 +127,7 @@ export async function convertFileKeysToMinimizedFileLinks(fileKeys: string[]) {
 
         if (!minimizedFileData) {
             const placeholderLinkData: MinimizedFileLink = {
-                detectedAt: 0,
                 href: BASE_URL + fileKey,
-                lastModified: "unknown",
                 name: fileKey,
                 size: 0,
                 units: "",
