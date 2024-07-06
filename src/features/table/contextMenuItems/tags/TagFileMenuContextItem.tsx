@@ -16,8 +16,10 @@ import {
 import { FileLink } from "@src/types/pageContentTypes"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { TagsIcon } from "lucide-react"
+import { ComponentProps } from "react"
 
-interface TagFileMenuContextItemProps {
+interface TagFileMenuContextItemProps
+    extends ComponentProps<typeof ContextMenuSub> {
     setIsTagMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
     setIsManageTagsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>
     fileLink: FileLink
@@ -29,6 +31,7 @@ export function TagFileMenuContextItem({
     setIsManageTagsMenuOpen,
     fileLink,
     fileTags,
+    ...props
 }: TagFileMenuContextItemProps) {
     const fileKey = generateFileLinkKey(fileLink)
     const queryClient = useQueryClient()
@@ -40,7 +43,7 @@ export function TagFileMenuContextItem({
 
     if (isLoading) {
         return (
-            <ContextMenuSub>
+            <ContextMenuSub {...props}>
                 <ContextMenuSubTrigger disabled>
                     <TagsIcon /> Add tag
                 </ContextMenuSubTrigger>
@@ -76,7 +79,7 @@ export function TagFileMenuContextItem({
     }
 
     return (
-        <ContextMenuSub>
+        <ContextMenuSub {...props}>
             <ContextMenuSubTrigger>
                 <TagsIcon /> Tags
             </ContextMenuSubTrigger>
