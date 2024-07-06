@@ -39,6 +39,8 @@ export async function saveFileData(
     await chrome.storage.local.set({ [FILE_DATA_STORAGE_KEY]: fileData })
 }
 
+export const GET_FILE_DATA_QUERY_KEY = "getFileData"
+
 /**
  * Retrieves a property for a specified file from Chrome local storage.
  * @param {string} fileKey - The key representing the file.

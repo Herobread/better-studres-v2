@@ -1,7 +1,7 @@
 import {
     ChangesRecord,
-    MinimizedFileLink,
     TrackedFileLinkData,
+    TrackedMinimizedFileLink,
 } from "./storage"
 
 /**
@@ -71,13 +71,13 @@ export function generateChangeRecords(
 
 /**
  * Compares two minimized file links.
- * @param {MinimizedFileLink} minimizedFileLink1 - The first minimized file link.
- * @param {MinimizedFileLink} minimizedFileLink2 - The second minimized file link.
+ * @param {TrackedMinimizedFileLink} minimizedFileLink1 - The first minimized file link.
+ * @param {TrackedMinimizedFileLink} minimizedFileLink2 - The second minimized file link.
  * @returns {boolean} True if the file links are the same, false otherwise.
  */
-export function compareMinimizedFileLinks(
-    minimizedFileLink1: MinimizedFileLink,
-    minimizedFileLink2: MinimizedFileLink
+export function compareTrackedMinimizedFileLinks(
+    minimizedFileLink1: TrackedMinimizedFileLink,
+    minimizedFileLink2: TrackedMinimizedFileLink
 ) {
     return (
         minimizedFileLink1.href === minimizedFileLink2.href &&

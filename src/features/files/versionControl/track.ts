@@ -1,14 +1,14 @@
 import { FileLink } from "@src/types/pageContentTypes"
+import { compareTrackedMinimizedFileLinks } from "./fileMetrics"
+import { isFileLinkTracked } from "./ignore"
 import {
-    MinimizedFileLink,
     TrackedFileLinkData,
+    TrackedMinimizedFileLink,
     generateFileLinkKey,
     getTrackedFileLink,
-    minimizeFileLink,
+    minimizeAndTrackFileLink,
     saveTrackedFileLinkToStorage,
 } from "./storage"
-import { compareMinimizedFileLinks } from "./fileMetrics"
-import { isFileLinkTracked } from "./ignore"
 
 /**
  * Tracks multiple file links.
@@ -30,7 +30,8 @@ export async function trackFileLink(fileLink: FileLink) {
         return
     }
 
-    const minimizedFileLink: MinimizedFileLink = minimizeFileLink(fileLink)
+    const minimizedFileLink: TrackedMinimizedFileLink =
+        minimizeAndTrackFileLink(fileLink)
 
     const key = generateFileLinkKey(fileLink)
 
@@ -51,7 +52,7 @@ export async function trackFileLink(fileLink: FileLink) {
     // file exists
     const { versions, latestFileLink } = record
 
-    const isNewVersion = !compareMinimizedFileLinks(
+    const isNewVersion = !compareTrackedMinimizedFileLinks(
         minimizedFileLink,
         latestFileLink
     )

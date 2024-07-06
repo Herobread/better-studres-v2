@@ -20,10 +20,12 @@ export default function UpdatesDialog({
     onOpenChange,
     open,
 }: UpdatesDialogProps) {
+    const fileKey = generateFileLinkKey(fileLink)
+
     const { data } = useQuery({
-        queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE + fileLink.href],
+        queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE, fileKey],
         queryFn: async () => {
-            return await getTrackedFileLink(generateFileLinkKey(fileLink))
+            return await getTrackedFileLink(fileKey)
         },
     })
 

@@ -1,7 +1,9 @@
-import { useToast } from "../../components/ui/use-toast"
+import { useQueryClient } from "@tanstack/react-query"
 import { CommandItem } from "../../components/ui/command"
 import { ToastAction } from "../../components/ui/toast"
+import { useToast } from "../../components/ui/use-toast"
 import {
+    GET_TRACKED_FILE_LINK_QUERY_KEY_BASE,
     clearVersionTrackingData,
     getFileDataMap,
     setFileDataMap,
@@ -16,6 +18,8 @@ export default function ClearVersionTrackingDataCommand({
 }: ClearVersionTrackingDataCommandProps) {
     const { toast } = useToast()
 
+    const queryClient = useQueryClient()
+
     const handleClearVersionTrackingData = async () => {
         try {
             const fileDataMapBackup = await getFileDataMap()
@@ -25,7 +29,12 @@ export default function ClearVersionTrackingDataCommand({
             const handleUndo = async () => {
                 try {
                     await setFileDataMap(fileDataMapBackup)
-
+                    queryClient.invalidateQueries({
+                        queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+                    })
+                    queryClient.refetchQueries({
+                        queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+                    })
                     toast({
                         title: "✅ Success",
                         description: "Version tracking data has been restored.",
@@ -38,6 +47,12 @@ export default function ClearVersionTrackingDataCommand({
                 }
             }
 
+            queryClient.invalidateQueries({
+                queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+            })
+            queryClient.refetchQueries({
+                queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE],
+            })
             toast({
                 title: "✅ Success",
                 description: "Version tracking data has been cleared.",
