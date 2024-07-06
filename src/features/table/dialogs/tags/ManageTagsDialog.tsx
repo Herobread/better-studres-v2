@@ -51,26 +51,32 @@ export function ManageTagsDialog({
                     </DialogDescription>
                 </DialogHeader>
                 <ScrollArea className="max-h-96">
-                    {tags?.map((tag, i) => {
-                        const { id } = tag
+                    {tags && tags.length > 0 ? (
+                        tags.map((tag, i) => {
+                            const { id } = tag
 
-                        return (
-                            <Fragment key={id}>
-                                <ManageTagCard
-                                    setActiveTag={setActiveTag}
-                                    setIsManageTagsDialogOpen={
-                                        setIsManageTagsDialogOpen
-                                    }
-                                    setIsViewTaggedFilesDialogOpen={
-                                        setIsViewTaggedFilesDialogOpen
-                                    }
-                                    tag={tag}
-                                    files={stats && stats[id]}
-                                />
-                                {i < tags.length - 1 && <Separator />}
-                            </Fragment>
-                        )
-                    })}
+                            return (
+                                <Fragment key={id}>
+                                    <ManageTagCard
+                                        setActiveTag={setActiveTag}
+                                        setIsManageTagsDialogOpen={
+                                            setIsManageTagsDialogOpen
+                                        }
+                                        setIsViewTaggedFilesDialogOpen={
+                                            setIsViewTaggedFilesDialogOpen
+                                        }
+                                        tag={tag}
+                                        files={stats && stats[id]}
+                                    />
+                                    {i < tags.length - 1 && <Separator />}
+                                </Fragment>
+                            )
+                        })
+                    ) : (
+                        <p>
+                            No tags found. Create tags to organize related files
+                        </p>
+                    )}
                 </ScrollArea>
             </DialogContent>
         </Dialog>
