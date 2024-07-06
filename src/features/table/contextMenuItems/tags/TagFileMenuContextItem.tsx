@@ -51,31 +51,12 @@ export function TagFileMenuContextItem({
         )
     }
 
-    // if (fileTags && fileTags?.length > 0) {
-    //     const handleRemoveTag = async () => {
-    //         await removeFileTag(fileKey, fileTags[0].id)
-    //         queryClient.invalidateQueries({
-    //             queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
-    //         })
-    //         queryClient.refetchQueries({
-    //             queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],
-    //         })
-    //     }
-
-    //     return (
-    //         <ContextMenuItem onSelect={handleRemoveTag}>
-    //             <TicketMinusIcon /> Remove tag
-    //         </ContextMenuItem>
-    //     )
-    // }
-
     const handleManageTags = () => {
         setIsManageTagsMenuOpen(true)
     }
 
     const handleCreateNewTag = () => {
         setIsTagMenuOpen(true)
-        // queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
     }
 
     return (

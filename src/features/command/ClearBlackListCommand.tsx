@@ -38,7 +38,10 @@ export default function ClearBlackListCommand({
                 title: "✅ Success",
                 description: "Blacklist data has been cleared.",
                 action: (
-                    <ToastAction onClick={handleUndo} altText="Restore blacklist">
+                    <ToastAction
+                        onClick={handleUndo}
+                        altText="Restore blacklist"
+                    >
                         Undo
                     </ToastAction>
                 ),
@@ -58,7 +61,7 @@ export default function ClearBlackListCommand({
     return (
         <CommandItem
             onSelect={handleCommand}
-            keywords={["reset", "data", "blacklist","whitelist"]}
+            keywords={["reset", "data", "blacklist", "whitelist"]}
         >
             🗑️ Clear blacklist
         </CommandItem>
