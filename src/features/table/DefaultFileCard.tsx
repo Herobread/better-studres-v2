@@ -1,7 +1,7 @@
 import { Badge } from "@src/components/ui/badge"
 import { ConfigContext } from "@src/features/config"
 import {
-    generateFileLinkKey,
+    generateFileLinkKeyDeprecated,
     isFileLinkTracked,
     isUrlTracked,
 } from "@src/features/files"
@@ -59,7 +59,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
         const { fileIcons, date, imagePreviewAsIcon } =
             useContext(ConfigContext)
 
-        const fileKey = generateFileLinkKey(fileLink)
+        const fileKey = generateFileLinkKeyDeprecated(fileLink)
 
         const { data: tags } = useQuery({
             queryKey: [TAGS_QUERY_KEY, TAGS_QUERY_KEY + fileKey],

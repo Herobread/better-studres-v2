@@ -17,7 +17,7 @@ import {
 } from "@src/components/ui/form"
 import { Input } from "@src/components/ui/input"
 import { useToast } from "@src/components/ui/use-toast"
-import { generateFileLinkKey } from "@src/features/files"
+import { generateFileLinkKeyDeprecated } from "@src/features/files"
 import {
     TAGS_QUERY_KEY,
     addTag,
@@ -49,7 +49,7 @@ export function TagFileMenuDialog({
 
     const queryClient = useQueryClient()
 
-    const fileKey = generateFileLinkKey(fileLink)
+    const fileKey = generateFileLinkKeyDeprecated(fileLink)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

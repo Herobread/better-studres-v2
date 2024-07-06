@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
-import useSmoothRouter from "./useSmoothRouter"
 import { PageData } from "../parser"
 import { redirect } from "./redirect"
+import useSmoothRouter from "./useSmoothRouter"
 
 export function SmoothRouterListener() {
     const { navigateToPage } = useSmoothRouter()

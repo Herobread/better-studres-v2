@@ -1,5 +1,5 @@
-import { CommandItem } from "../../components/ui/command"
 import { getCurrentTheme, useTheme } from "@src/features/theme"
+import { CommandItem } from "../../components/ui/command"
 
 interface ToggleThemeCommandProps {
     setIsCommandOpen: (open: boolean) => void

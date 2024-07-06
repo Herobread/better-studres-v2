@@ -1,16 +1,11 @@
-import {
-    deleteQuickLink,
-    getQuickLinks,
-    moveQuickLink,
-} from "./QuickLinkManager"
 import { useQuery } from "@tanstack/react-query"
-import QuickLinkButton from "./QuickLinkButton"
 import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "../../components/ui/popover"
-import AddQuickLinkForm from "./AddQuickLinkForm"
+    ArrowLeftIcon,
+    ChevronLeft,
+    ChevronRight,
+    Edit2Icon,
+    Trash2Icon,
+} from "lucide-react"
 import { useState } from "react"
 import {
     ContextMenu,
@@ -20,18 +15,23 @@ import {
     ContextMenuTrigger,
 } from "../../components/ui/context-menu"
 import { Dialog, DialogContent } from "../../components/ui/dialog"
-import EditQuickLinkForm from "./EditQuickLinkForm"
 import {
-    ArrowLeftIcon,
-    ChevronLeft,
-    ChevronRight,
-    Edit2Icon,
-    Trash2Icon,
-} from "lucide-react"
-import { QuickLinkContainer } from "./QuickLinkContainer"
-import { QuickLinkCard } from "./QuickLinkCard"
-import { generateQuickLinkInfo } from "./generateQuickLinkInfo"
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "../../components/ui/popover"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
+import AddQuickLinkForm from "./AddQuickLinkForm"
+import EditQuickLinkForm from "./EditQuickLinkForm"
+import QuickLinkButton from "./QuickLinkButton"
+import { QuickLinkCard } from "./QuickLinkCard"
+import { QuickLinkContainer } from "./QuickLinkContainer"
+import {
+    deleteQuickLink,
+    getQuickLinks,
+    moveQuickLink,
+} from "./QuickLinkManager"
+import { generateQuickLinkInfo } from "./generateQuickLinkInfo"
 
 export function QuickLinks() {
     const [isOpen, setIsOpen] = useState(false)

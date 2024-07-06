@@ -1,10 +1,10 @@
-import { useContext, useCallback } from "react"
+import { useCallback, useContext } from "react"
 
-import { redirect } from "@src/features/router/"
 import { PageData, parsePageContent } from "@src/features/parser"
-import { PageStateContext } from "./PageStateContext"
+import { redirect } from "@src/features/router/"
 import { checkIsUrlBlackListed } from "../extensionToggle/blacklist"
 import { parseDocumentFromText } from "../fileDownload/parseDocumentFromText"
+import { PageStateContext } from "./PageStateContext"
 
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)

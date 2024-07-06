@@ -6,7 +6,7 @@ import {
     ContextMenuSubContent,
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
-import { generateFileLinkKey } from "@src/features/files"
+import { generateFileLinkKeyDeprecated } from "@src/features/files"
 import {
     TAGS_QUERY_KEY,
     Tag,
@@ -33,7 +33,7 @@ export function TagFileMenuContextItem({
     fileTags,
     ...props
 }: TagFileMenuContextItemProps) {
-    const fileKey = generateFileLinkKey(fileLink)
+    const fileKey = generateFileLinkKeyDeprecated(fileLink)
     const queryClient = useQueryClient()
 
     const { data: allTags, isLoading } = useQuery({
