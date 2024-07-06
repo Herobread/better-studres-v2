@@ -90,7 +90,7 @@ export function TagFileMenuContextItem({
                 <ContextMenuItem inset onSelect={handleManageTags}>
                     Manage tags
                 </ContextMenuItem>
-                <ContextMenuSeparator />
+                {allTags && allTags.length > 0 && <ContextMenuSeparator />}
                 {allTags &&
                     allTags.map((tag) => {
                         const isChecked = !!fileTags?.find((tag_) => {
