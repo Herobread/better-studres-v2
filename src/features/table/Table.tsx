@@ -2,11 +2,11 @@ import { SortLinks } from "@src/types/pageContentTypes"
 import { useEffect, useState } from "react"
 import { Tag } from "../files/tags/storage"
 import { FullFileLink } from "../parser"
-import FileCard from "./FileCard"
 import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
 import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 import { ViewTaggedFilesDialog } from "./dialogs/tags/ViewTaggedFilesDialog"
+import { FileCard } from "./fileCard/FileCard"
 
 interface TableProps {
     fileLinks: FullFileLink[]
@@ -44,43 +44,43 @@ export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
           data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
           "
                 >
-                    <>
-                        <TableHeader sortLinks={sortLinks} />
-                        {fileLinks.map((fileLink) => {
-                            return (
-                                <FileCard
-                                    // setActiveTag={setActiveTag}
-                                    // isViewTaggedFilesDialogOpen={
-                                    //     isViewTaggedFilesDialogOpen
-                                    // }
-                                    // setIsViewTaggedFilesDialogOpen={
-                                    //     setIsViewTaggedFilesDialogOpen
-                                    // }
-                                    // isManageTagsMenuOpen={isManageTagsMenuOpen}
-                                    // setIsManageTagsMenuOpen={
-                                    //     setIsManageTagsDialogOpen
-                                    // }
-                                    fileLink={fileLink}
-                                    key={fileLink.fileKey}
-                                />
-                            )
-                        })}
-                        <ManageTagsDialog
-                            setIsViewTaggedFilesDialogOpen={
-                                setIsViewTaggedFilesDialogOpen
-                            }
-                            setActiveTag={setActiveTag}
-                            setIsManageTagsDialogOpen={
-                                setIsManageTagsDialogOpen
-                            }
-                            open={isManageTagsMenuOpen}
-                        />
-                        <ViewTaggedFilesDialog
-                            setIsOpen={setIsViewTaggedFilesDialogOpen}
-                            open={isViewTaggedFilesDialogOpen}
-                            tag={activeTag}
-                        />
-                    </>
+                    <TableHeader sortLinks={sortLinks} />
+                    {fileLinks.map((fileLink) => {
+                        return (
+                            <FileCard
+                                fileLink={fileLink}
+                                key={fileLink.fileKey}
+                            />
+                            // <FileCard
+                            // setActiveTag={setActiveTag}
+                            // isViewTaggedFilesDialogOpen={
+                            //     isViewTaggedFilesDialogOpen
+                            // }
+                            // setIsViewTaggedFilesDialogOpen={
+                            //     setIsViewTaggedFilesDialogOpen
+                            // }
+                            // isManageTagsMenuOpen={isManageTagsMenuOpen}
+                            // setIsManageTagsMenuOpen={
+                            //     setIsManageTagsDialogOpen
+                            // }
+                            //     fileLink={fileLink}
+                            //     key={fileLink.fileKey}
+                            // />
+                        )
+                    })}
+                    <ManageTagsDialog
+                        setIsViewTaggedFilesDialogOpen={
+                            setIsViewTaggedFilesDialogOpen
+                        }
+                        setActiveTag={setActiveTag}
+                        setIsManageTagsDialogOpen={setIsManageTagsDialogOpen}
+                        open={isManageTagsMenuOpen}
+                    />
+                    <ViewTaggedFilesDialog
+                        setIsOpen={setIsViewTaggedFilesDialogOpen}
+                        open={isViewTaggedFilesDialogOpen}
+                        tag={activeTag}
+                    />
                 </div>
             )}
         </>
