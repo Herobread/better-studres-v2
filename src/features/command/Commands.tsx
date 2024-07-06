@@ -1,4 +1,14 @@
+import { Badge } from "@src/components/ui/badge"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
+import {
+    BASE_URL,
+    convertUrlSegmentsToUrl,
+    extractUrlSegments,
+    getFormattedFilesListForCommand,
+} from "@src/features/files"
+import { redirect } from "@src/features/router/"
 import { useQuery } from "@tanstack/react-query"
+import { useCallback, useEffect } from "react"
 import {
     CommandDialog,
     CommandEmpty,
@@ -7,29 +17,20 @@ import {
     CommandItem,
     CommandList,
 } from "../../components/ui/command"
-import { useCallback, useEffect } from "react"
 import { getQuickLinks } from "../quickAccess"
-import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { useCommand } from "./CommandContext"
-import {
-    extractUrlSegments,
-    convertUrlSegmentsToUrl,
-    BASE_URL,
-} from "@src/features/files"
-import { getFormattedFilesList } from "@src/features/files"
-import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
-import ToggleThemeCommand from "./ToggleThemeCommand"
-import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
-import { redirect } from "@src/features/router/"
 import ClearBlackListCommand from "./ClearBlackListCommand"
+import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
+import { useCommand } from "./CommandContext"
+import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
 import { ToggleEnhancePageCommand } from "./ToggleEnhancePageCommand"
+import ToggleThemeCommand from "./ToggleThemeCommand"
 
 export default function Commands() {
     const { open, setOpen } = useCommand()
 
     const { data: commandsData } = useQuery({
         queryKey: ["commands"],
-        queryFn: getFormattedFilesList,
+        queryFn: getFormattedFilesListForCommand,
     })
 
     const { data: quickLinks } = useQuery({
@@ -122,14 +123,24 @@ export default function Commands() {
 
                             return (
                                 <CommandItem
-                                    keywords={[item.href]}
+                                    keywords={[item.href, ...item.tags]}
                                     key={urlSegmentsString}
                                     onSelect={() => {
                                         redirect(item.href, "userClick")
                                     }}
                                     className="grid gap-1"
                                 >
-                                    {item.name}
+                                    <div className="flex flex-wrap gap-2">
+                                        {item.name}
+                                        {item.tags.length > 0 &&
+                                            item.tags.map((tag) => {
+                                                return (
+                                                    <Badge key={tag}>
+                                                        {tag}
+                                                    </Badge>
+                                                )
+                                            })}
+                                    </div>
                                     <span className="text-muted-foreground">
                                         {urlSegmentsString}
                                     </span>
