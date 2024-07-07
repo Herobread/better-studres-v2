@@ -17,6 +17,7 @@
         "node": "^20.x"
     },
     "dependencies": {
+        "@ebay/nice-modal-react": "^1.2.13",
         "@hookform/resolvers": "^3.3.4",
         "@radix-ui/react-context-menu": "^2.1.5",
         "@radix-ui/react-dialog": "^1.0.5",

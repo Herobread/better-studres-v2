@@ -3,9 +3,37 @@ import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { X } from "lucide-react"
 import * as React from "react"
 
+import { NiceModalHandler } from "@ebay/nice-modal-react"
 import { cn } from "@src/lib/utils"
 
-const Dialog = DialogPrimitive.Root
+type ExtendedDialogProps = {
+    handler: NiceModalHandler<Record<string, unknown>>
+}
+
+const Dialog = React.forwardRef<
+    HTMLDivElement,
+    DialogPrimitive.DialogProps & ExtendedDialogProps
+>(({ children, handler, ...props }, ref) => {
+    const handleOnOpenChange = (open: boolean) => {
+        if (open) {
+            handler.show()
+        } else {
+            handler.hide()
+        }
+    }
+
+    return (
+        <DialogPrimitive.Root
+            onOpenChange={handleOnOpenChange}
+            open={handler?.visible}
+            {...props}
+        >
+            <div ref={ref}>{children}</div>
+        </DialogPrimitive.Root>
+    )
+})
+
+Dialog.displayName = "Dialog"
 
 const DialogTrigger = DialogPrimitive.Trigger
 

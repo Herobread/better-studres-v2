@@ -27,8 +27,8 @@ import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
 import DownloadFileMenuItem from "./contextMenuItems/DownloadFileMenuItem"
 import { UpdatesContextMenuItem } from "./contextMenuItems/UpdatesContextMenuItem"
 import { TagFileMenuContextItem } from "./contextMenuItems/tags/TagFileMenuContextItem"
-import UpdatesDialog from "./dialogs/changes/UpdatesDialog"
-import { TagFileMenuDialog } from "./dialogs/tags/TagFileMenuDialog"
+import UpdatesDialog from "./dialogs/changesOld/UpdatesDialog"
+import { TagFileMenuDialog } from "./dialogs/tagsOld/TagFileMenuDialog"
 
 export interface DefaultFileCardProps {
     fileLink: FullFileLink
