@@ -54,6 +54,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
         navigateToPage(href)
     }
 
+    console.log("FileCardDetails ref:", ref)
+
     return <a ref={ref} {...props} onClick={handleNavigation} />
 })
 

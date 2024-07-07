@@ -169,7 +169,6 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                                 {space?.size.toFixed(1)}
                             </div>
                             <div className="ml-[-8px]">{space?.units}</div>
-                            {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                             <div className="text-right">
                                 {date === "relative"
                                     ? lastModifiedRelative
@@ -221,6 +220,7 @@ const DefaultFileCard = forwardRef<HTMLAnchorElement, DefaultFileCardProps>(
                             />
                         )}
                         <CopyPathMenuItem href={href} />
+                        {/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
                         <DownloadFileMenuItem
                             href={href}
                             isFolder={isFolder}
