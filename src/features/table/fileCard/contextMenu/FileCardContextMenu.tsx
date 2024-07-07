@@ -40,7 +40,7 @@ const FileCardContextMenuContent = forwardRef<
 
             {isTagContextMenuShown && <ContextMenuSeparator />}
 
-            {isTagContextMenuShown && <TagsMenuItem />}
+            {isTagContextMenuShown && <TagsMenuItem fileLink={fileLink} />}
         </ContextMenuContent>
     )
 })
