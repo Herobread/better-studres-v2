@@ -1,15 +1,12 @@
 import { Badge } from "@src/components/ui/badge"
 import { TAGS_QUERY_KEY, getFileTags } from "@src/features/files/tags/storage"
-import { FullFileLink } from "@src/features/parser"
 import { useQuery } from "@tanstack/react-query"
 
 interface FileTagsProps {
-    fileLink: FullFileLink
+    fileKey: string
 }
 
-export function FileTags({ fileLink }: FileTagsProps) {
-    const { fileKey } = fileLink
-
+export function FileTags({ fileKey }: FileTagsProps) {
     const { data: tags } = useQuery({
         queryKey: [TAGS_QUERY_KEY, fileKey],
         queryFn: async () => {
