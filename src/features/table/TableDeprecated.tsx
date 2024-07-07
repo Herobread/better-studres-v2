@@ -8,14 +8,18 @@ import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 import { ViewTaggedFilesDialog } from "./dialogs/tags/ViewTaggedFilesDialog"
 import FileCard from "./fileCard/FileCard"
 
-interface TableProps {
+interface TableDeprecatedProps {
     fileLinks: FullFileLink[]
     sortLinks: SortLinks
     isLoading: boolean
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function Table({ fileLinks, sortLinks, isLoading }: TableProps) {
+export default function TableDeprecated({
+    fileLinks,
+    sortLinks,
+    isLoading,
+}: TableDeprecatedProps) {
     const [state, setState] = useState<"open" | "closed">("closed")
 
     const [isManageTagsMenuOpen, setIsManageTagsDialogOpen] = useState(false)
