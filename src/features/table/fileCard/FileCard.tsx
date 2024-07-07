@@ -13,7 +13,6 @@ interface FileCardProps extends FileCardDetailsProps {
 
 const FileCard = forwardRef<HTMLAnchorElement, FileCardProps>(
     ({ fileLink }, ref) => {
-        console.log("FileCard ref:", ref)
         return (
             <ContextMenu>
                 <ContextMenuTrigger className="col-span-full grid grid-cols-subgrid">
