@@ -1,12 +1,10 @@
-import { FullFileLink } from "@src/features/parser"
+import { FileSize } from "@src/features/parser"
 
 interface FileSizeProps {
-    fileLink: FullFileLink
+    size?: FileSize
 }
 
-export function FileSize({ fileLink }: FileSizeProps) {
-    const { size } = fileLink
-
+export function FileSize({ size }: FileSizeProps) {
     if (!size) {
         return <div className="col-span-2"></div>
     }

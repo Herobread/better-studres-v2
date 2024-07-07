@@ -1,20 +1,17 @@
 import { ConfigContext } from "@src/features/config"
-import { FullFileLink } from "@src/features/parser"
+import { FileLastModified } from "@src/features/parser"
 import { useContext } from "react"
 
 interface FileModifiedDateProps {
-    fileLink: FullFileLink
+    lastModified: FileLastModified
 }
 
-export function FileModifiedDate({ fileLink }: FileModifiedDateProps) {
-    const {
-        lastModified: { raw, difference },
-    } = fileLink
+export function FileModifiedDate({ lastModified }: FileModifiedDateProps) {
     const { date } = useContext(ConfigContext)
-    let content = raw
+    let content = lastModified.raw
 
     if (date === "relative") {
-        content = difference
+        content = lastModified.difference
     }
 
     return <div className="text-right">{content}</div>

@@ -1,12 +1,8 @@
-import { FullFileLink } from "@src/features/parser"
-
 interface FileDescriptionProps {
-    fileLink: FullFileLink
+    description?: string
 }
 
-export function FileDescription({ fileLink }: FileDescriptionProps) {
-    const { description } = fileLink
-
+export function FileDescription({ description }: FileDescriptionProps) {
     if (!description) {
         return null
     }

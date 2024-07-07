@@ -113,6 +113,15 @@ export type FileSize = {
     measure: string
 }
 
+export type FileLastModified = {
+    /** original value in format YYYY-MM-DD HH:MM */
+    raw: string
+    /** time in seconds from 1970 when the file was edited */
+    timestamp: number
+    /** time difference string in human readable format */
+    difference: string
+}
+
 export type FullFileLink = {
     /** Source from where all extra data was generated */
     base: BaseFileLink
@@ -131,14 +140,7 @@ export type FullFileLink = {
     /** file icon */
     icon: Image
     size?: FileSize
-    lastModified: {
-        /** original value in format YYYY-MM-DD HH:MM */
-        raw: string
-        /** time in seconds from 1970 when the file was edited */
-        timestamp: number
-        /** time difference string in human readable format */
-        difference: string
-    }
+    lastModified: FileLastModified
     description?: string
 
     // extra
