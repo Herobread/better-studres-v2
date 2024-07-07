@@ -6,7 +6,7 @@ import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
 import { ManageTagsDialog } from "./dialogs/tags/ManageTagsDialog"
 import { ViewTaggedFilesDialog } from "./dialogs/tags/ViewTaggedFilesDialog"
-import { FileCard } from "./fileCard/FileCard"
+import FileCard from "./fileCard/FileCard"
 
 interface TableProps {
     fileLinks: FullFileLink[]
