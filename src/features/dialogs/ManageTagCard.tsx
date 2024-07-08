@@ -1,3 +1,4 @@
+import NiceModal from "@ebay/nice-modal-react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Badge } from "@src/components/ui/badge"
 import { Button } from "@src/components/ui/button"
@@ -22,28 +23,19 @@ import { EditIcon, Trash2Icon } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import ManageTagsDialog from "./ManageTagsDialog"
+import ViewTaggedFilesDialog from "./ViewTaggedFilesDialog"
 
 interface ManageTagCardProps {
     tag: Tag
     files?: number
-    setActiveTag: React.Dispatch<React.SetStateAction<Tag>>
-    setIsManageTagsDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
-    setIsViewTaggedFilesDialogOpen: React.Dispatch<
-        React.SetStateAction<boolean>
-    >
 }
 
 const formSchema = z.object({
     tagName: z.string(),
 })
 
-export function ManageTagCard({
-    tag,
-    files,
-    setIsManageTagsDialogOpen,
-    setActiveTag,
-    setIsViewTaggedFilesDialogOpen,
-}: ManageTagCardProps) {
+export function ManageTagCard({ tag, files }: ManageTagCardProps) {
     const { id, name } = tag
 
     const { toast } = useToast()
@@ -81,9 +73,8 @@ export function ManageTagCard({
     }
 
     const handleOpenFilePreviews = () => {
-        setActiveTag(tag)
-        setIsManageTagsDialogOpen(false)
-        setIsViewTaggedFilesDialogOpen(true)
+        NiceModal.hide(ManageTagsDialog)
+        NiceModal.show(ViewTaggedFilesDialog, { tag })
     }
 
     files ??= 0

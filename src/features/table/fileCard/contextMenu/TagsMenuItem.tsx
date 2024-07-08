@@ -6,6 +6,7 @@ import {
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
 import AddNewTagDialog from "@src/features/dialogs/AddNewTagDialog"
+import ManageTagsDialog from "@src/features/dialogs/ManageTagsDialog"
 import { FullFileLink } from "@src/features/parser"
 import { TagsIcon } from "lucide-react"
 
@@ -22,6 +23,10 @@ export function TagsMenuItem({ fileLink }: TagsMenuItemProps) {
         NiceModal.show(AddNewTagDialog, { fileLink })
     }
 
+    const handleManageTags = () => {
+        NiceModal.show(ManageTagsDialog)
+    }
+
     return (
         <ContextMenuSub>
             <ContextMenuSubTrigger>
@@ -31,7 +36,7 @@ export function TagsMenuItem({ fileLink }: TagsMenuItemProps) {
                 <ContextMenuItem inset onSelect={handleCreateNewTag}>
                     Create new tag
                 </ContextMenuItem>
-                <ContextMenuItem inset onSelect={throwError}>
+                <ContextMenuItem inset onSelect={handleManageTags}>
                     Manage tags
                 </ContextMenuItem>
                 {/* {allTags && allTags.length > 0 && <ContextMenuSeparator />}
