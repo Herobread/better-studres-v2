@@ -20,6 +20,8 @@ export async function addQuickLink(rawQuickLink: RawQuickLink) {
     await chrome.storage.local.set({ quickLinks: currentLinks })
 }
 
+export const GET_QUICK_LINKS_QUERY_KEY = "getQuickLinks"
+
 export async function getQuickLinks() {
     const quickLinks: QuickLink[] = await chrome.storage.local
         .get("quickLinks")

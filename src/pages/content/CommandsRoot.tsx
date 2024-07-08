@@ -1,9 +1,9 @@
-import Commands from "@src/features/command/Commands"
+import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 
 export default function CommandsRoot() {
     return (
         <>
-            <Commands />
+            <CommandsShortcutMount />
         </>
     )
 }

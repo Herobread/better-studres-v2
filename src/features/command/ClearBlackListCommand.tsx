@@ -1,15 +1,13 @@
-import { useToast } from "../../components/ui/use-toast"
+import NiceModal from "@ebay/nice-modal-react"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { CommandItem } from "../../components/ui/command"
 import { ToastAction } from "../../components/ui/toast"
+import { useToast } from "../../components/ui/use-toast"
 import { getBlackList, setBlackList } from "../extensionToggle/blacklist"
 
-interface ClearBlackListCommandProps {
-    setIsCommandOpen: (open: boolean) => void
-}
+interface ClearBlackListCommandProps {}
 
-export default function ClearBlackListCommand({
-    setIsCommandOpen,
-}: ClearBlackListCommandProps) {
+export default function ClearBlackListCommand({}: ClearBlackListCommandProps) {
     const { toast } = useToast()
 
     const handleCommand = async () => {
@@ -55,7 +53,7 @@ export default function ClearBlackListCommand({
             console.error("Error clearing blacklist data:", error)
         }
 
-        setIsCommandOpen(false)
+        NiceModal.hide(CommandsDialog)
     }
 
     return (

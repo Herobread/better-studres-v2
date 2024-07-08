@@ -1,17 +1,17 @@
-import { useCommand } from "@src/features/command/CommandContext"
-import CommandInput from "@src/features/command/CommandInput"
-import Commands from "@src/features/command/Commands"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
-import {
-    getQuickLinks,
-    QuickLinkContainer,
-    QuickLinkCard,
-} from "@src/features/quickAccess"
 import H1 from "@src/components/typography/H1"
+import { useCommand } from "@src/features/command/CommandContext"
+import CommandInput from "@src/features/command/CommandInput"
+import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/files"
+import {
+    QuickLinkCard,
+    QuickLinkContainer,
+    getQuickLinks,
+} from "@src/features/quickAccess"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
@@ -53,7 +53,7 @@ export default function NotFound() {
 
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
-            <Commands />
+            <CommandsShortcutMount />
             {showCommandButton && (
                 <WideLayout>
                     <CommandInput onSelect={handleCommandActivation} />
