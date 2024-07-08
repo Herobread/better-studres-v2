@@ -16,11 +16,13 @@ export interface FileCardDetailsProps {
 
 const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
     ({ fileLink }, ref) => {
-        const { href, extension } = fileLink
+        const { href, extension, fullName } = fileLink
 
         const LONG_EXTENSION_LENGTH = 4
         const isLongExtensionName =
             !!extension && extension.length > LONG_EXTENSION_LENGTH
+
+        const isParentDir = fullName.includes("Parent Directory")
 
         return (
             <Link
@@ -42,7 +44,9 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
                             name={fileLink.name}
                             showExtension={isLongExtensionName}
                         />
-                        <FileTags fileKey={fileLink.fileKey} />
+                        {!isParentDir && (
+                            <FileTags fileKey={fileLink.fileKey} />
+                        )}
                     </div>
                     <FileDescription description={fileLink.description} />
                 </div>
