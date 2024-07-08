@@ -94,6 +94,8 @@ export async function addTag(fileKey: string, tag: Tag) {
     await saveFileData(fileKey, TAGS_FILE_DATA_KEY, tags)
 }
 
+export const GET_FILE_TAGS_QUERY_KEY = "getFileTags"
+
 export async function getFileTags(fileKey: string) {
     return (await getFileData(fileKey, TAGS_FILE_DATA_KEY)) as Tag[] | undefined
 }
