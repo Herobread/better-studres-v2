@@ -43,3 +43,6 @@ https://studres.cs.st-andrews.ac.uk/2012_2013/Teaching/Teaching_UG/SubHons/Level
 CS1005 Computer Science in Everyday Life (CSEL)
 https://studres.cs.st-andrews.ac.uk/2013_2014/Teaching/Teaching_UG/SubHons/Level_1/CS1005-CSEL/
 https://studres.cs.st-andrews.ac.uk/2017_2018/CS1005/
+
+funny jsons
+https://studres.cs.st-andrews.ac.uk/CS1003/Coursework/P5-August/data/

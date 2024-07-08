@@ -1,8 +1,8 @@
 import { FullFileLink } from "@src/features/parser"
 import { PageStateContext } from "@src/features/router/PageStateContext"
+import FileCard from "@src/features/table/fileCard/FileCard"
 import { SortLinks } from "@src/types/pageContentTypes"
 import { useContext } from "react"
-import FileCard from "../fileCard/FileCard"
 import TableHeader from "./TableHeader"
 import TableSkeleton from "./TableSkeleton"
 
