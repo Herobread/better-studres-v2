@@ -1,5 +1,4 @@
 export * from "./AddQuickLinkForm"
-export * from "./EditQuickLinkForm"
 export * from "./QuickLinkButton"
 export * from "./QuickLinkCard"
 export * from "./QuickLinkCardBase"
