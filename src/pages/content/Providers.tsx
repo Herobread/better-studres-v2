@@ -2,7 +2,6 @@ import NiceModal from "@ebay/nice-modal-react"
 import "@src/assets/styles/shadcn-ui.css"
 import { Toaster } from "@src/components/ui/toaster"
 import { TooltipProvider } from "@src/components/ui/tooltip"
-import { CommandProvider } from "@src/features/command/CommandContext"
 import ConfigContextProvider from "@src/features/config/ConfigContext"
 import { PageStateContextProvider } from "@src/features/router/PageStateContext"
 import { SmoothRouterListener } from "@src/features/router/SmoothRouterListener"
@@ -31,12 +30,10 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
                         <SmoothRouterListener />
                         <NiceModal.Provider>
                             <TooltipProvider delayDuration={0}>
-                                <CommandProvider>
-                                    <ConfigContextProvider>
-                                        {children}
-                                        <Toaster />
-                                    </ConfigContextProvider>
-                                </CommandProvider>
+                                <ConfigContextProvider>
+                                    {children}
+                                    <Toaster />
+                                </ConfigContextProvider>
                             </TooltipProvider>
                         </NiceModal.Provider>
                     </PageStateContextProvider>
