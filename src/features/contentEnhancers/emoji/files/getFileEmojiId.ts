@@ -21,6 +21,7 @@ export function getFileEmojiId(fileName: string): string {
         "Second/",
         "Orientation/",
         "Reviews/",
+        "Makefile",
     ]
 
     if (specialNames.includes(fileName)) {
