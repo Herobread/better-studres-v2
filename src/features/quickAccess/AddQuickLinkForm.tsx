@@ -43,7 +43,7 @@ export default function AddQuickLinkForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             icon: moduleEmoji,
-            name,
+            name: decodeURI(name || ""),
             href,
         },
     })
