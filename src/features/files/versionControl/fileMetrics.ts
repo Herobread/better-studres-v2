@@ -74,16 +74,10 @@ export function compareTrackedMinimizedFileLinks(
     minimizedFileLink2: TrackedMinimizedFileLink
 ) {
     return (
-        minimizedFileLink1.detectedAt === minimizedFileLink2.detectedAt &&
         minimizedFileLink1.rawDescription ===
             minimizedFileLink2.rawDescription &&
-        minimizedFileLink1.rawHref === minimizedFileLink2.rawHref &&
-        minimizedFileLink1.rawHrefAttribute ===
-            minimizedFileLink2.rawHrefAttribute &&
-        minimizedFileLink1.rawImage === minimizedFileLink2.rawImage &&
         minimizedFileLink1.rawLastModified ===
             minimizedFileLink2.rawLastModified &&
-        minimizedFileLink1.rawName === minimizedFileLink2.rawName &&
         minimizedFileLink1.rawSize === minimizedFileLink2.rawSize
     )
 }

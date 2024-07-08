@@ -1,12 +1,15 @@
+import NiceModal from "@ebay/nice-modal-react"
 import { ContextMenuItem } from "@src/components/ui/context-menu"
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from "@src/components/ui/tooltip"
+import FileUpdatesDialog from "@src/features/dialogs/FileUpdatesDialog"
 import { isUrlTracked } from "@src/features/files"
 import { FullFileLink } from "@src/features/parser"
 import { GitCompareArrowsIcon } from "lucide-react"
+import { ComponentProps } from "react"
 
 interface UpdatesMenuItemProps {
     fileLink: FullFileLink
@@ -20,10 +23,11 @@ export function UpdatesMenuItem({ fileLink }: UpdatesMenuItemProps) {
         return (
             <Tooltip>
                 <TooltipTrigger>
-                    <UpdatesMenuItemContent fileLink={fileLink} />
+                    <UpdatesMenuItemContent fileLink={fileLink} disabled />
                 </TooltipTrigger>
                 <TooltipContent>
-                    Version tracking is disabled for archived years.
+                    Version tracking is disabled for archived years and
+                    _this_session.
                 </TooltipContent>
             </Tooltip>
         )
@@ -32,13 +36,20 @@ export function UpdatesMenuItem({ fileLink }: UpdatesMenuItemProps) {
     return <UpdatesMenuItemContent fileLink={fileLink} />
 }
 
-interface UpdatesMenuItemContentProps {
+type UpdatesMenuItemContentProps = {
     fileLink: FullFileLink
 }
 
-function UpdatesMenuItemContent({ fileLink }: UpdatesMenuItemContentProps) {
+function UpdatesMenuItemContent({
+    fileLink,
+    ...props
+}: UpdatesMenuItemContentProps & ComponentProps<typeof ContextMenuItem>) {
+    const handleSelect = () => {
+        NiceModal.show(FileUpdatesDialog, { fileLink })
+    }
+
     return (
-        <ContextMenuItem>
+        <ContextMenuItem {...props} onSelect={handleSelect}>
             <GitCompareArrowsIcon /> View update history
         </ContextMenuItem>
     )
