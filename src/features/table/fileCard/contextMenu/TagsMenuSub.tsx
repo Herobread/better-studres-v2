@@ -7,8 +7,8 @@ import {
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
 import { Separator } from "@src/components/ui/separator"
-import AddNewTagDialog from "@src/features/dialogs/AddNewTagDialog"
-import ManageTagsDialog from "@src/features/dialogs/ManageTagsDialog"
+import AddNewTagDialog from "@src/features/dialogs/tags/AddNewTagDialog"
+import ManageTagsDialog from "@src/features/dialogs/tags/ManageTagsDialog"
 import {
     GET_FILE_TAGS_QUERY_KEY,
     TAGS_QUERY_KEY,

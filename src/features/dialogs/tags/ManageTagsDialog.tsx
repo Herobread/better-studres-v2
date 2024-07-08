@@ -8,13 +8,13 @@ import {
 } from "@src/components/ui/dialog"
 import { ScrollArea } from "@src/components/ui/scroll-area"
 import { Separator } from "@src/components/ui/separator"
-import { useQuery } from "@tanstack/react-query"
-import { Fragment } from "react/jsx-runtime"
 import {
     GET_TOTAL_TAGGED_FILES_MAP_QUERY_KEY,
     getTotalTaggedFilesMap,
-} from "../files/tags/stats"
-import { TAGS_QUERY_KEY, getTags } from "../files/tags/storage"
+} from "@src/features/files/tags/stats"
+import { TAGS_QUERY_KEY, getTags } from "@src/features/files/tags/storage"
+import { useQuery } from "@tanstack/react-query"
+import { Fragment } from "react/jsx-runtime"
 import { ManageTagCard } from "./ManageTagCard"
 
 export default NiceModal.create(() => {
