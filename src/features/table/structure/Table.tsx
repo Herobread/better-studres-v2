@@ -2,9 +2,9 @@ import { FullFileLink } from "@src/features/parser"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import { SortLinks } from "@src/types/pageContentTypes"
 import { useContext } from "react"
-import TableHeader from "../TableHeader"
-import TableSkeleton from "../TableSkeleton"
 import FileCard from "../fileCard/FileCard"
+import TableHeader from "./TableHeader"
+import TableSkeleton from "./TableSkeleton"
 
 interface TableProps {
     fileLinks: FullFileLink[]
