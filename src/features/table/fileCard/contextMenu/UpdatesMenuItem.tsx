@@ -5,9 +5,9 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@src/components/ui/tooltip"
-import FileUpdatesDialog from "@src/features/dialogs/FileUpdatesDialog"
 import { isUrlTracked } from "@src/features/files"
 import { FullFileLink } from "@src/features/parser"
+import FileUpdatesDialog from "@src/features/shared/dialogs/FileUpdatesDialog"
 import { GitCompareArrowsIcon } from "lucide-react"
 import { ComponentProps } from "react"
 
