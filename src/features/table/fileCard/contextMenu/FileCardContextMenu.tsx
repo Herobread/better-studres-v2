@@ -5,7 +5,7 @@ import {
 import { FullFileLink } from "@src/features/parser"
 import CopyPathMenuItem from "@src/features/shared/commands/CopyPathMenuItem"
 import { forwardRef } from "react"
-import DownloadFileMenuItem from "../../contextMenuItems/DownloadFileMenuItem"
+import DownloadFileMenuItem from "./DownloadFileMenuItem"
 import { MenuLabel } from "./MenuLabel"
 import { TagsMenuItem } from "./TagsMenuItem"
 import { UpdatesMenuItem } from "./UpdatesMenuItem"
