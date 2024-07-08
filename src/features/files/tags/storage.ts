@@ -40,7 +40,7 @@ export async function getTags() {
     const EXAMPLE_TAGS: Tag[] = [
         {
             id: 0,
-            name: "important",
+            name: "Important",
         },
         {
             id: 1,
