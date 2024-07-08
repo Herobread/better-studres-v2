@@ -1,6 +1,6 @@
 import NiceModal from "@ebay/nice-modal-react"
 import { Badge } from "@src/components/ui/badge"
-import ViewTaggedFilesDialog from "@src/features/dialogs/ViewTaggedFilesDialog"
+import ViewTaggedFilesDialog from "@src/features/dialogs/tags/ViewTaggedFilesDialog"
 import { TAGS_QUERY_KEY, getFileTags } from "@src/features/files/tags/storage"
 import { useQuery } from "@tanstack/react-query"
 
