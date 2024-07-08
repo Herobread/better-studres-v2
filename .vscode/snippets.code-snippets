@@ -1,20 +1,20 @@
 {
-	"NiceModal with shadcn dialog Component": {
-		"prefix": "dialog",
-		"body": [
-			"import NiceModal, { useModal } from \"@ebay/nice-modal-react\"",
-			"import { Dialog, DialogContent } from \"@src/components/ui/dialog\"",
-			"",
-			"export default NiceModal.create(() => {",
-			"    const modalHandler = useModal()",
-			"",
-			"    return (",
-			"        <Dialog handler={modalHandler}>",
-			"            <DialogContent>$1</DialogContent>",
-			"        </Dialog>",
-			"    )",
-			"})"
-		],
-		"description": "Create a NiceModal component with useModal hook and shadcn ui Dialog"
-	}
+    "NiceModal with shadcn dialog Component": {
+        "prefix": "dialog",
+        "body": [
+            "import NiceModal, { useModal } from \"@ebay/nice-modal-react\"",
+            "import { Dialog, DialogContent } from \"@src/components/ui/dialog\"",
+            "",
+            "export default NiceModal.create(() => {",
+            "    const modalHandler = useModal()",
+            "",
+            "    return (",
+            "        <Dialog handler={modalHandler}>",
+            "            <DialogContent>$1</DialogContent>",
+            "        </Dialog>",
+            "    )",
+            "})",
+        ],
+        "description": "Create a NiceModal component with useModal hook and shadcn ui Dialog",
+    },
 }
