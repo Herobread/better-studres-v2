@@ -1,13 +1,11 @@
+import NiceModal from "@ebay/nice-modal-react"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { getCurrentTheme, useTheme } from "@src/features/theme"
 import { CommandItem } from "../../components/ui/command"
 
-interface ToggleThemeCommandProps {
-    setIsCommandOpen: (open: boolean) => void
-}
+interface ToggleThemeCommandProps {}
 
-export default function ToggleThemeCommand({
-    setIsCommandOpen,
-}: ToggleThemeCommandProps) {
+export default function ToggleThemeCommand({}: ToggleThemeCommandProps) {
     const { theme, setTheme } = useTheme()
 
     const currentTheme = getCurrentTheme(theme)
@@ -19,7 +17,7 @@ export default function ToggleThemeCommand({
             setTheme("dark")
         }
 
-        setIsCommandOpen(false)
+        NiceModal.hide(CommandsDialog)
     }
 
     return (

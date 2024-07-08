@@ -1,3 +1,5 @@
+import NiceModal from "@ebay/nice-modal-react"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQueryClient } from "@tanstack/react-query"
 import { CommandItem } from "../../components/ui/command"
 import { ToastAction } from "../../components/ui/toast"
@@ -9,13 +11,9 @@ import {
     setFileDataMap,
 } from "../files"
 
-interface ClearVersionTrackingDataCommandProps {
-    setIsCommandOpen: (open: boolean) => void
-}
+interface ClearVersionTrackingDataCommandProps {}
 
-export default function ClearVersionTrackingDataCommand({
-    setIsCommandOpen,
-}: ClearVersionTrackingDataCommandProps) {
+export default function ClearVersionTrackingDataCommand({}: ClearVersionTrackingDataCommandProps) {
     const { toast } = useToast()
 
     const queryClient = useQueryClient()
@@ -71,7 +69,7 @@ export default function ClearVersionTrackingDataCommand({
             console.error("Error clearing version tracking data:", error)
         }
 
-        setIsCommandOpen(false)
+        NiceModal.hide(CommandsDialog)
     }
 
     return (

@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import * as React from "react"
 import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive } from "cmdk"
 import { Search } from "lucide-react"
+import * as React from "react"
 
-import { cn } from "@src/lib/utils"
+import { NiceModalHandler } from "@ebay/nice-modal-react"
 import { Dialog, DialogContent } from "@src/components/ui/dialog"
+import { cn } from "@src/lib/utils"
 
 const Command = React.forwardRef<
     React.ElementRef<typeof CommandPrimitive>,
@@ -23,7 +24,9 @@ const Command = React.forwardRef<
 Command.displayName = CommandPrimitive.displayName
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface CommandDialogProps extends DialogProps {}
+interface CommandDialogProps extends DialogProps {
+    handler: NiceModalHandler<Record<string, unknown>>
+}
 
 const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
     return (
@@ -152,11 +155,11 @@ CommandShortcut.displayName = "CommandShortcut"
 export {
     Command,
     CommandDialog,
-    CommandInput,
-    CommandList,
     CommandEmpty,
     CommandGroup,
+    CommandInput,
     CommandItem,
-    CommandShortcut,
+    CommandList,
     CommandSeparator,
+    CommandShortcut,
 }

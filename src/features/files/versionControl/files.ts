@@ -11,6 +11,9 @@ export interface FileLinkPath {
     tags: string[]
 }
 
+export const GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY =
+    "getFormattedFilesListForCommand"
+
 /**
  * Retrieves a list of files with their paths and formatted names.
  * @returns {Promise<FileLinkPath[]>} A promise that resolves to an array of file link paths.

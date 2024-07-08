@@ -1,14 +1,5 @@
+import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { Badge } from "@src/components/ui/badge"
-import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import {
-    BASE_URL,
-    convertUrlSegmentsToUrl,
-    extractUrlSegments,
-    getFormattedFilesListForCommand,
-} from "@src/features/files"
-import { redirect } from "@src/features/router/"
-import { useQuery } from "@tanstack/react-query"
-import { useCallback, useEffect } from "react"
 import {
     CommandDialog,
     CommandEmpty,
@@ -16,42 +7,39 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
-} from "../../components/ui/command"
-import { getQuickLinks } from "../quickAccess"
-import ClearBlackListCommand from "./ClearBlackListCommand"
-import ClearVersionTrackingDataCommand from "./ClearVersionTrackingDataCommand"
-import { useCommand } from "./CommandContext"
-import SaveQuickLinkCommand from "./SaveQuickLinkCommand"
-import { ToggleEnhancePageCommand } from "./ToggleEnhancePageCommand"
-import ToggleThemeCommand from "./ToggleThemeCommand"
+} from "@src/components/ui/command"
+import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
+import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
+import SaveQuickLinkCommand from "@src/features/command/SaveQuickLinkCommand"
+import { ToggleEnhancePageCommand } from "@src/features/command/ToggleEnhancePageCommand"
+import ToggleThemeCommand from "@src/features/command/ToggleThemeCommand"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
+import {
+    BASE_URL,
+    GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY,
+    convertUrlSegmentsToUrl,
+    extractUrlSegments,
+    getFormattedFilesListForCommand,
+} from "@src/features/files"
+import {
+    GET_QUICK_LINKS_QUERY_KEY,
+    getQuickLinks,
+} from "@src/features/quickAccess"
+import { redirect } from "@src/features/router"
+import { useQuery } from "@tanstack/react-query"
 
-export default function Commands() {
-    const { open, setOpen } = useCommand()
+export default NiceModal.create(() => {
+    const modalHandler = useModal()
 
     const { data: commandsData } = useQuery({
-        queryKey: ["commands"],
+        queryKey: [GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY],
         queryFn: getFormattedFilesListForCommand,
     })
 
     const { data: quickLinks } = useQuery({
-        queryKey: ["quicklinks"],
+        queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
-
-    const toggleOpen = useCallback(() => {
-        setOpen(!open)
-    }, [setOpen])
-
-    useEffect(() => {
-        const down = (e: KeyboardEvent) => {
-            if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-                e.preventDefault()
-                toggleOpen()
-            }
-        }
-        document.addEventListener("keydown", down)
-        return () => document.removeEventListener("keydown", down)
-    }, [toggleOpen])
 
     const currentUrl = window.location.toString()
     const currentUrlSegments = extractUrlSegments(currentUrl)
@@ -74,7 +62,7 @@ export default function Commands() {
     }
 
     return (
-        <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandDialog handler={modalHandler}>
             <CommandInput placeholder="Type a command or search..." />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
@@ -105,15 +93,13 @@ export default function Commands() {
                                 </CommandItem>
                             )
                         })}
-                    <SaveQuickLinkCommand setIsCommandOpen={setOpen} />
+                    <SaveQuickLinkCommand />
                 </CommandGroup>
                 <CommandGroup heading="Commands">
-                    <ToggleThemeCommand setIsCommandOpen={setOpen} />
+                    <ToggleThemeCommand />
                     <ToggleEnhancePageCommand />
-                    <ClearVersionTrackingDataCommand
-                        setIsCommandOpen={setOpen}
-                    />
-                    <ClearBlackListCommand setIsCommandOpen={setOpen} />
+                    <ClearVersionTrackingDataCommand />
+                    <ClearBlackListCommand />
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
@@ -151,4 +137,4 @@ export default function Commands() {
             </CommandList>
         </CommandDialog>
     )
-}
+})

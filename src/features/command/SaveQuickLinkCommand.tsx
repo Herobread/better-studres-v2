@@ -1,20 +1,18 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { CommandItem } from "../../components/ui/command"
-import { useToast } from "../../components/ui/use-toast"
+import NiceModal from "@ebay/nice-modal-react"
 import {
     addQuickLink,
     deleteQuickLink,
+    generateQuickLinkInfo,
     getQuickLinks,
 } from "@src/features/quickAccess"
-import { generateQuickLinkInfo } from "@src/features/quickAccess"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { CommandItem } from "../../components/ui/command"
+import { useToast } from "../../components/ui/use-toast"
 
-interface SaveQuickLinkCommandProps {
-    setIsCommandOpen: (open: boolean) => void
-}
+interface SaveQuickLinkCommandProps {}
 
-export default function SaveQuickLinkCommand({
-    setIsCommandOpen,
-}: SaveQuickLinkCommandProps) {
+export default function SaveQuickLinkCommand({}: SaveQuickLinkCommandProps) {
     const { toast } = useToast()
     const queryClient = useQueryClient()
 
@@ -54,7 +52,7 @@ export default function SaveQuickLinkCommand({
             })
         }
 
-        setIsCommandOpen(false)
+        NiceModal.hide(CommandsDialog)
     }
 
     if (currentPageQuickLink) {
@@ -86,7 +84,7 @@ export default function SaveQuickLinkCommand({
             })
         }
 
-        setIsCommandOpen(false)
+        NiceModal.hide(CommandsDialog)
     }
 
     return (

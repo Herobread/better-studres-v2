@@ -1,10 +1,10 @@
+import NiceModal from "@ebay/nice-modal-react"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
-import { useCommand } from "@src/features/command/CommandContext"
 import CommandInput from "@src/features/command/CommandInput"
-import Commands from "@src/features/command/Commands"
+import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
 import { FileMetricsTracker } from "@src/features/files"
 import ModuleHeader from "@src/features/header/ModuleHeader"
@@ -12,6 +12,7 @@ import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
 import { FolderContent } from "@src/features/parser"
 import { QuickLinks } from "@src/features/quickAccess/"
 import { PageStateContext } from "@src/features/router/PageStateContext"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { Table } from "@src/features/table/structure/Table"
 import parse from "html-react-parser"
 import { useContext } from "react"
@@ -25,16 +26,15 @@ export default function Folder({ content }: FolderProps) {
 
     const { fileLinks, sortLinks, extraContent } = content
 
-    const { setOpen } = useCommand()
     const { showCommandButton, showQuickLinks } = useContext(ConfigContext)
 
     const handleCommandActivation = () => {
-        setOpen(true)
+        NiceModal.show(CommandsDialog)
     }
 
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
-            <Commands />
+            <CommandsShortcutMount />
             {showCommandButton && (
                 <WideLayout>
                     <CommandInput onSelect={handleCommandActivation} />
