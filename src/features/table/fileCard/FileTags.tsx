@@ -1,4 +1,6 @@
+import NiceModal from "@ebay/nice-modal-react"
 import { Badge } from "@src/components/ui/badge"
+import ViewTaggedFilesDialog from "@src/features/dialogs/ViewTaggedFilesDialog"
 import { TAGS_QUERY_KEY, getFileTags } from "@src/features/files/tags/storage"
 import { useQuery } from "@tanstack/react-query"
 
@@ -27,11 +29,7 @@ export function FileTags({ fileKey }: FileTagsProps) {
                             e.preventDefault()
                             e.stopPropagation()
 
-                            throw new Error("tag click")
-                            // setIsViewTaggedFilesDialogOpen(
-                            //     true
-                            // )
-                            // setActiveTag(tag)
+                            NiceModal.show(ViewTaggedFilesDialog, { tag })
                         }}
                         key={tag.id}
                     >
