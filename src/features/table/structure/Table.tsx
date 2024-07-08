@@ -29,17 +29,9 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
           "
         >
             <TableHeader sortLinks={sortLinks} />
-
             {fileLinks.map((fileLink) => {
                 return <FileCard fileLink={fileLink} key={fileLink.fileKey} />
             })}
-
-            {/* 
-            - tag manager dialog
-            - add new dialog
-            - view files that have tag dialog
-            - updates dialog
-            */}
         </div>
     )
 }
