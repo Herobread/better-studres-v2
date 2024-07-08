@@ -24,4 +24,6 @@ const FileCard = forwardRef<HTMLAnchorElement, FileCardProps>(
     }
 )
 
+FileCard.displayName = "FileCard"
+
 export default FileCard

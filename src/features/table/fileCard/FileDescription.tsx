@@ -7,5 +7,5 @@ export function FileDescription({ description }: FileDescriptionProps) {
         return null
     }
 
-    return <div className="italic"> {description}</div>
+    return <div className="italic">{description}</div>
 }

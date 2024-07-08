@@ -53,4 +53,6 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
     }
 )
 
+FileCardDetails.displayName = "FileCardDetails"
+
 export default FileCardDetails

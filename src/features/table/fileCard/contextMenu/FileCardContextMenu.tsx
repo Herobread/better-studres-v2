@@ -45,4 +45,6 @@ const FileCardContextMenuContent = forwardRef<
     )
 })
 
+FileCardContextMenuContent.displayName = "FileCardContextMenuContent"
+
 export default FileCardContextMenuContent
