@@ -2,16 +2,17 @@ import NiceModal from "@ebay/nice-modal-react"
 import {
     ContextMenuCheckboxItem,
     ContextMenuItem,
-    ContextMenuSeparator,
     ContextMenuSub,
     ContextMenuSubContent,
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
+import { Separator } from "@src/components/ui/separator"
 import AddNewTagDialog from "@src/features/dialogs/AddNewTagDialog"
 import ManageTagsDialog from "@src/features/dialogs/ManageTagsDialog"
 import {
     GET_FILE_TAGS_QUERY_KEY,
     TAGS_QUERY_KEY,
+    Tag,
     getFileTags,
     getTags,
     toggleFileTag,
@@ -20,11 +21,11 @@ import { FullFileLink } from "@src/features/parser"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { TagsIcon } from "lucide-react"
 
-interface TagsMenuItemProps {
+interface TagsMenuSubProps {
     fileLink: FullFileLink
 }
 
-export function TagsMenuItem({ fileLink }: TagsMenuItemProps) {
+export function TagsMenuSub({ fileLink }: TagsMenuSubProps) {
     const { fileKey } = fileLink
 
     const { data: tags } = useQuery({
@@ -36,8 +37,6 @@ export function TagsMenuItem({ fileLink }: TagsMenuItemProps) {
         queryKey: [GET_FILE_TAGS_QUERY_KEY],
         queryFn: () => getFileTags(fileKey),
     })
-
-    const queryClient = useQueryClient()
 
     const handleCreateNewTag = () => {
         NiceModal.show(AddNewTagDialog, { fileLink })
@@ -59,37 +58,63 @@ export function TagsMenuItem({ fileLink }: TagsMenuItemProps) {
                 <ContextMenuItem inset onSelect={handleManageTags}>
                     Manage tags
                 </ContextMenuItem>
-                {tags && tags.length > 0 && <ContextMenuSeparator />}
-                {tags &&
-                    tags.map((tag) => {
-                        const isChecked = !!currentTags?.find((tag_) => {
-                            return tag_.id === tag.id
-                        })
 
-                        const { id, name } = tag
-
-                        const handleToggleTag = async () => {
-                            await toggleFileTag(fileKey, tag)
-
-                            queryClient.invalidateQueries({
-                                queryKey: [TAGS_QUERY_KEY],
-                            })
-                            queryClient.refetchQueries({
-                                queryKey: [TAGS_QUERY_KEY],
-                            })
-                        }
-
-                        return (
-                            <ContextMenuCheckboxItem
-                                checked={isChecked}
-                                onSelect={handleToggleTag}
-                                key={id}
-                            >
-                                {name}
-                            </ContextMenuCheckboxItem>
-                        )
-                    })}
+                <TagsList
+                    tags={tags}
+                    appliedTags={currentTags}
+                    fileKey={fileKey}
+                />
             </ContextMenuSubContent>
         </ContextMenuSub>
+    )
+}
+
+function TagsList({
+    tags,
+    appliedTags,
+    fileKey,
+}: {
+    tags?: Tag[]
+    appliedTags?: Tag[]
+    fileKey: string
+}) {
+    const queryClient = useQueryClient()
+
+    if (!tags || tags.length == 0) {
+        return null
+    }
+
+    return (
+        <>
+            <Separator />
+            {tags.map((tag) => {
+                const isChecked = !!appliedTags?.find((tag_) => {
+                    return tag_.id === tag.id
+                })
+
+                const { id, name } = tag
+
+                const handleToggleTag = async () => {
+                    await toggleFileTag(fileKey, tag)
+
+                    queryClient.invalidateQueries({
+                        queryKey: [TAGS_QUERY_KEY],
+                    })
+                    queryClient.refetchQueries({
+                        queryKey: [TAGS_QUERY_KEY],
+                    })
+                }
+
+                return (
+                    <ContextMenuCheckboxItem
+                        checked={isChecked}
+                        onSelect={handleToggleTag}
+                        key={id}
+                    >
+                        {name}
+                    </ContextMenuCheckboxItem>
+                )
+            })}
+        </>
     )
 }

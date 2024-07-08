@@ -7,7 +7,7 @@ import CopyPathMenuItem from "@src/features/shared/commands/CopyPathMenuItem"
 import { forwardRef } from "react"
 import DownloadFileMenuItem from "./DownloadFileMenuItem"
 import { MenuLabel } from "./MenuLabel"
-import { TagsMenuItem } from "./TagsMenuItem"
+import { TagsMenuSub } from "./TagsMenuSub"
 import { UpdatesMenuItem } from "./UpdatesMenuItem"
 
 interface FileCardContextMenuProps {
@@ -40,7 +40,7 @@ const FileCardContextMenuContent = forwardRef<
 
             {isTagContextMenuShown && <ContextMenuSeparator />}
 
-            {isTagContextMenuShown && <TagsMenuItem fileLink={fileLink} />}
+            {isTagContextMenuShown && <TagsMenuSub fileLink={fileLink} />}
         </ContextMenuContent>
     )
 })
