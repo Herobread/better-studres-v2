@@ -1,14 +1,7 @@
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@src/components/ui/select"
-import { Button } from "@src/components/ui/button"
-import { z } from "zod"
-import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import pkg from "@src/../package.json"
+import "@src/assets/styles/css-reset.css"
+import { Button } from "@src/components/ui/button"
 import {
     Form,
     FormControl,
@@ -17,16 +10,23 @@ import {
     FormLabel,
     FormMessage,
 } from "@src/components/ui/form"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@src/components/ui/select"
+import { Switch } from "@src/components/ui/switch"
+import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
+import { loadConfig } from "@src/features/config/loadConfig"
+import { saveConfig } from "@src/features/config/saveConfig"
+import BlacklistToggle from "@src/features/extensionToggle/BlacklistToggle"
+import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
-import { Switch } from "@src/components/ui/switch"
-import pkg from "@src/../package.json"
-import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
-import { saveConfig } from "@src/features/config/saveConfig"
-import { loadConfig } from "@src/features/config/loadConfig"
-import ExtensionToggle from "@src/features/extensionToggle/ExtensionToggle"
-import BlacklistToggle from "@src/features/extensionToggle/BlacklistToggle"
-import "@src/assets/styles/css-reset.css"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 const formSchema = z.object({
     date: z.enum(["full", "relative"]),

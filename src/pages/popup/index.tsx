@@ -1,8 +1,8 @@
-import { createRoot } from "react-dom/client"
-import "@pages/popup/index.css"
 import Popup from "@pages/popup/Popup"
-import Providers from "../content/Providers"
+import "@pages/popup/index.css"
 import { THEME_STORAGE_KEY } from "@src/features/theme"
+import { createRoot } from "react-dom/client"
+import Providers from "../content/Providers"
 
 async function init() {
     const rootContainer = document.querySelector("#__root")
