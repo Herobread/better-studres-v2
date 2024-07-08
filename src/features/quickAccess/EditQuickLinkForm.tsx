@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { QuickLink } from "@src/types/quickLinkTypes"
+import { useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import CompactLayout from "../../components/layouts/CompactLayout"
@@ -19,7 +20,6 @@ import { updateQuickLink } from "./QuickLinkManager"
 
 interface EditQuickLinkFormProps {
     quickLink: QuickLink
-    afterSubmit?: () => void
 }
 
 const formSchema = z.object({
@@ -30,7 +30,6 @@ const formSchema = z.object({
 
 export default function EditQuickLinkForm({
     quickLink,
-    afterSubmit,
 }: EditQuickLinkFormProps) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -39,12 +38,13 @@ export default function EditQuickLinkForm({
         },
     })
 
+    const queryClient = useQueryClient()
+
     async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
         await updateQuickLink(quickLink.id, quickLinkData)
 
-        if (afterSubmit) {
-            afterSubmit()
-        }
+        queryClient.invalidateQueries({ queryKey: ["quicklinks"] })
+        queryClient.refetchQueries({ queryKey: ["quicklinks"] })
     }
 
     return (
