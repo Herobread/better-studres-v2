@@ -1,3 +1,4 @@
+import { FullFileLink } from "@src/features/parser"
 import { compareTrackedMinimizedFileLinks } from "./fileMetrics"
 import { isFileLinkTracked } from "./ignore"
 import {
@@ -8,7 +9,6 @@ import {
     minimizeAndTrackFileLink,
     saveTrackedFileLinkToStorage,
 } from "./storage"
-import { FullFileLink } from "@src/features/parser"
 
 /**
  * Tracks multiple file links.
