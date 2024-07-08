@@ -20,8 +20,8 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "../../components/ui/popover"
-import EditQuickLinkDialog from "../dialogs/EditQuickLinkDialog"
 import CopyPathMenuItem from "../shared/commands/CopyPathMenuItem"
+import EditQuickLinkDialog from "../shared/dialogs/EditQuickLinkDialog"
 import AddQuickLinkForm from "./AddQuickLinkForm"
 import QuickLinkButton from "./QuickLinkButton"
 import { QuickLinkCard } from "./QuickLinkCard"

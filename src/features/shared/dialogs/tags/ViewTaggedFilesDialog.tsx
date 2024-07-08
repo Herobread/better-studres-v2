@@ -11,15 +11,15 @@ import { ScrollArea } from "@src/components/ui/scroll-area"
 import { Separator } from "@src/components/ui/separator"
 import { useQuery } from "@tanstack/react-query"
 import { Fragment } from "react/jsx-runtime"
-import { convertFileKeysToMinimizedFileLinks } from "../../files"
+import { convertFileKeysToMinimizedFileLinks } from "../../../files"
 import {
     GET_FILES_TAGGED_QUERY_KEY,
     TAGS_QUERY_KEY,
     Tag,
     getFilesTagged,
-} from "../../files/tags/storage"
-import { BaseFileLink } from "../../parser"
-import Link, { LinkProps } from "../../router/Link"
+} from "../../../files/tags/storage"
+import { BaseFileLink } from "../../../parser"
+import Link, { LinkProps } from "../../../router/Link"
 
 interface ViewTaggedFilesDialogProps {
     tag: Tag

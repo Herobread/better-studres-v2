@@ -7,8 +7,6 @@ import {
     ContextMenuSubTrigger,
 } from "@src/components/ui/context-menu"
 import { Separator } from "@src/components/ui/separator"
-import AddNewTagDialog from "@src/features/dialogs/tags/AddNewTagDialog"
-import ManageTagsDialog from "@src/features/dialogs/tags/ManageTagsDialog"
 import {
     GET_FILE_TAGS_QUERY_KEY,
     TAGS_QUERY_KEY,
@@ -18,6 +16,8 @@ import {
     toggleFileTag,
 } from "@src/features/files/tags/storage"
 import { FullFileLink } from "@src/features/parser"
+import AddNewTagDialog from "@src/features/shared/dialogs/tags/AddNewTagDialog"
+import ManageTagsDialog from "@src/features/shared/dialogs/tags/ManageTagsDialog"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { TagsIcon } from "lucide-react"
 

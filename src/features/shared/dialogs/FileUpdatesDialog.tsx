@@ -15,8 +15,8 @@ import {
     GET_TRACKED_FILE_LINK_QUERY_KEY_BASE,
     generateChangeRecords,
     getTrackedFileLink,
-} from "../files"
-import { FullFileLink } from "../parser"
+} from "../../files"
+import { FullFileLink } from "../../parser"
 
 export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
     const modalHandler = useModal()
@@ -42,18 +42,18 @@ export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
                         Locally observed changes in file size or modification
                         date.
                     </DialogDescription>
-                    <ScrollArea className="max-h-96">
-                        <div className="grid grid-cols-[max-content_1fr] gap-2">
-                            {fileUpdates && (
-                                <ChangesRecordCard
-                                    changeRecords={generateChangeRecords(
-                                        fileUpdates
-                                    )}
-                                />
-                            )}
-                        </div>
-                    </ScrollArea>
                 </DialogHeader>
+                <ScrollArea className="max-h-96">
+                    <div className="grid grid-cols-[max-content_1fr] gap-2">
+                        {fileUpdates && (
+                            <ChangesRecordCard
+                                changeRecords={generateChangeRecords(
+                                    fileUpdates
+                                )}
+                            />
+                        )}
+                    </div>
+                </ScrollArea>
             </DialogContent>
         </Dialog>
     )
