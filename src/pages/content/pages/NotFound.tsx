@@ -1,8 +1,8 @@
+import NiceModal from "@ebay/nice-modal-react"
 import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
 import H1 from "@src/components/typography/H1"
-import { useCommand } from "@src/features/command/CommandContext"
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
@@ -12,6 +12,7 @@ import {
     QuickLinkContainer,
     getQuickLinks,
 } from "@src/features/quickAccess"
+import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
@@ -23,10 +24,8 @@ export default function NotFound() {
         queryFn: getQuickLinks,
     })
 
-    const { setOpen } = useCommand()
-
     const handleCommandActivation = () => {
-        setOpen(true)
+        NiceModal.show(CommandsDialog)
     }
 
     const lastUrl = document.referrer
