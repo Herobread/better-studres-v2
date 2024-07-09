@@ -3,7 +3,7 @@ import {
     ContextMenuSeparator,
 } from "@src/components/ui/context-menu"
 import { FullFileLink } from "@src/features/parser"
-import CopyPathMenuItem from "@src/features/shared/commands/CopyPathMenuItem"
+import CopyPathMenuItem from "@src/features/shared/contextMenuItems/CopyPathMenuItem"
 import { forwardRef } from "react"
 import DownloadFileMenuItem from "./DownloadFileMenuItem"
 import { MenuLabel } from "./MenuLabel"
