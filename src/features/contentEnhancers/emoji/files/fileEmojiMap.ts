@@ -67,6 +67,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     swf: "🕹️",
     // data
     csv: "📊",
+    csl: "📊",
     sql: "🗄️",
     db: "🗄️",
     xlsx: "📊",
