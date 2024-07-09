@@ -62,12 +62,10 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
 
     return (
         <Dialog handler={modalHandler}>
-            <DialogContent aria-describedby="dialog-description">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Edit &quot;{quickLink.name}&quot;</DialogTitle>
-                    <DialogDescription id="dialog-description">
-                        Modify data
-                    </DialogDescription>
+                    <DialogDescription>Modify data</DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form

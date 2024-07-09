@@ -1,4 +1,5 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { Badge } from "@src/components/ui/badge"
 import {
     CommandDialog,
@@ -8,6 +9,7 @@ import {
     CommandItem,
     CommandList,
 } from "@src/components/ui/command"
+import { DialogDescription, DialogTitle } from "@src/components/ui/dialog"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
 import SaveQuickLinkCommand from "@src/features/command/SaveQuickLinkCommand"
@@ -63,6 +65,11 @@ export default NiceModal.create(() => {
 
     return (
         <CommandDialog handler={modalHandler}>
+            <VisuallyHidden>
+                <DialogTitle>
+                    <DialogDescription>Command dialog</DialogDescription>
+                </DialogTitle>
+            </VisuallyHidden>
             <CommandInput placeholder="Type a command or search..." />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>

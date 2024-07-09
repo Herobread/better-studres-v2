@@ -79,10 +79,10 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
 
     return (
         <Dialog handler={modalHandler}>
-            <DialogContent aria-describedby="dialog-description">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Create New Tag</DialogTitle>
-                    <DialogDescription id="dialog-description">
+                    <DialogDescription>
                         Enter a tag name to add a new tag to {`"${fullName}"`}.
                     </DialogDescription>
                 </DialogHeader>

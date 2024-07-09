@@ -39,12 +39,10 @@ export default NiceModal.create(({ tag }: ViewTaggedFilesDialogProps) => {
 
     return (
         <Dialog handler={modalHandler}>
-            <DialogContent aria-describedby="dialog-description">
+            <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Files tagged &quot;{name}&quot;</DialogTitle>
-                    <DialogDescription id="dialog-description">
-                        Files tagged {name}
-                    </DialogDescription>
+                    <DialogDescription>Files tagged {name}</DialogDescription>
                     <ScrollArea className="max-h-96">
                         <div className="grid gap-2">
                             {baseFileLinks && baseFileLinks.length > 0 ? (

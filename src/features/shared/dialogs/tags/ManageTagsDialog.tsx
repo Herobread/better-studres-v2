@@ -35,7 +35,7 @@ export default NiceModal.create(() => {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Manage tags</DialogTitle>
-                    <DialogDescription id="dialog-description">
+                    <DialogDescription>
                         Rename or delete tags and view their usage.
                     </DialogDescription>
                 </DialogHeader>

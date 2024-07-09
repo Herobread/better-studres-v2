@@ -38,7 +38,7 @@ export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
                         Version history of {emoji}
                         {fullName}
                     </DialogTitle>
-                    <DialogDescription id="dialog-description">
+                    <DialogDescription>
                         Locally observed changes in file size or modification
                         date.
                     </DialogDescription>
