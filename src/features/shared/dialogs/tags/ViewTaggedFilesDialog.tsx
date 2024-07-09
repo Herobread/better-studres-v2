@@ -1,5 +1,4 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
-import { Badge } from "@src/components/ui/badge"
 import {
     Dialog,
     DialogContent,
@@ -18,7 +17,7 @@ import {
     Tag,
     getFilesTagged,
 } from "../../../files/tags/storage"
-import { BaseFileLink } from "../../../parser"
+import { BaseFileLink, expandBaseFileLink } from "../../../parser"
 import Link, { LinkProps } from "../../../router/Link"
 
 interface ViewTaggedFilesDialogProps {
@@ -40,11 +39,9 @@ export default NiceModal.create(({ tag }: ViewTaggedFilesDialogProps) => {
 
     return (
         <Dialog handler={modalHandler}>
-            <DialogContent>
+            <DialogContent aria-describedby="dialog-description">
                 <DialogHeader>
-                    <DialogTitle>
-                        Files tagged <Badge variant={"secondary"}>{name}</Badge>
-                    </DialogTitle>
+                    <DialogTitle>Files tagged &quot;{name}&quot;</DialogTitle>
                     <DialogDescription id="dialog-description">
                         Files tagged {name}
                     </DialogDescription>
@@ -85,16 +82,18 @@ function MinimizedTaggedLinkPreview({
     baseFileLink,
     ...props
 }: MinimizedTaggedLinkPreviewProps) {
-    const { rawHref, rawName } = baseFileLink
+    const { emoji, name, fileKey, href } = expandBaseFileLink(baseFileLink)
 
     return (
         <Link
-            href={rawHref}
+            href={href}
             className="w-full rounded-lg p-2 hover:bg-background-layer-1"
             {...props}
         >
-            <p className="font-bold">{rawName}</p>
-            <p className="text-sm text-muted-foreground">{rawHref}</p>
+            <p className="font-bold">
+                {emoji} {name}
+            </p>
+            <p className="break-all text-sm text-muted-foreground">{fileKey}</p>
         </Link>
     )
 }

@@ -33,7 +33,7 @@ export function FileTags({ fileKey }: FileTagsProps) {
                         }}
                         key={tag.id}
                     >
-                        <Badge variant={"secondary"}>{tag.name}</Badge>
+                        <Badge>{tag.name}</Badge>
                     </button>
                 )
             })}
