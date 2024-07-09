@@ -23,9 +23,9 @@ const FileCardContextMenuContent = forwardRef<
     return (
         <ContextMenuContent ref={ref}>
             <MenuLabel
-                fileKey={fileLink.fileKey}
                 fullName={fileLink.fullName}
                 size={fileLink.size}
+                description={fileLink.lastModified.raw}
             />
 
             <ContextMenuSeparator />

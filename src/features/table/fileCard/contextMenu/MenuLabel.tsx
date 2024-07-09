@@ -4,10 +4,10 @@ import { FileSize } from "@src/features/parser"
 interface MenuLabelProps {
     fullName: string
     size?: FileSize
-    fileKey: string
+    description: string
 }
 
-export function MenuLabel({ fullName, size, fileKey }: MenuLabelProps) {
+export function MenuLabel({ fullName, size, description }: MenuLabelProps) {
     return (
         <ContextMenuLabel>
             <div className="flex gap-1">
@@ -19,7 +19,7 @@ export function MenuLabel({ fullName, size, fileKey }: MenuLabelProps) {
                     </span>
                 )}
             </div>
-            <p className="text-sm text-muted-foreground">{fileKey}</p>
+            <p className="text-sm text-muted-foreground">{description}</p>
         </ContextMenuLabel>
     )
 }
