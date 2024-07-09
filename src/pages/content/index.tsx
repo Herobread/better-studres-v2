@@ -20,6 +20,7 @@ async function initialize() {
     }
 
     const isExtensionEnabled = await getExtensionState()
+    console.log("extension is " + isExtensionEnabled)
     if (!isExtensionEnabled) {
         return
     }

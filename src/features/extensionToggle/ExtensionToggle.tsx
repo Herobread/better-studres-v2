@@ -30,6 +30,7 @@ export default function ExtensionToggle() {
 
     const handleClick = async () => {
         const newState = !localExtensionState
+        console.log("state" + newState)
         setLocalExtensionState(newState)
         await setExtensionState(newState)
         queryClient.invalidateQueries({
