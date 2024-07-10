@@ -1,3 +1,4 @@
+import { HTML_ENHANCED_FILE_DATA_KEY } from "@src/features/enhanceHtml/ControlPanel"
 import { TAGS_FILE_DATA_KEY, Tag } from "../tags/storage"
 import {
     TrackedFileLinkData,
@@ -7,12 +8,14 @@ import {
 export type FilePropertyKey =
     | typeof VERSION_CONTROL_FILE_DATA_KEY
     | typeof TAGS_FILE_DATA_KEY
+    | typeof HTML_ENHANCED_FILE_DATA_KEY
 
 export const FILE_DATA_STORAGE_KEY: FilePropertyKey = "version-control-data"
 
 export interface FileData {
     [VERSION_CONTROL_FILE_DATA_KEY]?: TrackedFileLinkData
     [TAGS_FILE_DATA_KEY]?: Tag[]
+    [HTML_ENHANCED_FILE_DATA_KEY]?: boolean
 }
 
 export interface FileDataMap {

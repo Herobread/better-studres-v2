@@ -8,13 +8,16 @@ import {
 } from "@src/features/extensionToggle/extensionState"
 import { PageData, parsePageContent } from "@src/features/parser"
 import { THEME_STORAGE_KEY } from "@src/features/theme"
+import { EnhanceHtml } from "@src/pages/content/pages/EnhanceHtml"
 import { createRoot } from "react-dom/client"
 import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
 
 async function initialize() {
-    const isUrlBlackListed = await checkIsUrlBlackListed(location.href)
+    const currentUrl = location.href
+
+    const isUrlBlackListed = await checkIsUrlBlackListed(currentUrl)
     if (isUrlBlackListed) {
         return
     }
@@ -32,7 +35,7 @@ async function initialize() {
         if (changes[BLACK_LIST_STORAGE_KEY]) {
             const blackList = changes[BLACK_LIST_STORAGE_KEY].newValue
 
-            if (blackList.includes(location.href)) {
+            if (blackList.includes(currentUrl)) {
                 location.reload()
             }
         }
@@ -40,6 +43,23 @@ async function initialize() {
 
     try {
         const rootContainer = document.body
+
+        const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
+        const theme = themeObject[THEME_STORAGE_KEY]
+
+        if (currentUrl.endsWith(".html")) {
+            const enhancerRoot = document.createElement("div")
+            enhancerRoot.setAttribute("id", "__better_studres_theme_root")
+            rootContainer.appendChild(enhancerRoot)
+            const root = createRoot(enhancerRoot)
+            root.render(
+                <Providers overrideTheme={theme}>
+                    <EnhanceHtml />
+                    <CommandsRoot />
+                </Providers>
+            )
+            return
+        }
 
         const pageData: PageData = parsePageContent(rootContainer)
 
@@ -57,14 +77,11 @@ async function initialize() {
             throw new Error("Can't find Options root element")
         }
 
-        history.replaceState({ ...pageData }, "", location.href.toString())
+        history.replaceState({ ...pageData }, "", currentUrl.toString())
 
         const root = createRoot(rootContainer)
 
         rootContainer.setAttribute("id", "__better_studres_theme_root")
-
-        const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
-        const theme = themeObject[THEME_STORAGE_KEY]
 
         resetFolderStyles()
 
@@ -81,6 +98,9 @@ async function initialize() {
         div.className = "__better_studres__root _tailwind_preflight_reset"
         document.body.appendChild(div)
 
+        const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
+        const theme = themeObject[THEME_STORAGE_KEY]
+
         const rootContainer = document.querySelector(".__better_studres__root")
         if (!rootContainer) {
             throw new Error("Can't find Options root element")
@@ -89,7 +109,7 @@ async function initialize() {
         const root = createRoot(rootContainer)
 
         root.render(
-            <Providers>
+            <Providers overrideTheme={theme}>
                 <CommandsRoot />
             </Providers>
         )
