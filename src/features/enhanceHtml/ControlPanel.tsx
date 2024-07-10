@@ -1,5 +1,10 @@
 import { Toggle } from "@src/components/ui/toggle"
 import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+} from "@src/components/ui/tooltip"
+import {
     GET_FILE_DATA_QUERY_KEY,
     extractUrlSegments,
     generateFileKey,
@@ -57,9 +62,16 @@ export function ControlPanel() {
     }
 
     return (
-        <Toggle onPressedChange={handleEnhance} pressed={isEnhanced}>
-            <SparklesIcon />
-        </Toggle>
+        <Tooltip>
+            <TooltipTrigger>
+                <Toggle onPressedChange={handleEnhance} pressed={isEnhanced}>
+                    <SparklesIcon />
+                </Toggle>
+            </TooltipTrigger>
+            <TooltipContent>
+                Applies basic css styles to improve page appearance.
+            </TooltipContent>
+        </Tooltip>
     )
 }
 
