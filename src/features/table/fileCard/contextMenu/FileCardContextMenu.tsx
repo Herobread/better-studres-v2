@@ -18,7 +18,7 @@ const FileCardContextMenuContent = forwardRef<
     HTMLDivElement,
     FileCardContextMenuProps
 >(({ fileLink }, ref) => {
-    const isTagContextMenuShown = !(fileLink.fullName === "Parent Directory")
+    const isParentDirectory = fileLink.fullName === "Parent Directory"
 
     return (
         <ContextMenuContent ref={ref}>
@@ -32,15 +32,17 @@ const FileCardContextMenuContent = forwardRef<
 
             <UpdatesMenuItem fileLink={fileLink} />
             <CopyPathMenuItem href={fileLink.href} />
-            <DownloadFileMenuItem
-                href={fileLink.href}
-                isFolder={fileLink.isFolder}
-                fileName={fileLink.fullName}
-            />
+            {!isParentDirectory && (
+                <DownloadFileMenuItem
+                    href={fileLink.href}
+                    isFolder={fileLink.isFolder}
+                    fileName={fileLink.fullName}
+                />
+            )}
 
-            {isTagContextMenuShown && <ContextMenuSeparator />}
+            {!isParentDirectory && <ContextMenuSeparator />}
 
-            {isTagContextMenuShown && <TagsMenuSub fileLink={fileLink} />}
+            {!isParentDirectory && <TagsMenuSub fileLink={fileLink} />}
         </ContextMenuContent>
     )
 })
