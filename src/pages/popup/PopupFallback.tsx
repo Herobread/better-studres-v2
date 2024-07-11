@@ -1,6 +1,11 @@
 import pkg from "@src/../package.json"
 import CompactLayout from "@src/components/layouts/CompactLayout"
-import { BASE_URL, MMS_BASE_URL, MY_SAINT_BASE_URL } from "@src/features/files"
+import {
+    BASE_URL,
+    MMS_BASE_URL,
+    MOODLE_BASE_URL,
+    MY_SAINT_BASE_URL,
+} from "@src/features/files"
 import {
     QuickLinkCardBase,
     QuickLinkContainer,
@@ -65,6 +70,16 @@ export default function PopupFallback() {
                                 icon: "🏛️",
                                 id: 2,
                                 name: "MySaint",
+                            }}
+                        />
+                    </a>
+                    <a href={MOODLE_BASE_URL} target="_blank" rel="noreferrer">
+                        <QuickLinkCardBase
+                            quickLink={{
+                                href: MOODLE_BASE_URL,
+                                icon: "🎓",
+                                id: 3,
+                                name: "Moodle",
                             }}
                         />
                     </a>
