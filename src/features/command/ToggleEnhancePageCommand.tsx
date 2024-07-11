@@ -4,6 +4,8 @@ import { toggleBlackListForUrl } from "../extensionToggle/blacklist"
 export function ToggleEnhancePageCommand() {
     const handleSelect = async () => {
         await toggleBlackListForUrl(location.href)
+
+        location.reload()
     }
 
     return (
