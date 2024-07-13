@@ -84,6 +84,7 @@ async function initialize() {
         rootContainer.setAttribute("id", "__better_studres_theme_root")
 
         resetFolderStyles()
+        addDoctype()
         addHeadMeta()
 
         rootContainer.style.overflowY = "scroll" // show scroll bar
@@ -141,9 +142,22 @@ function resetFolderStyles() {
 }
 
 function addHeadMeta() {
-    const meta = document.createElement('meta')
-    meta.name = 'viewport'
-    meta.content = 'width=device-width, initial-scale=1'
+    const meta = document.createElement("meta")
+    meta.name = "viewport"
+    meta.content = "width=device-width, initial-scale=1"
 
     document.head.appendChild(meta)
+}
+
+function addDoctype() {
+    if (document.doctype) {
+        return
+    }
+
+    const newDoctype = document.implementation.createDocumentType(
+        "html",
+        "",
+        ""
+    )
+    document.insertBefore(newDoctype, document.documentElement)
 }
