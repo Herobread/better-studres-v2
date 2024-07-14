@@ -7,6 +7,7 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@src/components/ui/dialog"
@@ -22,7 +23,7 @@ import { Input } from "@src/components/ui/input"
 import { updateQuickLink } from "@src/features/quickAccess"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQueryClient } from "@tanstack/react-query"
-import { useEffect } from "react"
+import { MouseEvent, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
@@ -60,12 +61,21 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
         modalHandler.hide()
     }
 
+    const handleClose = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        console.log("resetting")
+        reset()
+        modalHandler.hide()
+    }
+
     return (
         <Dialog handler={modalHandler}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Edit &quot;{quickLink.name}&quot;</DialogTitle>
-                    <DialogDescription>Modify data</DialogDescription>
+                    <DialogTitle>Edit Quick Link</DialogTitle>
+                    <DialogDescription>
+                        Update the details of your quick link.
+                    </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
                     <form
@@ -87,7 +97,7 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
                                                     <FormControl>
                                                         <Input
                                                             autoComplete="off"
-                                                            placeholder="icon"
+                                                            placeholder="Icon"
                                                             className="text-center"
                                                             {...field}
                                                         />
@@ -107,7 +117,7 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
                                                     <FormControl>
                                                         <Input
                                                             autoComplete="off"
-                                                            placeholder="name"
+                                                            placeholder="Name"
                                                             {...field}
                                                         />
                                                     </FormControl>
@@ -127,7 +137,7 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
                                                 <FormControl>
                                                     <Input
                                                         autoComplete="off"
-                                                        placeholder="url"
+                                                        placeholder="Enter URL"
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -137,9 +147,16 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
                                     }}
                                 />
                             </CompactLayout>
-                            <div className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                            <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                                <Button
+                                    onClick={handleClose}
+                                    variant={"outline"}
+                                    type="button"
+                                >
+                                    Cancel
+                                </Button>
                                 <Button type="submit">Save</Button>
-                            </div>
+                            </DialogFooter>
                         </NormalLayout>
                     </form>
                 </Form>
