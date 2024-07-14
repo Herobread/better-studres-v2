@@ -1,8 +1,10 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
+import { Button } from "@src/components/ui/button"
 import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@src/components/ui/dialog"
@@ -37,36 +39,45 @@ export default NiceModal.create(({ tag }: ViewTaggedFilesDialogProps) => {
         },
     })
 
+    const handleClose = () => {
+        modalHandler.hide()
+    }
+
     return (
         <Dialog handler={modalHandler}>
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Files tagged &quot;{name}&quot;</DialogTitle>
                     <DialogDescription>Files tagged {name}</DialogDescription>
-                    <ScrollArea className="max-h-96">
-                        <div className="grid gap-2">
-                            {baseFileLinks && baseFileLinks.length > 0 ? (
-                                baseFileLinks.map((baseFileLink, i) => {
-                                    return (
-                                        <Fragment key={baseFileLink.rawHref}>
-                                            <MinimizedTaggedLinkPreview
-                                                baseFileLink={baseFileLink}
-                                                onClick={() => {
-                                                    modalHandler.hide()
-                                                }}
-                                            />
-                                            {i < baseFileLinks.length - 1 && (
-                                                <Separator />
-                                            )}
-                                        </Fragment>
-                                    )
-                                })
-                            ) : (
-                                <p>No tagged files or folders found.</p>
-                            )}
-                        </div>
-                    </ScrollArea>
                 </DialogHeader>
+                <ScrollArea className="max-h-96">
+                    <div className="grid gap-2">
+                        {baseFileLinks && baseFileLinks.length > 0 ? (
+                            baseFileLinks.map((baseFileLink, i) => {
+                                return (
+                                    <Fragment key={baseFileLink.rawHref}>
+                                        <MinimizedTaggedLinkPreview
+                                            baseFileLink={baseFileLink}
+                                            onClick={() => {
+                                                modalHandler.hide()
+                                            }}
+                                        />
+                                        {i < baseFileLinks.length - 1 && (
+                                            <Separator />
+                                        )}
+                                    </Fragment>
+                                )
+                            })
+                        ) : (
+                            <p>No tagged files or folders found.</p>
+                        )}
+                    </div>
+                </ScrollArea>
+                <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                    <Button variant={"outline"} onClick={handleClose}>
+                        Close
+                    </Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     )
