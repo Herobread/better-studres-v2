@@ -30,7 +30,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 interface TagFileMenuDialogProps {
-    fileLink: FullFileLink
+    fileLink?: FullFileLink
 }
 
 const formSchema = z.object({
@@ -38,7 +38,9 @@ const formSchema = z.object({
 })
 
 export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
-    const { fullName, fileKey } = fileLink
+    const isAddToFileLink = !!fileLink
+
+    // const { fullName, fileKey } = fileLink
 
     const modalHandler = useModal()
     const { toast } = useToast()
@@ -55,20 +57,26 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
         try {
             const tag = await createTag(name)
 
-            await addTag(fileKey, tag)
+            if (isAddToFileLink) {
+                await addTag(fileLink.fileKey, tag)
+            }
 
             queryClient.invalidateQueries({
-                queryKey: [TAGS_QUERY_KEY, fileKey],
+                queryKey: [TAGS_QUERY_KEY, fileLink?.fileKey],
             })
             queryClient.refetchQueries({
-                queryKey: [TAGS_QUERY_KEY, fileKey],
+                queryKey: [TAGS_QUERY_KEY, fileLink?.fileKey],
             })
 
             handleClose()
 
+            const description = isAddToFileLink
+                ? `Created new tag: ${name} and added to ${fileLink.fullName}.`
+                : `Created new tag: ${name}`
+
             toast({
                 title: "✅ Success",
-                description: `Added ${name} to ${fullName}.`,
+                description,
             })
         } catch (error) {
             toast({
@@ -89,7 +97,9 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                 <DialogHeader>
                     <DialogTitle>Create New Tag</DialogTitle>
                     <DialogDescription>
-                        Enter a tag name to add a new tag to {`"${fullName}"`}.
+                        {isAddToFileLink
+                            ? `Enter a tag name to add a new tag to "${fileLink.fullName}".`
+                            : "Enter a name to create a new tag."}
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -106,7 +116,7 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                                     <FormControl>
                                         <Input
                                             autoComplete="off"
-                                            placeholder="e.g., important, todo, c++"
+                                            placeholder="e.g., Important, Todo, C++"
                                             {...field}
                                         />
                                     </FormControl>
@@ -122,7 +132,11 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit">Add Tag</Button>
+                            <Button type="submit">
+                                {isAddToFileLink
+                                    ? `Create and add tag`
+                                    : `Create tag`}
+                            </Button>
                         </DialogFooter>
                     </form>
                 </Form>
