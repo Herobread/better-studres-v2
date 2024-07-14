@@ -5,6 +5,7 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@src/components/ui/dialog"
@@ -37,10 +38,10 @@ const formSchema = z.object({
 })
 
 export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
+    const { fullName, fileKey } = fileLink
+
     const modalHandler = useModal()
     const { toast } = useToast()
-
-    const { fullName, fileKey } = fileLink
 
     const queryClient = useQueryClient()
 
@@ -63,7 +64,7 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                 queryKey: [TAGS_QUERY_KEY, fileKey],
             })
 
-            modalHandler.hide()
+            handleClose()
 
             toast({
                 title: "✅ Success",
@@ -75,6 +76,11 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                 description: `${error}`,
             })
         }
+    }
+
+    const handleClose = () => {
+        form.reset()
+        modalHandler.hide()
     }
 
     return (
@@ -108,9 +114,16 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                                 </FormItem>
                             )}
                         />
-                        <div className="flex justify-end">
+                        <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                            <Button
+                                type="button"
+                                variant={"outline"}
+                                onClick={handleClose}
+                            >
+                                Cancel
+                            </Button>
                             <Button type="submit">Add Tag</Button>
-                        </div>
+                        </DialogFooter>
                     </form>
                 </Form>
             </DialogContent>
