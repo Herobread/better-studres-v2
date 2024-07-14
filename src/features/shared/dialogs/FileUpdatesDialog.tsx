@@ -1,12 +1,16 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
+import { Button } from "@src/components/ui/button"
 import {
     Dialog,
     DialogContent,
     DialogDescription,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@src/components/ui/dialog"
 import { ScrollArea } from "@src/components/ui/scroll-area"
+import { useToast } from "@src/components/ui/use-toast"
+import { saveFolder } from "@src/features/fileDownload"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowRightIcon } from "lucide-react"
 import { Fragment } from "react/jsx-runtime"
@@ -21,7 +25,9 @@ import { FullFileLink } from "../../parser"
 export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
     const modalHandler = useModal()
 
-    const { fileKey, fullName, emoji } = fileLink
+    const {toast} = useToast()
+
+    const { fileKey, fullName, emoji, href, lastModified } = fileLink
 
     const { data: fileUpdates } = useQuery({
         queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE, fileKey],
@@ -29,6 +35,29 @@ export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
             return await getTrackedFileLink(fileKey)
         },
     })
+
+    const handleClose = () => {
+        modalHandler.hide()
+    }
+
+    const handleDownload = async () => {
+        toast({
+            title: "📥 Downloading",
+            description: "Fetching and archiving files.",
+        })
+        try {
+            await saveFolder(href)
+            toast({
+                title: "✅ Success",
+                description: `Downloaded ${fullName}.`,
+            })
+        } catch (error) {
+            toast({
+                title: "❌ Error",
+                description: `Failed to download ${fullName}.`,
+            })
+        }
+    }
 
     return (
         <Dialog handler={modalHandler}>
@@ -54,6 +83,10 @@ export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
                         )}
                     </div>
                 </ScrollArea>
+                <DialogFooter className="flex gap-1">
+                    <Button variant={'outline'} onClick={handleClose}>Close</Button>
+                    <Button onClick={handleDownload}>Download current version</Button>
+                </DialogFooter>
             </DialogContent>
         </Dialog>
     )
