@@ -13,7 +13,7 @@ interface TableProps {
 }
 
 export function Table({ fileLinks, sortLinks }: TableProps) {
-    const { isLoading } = useContext(PageStateContext)
+    const { isLoading, transitionData } = useContext(PageStateContext)
 
     if (isLoading) {
         return <TableSkeleton />
@@ -25,10 +25,13 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
         <>
             <div
                 data-state={state}
+                data-direction={transitionData?.direction}
                 className="grid grid-cols-[50px_auto_4fr_max-content_max-content_3fr] gap-3 
-            transition-opacity data-[state=open]:animate-in data-[state=closed]:animate-out
-            data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
-            "
+                transition-opacity
+                data-[state=open]:animate-in data-[state=closed]:animate-out 
+                data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
+                data-[direction=back][data-state=open]:slide-in-from-left-10 
+                data-[direction=forward][data-state=open]:slide-in-from-right-10"
             >
                 <TableHeader sortLinks={sortLinks} />
                 {fileLinks.map((fileLink) => {

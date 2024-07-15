@@ -1,7 +1,13 @@
 import { PageData } from "@src/features/parser"
 import { Dispatch, SetStateAction, createContext, useState } from "react"
 
-interface PageStateTypes {
+export type TransitionData = {
+    direction: "back" | "forward"
+}
+
+type PageStateTypes = {
+    transitionData: TransitionData | undefined
+    setTransitionData: Dispatch<SetStateAction<TransitionData | undefined>>
     isLoading: boolean
     setIsLoading: Dispatch<SetStateAction<boolean>>
     pageData: PageData | undefined
@@ -9,6 +15,10 @@ interface PageStateTypes {
 }
 
 const pageStateFallback: PageStateTypes = {
+    transitionData: undefined,
+    setTransitionData: () => {
+        throw new Error("setTransitionData not initialized")
+    },
     isLoading: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     setIsLoading: () => {
@@ -34,10 +44,15 @@ export function PageStateContextProvider({
         pageStateFallback.isLoading
     )
     const [pageData, setPageData] = useState<PageData | undefined>(undefined)
+    const [transitionData, setTransitionData] = useState<
+        TransitionData | undefined
+    >(undefined)
 
     return (
         <PageStateContext.Provider
             value={{
+                transitionData,
+                setTransitionData,
                 isLoading,
                 setIsLoading,
                 pageData,

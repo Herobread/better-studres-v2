@@ -88,10 +88,20 @@ module.exports = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                "move-left-to-right": {
+                    "0%": { transform: "translateX(-100%)" },
+                    "100%": { transform: "translateX(100%)" },
+                },
+                "move-right-to-left": {
+                    "0%": { transform: "translateX(100%)" },
+                    "100%": { transform: "translateX(-100%)" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "left-to-right": "move-left-to-right 2s ease-out",
+                "right-to-left": "move-right-to-left 2s ease-out",
             },
         },
     },
