@@ -20,7 +20,7 @@ export default function CopyPathMenuItem({ href }: CopyPathMenuItemProps) {
 
     return (
         <ContextMenuItem onSelect={handleSelect}>
-            <CopyIcon /> Copy URL
+            <CopyIcon  className="w-4 h-4"/> Copy URL
         </ContextMenuItem>
     )
 }

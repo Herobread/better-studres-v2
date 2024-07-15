@@ -41,7 +41,7 @@ export default function DownloadFileMenuItem({
     if (isFolder) {
         return (
             <ContextMenuItem onSelect={handleFolderDownload}>
-                <DownloadIcon /> Download folder
+                <DownloadIcon  className="w-4 h-4"/> Download folder
             </ContextMenuItem>
         )
     }
@@ -52,7 +52,7 @@ export default function DownloadFileMenuItem({
 
     return (
         <ContextMenuItem onSelect={handleSelect}>
-            <DownloadIcon /> Download file
+            <DownloadIcon  className="w-4 h-4"/> Download file
         </ContextMenuItem>
     )
 }

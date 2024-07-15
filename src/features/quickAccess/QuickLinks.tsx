@@ -97,7 +97,7 @@ export function QuickLinks() {
                                         handleEditQuickLink(quickLink.id)
                                     }
                                 >
-                                    <Edit2Icon /> Edit link
+                                    <Edit2Icon  className="w-4 h-4"/> Edit link
                                 </ContextMenuItem>
                                 <CopyPathMenuItem href={quickLink.href} />
                                 <ContextMenuItem
@@ -106,7 +106,7 @@ export function QuickLinks() {
                                         await handleMoveRight(quickLink.id)
                                     }}
                                 >
-                                    <ChevronRight /> Move right
+                                    <ChevronRight className="w-4 h-4" /> Move right
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     disabled={i == 0}
@@ -114,7 +114,7 @@ export function QuickLinks() {
                                         await handleMoveLeft(quickLink.id)
                                     }}
                                 >
-                                    <ChevronLeft /> Move left
+                                    <ChevronLeft className="w-4 h-4" /> Move left
                                 </ContextMenuItem>
                                 <ContextMenuSeparator />
                                 <ContextMenuItem
@@ -124,7 +124,7 @@ export function QuickLinks() {
                                         )
                                     }}
                                 >
-                                    <Trash2Icon /> Delete
+                                    <Trash2Icon  className="w-4 h-4"/> Delete
                                 </ContextMenuItem>
                             </ContextMenuContent>
                         </ContextMenu>

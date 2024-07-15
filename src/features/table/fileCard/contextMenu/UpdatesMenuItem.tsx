@@ -50,7 +50,7 @@ function UpdatesMenuItemContent({
 
     return (
         <ContextMenuItem {...props} onSelect={handleSelect}>
-            <GitCompareArrowsIcon /> View update history
+            <GitCompareArrowsIcon className="w-4 h-4" /> View update history
         </ContextMenuItem>
     )
 }

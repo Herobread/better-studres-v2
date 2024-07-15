@@ -49,7 +49,7 @@ export function TagsMenuSub({ fileLink }: TagsMenuSubProps) {
     return (
         <ContextMenuSub>
             <ContextMenuSubTrigger>
-                <TagsIcon /> Tags
+                <TagsIcon className="w-4 h-4"/> Tags
             </ContextMenuSubTrigger>
             <ContextMenuSubContent className="max-h-[300px] w-48 overflow-auto">
                 <ContextMenuItem inset onSelect={handleCreateNewTag}>

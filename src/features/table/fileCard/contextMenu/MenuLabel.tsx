@@ -19,7 +19,7 @@ export function MenuLabel({ fullName, size, description }: MenuLabelProps) {
                     </span>
                 )}
             </div>
-            <p className="text-sm text-muted-foreground">{description}</p>
+            <p className="text-muted-foreground font-normal">{description}</p>
         </ContextMenuLabel>
     )
 }

@@ -28,7 +28,7 @@ const FileCardContextMenuContent = forwardRef<
         return (
             <ContextMenuContent ref={ref}>
                 <ContextMenuItem onClick={() => redirect(BASE_URL)}>
-                    <FolderIcon /> Go to Root
+                    <FolderIcon  className="w-4 h-4"/> Go to Root
                 </ContextMenuItem>
             </ContextMenuContent>
         )
