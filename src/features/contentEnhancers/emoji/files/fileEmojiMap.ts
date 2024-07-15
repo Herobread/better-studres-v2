@@ -109,6 +109,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     gz: "📦",
     tgz: "📦",
     pcap: "📦",
+    npz: "📦",
     // video
     mp4: "📽",
     ogv: "📽",
