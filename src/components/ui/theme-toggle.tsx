@@ -3,14 +3,16 @@ import { Moon, Sun } from "lucide-react"
 import { Button } from "@src/components/ui/button"
 import {
     DropdownMenu,
+    DropdownMenuCheckboxItem,
     DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger
 } from "@src/components/ui/dropdown-menu"
 import { useTheme } from "@src/features/theme"
 
 export function ThemeToggle() {
-    const { setTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
 
     return (
         <DropdownMenu>
@@ -22,15 +24,17 @@ export function ThemeToggle() {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
+                <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                <DropdownMenuSeparator/>
+                <DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme("light")}>
                     Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={theme === 'dark'} onCheckedChange={() => setTheme("dark")}>
                     Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem checked={theme === 'system'} onCheckedChange={() => setTheme("system")}>
                     System
-                </DropdownMenuItem>
+                </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
