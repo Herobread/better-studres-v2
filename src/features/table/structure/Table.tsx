@@ -39,8 +39,8 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
                         <FileCard fileLink={fileLink} key={fileLink.fileKey} />
                     )
                 })}
+                {fileLinks.length === 1 && <EmptyFolderMessage />}
             </div>
-            {fileLinks.length === 1 && <EmptyFolderMessage />}
         </>
     )
 }

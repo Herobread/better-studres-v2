@@ -46,3 +46,6 @@ https://studres.cs.st-andrews.ac.uk/2017_2018/CS1005/
 
 funny jsons
 https://studres.cs.st-andrews.ac.uk/CS1003/Coursework/P5-August/data/
+
+banana
+https://studres.cs.st-andrews.ac.uk/CS5003/Examples/W2-HTML-CSS/someimage.png
