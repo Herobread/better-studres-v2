@@ -80,6 +80,14 @@ module.exports = {
                 sm: "calc(var(--radius) - 4px)",
             },
             keyframes: {
+                pulse: {
+                    "0%, 100%": {
+                        opacity: 0,
+                    },
+                    "50%": {
+                        opacity: 1,
+                    },
+                },
                 "accordion-down": {
                     from: { height: "0" },
                     to: { height: "var(--radix-accordion-content-height)" },
@@ -98,6 +106,7 @@ module.exports = {
                 },
             },
             animation: {
+                pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "left-to-right": "move-left-to-right 2s ease-out",
