@@ -63,7 +63,13 @@ export default function SortHeader({
     }
 
     return (
-        <Link className={header({ intent: style })} href={href}>
+        <Link
+            className={header({ intent: style })}
+            href={href}
+            transitionData={{
+                direction: currentOrder === "asc" ? "top" : "bottom",
+            }}
+        >
             <div>{children}</div>
             {sort != null && (
                 <div className="opacity-50 transition-opacity duration-200 group-hover:opacity-100">

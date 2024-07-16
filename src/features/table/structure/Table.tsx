@@ -30,8 +30,11 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
                 transition-opacity
                 data-[state=open]:animate-in data-[state=closed]:animate-out 
                 data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
-                data-[direction=back][data-state=open]:slide-in-from-left-10 
-                data-[direction=forward][data-state=open]:slide-in-from-right-10"
+                data-[direction=bottom][data-state=open]:slide-in-from-bottom-10 
+                data-[direction=left][data-state=open]:slide-in-from-left-10
+                data-[direction=right][data-state=open]:slide-in-from-right-10
+                data-[direction=top][data-state=open]:slide-in-from-top-10
+                "
             >
                 <TableHeader sortLinks={sortLinks} />
                 {fileLinks.map((fileLink) => {

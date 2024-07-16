@@ -2,7 +2,7 @@ import { PageData } from "@src/features/parser"
 import { Dispatch, SetStateAction, createContext, useState } from "react"
 
 export type TransitionData = {
-    direction: "back" | "forward"
+    direction: "left" | "right" | "bottom" | "top"
 }
 
 type PageStateTypes = {

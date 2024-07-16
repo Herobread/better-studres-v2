@@ -26,7 +26,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
         const isParentDir = fullName.includes("Parent Directory")
 
         const transitionData: TransitionData = {
-            direction: isParentDir ? "back" : "forward",
+            direction: isParentDir ? "left" : "right",
         }
 
         return (
