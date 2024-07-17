@@ -1,4 +1,5 @@
 import NiceModal from "@ebay/nice-modal-react"
+import CopyTextMenuItem from "@src/features/shared/contextMenuItems/CopyTextMenuItem"
 import { useQuery } from "@tanstack/react-query"
 import {
     ArrowLeftIcon,
@@ -20,7 +21,6 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "../../components/ui/popover"
-import CopyPathMenuItem from "../shared/contextMenuItems/CopyPathMenuItem"
 import EditQuickLinkDialog from "../shared/dialogs/EditQuickLinkDialog"
 import AddQuickLinkForm from "./AddQuickLinkForm"
 import QuickLinkButton from "./QuickLinkButton"
@@ -97,16 +97,20 @@ export function QuickLinks() {
                                         handleEditQuickLink(quickLink.id)
                                     }
                                 >
-                                    <Edit2Icon  className="w-4 h-4"/> Edit link
+                                    <Edit2Icon className="h-4 w-4" /> Edit link
                                 </ContextMenuItem>
-                                <CopyPathMenuItem href={quickLink.href} />
+                                <CopyTextMenuItem
+                                    name="URL"
+                                    textToCopy={quickLink.href}
+                                />
                                 <ContextMenuItem
                                     disabled={i == quickLinks.length - 1}
                                     onSelect={async () => {
                                         await handleMoveRight(quickLink.id)
                                     }}
                                 >
-                                    <ChevronRight className="w-4 h-4" /> Move right
+                                    <ChevronRight className="h-4 w-4" /> Move
+                                    right
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     disabled={i == 0}
@@ -114,7 +118,8 @@ export function QuickLinks() {
                                         await handleMoveLeft(quickLink.id)
                                     }}
                                 >
-                                    <ChevronLeft className="w-4 h-4" /> Move left
+                                    <ChevronLeft className="h-4 w-4" /> Move
+                                    left
                                 </ContextMenuItem>
                                 <ContextMenuSeparator />
                                 <ContextMenuItem
@@ -124,7 +129,7 @@ export function QuickLinks() {
                                         )
                                     }}
                                 >
-                                    <Trash2Icon  className="w-4 h-4"/> Delete
+                                    <Trash2Icon className="h-4 w-4" /> Delete
                                 </ContextMenuItem>
                             </ContextMenuContent>
                         </ContextMenu>
