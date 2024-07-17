@@ -63,7 +63,6 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
 
     const handleClose = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log("resetting")
         reset()
         modalHandler.hide()
     }

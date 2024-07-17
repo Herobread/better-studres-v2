@@ -2,6 +2,7 @@ import { Separator } from "@src/components/ui/separator"
 import { FullFileLink } from "@src/features/parser"
 import Link from "@src/features/router/Link"
 import { TransitionData } from "@src/features/router/PageStateContext"
+import { FileCustomDescription } from "@src/features/table/fileCard/FileCustomDescription"
 import { forwardRef } from "react"
 import { FileDescription } from "./FileDescription"
 import { FileExtension } from "./FileExtension"
@@ -55,6 +56,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
                         )}
                     </div>
                     <FileDescription description={fileLink.description} />
+                    <FileCustomDescription fileKey={fileLink.fileKey} />
                 </div>
                 <FileSize size={fileLink.size} />
                 <FileModifiedDate lastModified={fileLink.lastModified} />

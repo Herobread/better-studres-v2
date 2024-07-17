@@ -25,7 +25,7 @@ const FileCard = forwardRef<HTMLAnchorElement, FileCardProps>(
                     title={fileLink.fullName}
                     className="col-span-full grid grid-cols-subgrid"
                 >
-                    <FileCardDetails fileLink={fileLink} ref={ref} />
+                    <FileCardWithContextMenu fileLink={fileLink} ref={ref} />
                 </ImagePreviewWrapper>
             )
         }

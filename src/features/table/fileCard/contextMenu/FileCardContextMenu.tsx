@@ -7,6 +7,7 @@ import { BASE_URL } from "@src/features/files"
 import { FullFileLink } from "@src/features/parser"
 import { redirect } from "@src/features/router"
 import CopyPathMenuItem from "@src/features/shared/contextMenuItems/CopyPathMenuItem"
+import { AddNoteContextMenuItem } from "@src/features/table/fileCard/contextMenu/AddNoteContextMenuItem"
 import { FolderIcon } from "lucide-react"
 import { forwardRef } from "react"
 import DownloadFileMenuItem from "./DownloadFileMenuItem"
@@ -28,7 +29,7 @@ const FileCardContextMenuContent = forwardRef<
         return (
             <ContextMenuContent ref={ref}>
                 <ContextMenuItem onClick={() => redirect(BASE_URL)}>
-                    <FolderIcon  className="w-4 h-4"/> Go to Root
+                    <FolderIcon className="h-4 w-4" /> Go to Root
                 </ContextMenuItem>
             </ContextMenuContent>
         )
@@ -51,6 +52,7 @@ const FileCardContextMenuContent = forwardRef<
                 isFolder={fileLink.isFolder}
                 fileName={fileLink.fullName}
             />
+            <AddNoteContextMenuItem fileKey={fileLink.fileKey} />
 
             <ContextMenuSeparator />
 
