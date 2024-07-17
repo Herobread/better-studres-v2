@@ -28,7 +28,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 const formSchema = z.object({
-    icon: z.string().emoji().max(4, "4 emoji max"),
+    icon: z.string().emoji(),
     name: z.string().min(1, "Name is required").max(50),
     href: z.string().min(1, "Link is required"),
 })
