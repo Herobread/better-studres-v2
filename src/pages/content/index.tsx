@@ -14,6 +14,42 @@ import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
 
+const CODE_FILE_EXTENSIONS = [
+    // text
+    ".txt",
+    ".csv",
+    // config
+    ".config",
+    ".properties",
+    ".makefile",
+    ".cabal",
+    ".yaml",
+    ".ipkg",
+    ".gitignore",
+    // code
+    ".java",
+    ".hs",
+    ".py",
+    ".css",
+    ".sh",
+    ".php",
+    ".js",
+    ".jsx",
+    ".ts",
+    ".tsx",
+    ".py",
+    ".pl",
+    ".hs",
+    ".h",
+    ".c",
+    ".cpp",
+    ".ppc64",
+    ".st",
+    ".idr",
+    ".mjs",
+    ".r",
+]
+
 async function initialize() {
     const currentUrl = location.href
 
