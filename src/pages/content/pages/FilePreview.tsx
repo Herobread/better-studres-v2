@@ -1,12 +1,18 @@
 import { FileContent } from "@src/features/parser"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
 
 export function FilePreview({ content }: { content: FileContent }) {
     return (
         <>
-            <h1>hello world</h1>
-            <pre className="whitespace-pre-wrap break-words">
+            <SyntaxHighlighter
+                language="java"
+                wrapLongLines
+                showLineNumbers
+                style={vscDarkPlus}
+            >
                 {content.text}
-            </pre>
+            </SyntaxHighlighter>
         </>
     )
 }
