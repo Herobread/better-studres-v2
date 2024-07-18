@@ -23,3 +23,13 @@ export function downloadFile(href: string, filename: string): void {
     link.click()
     document.body.removeChild(link)
 }
+
+/**
+ * same as string.endsWith but for array
+ *
+ * @param str
+ * @param ends
+ */
+export function endsWith(str: string, ends: string[]) {
+    return ends.some((end) => str.endsWith(end))
+}

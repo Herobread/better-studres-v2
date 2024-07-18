@@ -1,10 +1,12 @@
 import { FullFileLink, parseTable } from "@src/features/parser"
+import { parseFilePageContent } from "@src/features/parser/parseFilePageContent"
+import { isFilePage } from "@src/features/router/isFilePage"
 import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { isRootPage } from "@src/features/router/isRootPage"
 import { SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 
-export type PageType = "folder" | "not found" | "root" | "unknown"
+export type PageType = "folder" | "not found" | "root" | "file" | "unknown"
 
 export interface BasePageData {
     type: PageType
@@ -30,6 +32,15 @@ export interface RootPageData extends BasePageData {
     type: "root"
 }
 
+export interface FileContent {
+    text: string
+}
+
+export interface FilePreviewPageData extends BasePageData {
+    type: "file"
+    content: FileContent
+}
+
 export interface UnknownPageData extends BasePageData {
     type: "unknown"
 }
@@ -39,6 +50,7 @@ export type PageData =
     | NotFoundPageData
     | RootPageData
     | UnknownPageData
+    | FilePreviewPageData
 
 /**
  * Parses the content of a page to extract its title, file links, and sort links.
@@ -55,6 +67,13 @@ export function parsePageContent(content: HTMLElement): PageData {
     if (isRootPage(content)) {
         return {
             type: "root",
+        }
+    }
+
+    if (isFilePage(content)) {
+        return {
+            type: "file",
+            content: parseFilePageContent(content),
         }
     }
 
