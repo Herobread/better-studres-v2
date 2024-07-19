@@ -1,15 +1,14 @@
 import { FileContent } from "@src/features/parser"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
+import SyntaxHighlighter from "react-syntax-highlighter"
+import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs"
 
 export function FilePreview({ content }: { content: FileContent }) {
     return (
         <>
             <SyntaxHighlighter
-                language="java"
                 wrapLongLines
                 showLineNumbers
-                style={vscDarkPlus}
+                style={atomOneDark}
             >
                 {content.text}
             </SyntaxHighlighter>
