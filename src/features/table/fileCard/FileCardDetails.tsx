@@ -56,7 +56,9 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
                         )}
                     </div>
                     <FileDescription description={fileLink.description} />
-                    <FileCustomDescription fileKey={fileLink.fileKey} />
+                    {!isParentDir && (
+                        <FileCustomDescription fileKey={fileLink.fileKey} />
+                    )}
                 </div>
                 <FileSize size={fileLink.size} />
                 <FileModifiedDate lastModified={fileLink.lastModified} />
