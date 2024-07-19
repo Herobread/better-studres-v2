@@ -13,11 +13,13 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
     theme: PreferredTheme
     setTheme: (theme: PreferredTheme) => void
+    actualTheme: Theme
 }
 
 const initialState: ThemeProviderState = {
     theme: "system",
     setTheme: () => null,
+    actualTheme: "dark",
 }
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
@@ -47,6 +49,9 @@ export function ThemeProvider({
             (localStorage.getItem(storageKey) as PreferredTheme) || defaultTheme
         )
     })
+    const [actualTheme, setActualTheme] = useState<Theme>(() => {
+        return getCurrentTheme(theme)
+    })
 
     useEffect(() => {
         const root = window.document.getElementById(
@@ -61,6 +66,7 @@ export function ThemeProvider({
 
         const appliedTheme = getCurrentTheme(theme)
         root.classList.add(appliedTheme)
+        setActualTheme(appliedTheme)
         root.style.colorScheme = appliedTheme
     }, [theme])
 
@@ -70,7 +76,9 @@ export function ThemeProvider({
             localStorage.setItem(storageKey, newTheme)
             await chrome.storage.local.set({ [storageKey]: newTheme })
             setTheme(newTheme)
+            setActualTheme(getCurrentTheme(newTheme))
         },
+        actualTheme,
     }
 
     return (
