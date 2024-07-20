@@ -12,7 +12,7 @@ export async function fetchFolder(
     url: string,
     baseUrl?: string
 ): Promise<FolderContent> {
-    let result: FolderContent = {}
+    const result: FolderContent = {}
 
     const page = await fetch(url)
     const blob = await page.blob()
