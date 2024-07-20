@@ -10,9 +10,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { CommandItem } from "../../components/ui/command"
 import { useToast } from "../../components/ui/use-toast"
 
-interface SaveQuickLinkCommandProps {}
-
-export default function SaveQuickLinkCommand({}: SaveQuickLinkCommandProps) {
+export default function SaveQuickLinkCommand() {
     const { toast } = useToast()
     const queryClient = useQueryClient()
 

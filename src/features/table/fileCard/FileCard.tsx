@@ -47,6 +47,8 @@ const FileCardWithContextMenu = forwardRef<HTMLAnchorElement, FileCardProps>(
     }
 )
 
+FileCardWithContextMenu.displayName = "FileCardWithContextMenu"
+
 FileCard.displayName = "FileCard"
 
 export default FileCard

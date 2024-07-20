@@ -3,9 +3,7 @@ import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { getCurrentTheme, useTheme } from "@src/features/theme"
 import { CommandItem } from "../../components/ui/command"
 
-interface ToggleThemeCommandProps {}
-
-export default function ToggleThemeCommand({}: ToggleThemeCommandProps) {
+export default function ToggleThemeCommand() {
     const { theme, setTheme } = useTheme()
 
     const currentTheme = getCurrentTheme(theme)
