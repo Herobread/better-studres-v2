@@ -7,7 +7,7 @@ jobs:
     build:
         name: Build
         timeout-minutes: 15
-        runs-on: windows-latest
+        runs-on: ubuntu-latest
 
         steps:
             - name: Check out code
@@ -15,21 +15,19 @@ jobs:
               with:
                   fetch-depth: 2
 
-            - name: Setup Node.js environment
-              uses: actions/setup-node@v4
+            - name: Setup Bun environment
+              uses: oven-sh/setup-bun@v1
               with:
-                  node-version: 20
-                  cache: "yarn"
+                  bun-version: 0.7.0
 
             - name: Install dependencies
-              run: yarn
+              run: bun install
 
             - name: Build
-              run: yarn build
+              run: bun run build
 
             - name: Zip the build folder
-              run: |
-                  powershell Compress-Archive -Path dist\* -DestinationPath better-studres.zip
+              run: zip -r better-studres.zip dist/*
 
             - name: Upload extension artifacts
               uses: actions/upload-artifact@v3
