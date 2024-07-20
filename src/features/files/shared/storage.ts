@@ -28,7 +28,7 @@ export async function saveFileData(
     filePropertyKey: FilePropertyKey,
     fileProperty: any
 ): Promise<void> {
-    let fileData = await getFileDataMap()
+    const fileData = await getFileDataMap()
 
     if (!fileData[fileKey]) {
         fileData[fileKey] = {}
@@ -50,8 +50,8 @@ export const GET_FILE_DATA_QUERY_KEY = "getFileData"
 export async function getFileData(
     fileKey: string,
     filePropertyKey?: FilePropertyKey
-): Promise<any | null> {
-    let fileData = await getFileDataMap()
+) {
+    const fileData = await getFileDataMap()
 
     if (!fileData[fileKey]) {
         return null

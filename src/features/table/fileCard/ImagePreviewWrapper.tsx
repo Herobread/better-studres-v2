@@ -15,7 +15,7 @@ interface ImagePreviewWrapperProps {
 const ImagePreviewWrapper = forwardRef<
     HTMLAnchorElement,
     ImagePreviewWrapperProps
->(({ src, title, className, children, ...props }, ref) => {
+>(({ src, title, className, children }, ref) => {
     return (
         <HoverCard>
             <HoverCardTrigger ref={ref} className={className}>

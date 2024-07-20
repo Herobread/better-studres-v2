@@ -19,7 +19,7 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
         return <TableSkeleton />
     }
 
-    let state = isLoading ? "closed" : "open"
+    const state = isLoading ? "closed" : "open"
 
     return (
         <>

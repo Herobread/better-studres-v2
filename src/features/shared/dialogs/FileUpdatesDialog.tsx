@@ -25,9 +25,9 @@ import { FullFileLink } from "../../parser"
 export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
     const modalHandler = useModal()
 
-    const {toast} = useToast()
+    const { toast } = useToast()
 
-    const { fileKey, fullName, emoji, href, lastModified } = fileLink
+    const { fileKey, fullName, emoji, href } = fileLink
 
     const { data: fileUpdates } = useQuery({
         queryKey: [GET_TRACKED_FILE_LINK_QUERY_KEY_BASE, fileKey],
@@ -84,8 +84,12 @@ export default NiceModal.create(({ fileLink }: { fileLink: FullFileLink }) => {
                     </div>
                 </ScrollArea>
                 <DialogFooter className="flex gap-1">
-                    <Button variant={'outline'} onClick={handleClose}>Close</Button>
-                    <Button onClick={handleDownload}>Download current version</Button>
+                    <Button variant={"outline"} onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button onClick={handleDownload}>
+                        Download current version
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

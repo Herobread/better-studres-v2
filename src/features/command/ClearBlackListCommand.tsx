@@ -5,9 +5,7 @@ import { ToastAction } from "../../components/ui/toast"
 import { useToast } from "../../components/ui/use-toast"
 import { getBlackList, setBlackList } from "../extensionToggle/blacklist"
 
-interface ClearBlackListCommandProps {}
-
-export default function ClearBlackListCommand({}: ClearBlackListCommandProps) {
+export default function ClearBlackListCommand() {
     const { toast } = useToast()
 
     const handleCommand = async () => {

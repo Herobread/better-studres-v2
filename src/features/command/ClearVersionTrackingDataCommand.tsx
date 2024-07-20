@@ -11,9 +11,7 @@ import {
     setFileDataMap,
 } from "../files"
 
-interface ClearVersionTrackingDataCommandProps {}
-
-export default function ClearVersionTrackingDataCommand({}: ClearVersionTrackingDataCommandProps) {
+export default function ClearVersionTrackingDataCommand() {
     const { toast } = useToast()
 
     const queryClient = useQueryClient()
