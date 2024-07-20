@@ -12,7 +12,9 @@ export default function CommandInput({ onSelect }: CommandInputProps) {
         >
             <SearchIcon />
             <p className="flex-grow">Search visited folders or run commands</p>
-            <kbd className="px-1 font-bold">⌘K</kbd>
+            <kbd className="flex gap-1 rounded-sm bg-background-layer-1 px-2 text-sm">
+                <span>⌘</span>K
+            </kbd>
         </button>
     )
 }
