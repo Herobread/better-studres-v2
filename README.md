@@ -4,7 +4,7 @@
 
 ![Better studres](https://github.com/Herobread/better-studres-v2/assets/52717777/b352a9ed-3bac-47c0-a058-f4af46984282)
 
-Better StudRes v2 is a chrome extension, that improves appearence of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities. This will help you understand the features and get started with running the project.
+Better StudRes v2 is a chrome extension, that improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
 
 [chrome web store](https://chromewebstore.google.com/detail/better-studres/kamnhbpjhhhjlbandgpngdnplledombg)
 
@@ -12,76 +12,77 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 
 ### Improved UI and UX
 
-- Completely redesigned interface for a modern look and feel.
-- Added dark mode
+Completely redesigned interface for a modern look and feel.
+
+- **Better folder view**:
+  - Better Header:
+    - navigate to any subdirectory
+  - Better File Cards:
+    - improved accessibility
+    - image previews
+    - download files and folders
+    - add notes
+    - add tags
+  - Simple Animations
+- **Improve HTML Button**
+  - click to reduce width of page and make it easier to read
+- **Syntax Highlighting**
+  - code files are highlighted with `react-syntax-highlighter`
 
 ![dark mode](https://github.com/Herobread/better-studres-v2/assets/52717777/0624c561-1491-474d-b83f-41956bde1075)
 
-### QuickLinks V2
+### QuickLinks
 
 ![quicklinks](https://github.com/Herobread/better-studres-v2/assets/52717777/a3401d2a-5109-4b53-9400-e52fcdc889e5)
 
-- **Add Links**: Easily add links to any page, auto-filled with active page data (emoji, name, link).
-- **Edit/Delete**: Right-click to edit or delete links.
-- **Reorder**.
+Easily add and configure links to any page.
 
 ### Commands
 
 ![Commands](https://github.com/Herobread/better-studres-v2/assets/52717777/341a4186-c191-4878-a8e8-3a9decaf29e9)
 
-- Commands work on any StudRes page, including the root directory and file views.
-- Command allow you to:
-  - **Open QuickLinks**: Access saved links quickly.
-  - **Navigate**: Go to root, module root, or parent directory with ease.
-  - **Open any visited page**: visited paths are stored and can be searched to quickly navigate to them
+Commands work on any StudRes page, they allow you to:
 
-### Image Preview
+- **Navigate**: Go to your links quickly, module root, or parent directory with ease.
+- **Search for any visited page**: visited paths are stored and can be searched to quickly navigate to them
+- **Configure**: change theme, add links, clear version data
 
-- Hover over image files to see a preview.
+### Customization
 
-### More Emojis
+Use popup to change date display mode, icons, and UI elements visibility.
 
-- Custom emojis for all modules.
-- Expanded emoji support for more file extensions.
+### Tags
 
-### Better Header
+Add file tags to group related files
 
-- **Minimal**: Displays only the module code for a cleaner look.
-- **Practical**: Breadcrumbs - allow you to navigate to any part of the current path.
+### Download Files
 
-### Better File Cards
-
-- **Modification Time**: Displayed relative to the current time.
-- **Bigger Hitbox**: Easier to click and interact with.
-- **Visible Sorting Icons**: Icons tell how the folders and files are sorted
-
-### Pop up
-
-- **Customize**: date display mode, icons, and UI elements visibility.
+Right click on any folder to archive and download it.
 
 ## Tech Stack
 
-- **Vite**
-- **React**
+- **vite**
+- **react**
 - **TypeScript**
-- **Tailwind CSS**
+- **tailwind CSS**
 - **shadcn UI**
-- **tanstack query** and other libraries
+- **tanstack query**
+- **nice-modal-react**
+- **react-syntax-highlighter**
+- [vite-web-extension](https://github.com/JohnBra/vite-web-extension) template
 
-## How to Run(outdated, use bun instead)
+## How to Run in dev mode
 
 1. **Install Dependencies**
 
     ```bash
-    yarn
+    bun install
     ```
-
-    _Note: You might need to use `--legacy-peer-deps`._
 
 2. **Start the Development Server**
 
     ```bash
-    yarn dev
+    bun run dev
     ```
 
     This will automatically rebuild the extension to the `dist/` directory.
@@ -98,7 +99,7 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 2. **Build**
 
     ```bash
-    yarn build
+    bun run build
     ```
 
     Output will be stored in the dist/
