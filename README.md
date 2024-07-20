@@ -68,7 +68,7 @@ Better StudRes v2 is a chrome extension, that improves appearence of the St Andr
 - **shadcn UI**
 - **tanstack query** and other libraries
 
-## How to Run
+## How to Run(outdated, use bun instead)
 
 1. **Install Dependencies**
 
