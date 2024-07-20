@@ -26,11 +26,11 @@ jobs:
             - name: Build
               run: bun run build
 
-            - name: Zip the build folder
-              run: zip -r better-studres.zip dist/*
+            - name: Zip the build contents
+              run: cd dist && zip -r ../better-studres.zip ./*
 
             - name: Upload extension artifacts
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
                   name: better-studres
                   path: better-studres.zip
