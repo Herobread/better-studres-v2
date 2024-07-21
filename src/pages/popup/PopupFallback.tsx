@@ -7,6 +7,7 @@ import {
     MY_SAINT_BASE_URL,
 } from "@src/features/files"
 import {
+    GET_QUICK_LINKS_QUERY_KEY,
     QuickLinkCardBase,
     QuickLinkContainer,
     getQuickLinks,
@@ -15,7 +16,7 @@ import { useQuery } from "@tanstack/react-query"
 
 export default function PopupFallback() {
     const { data: quickLinks } = useQuery({
-        queryKey: ["quicklinks"],
+        queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
 

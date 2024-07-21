@@ -8,6 +8,7 @@ import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMou
 import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/files"
 import {
+    GET_QUICK_LINKS_QUERY_KEY,
     QuickLinkCard,
     QuickLinkContainer,
     getQuickLinks,
@@ -20,7 +21,7 @@ import { useContext } from "react"
 
 export default function NotFound() {
     const { data: quickLinks } = useQuery({
-        queryKey: ["quicklinks"],
+        queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
 

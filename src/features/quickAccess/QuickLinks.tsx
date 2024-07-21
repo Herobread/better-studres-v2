@@ -28,6 +28,7 @@ import { QuickLinkCard } from "./QuickLinkCard"
 import { QuickLinkContainer } from "./QuickLinkContainer"
 import {
     deleteQuickLink,
+    GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
     moveQuickLink,
 } from "./QuickLinkManager"
@@ -37,7 +38,7 @@ export function QuickLinks() {
     const [isOpen, setIsOpen] = useState(false)
 
     const { data: quickLinks, refetch } = useQuery({
-        queryKey: ["quicklinks"],
+        queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
 

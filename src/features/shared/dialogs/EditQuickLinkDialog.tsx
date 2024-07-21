@@ -20,7 +20,10 @@ import {
     FormMessage,
 } from "@src/components/ui/form"
 import { Input } from "@src/components/ui/input"
-import { updateQuickLink } from "@src/features/quickAccess"
+import {
+    GET_QUICK_LINKS_QUERY_KEY,
+    updateQuickLink,
+} from "@src/features/quickAccess"
 import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQueryClient } from "@tanstack/react-query"
 import { MouseEvent, useEffect } from "react"
@@ -55,8 +58,8 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
     async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
         await updateQuickLink(quickLink.id, quickLinkData)
 
-        queryClient.invalidateQueries({ queryKey: ["quicklinks"] })
-        queryClient.refetchQueries({ queryKey: ["quicklinks"] })
+        queryClient.invalidateQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
+        queryClient.refetchQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
 
         modalHandler.hide()
     }
