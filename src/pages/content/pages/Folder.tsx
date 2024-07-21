@@ -10,7 +10,11 @@ import { FileMetricsTracker } from "@src/features/files"
 import ModuleHeader from "@src/features/header/ModuleHeader"
 import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
 import { FolderContent } from "@src/features/parser"
-import { QuickLinks } from "@src/features/quickLinks/components"
+import {
+    QuickLinkContainer,
+    QuickLinkList,
+} from "@src/features/quickLinks/components"
+import { AddQuickLinkButton } from "@src/features/quickLinks/components/AddQuickLinkButton"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { Table } from "@src/features/table/structure/Table"
@@ -48,7 +52,12 @@ export default function Folder({ content }: FolderProps) {
                     </div>
                     <SubheaderBreadcrumbs />
                 </CompactLayout>
-                {showQuickLinks && <QuickLinks />}
+                {showQuickLinks && (
+                    <QuickLinkContainer>
+                        <AddQuickLinkButton />
+                        <QuickLinkList />
+                    </QuickLinkContainer>
+                )}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
                 {extraContent && !isLoading && (
                     <div className="prose w-full dark:prose-invert">

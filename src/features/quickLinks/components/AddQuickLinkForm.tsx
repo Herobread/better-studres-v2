@@ -1,7 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/files"
-import { addQuickLink } from "@src/features/quickLinks"
+import {
+    addQuickLink,
+    GET_QUICK_LINKS_QUERY_KEY,
+} from "@src/features/quickLinks"
+import { useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import CompactLayout from "../../../components/layouts/CompactLayout"
@@ -39,6 +43,8 @@ export default function AddQuickLinkForm({
     const moduleCode = urlSegments[0]
     const moduleEmoji = getModuleEmoji(moduleCode)
 
+    const queryClient = useQueryClient()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -50,6 +56,9 @@ export default function AddQuickLinkForm({
 
     async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
         await addQuickLink(quickLinkData)
+
+        queryClient.invalidateQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
+        queryClient.refetchQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
 
         if (afterSubmit) {
             afterSubmit()

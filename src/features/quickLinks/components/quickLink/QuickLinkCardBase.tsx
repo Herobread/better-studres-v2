@@ -1,4 +1,4 @@
-import { QuickLink } from "@src/types/quickLinkTypes"
+import { QuickLink } from "@src/features/quickLinks"
 
 interface QuickLinkCardBaseProps {
     quickLink: QuickLink
