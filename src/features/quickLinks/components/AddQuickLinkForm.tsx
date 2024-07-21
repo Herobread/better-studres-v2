@@ -1,12 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/files"
+import { addQuickLink } from "@src/features/quickLinks"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import CompactLayout from "../../components/layouts/CompactLayout"
-import NormalLayout from "../../components/layouts/NormalLayout"
-import H2 from "../../components/typography/H2"
-import { Button } from "../../components/ui/button"
+import CompactLayout from "../../../components/layouts/CompactLayout"
+import NormalLayout from "../../../components/layouts/NormalLayout"
+import H2 from "../../../components/typography/H2"
+import { Button } from "../../../components/ui/button"
 import {
     Form,
     FormControl,
@@ -14,9 +15,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "../../components/ui/form"
-import { Input } from "../../components/ui/input"
-import { addQuickLink } from "./QuickLinkManager"
+} from "../../../components/ui/form"
+import { Input } from "../../../components/ui/input"
 
 const formSchema = z.object({
     icon: z.string().emoji(),

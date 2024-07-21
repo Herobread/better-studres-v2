@@ -1,4 +1,11 @@
 import NiceModal from "@ebay/nice-modal-react"
+import {
+    deleteQuickLink,
+    generateQuickLinkInfo,
+    GET_QUICK_LINKS_QUERY_KEY,
+    getQuickLinks,
+    moveQuickLink,
+} from "@src/features/quickLinks"
 import CopyTextMenuItem from "@src/features/shared/contextMenuItems/CopyTextMenuItem"
 import { useQuery } from "@tanstack/react-query"
 import {
@@ -15,24 +22,17 @@ import {
     ContextMenuItem,
     ContextMenuSeparator,
     ContextMenuTrigger,
-} from "../../components/ui/context-menu"
+} from "../../../components/ui/context-menu"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "../../components/ui/popover"
-import EditQuickLinkDialog from "../shared/dialogs/EditQuickLinkDialog"
+} from "../../../components/ui/popover"
+import EditQuickLinkDialog from "../../shared/dialogs/EditQuickLinkDialog"
 import AddQuickLinkForm from "./AddQuickLinkForm"
 import QuickLinkButton from "./QuickLinkButton"
 import { QuickLinkCard } from "./QuickLinkCard"
 import { QuickLinkContainer } from "./QuickLinkContainer"
-import {
-    deleteQuickLink,
-    GET_QUICK_LINKS_QUERY_KEY,
-    getQuickLinks,
-    moveQuickLink,
-} from "./QuickLinkManager"
-import { generateQuickLinkInfo } from "./generateQuickLinkInfo"
 
 export function QuickLinks() {
     const [isOpen, setIsOpen] = useState(false)

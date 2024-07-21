@@ -1,4 +1,12 @@
-import { QuickLink, RawQuickLink } from "@src/types/quickLinkTypes"
+export interface QuickLink extends RawQuickLink {
+    id: number
+}
+
+export interface RawQuickLink {
+    icon: string
+    name: string
+    href: string
+}
 
 export async function addQuickLink(rawQuickLink: RawQuickLink) {
     const result = await chrome.storage.local.get("quickLinks")

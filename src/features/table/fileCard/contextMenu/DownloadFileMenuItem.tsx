@@ -1,7 +1,7 @@
 import { ContextMenuItem } from "@src/components/ui/context-menu"
 import { useToast } from "@src/components/ui/use-toast"
 import { saveFolder } from "@src/features/fileDownload"
-import { generateQuickLinkInfo } from "@src/features/quickAccess"
+import { generateQuickLinkInfo } from "@src/features/quickLinks"
 import { downloadFile } from "@src/lib/utils"
 import { DownloadIcon } from "lucide-react"
 
@@ -41,7 +41,7 @@ export default function DownloadFileMenuItem({
     if (isFolder) {
         return (
             <ContextMenuItem onSelect={handleFolderDownload}>
-                <DownloadIcon  className="w-4 h-4"/> Download folder
+                <DownloadIcon className="h-4 w-4" /> Download folder
             </ContextMenuItem>
         )
     }
@@ -52,7 +52,7 @@ export default function DownloadFileMenuItem({
 
     return (
         <ContextMenuItem onSelect={handleSelect}>
-            <DownloadIcon  className="w-4 h-4"/> Download file
+            <DownloadIcon className="h-4 w-4" /> Download file
         </ContextMenuItem>
     )
 }

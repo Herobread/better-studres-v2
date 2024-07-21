@@ -8,10 +8,12 @@ import {
 } from "@src/features/files"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
+    getQuickLinks,
+} from "@src/features/quickLinks"
+import {
     QuickLinkCardBase,
     QuickLinkContainer,
-    getQuickLinks,
-} from "@src/features/quickAccess"
+} from "@src/features/quickLinks/components"
 import { useQuery } from "@tanstack/react-query"
 
 export default function PopupFallback() {

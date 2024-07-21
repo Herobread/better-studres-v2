@@ -3,7 +3,7 @@ import {
     addQuickLink,
     generateQuickLinkInfo,
     GET_QUICK_LINKS_QUERY_KEY,
-} from "@src/features/quickAccess"
+} from "@src/features/quickLinks"
 import { useQueryClient } from "@tanstack/react-query"
 import { PinIcon } from "lucide-react"
 

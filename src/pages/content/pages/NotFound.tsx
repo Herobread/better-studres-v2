@@ -9,12 +9,14 @@ import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/files"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
+    getQuickLinks,
+    QuickLink,
+} from "@src/features/quickLinks"
+import {
     QuickLinkCard,
     QuickLinkContainer,
-    getQuickLinks,
-} from "@src/features/quickAccess"
+} from "@src/features/quickLinks/components"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
-import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
 import { useContext } from "react"

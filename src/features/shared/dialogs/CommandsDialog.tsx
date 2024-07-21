@@ -26,7 +26,7 @@ import {
 import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
-} from "@src/features/quickAccess"
+} from "@src/features/quickLinks"
 import { redirect } from "@src/features/router"
 import { useQuery } from "@tanstack/react-query"
 
