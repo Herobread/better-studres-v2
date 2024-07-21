@@ -9,12 +9,15 @@ import { ConfigContext } from "@src/features/config"
 import { BASE_URL } from "@src/features/files"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
-    QuickLinkCard,
-    QuickLinkContainer,
     getQuickLinks,
-} from "@src/features/quickAccess"
+    QuickLink,
+} from "@src/features/quickLinks"
+import {
+    QuickLinkContainer,
+    QuickLinkList,
+} from "@src/features/quickLinks/components"
+import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
-import { QuickLink } from "@src/types/quickLinkTypes"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
 import { useContext } from "react"
@@ -82,7 +85,7 @@ export default function NotFound() {
                     <QuickLinkContainer>
                         {suggestedLinks.map((quickLink) => {
                             return (
-                                <QuickLinkCard
+                                <QuickLinkLink
                                     quickLink={quickLink}
                                     key={quickLink.id}
                                 />
@@ -94,14 +97,7 @@ export default function NotFound() {
                     <CompactLayout>
                         <p>Or your quick links:</p>
                         <QuickLinkContainer>
-                            {quickLinks.map((quickLink) => {
-                                return (
-                                    <QuickLinkCard
-                                        quickLink={quickLink}
-                                        key={quickLink.id}
-                                    />
-                                )
-                            })}
+                            <QuickLinkList />
                         </QuickLinkContainer>
                     </CompactLayout>
                 )}

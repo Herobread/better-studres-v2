@@ -1,12 +1,17 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import { extractUrlSegments } from "@src/features/files"
+import {
+    addQuickLink,
+    GET_QUICK_LINKS_QUERY_KEY,
+} from "@src/features/quickLinks"
+import { useQueryClient } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import CompactLayout from "../../components/layouts/CompactLayout"
-import NormalLayout from "../../components/layouts/NormalLayout"
-import H2 from "../../components/typography/H2"
-import { Button } from "../../components/ui/button"
+import CompactLayout from "../../../components/layouts/CompactLayout"
+import NormalLayout from "../../../components/layouts/NormalLayout"
+import H2 from "../../../components/typography/H2"
+import { Button } from "../../../components/ui/button"
 import {
     Form,
     FormControl,
@@ -14,9 +19,8 @@ import {
     FormItem,
     FormLabel,
     FormMessage,
-} from "../../components/ui/form"
-import { Input } from "../../components/ui/input"
-import { addQuickLink } from "./QuickLinkManager"
+} from "../../../components/ui/form"
+import { Input } from "../../../components/ui/input"
 
 const formSchema = z.object({
     icon: z.string().emoji(),
@@ -39,6 +43,8 @@ export default function AddQuickLinkForm({
     const moduleCode = urlSegments[0]
     const moduleEmoji = getModuleEmoji(moduleCode)
 
+    const queryClient = useQueryClient()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -50,6 +56,9 @@ export default function AddQuickLinkForm({
 
     async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
         await addQuickLink(quickLinkData)
+
+        queryClient.invalidateQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
+        queryClient.refetchQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
 
         if (afterSubmit) {
             afterSubmit()

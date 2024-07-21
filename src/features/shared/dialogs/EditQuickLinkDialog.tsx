@@ -22,9 +22,9 @@ import {
 import { Input } from "@src/components/ui/input"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
+    QuickLink,
     updateQuickLink,
-} from "@src/features/quickAccess"
-import { QuickLink } from "@src/types/quickLinkTypes"
+} from "@src/features/quickLinks"
 import { useQueryClient } from "@tanstack/react-query"
 import { MouseEvent, useEffect } from "react"
 import { useForm } from "react-hook-form"

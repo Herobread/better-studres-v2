@@ -4,7 +4,7 @@ import {
     deleteQuickLink,
     generateQuickLinkInfo,
     getQuickLinks,
-} from "@src/features/quickAccess"
+} from "@src/features/quickLinks"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { CommandItem } from "../../components/ui/command"

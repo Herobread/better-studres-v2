@@ -1,7 +1,7 @@
+import { generateQuickLinkInfo } from "@src/features/quickLinks"
 import { saveAs } from "file-saver"
 import JSZip from "jszip"
 import { parsePageContent } from "../parser"
-import { generateQuickLinkInfo } from "../quickAccess"
 import { parseDocumentFromText } from "./parseDocumentFromText"
 
 export interface FolderContent {
