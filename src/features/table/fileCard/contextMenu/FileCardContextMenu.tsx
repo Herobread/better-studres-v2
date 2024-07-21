@@ -12,6 +12,7 @@ import { FullFileLink } from "@src/features/parser"
 import { redirect } from "@src/features/router"
 import CopyTextMenuItem from "@src/features/shared/contextMenuItems/CopyTextMenuItem"
 import { AddNoteContextMenuItem } from "@src/features/table/fileCard/contextMenu/AddNoteContextMenuItem"
+import { AddQuickLinkMenuItem } from "@src/features/table/fileCard/contextMenu/AddQuickLinkMenuItem"
 import { FolderIcon, FolderRootIcon } from "lucide-react"
 import { forwardRef } from "react"
 import DownloadFileMenuItem from "./DownloadFileMenuItem"
@@ -57,6 +58,7 @@ const FileCardContextMenuContent = forwardRef<
 
             <ContextMenuSeparator />
 
+            <AddQuickLinkMenuItem href={fileLink.href} />
             <UpdatesMenuItem fileLink={fileLink} />
             <CopyTextMenuItem name="URL" textToCopy={fileLink.href} />
             <CopyTextMenuItem name="file name" textToCopy={fileLink.fullName} />
