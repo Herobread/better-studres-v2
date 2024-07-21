@@ -1,10 +1,6 @@
 import { QuickLink } from "@src/features/quickLinks"
 
-interface QuickLinkCardBaseProps {
-    quickLink: QuickLink
-}
-
-export function QuickLinkCardBase({ quickLink }: QuickLinkCardBaseProps) {
+export function QuickLinkCardBase({ quickLink }: { quickLink: QuickLink }) {
     const { name, icon } = quickLink
 
     return (

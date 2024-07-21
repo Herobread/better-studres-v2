@@ -12,6 +12,11 @@ import {
     getQuickLinks,
     QuickLink,
 } from "@src/features/quickLinks"
+import {
+    QuickLinkContainer,
+    QuickLinkList,
+} from "@src/features/quickLinks/components"
+import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
@@ -77,32 +82,23 @@ export default function NotFound() {
                             ? "Try those links:"
                             : "Try this link:"}
                     </p>
-                    {/* TODO */}
-                    {/* <QuickLinkContainer>
+                    <QuickLinkContainer>
                         {suggestedLinks.map((quickLink) => {
                             return (
-                                <QuickLinkCard
+                                <QuickLinkLink
                                     quickLink={quickLink}
                                     key={quickLink.id}
                                 />
                             )
                         })}
-                    </QuickLinkContainer> */}
+                    </QuickLinkContainer>
                 </CompactLayout>
                 {showQuickLinks && quickLinks && (
                     <CompactLayout>
                         <p>Or your quick links:</p>
-                        {/* TODO */}
-                        {/* <QuickLinkContainer>
-                            {quickLinks.map((quickLink) => {
-                                return (
-                                    <QuickLinkCard
-                                        quickLink={quickLink}
-                                        key={quickLink.id}
-                                    />
-                                )
-                            })}
-                        </QuickLinkContainer> */}
+                        <QuickLinkContainer>
+                            <QuickLinkList />
+                        </QuickLinkContainer>
                     </CompactLayout>
                 )}
             </MainLayout>

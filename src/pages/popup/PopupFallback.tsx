@@ -13,6 +13,7 @@ import {
 import {
     QuickLinkCardBase,
     QuickLinkContainer,
+    QuickLinkList,
 } from "@src/features/quickLinks/components"
 import { useQuery } from "@tanstack/react-query"
 
@@ -93,20 +94,7 @@ export default function PopupFallback() {
                     <CompactLayout>
                         <p>Or your quick links:</p>
                         <QuickLinkContainer>
-                            {quickLinks?.map((quickLink) => {
-                                return (
-                                    <a
-                                        href={quickLink.href}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        key={quickLink.id}
-                                    >
-                                        <QuickLinkCardBase
-                                            quickLink={quickLink}
-                                        />
-                                    </a>
-                                )
-                            })}
+                            <QuickLinkList />
                         </QuickLinkContainer>
                     </CompactLayout>
                 </>
