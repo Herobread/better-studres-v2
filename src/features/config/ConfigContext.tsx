@@ -1,6 +1,5 @@
 import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
 import { loadConfig } from "@src/features/config/loadConfig"
-import { saveConfig } from "@src/features/config/saveConfig"
 import { ConfigTypes } from "@src/types/configTypes"
 import { useQuery } from "@tanstack/react-query"
 import React, { createContext, useEffect, useState } from "react"
@@ -36,7 +35,6 @@ export default function ConfigContextProvider({
             if (changes.config) {
                 const newConfig = changes.config.newValue
                 setConfig(newConfig)
-                saveConfig(newConfig)
             }
         }
 
@@ -44,7 +42,7 @@ export default function ConfigContextProvider({
         return () => {
             storage.onChanged.removeListener(handleStorageChange)
         }
-    }, [])
+    }, [config])
 
     return (
         <ConfigContext.Provider value={config}>
