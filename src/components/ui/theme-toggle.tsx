@@ -7,7 +7,7 @@ import {
     DropdownMenuContent,
     DropdownMenuLabel,
     DropdownMenuSeparator,
-    DropdownMenuTrigger
+    DropdownMenuTrigger,
 } from "@src/components/ui/dropdown-menu"
 import { useTheme } from "@src/features/theme"
 
@@ -25,14 +25,23 @@ export function ThemeToggle() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                <DropdownMenuSeparator/>
-                <DropdownMenuCheckboxItem checked={theme === 'light'} onCheckedChange={() => setTheme("light")}>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem
+                    checked={theme === "light"}
+                    onCheckedChange={() => setTheme("light")}
+                >
                     Light
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem checked={theme === 'dark'} onCheckedChange={() => setTheme("dark")}>
+                <DropdownMenuCheckboxItem
+                    checked={theme === "dark"}
+                    onCheckedChange={() => setTheme("dark")}
+                >
                     Dark
                 </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem checked={theme === 'system'} onCheckedChange={() => setTheme("system")}>
+                <DropdownMenuCheckboxItem
+                    checked={theme === "system"}
+                    onCheckedChange={() => setTheme("system")}
+                >
                     System
                 </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
