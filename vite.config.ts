@@ -4,7 +4,9 @@ import { resolve } from "path"
 import { defineConfig } from "vite"
 
 import devManifest from "./manifest.dev.json"
+import firefoxManifest from "./manifest.firefox.json"
 import manifest from "./manifest.json"
+
 import pkg from "./package.json"
 import { stripDevIcons } from "./vite/plugins/stripDevIcons"
 import { viteManifestHackIssue846 } from "./vite/plugins/viteManifestHackIssue846"
@@ -16,10 +18,12 @@ const outDir = resolve(__dirname, "dist")
 const publicDir = resolve(__dirname, "public")
 
 const isDev = process.env.__DEV__ === "true"
+const isFirefox = process.env.BROWSER === "firefox"
 
 const extensionManifest = {
     ...manifest,
     ...(isDev ? devManifest : ({} as ManifestV3Export)),
+    ...(isFirefox ? firefoxManifest : ({} as ManifestV3Export)),
     name: isDev ? `DEV: ${manifest.name}` : manifest.name,
     version: pkg.version,
 }

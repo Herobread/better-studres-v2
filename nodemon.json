@@ -9,7 +9,8 @@
         "vite.config.ts",
         "tailwind.config.ts",
         "manifest.json",
-        "manifest.dev.json"
+        "manifest.dev.json",
+        "manifest.firefox.json"
     ],
     "ext": "tsx,css,html,ts,json",
     "ignore": ["src/**/*.spec.ts"],
