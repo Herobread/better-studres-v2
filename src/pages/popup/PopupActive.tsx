@@ -10,14 +10,8 @@ import {
     FormLabel,
     FormMessage,
 } from "@src/components/ui/form"
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@src/components/ui/select"
 import { Switch } from "@src/components/ui/switch"
+import { ToggleGroup, ToggleGroupItem } from "@src/components/ui/toggle-group"
 import { CONFIG_FALLBACK } from "@src/features/config/configFallback"
 import { loadConfig } from "@src/features/config/loadConfig"
 import { saveConfig } from "@src/features/config/saveConfig"
@@ -99,25 +93,26 @@ export default function PopupActive() {
                         name="date"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>📅 Date display:</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Date display" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="relative">
-                                            Relative (N days ago)
-                                        </SelectItem>
-                                        <SelectItem value="full">
-                                            Full (YYYY-MM-DD HH:MM)
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <FormLabel>Date display:</FormLabel>
+                                <FormControl>
+                                    <ToggleGroup
+                                        type="single"
+                                        className="grid grid-cols-2"
+                                        value={field.value}
+                                        onValueChange={(value) => {
+                                            if (value) {
+                                                field.onChange(value)
+                                            }
+                                        }}
+                                    >
+                                        <ToggleGroupItem value="relative">
+                                            ⏲️ Relative
+                                        </ToggleGroupItem>
+                                        <ToggleGroupItem value="full">
+                                            📅 Full
+                                        </ToggleGroupItem>
+                                    </ToggleGroup>
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
@@ -127,29 +122,31 @@ export default function PopupActive() {
                         name="fileIcons"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>📁 File icons:</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="File icons" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        <SelectItem value="emoji">
-                                            Emoji
-                                        </SelectItem>
-                                        <SelectItem value="pictures">
-                                            Original icons
-                                        </SelectItem>
-                                    </SelectContent>
-                                </Select>
+                                <FormLabel>File icons:</FormLabel>
+                                <FormControl>
+                                    <ToggleGroup
+                                        type="single"
+                                        className="grid grid-cols-2"
+                                        value={field.value}
+                                        onValueChange={(value) => {
+                                            if (value) {
+                                                field.onChange(value)
+                                            }
+                                        }}
+                                    >
+                                        <ToggleGroupItem value="emoji">
+                                            📁 Emoji
+                                        </ToggleGroupItem>
+                                        <ToggleGroupItem value="pictures">
+                                            🖼️ Picture
+                                        </ToggleGroupItem>
+                                    </ToggleGroup>
+                                </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <FormLabel>Other view options:</FormLabel>
                     <FormField
                         control={form.control}
                         name="imagePreviewAsIcon"
