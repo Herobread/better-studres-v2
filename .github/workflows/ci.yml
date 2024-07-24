@@ -4,8 +4,8 @@ on:
     workflow_dispatch:
 
 jobs:
-    build:
-        name: Build
+    build-chrome:
+        name: Build Chrome extension
         timeout-minutes: 15
         runs-on: ubuntu-latest
 
@@ -23,14 +23,39 @@ jobs:
             - name: Install dependencies
               run: bun install
 
-            - name: Build
+            - name: Build Chrome
               run: bun run build
 
-            - name: Zip the build contents
-              run: cd dist && zip -r ../better-studres.zip ./*
-
-            - name: Upload extension artifacts
+            - name: Upload Chrome extension artifacts
               uses: actions/upload-artifact@v4
               with:
-                  name: better-studres
-                  path: better-studres.zip
+                  name: better-studres-chrome
+                  path: dist/
+
+    build-firefox:
+        name: Build Firefox extension
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 2
+
+            - name: Setup Bun environment
+              uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: 0.7.0
+
+            - name: Install dependencies
+              run: bun install
+
+            - name: Build Firefox
+              run: bun run build:firefox
+
+            - name: Upload Firefox extension artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: better-studres-firefox
+                  path: dist/
