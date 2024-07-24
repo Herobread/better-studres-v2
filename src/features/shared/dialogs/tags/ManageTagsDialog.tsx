@@ -72,7 +72,7 @@ export default NiceModal.create(() => {
                         </p>
                     )}
                 </ScrollArea>
-                <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                <DialogFooter className="flex flex-col-reverse gap-1 sm:flex-row sm:justify-end sm:space-x-2">
                     <Button variant={"outline"} onClick={handleClose}>
                         Close
                     </Button>

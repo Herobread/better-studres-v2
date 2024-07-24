@@ -124,7 +124,7 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
                                 </FormItem>
                             )}
                         />
-                        <DialogFooter className="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                        <DialogFooter className="flex flex-col-reverse gap-1 sm:flex-row sm:justify-end sm:space-x-2">
                             <Button
                                 type="button"
                                 variant={"outline"}
