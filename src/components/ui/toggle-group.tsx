@@ -48,7 +48,8 @@ const ToggleGroupItem = React.forwardRef<
                     variant: context.variant || variant,
                     size: context.size || size,
                 }),
-                className
+                className,
+                "data-[state=on]:font-medium data-[state=on]:text-foreground"
             )}
             {...props}
         >
