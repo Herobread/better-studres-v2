@@ -3,13 +3,13 @@
  * @param {string} href - The URL to redirect to.
  * @param {"userClick" | "http"} [type] - The type of redirection. Defaults to "userClick".
  */
-export function redirect(href: string, type?: "userClick" | "http") {
-    const isPopup = window.opener && window.opener !== window
-
-    if (isPopup) {
-        // Open the URL in a new tab and close the popup
-        window.open(href, "_blank")
-        window.close()
+export function redirect(
+    href: string,
+    type?: "userClick" | "http",
+    isBlank?: boolean
+) {
+    if (isBlank) {
+        chrome.tabs.create({ url: href })
         return
     }
 

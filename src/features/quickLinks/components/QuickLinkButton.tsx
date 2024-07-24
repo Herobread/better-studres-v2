@@ -1,3 +1,4 @@
+import { QuickLinkCardBase } from "@src/features/quickLinks/components/quickLink/QuickLinkCardBase"
 import { ButtonHTMLAttributes, forwardRef } from "react"
 
 interface QuickLinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -8,13 +9,8 @@ interface QuickLinkButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const QuickLinkButton = forwardRef<HTMLButtonElement, QuickLinkButtonProps>(
     ({ content, icon, ...props }, ref) => {
         return (
-            <button
-                {...props}
-                ref={ref}
-                className="flex cursor-pointer gap-2 rounded-xl bg-background-layer-1 px-3 py-1 hover:bg-accent"
-            >
-                <div className="text-base">{icon}</div>
-                {content && <div>{content}</div>}
+            <button {...props} ref={ref}>
+                <QuickLinkCardBase icon={icon} name={content} />
             </button>
         )
     }

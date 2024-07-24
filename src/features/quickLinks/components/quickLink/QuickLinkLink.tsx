@@ -6,9 +6,11 @@ export function QuickLinkLink({
     quickLink,
     ...props
 }: { quickLink: QuickLink } & LinkProps) {
+    const { href } = quickLink
+
     return (
-        <Link {...props}>
-            <QuickLinkCardBase quickLink={quickLink} />
+        <Link href={href} {...props}>
+            <QuickLinkCardBase icon={quickLink.icon} name={quickLink.name} />
         </Link>
     )
 }

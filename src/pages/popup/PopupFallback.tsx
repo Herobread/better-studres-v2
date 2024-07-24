@@ -11,10 +11,10 @@ import {
     getQuickLinks,
 } from "@src/features/quickLinks"
 import {
-    QuickLinkCardBase,
     QuickLinkContainer,
     QuickLinkList,
 } from "@src/features/quickLinks/components"
+import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
 import { useQuery } from "@tanstack/react-query"
 
 export default function PopupFallback() {
@@ -43,50 +43,46 @@ export default function PopupFallback() {
             <CompactLayout>
                 <p>Try one of those:</p>
                 <QuickLinkContainer>
-                    <a href={BASE_URL} target="_blank" rel="noreferrer">
-                        <QuickLinkCardBase
-                            quickLink={{
-                                href: "",
-                                icon: "🌱",
-                                id: 0,
-                                name: "StudRes",
-                            }}
-                        />
-                    </a>
-                    <a href={MMS_BASE_URL} target="_blank" rel="noreferrer">
-                        <QuickLinkCardBase
-                            quickLink={{
-                                href: "",
-                                icon: "✅",
-                                id: 1,
-                                name: "MMS",
-                            }}
-                        />
-                    </a>
-                    <a
-                        href={MY_SAINT_BASE_URL}
+                    <QuickLinkLink
                         target="_blank"
                         rel="noreferrer"
-                    >
-                        <QuickLinkCardBase
-                            quickLink={{
-                                href: MY_SAINT_BASE_URL,
-                                icon: "🏛️",
-                                id: 2,
-                                name: "MySaint",
-                            }}
-                        />
-                    </a>
-                    <a href={MOODLE_BASE_URL} target="_blank" rel="noreferrer">
-                        <QuickLinkCardBase
-                            quickLink={{
-                                href: MOODLE_BASE_URL,
-                                icon: "🎓",
-                                id: 3,
-                                name: "Moodle",
-                            }}
-                        />
-                    </a>
+                        quickLink={{
+                            href: BASE_URL,
+                            icon: "🌱",
+                            id: 0,
+                            name: "StudRes",
+                        }}
+                    />
+                    <QuickLinkLink
+                        target="_blank"
+                        rel="noreferrer"
+                        quickLink={{
+                            href: MMS_BASE_URL,
+                            icon: "✅",
+                            id: 1,
+                            name: "MMS",
+                        }}
+                    />
+                    <QuickLinkLink
+                        target="_blank"
+                        rel="noreferrer"
+                        quickLink={{
+                            href: MY_SAINT_BASE_URL,
+                            icon: "🏛️",
+                            id: 2,
+                            name: "MySaint",
+                        }}
+                    />
+                    <QuickLinkLink
+                        target="_blank"
+                        rel="noreferrer"
+                        quickLink={{
+                            href: MOODLE_BASE_URL,
+                            icon: "🎓",
+                            id: 3,
+                            name: "Moodle",
+                        }}
+                    />
                 </QuickLinkContainer>
             </CompactLayout>
             {quickLinks && quickLinks?.length > 0 && (
@@ -94,7 +90,7 @@ export default function PopupFallback() {
                     <CompactLayout>
                         <p>Or your quick links:</p>
                         <QuickLinkContainer>
-                            <QuickLinkList />
+                            <QuickLinkList linkConfig={{ target: "_blank" }} />
                         </QuickLinkContainer>
                     </CompactLayout>
                 </>

@@ -2,16 +2,21 @@ import {
     ContextMenu,
     ContextMenuTrigger,
 } from "@src/components/ui/context-menu"
-import { QuickLinkCardBase } from "@src/features/quickLinks/components/quickLink/QuickLinkCardBase"
 import { QuickLinkContextMenuContent } from "@src/features/quickLinks/components/quickLink/QuickLinkContextMenuContent"
+import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
 } from "@src/features/quickLinks/storage"
 import Link from "@src/features/router/Link"
 import { useQuery } from "@tanstack/react-query"
+import { ComponentProps } from "react"
 
-export function QuickLinkList() {
+export function QuickLinkList({
+    linkConfig,
+}: {
+    linkConfig?: ComponentProps<typeof Link>
+}) {
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
@@ -26,9 +31,10 @@ export function QuickLinkList() {
                 return (
                     <ContextMenu key={quickLink.id}>
                         <ContextMenuTrigger>
-                            <Link href={quickLink.href}>
-                                <QuickLinkCardBase quickLink={quickLink} />
-                            </Link>
+                            <QuickLinkLink
+                                quickLink={quickLink}
+                                {...linkConfig}
+                            />
                         </ContextMenuTrigger>
                         <QuickLinkContextMenuContent
                             quickLink={quickLink}
