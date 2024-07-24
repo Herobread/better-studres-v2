@@ -3,6 +3,7 @@ import {
     addQuickLink,
     deleteQuickLink,
     generateQuickLinkInfo,
+    GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
 } from "@src/features/quickLinks"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
@@ -17,7 +18,7 @@ export default function SaveQuickLinkCommand() {
     const currentUrl = location.href.toString()
 
     const { data: quickLinks } = useQuery({
-        queryKey: ["quicklinks"],
+        queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
 
@@ -37,7 +38,12 @@ export default function SaveQuickLinkCommand() {
 
             await deleteQuickLink(currentPageQuickLink.id)
 
-            queryClient.refetchQueries({ queryKey: ["quicklinks"] })
+            await queryClient.invalidateQueries({
+                queryKey: [GET_QUICK_LINKS_QUERY_KEY],
+            })
+            await queryClient.refetchQueries({
+                queryKey: [GET_QUICK_LINKS_QUERY_KEY],
+            })
 
             toast({
                 title: "✅ Success",
@@ -69,7 +75,12 @@ export default function SaveQuickLinkCommand() {
                 icon,
             })
 
-            queryClient.refetchQueries({ queryKey: ["quicklinks"] })
+            await queryClient.invalidateQueries({
+                queryKey: [GET_QUICK_LINKS_QUERY_KEY],
+            })
+            await queryClient.refetchQueries({
+                queryKey: [GET_QUICK_LINKS_QUERY_KEY],
+            })
 
             toast({
                 title: "✅ Success",
