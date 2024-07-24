@@ -15,6 +15,7 @@ import {
     QuickLinkList,
 } from "@src/features/quickLinks/components"
 import { AddQuickLinkButton } from "@src/features/quickLinks/components/AddQuickLinkButton"
+import { EmptyQuickLinksMessage } from "@src/features/quickLinks/components/EmptyQuickLinksMessage"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { Table } from "@src/features/table/structure/Table"
@@ -56,6 +57,7 @@ export default function Folder({ content }: FolderProps) {
                     <QuickLinkContainer>
                         <AddQuickLinkButton />
                         <QuickLinkList />
+                        <EmptyQuickLinksMessage />
                     </QuickLinkContainer>
                 )}
                 <Table fileLinks={fileLinks} sortLinks={sortLinks} />
