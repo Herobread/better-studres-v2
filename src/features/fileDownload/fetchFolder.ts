@@ -62,35 +62,52 @@ export async function archiveAndSaveBlobs(
     folderContent: FolderContent,
     name?: string
 ) {
+    /*
+     * Due to compatibility issues between Firefox and JSZip,
+     * passing a Blob directly can cause problems.
+     *
+     * Thats why I am converting the Blob to a base64 string to ensure it works correctly.
+     *
+     * https://github.com/Herobread/better-studres-v2/issues/76
+     */
+
     const zip = new JSZip()
 
     name ??= "archive"
 
-    const rootFolder = zip.folder(name)!
+    const rootFolder = zip.folder(name) as JSZip
 
-    for (const [path, blob] of Object.entries(folderContent)) {
-        if (blob instanceof Blob) {
-            rootFolder.file(path, blob)
-        } else if (typeof blob === "object") {
-            const folder = rootFolder.folder(path)
-            addFolderToZip(folder!, blob)
+    const addBlobToZip = async (path: string, blob: Blob) => {
+        return new Promise<void>((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(blob)
+            reader.onloadend = () => {
+                const base64url = reader.result as string
+                const base64data = base64url.split(",")[1]
+                rootFolder?.file(path, base64data, {
+                    base64: true,
+                })
+                resolve()
+            }
+            reader.onerror = reject
+        })
+    }
+
+    const processFolder = async (folder: JSZip, content: FolderContent) => {
+        for (const [path, blob] of Object.entries(content)) {
+            if (blob instanceof Blob) {
+                await addBlobToZip(path, blob)
+            } else if (typeof blob === "object") {
+                const newFolder = folder.folder(path) as JSZip
+                await processFolder(newFolder, blob)
+            }
         }
     }
 
-    zip.generateAsync({ type: "blob" }).then((content) => {
-        saveAs(content, name + ".zip")
-    })
-}
+    await processFolder(rootFolder, folderContent)
 
-function addFolderToZip(zipFolder: JSZip, folderContent: FolderContent) {
-    for (const [path, blob] of Object.entries(folderContent)) {
-        if (blob instanceof Blob) {
-            zipFolder.file(path, blob)
-        } else if (typeof blob === "object") {
-            const subFolder = zipFolder.folder(path)
-            addFolderToZip(subFolder!, blob)
-        }
-    }
+    const content = await zip.generateAsync({ type: "blob" })
+    saveAs(content, name + ".zip")
 }
 
 export async function saveFolder(url: string) {
