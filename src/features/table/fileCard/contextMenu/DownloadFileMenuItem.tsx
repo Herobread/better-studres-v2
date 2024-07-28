@@ -30,10 +30,12 @@ export default function DownloadFileMenuItem({
                 title: "✅ Success",
                 description: `Downloaded ${name}.`,
             })
-        } catch (error) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            console.log(error)
             toast({
                 title: "❌ Error",
-                description: `Failed to download ${name}.`,
+                description: `Failed to download ${name}. ${error.message}`,
             })
         }
     }
