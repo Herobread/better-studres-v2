@@ -9,6 +9,7 @@
 Better StudRes v2 is a chrome extension, that improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
 
 [chrome web store](https://chromewebstore.google.com/detail/better-studres/kamnhbpjhhhjlbandgpngdnplledombg)
+[Firefox addons](https://addons.mozilla.org/en-GB/firefox/addon/better-studres/)
 
 ## Key Features
 
