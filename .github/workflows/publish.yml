@@ -37,18 +37,18 @@ jobs:
                   name: better-studres-chrome
                   path: chrome_extension.zip
 
-            - name: Publish to Chrome Web Store
-              uses: fregante/chrome-webstore-upload@v1
-              with:
-                  client_id: ${{ secrets.CHROME_EXTENSION_CLIENT_ID }}
-                  client_secret: ${{ secrets.CHROME_EXTENSION_CLIENT_SECRET }}
-                  refresh_token: ${{ secrets.CHROME_EXTENSION_REFRESH_TOKEN }}
-                  extension_id: kamnhbpjhhhjlbandgpngdnplledombg
-                  source: chrome_extension.zip
-              env:
-                  WEBSTORE_CLIENT_ID: ${{ secrets.CHROME_EXTENSION_CLIENT_ID }}
-                  WEBSTORE_CLIENT_SECRET: ${{ secrets.CHROME_EXTENSION_CLIENT_SECRET }}
-                  WEBSTORE_REFRESH_TOKEN: ${{ secrets.CHROME_EXTENSION_REFRESH_TOKEN }}
+            - name: Install webstore cli
+              run: |-
+                  bun add -g chrome-webstore-upload-cli
+
+            - name: Upload step
+              run: |-
+                  chrome-webstore-upload upload \
+                    --source chrome_extension.zip \
+                    --extension-id kamnhbpjhhhjlbandgpngdnplledombg \
+                    --client-id ${{ secrets.GOOGLE_CLIENT_ID }} \
+                    --client-secret ${{ secrets.GOOGLE_CLIENT_SECRET }} \
+                    --refresh-token ${{ secrets.GOOGLE_REFRESH_TOKEN }}
 
     build-firefox:
         name: Build Firefox extension
