@@ -38,7 +38,7 @@ jobs:
                   path: chrome_extension.zip
 
             - name: Publish to Chrome Web Store
-              uses: fregante/setup-chrome-webstore@v1
+              uses: fregante/chrome-webstore-upload@v1
               with:
                   client_id: ${{ secrets.CHROME_EXTENSION_CLIENT_ID }}
                   client_secret: ${{ secrets.CHROME_EXTENSION_CLIENT_SECRET }}
