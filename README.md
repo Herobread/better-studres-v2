@@ -4,7 +4,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/herobread/better-studres-v2/badge)](https://www.codefactor.io/repository/github/herobread/better-studres-v2)
 [![wakatime](https://wakatime.com/badge/user/9572a36f-d8ee-4307-9f1b-ae487130d025/project/018eb88f-13da-4546-a0fb-cc9693bcb2be.svg)](https://wakatime.com/badge/user/9572a36f-d8ee-4307-9f1b-ae487130d025/project/018eb88f-13da-4546-a0fb-cc9693bcb2be)
 
-![Better studres](https://github.com/Herobread/better-studres-v2/assets/52717777/b352a9ed-3bac-47c0-a058-f4af46984282)
+![Better studres](https://github.com/user-attachments/assets/6c28cd46-496c-4f27-af78-c8fd898987bb)
 
 Better StudRes v2 is a chrome extension, that improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
 
