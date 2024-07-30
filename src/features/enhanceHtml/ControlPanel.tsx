@@ -28,7 +28,11 @@ export function ControlPanel() {
             fileKey,
             HTML_ENHANCED_FILE_DATA_KEY,
         ],
-        queryFn: () => getFileData(fileKey, HTML_ENHANCED_FILE_DATA_KEY),
+        queryFn: () =>
+            getFileData(
+                fileKey,
+                HTML_ENHANCED_FILE_DATA_KEY
+            ) as Promise<boolean>,
     })
 
     useEffect(() => {
@@ -64,12 +68,16 @@ export function ControlPanel() {
     return (
         <Tooltip>
             <TooltipTrigger>
-                <Toggle onPressedChange={handleEnhance} pressed={isEnhanced}>
+                <Toggle
+                    className="bg-background-layer-1 opacity-25 transition-opacity hover:opacity-100"
+                    onPressedChange={handleEnhance}
+                    pressed={isEnhanced}
+                >
                     <SparklesIcon />
                 </Toggle>
             </TooltipTrigger>
             <TooltipContent>
-                Applies basic css styles to improve page appearance.
+                Applies basic css styles to potentially improve page appearance.
             </TooltipContent>
         </Tooltip>
     )
