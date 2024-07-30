@@ -5,7 +5,7 @@
   Better StudRes v2
 </h1>
 <p align="center">
-An open-source browser extension, that improves appearance of the St Andrews studres, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
+An open-source browser extension, that improves appearance of the <b>St Andrews Student Resources</b>, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
 </p>
 <p align="center">
   <a target="_blank" rel="noreferrer noopener" href="https://chromewebstore.google.com/detail/better-studres/kamnhbpjhhhjlbandgpngdnplledombg">
@@ -17,7 +17,6 @@ An open-source browser extension, that improves appearance of the St Andrews stu
 </p>
 
 ![Better studres](https://github.com/user-attachments/assets/d8294743-b748-49bc-9e0d-e124e48dcbed)
-
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
