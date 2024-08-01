@@ -67,7 +67,7 @@ export default function AddQuickLinkForm({
 
     return (
         <NormalLayout>
-            <H2>Add quick link</H2>
+            <H2>Pin Link</H2>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="m-0">
                     <NormalLayout>
@@ -133,7 +133,7 @@ export default function AddQuickLinkForm({
                                 }}
                             />
                         </CompactLayout>
-                        <Button type="submit">Add</Button>
+                        <Button type="submit">Pin</Button>
                     </NormalLayout>
                 </form>
             </Form>

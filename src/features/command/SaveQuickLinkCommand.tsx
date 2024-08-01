@@ -62,7 +62,7 @@ export default function SaveQuickLinkCommand() {
     if (currentPageQuickLink) {
         return (
             <CommandItem onSelect={handleRemoveQuickLink}>
-                ➖ Remove {icon} {name}
+                ➖ Unpin {icon} {name}
             </CommandItem>
         )
     }
@@ -101,7 +101,7 @@ export default function SaveQuickLinkCommand() {
             onSelect={handleSaveQuickLink}
             keywords={["save", "link", "pin"]}
         >
-            ➕ Save {`${icon} ${name}`}
+            ➕ Pin {`${icon} ${name}`}
         </CommandItem>
     )
 }

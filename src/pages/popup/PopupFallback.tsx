@@ -88,7 +88,7 @@ export default function PopupFallback() {
             {quickLinks && quickLinks?.length > 0 && (
                 <>
                     <CompactLayout>
-                        <p>Or your quick links:</p>
+                        <p>Or your pinned links:</p>
                         <QuickLinkContainer>
                             <QuickLinkList linkConfig={{ target: "_blank" }} />
                         </QuickLinkContainer>

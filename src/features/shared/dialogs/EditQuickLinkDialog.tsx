@@ -74,9 +74,9 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
         <Dialog handler={modalHandler}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Edit Quick Link</DialogTitle>
+                    <DialogTitle>Edit Pinned Link</DialogTitle>
                     <DialogDescription>
-                        Update the details of your quick link.
+                        Update the details of the pinned link.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>

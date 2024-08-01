@@ -17,7 +17,7 @@ import {
     ChevronLeftIcon,
     ChevronRightIcon,
     Edit2Icon,
-    Trash2Icon,
+    PinOffIcon,
 } from "lucide-react"
 import { forwardRef } from "react"
 
@@ -62,7 +62,7 @@ export const QuickLinkContextMenuContent = forwardRef<
     return (
         <ContextMenuContent ref={ref}>
             <ContextMenuItem onSelect={handleEditQuickLink}>
-                <Edit2Icon className="h-4 w-4" /> Edit link
+                <Edit2Icon className="h-4 w-4" /> Edit
             </ContextMenuItem>
             <CopyTextMenuItem name="URL" textToCopy={quickLink.href} />
             <ContextMenuItem
@@ -87,7 +87,7 @@ export const QuickLinkContextMenuContent = forwardRef<
                     await handleRemoveQuickLink(quickLink.id)
                 }}
             >
-                <Trash2Icon className="h-4 w-4" /> Delete
+                <PinOffIcon className="h-4 w-4" /> Unpin
             </ContextMenuItem>
         </ContextMenuContent>
     )
