@@ -3,6 +3,7 @@ import "@src/assets/styles/shadcn-ui.css"
 import { Toaster } from "@src/components/ui/toaster"
 import { TooltipProvider } from "@src/components/ui/tooltip"
 import ConfigContextProvider from "@src/features/config/ConfigContext"
+import { DownloadInfoProvider } from "@src/features/fileDownload/DownloadInfoContext"
 import { PageStateContextProvider } from "@src/features/router/PageStateContext"
 import { SmoothRouterListener } from "@src/features/router/SmoothRouterListener"
 import { PreferredTheme, ThemeProvider } from "@src/features/theme"
@@ -31,7 +32,9 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
                         <NiceModal.Provider>
                             <TooltipProvider delayDuration={0}>
                                 <ConfigContextProvider>
-                                    {children}
+                                    <DownloadInfoProvider>
+                                        {children}
+                                    </DownloadInfoProvider>
                                     <Toaster />
                                 </ConfigContextProvider>
                             </TooltipProvider>

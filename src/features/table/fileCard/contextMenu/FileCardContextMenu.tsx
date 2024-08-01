@@ -63,6 +63,7 @@ const FileCardContextMenuContent = forwardRef<
             <CopyTextMenuItem name="URL" textToCopy={fileLink.href} />
             <CopyTextMenuItem name="file name" textToCopy={fileLink.fullName} />
             <DownloadFileMenuItem
+                fileKey={fileLink.fileKey}
                 href={fileLink.href}
                 isFolder={fileLink.isFolder}
                 fileName={fileLink.fullName}

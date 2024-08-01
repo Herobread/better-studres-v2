@@ -1,6 +1,6 @@
 import { ContextMenuItem } from "@src/components/ui/context-menu"
 import { useToast } from "@src/components/ui/use-toast"
-import { saveFolder } from "@src/features/fileDownload"
+import { useDownloadInfo } from "@src/features/fileDownload/DownloadInfoContext"
 import { generateQuickLinkInfo } from "@src/features/quickLinks"
 import { downloadFile } from "@src/lib/utils"
 import { DownloadIcon } from "lucide-react"
@@ -9,23 +9,31 @@ interface DownloadFileMenuItemProps {
     href: string
     isFolder: boolean
     fileName: string
+    fileKey: string
 }
 
 export default function DownloadFileMenuItem({
     href,
     isFolder,
     fileName,
+    fileKey,
 }: DownloadFileMenuItemProps) {
     const { toast } = useToast()
+    const { addFileKeyToDownloadingList, removeFileKeyFromDownloadingList } =
+        useDownloadInfo()
 
     const handleFolderDownload = async () => {
+        addFileKeyToDownloadingList(fileKey)
+
         const { name } = generateQuickLinkInfo(href)
+
         toast({
             title: "📥 Downloading",
             description: "Fetching and archiving files.",
         })
         try {
-            await saveFolder(href)
+            // await saveFolder(href)
+            await new Promise((r) => setTimeout(r, 4000))
             toast({
                 title: "✅ Success",
                 description: `Downloaded ${name}.`,
@@ -37,6 +45,8 @@ export default function DownloadFileMenuItem({
                 title: "❌ Error",
                 description: `Failed to download ${name}. ${error.message}`,
             })
+        } finally {
+            removeFileKeyFromDownloadingList(fileKey)
         }
     }
 

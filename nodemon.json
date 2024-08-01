@@ -7,7 +7,7 @@
         "utils",
         "vite",
         "vite.config.ts",
-        "tailwind.config.ts",
+        "tailwind.config.cjs",
         "manifest.json",
         "manifest.dev.json",
         "manifest.firefox.json"

@@ -36,6 +36,9 @@ module.exports = {
             gridTemplateColumns: {
                 files: "max-content auto 4fr max-content max-content 3fr",
             },
+            backgroundSize: {
+                "200%": "200%",
+            },
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -43,6 +46,8 @@ module.exports = {
                 background: {
                     DEFAULT: "hsl(var(--background))",
                     "layer-1": "hsl(var(--background-layer-1))",
+                    "flow-start": "hsl(var(--background-flow-start))",
+                    "flow-end": "hsl(var(--background-flow-end))",
                 },
                 foreground: "hsl(var(--foreground))",
                 primary: {
@@ -96,11 +101,24 @@ module.exports = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                "background-flow": {
+                    "0%": {
+                        backgroundPosition: "0% 0%",
+                    },
+                    "100%": {
+                        backgroundPosition: "400% 0%",
+                    },
+                },
             },
             animation: {
                 pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "background-flow": "background-flow 5s linear infinite",
+            },
+            backgroundImage: {
+                "gradient-flow":
+                    "linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(131,58,180,1) 100%)",
             },
         },
     },
