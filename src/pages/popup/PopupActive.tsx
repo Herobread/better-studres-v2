@@ -208,7 +208,7 @@ export default function PopupActive() {
                                         />
                                     </FormControl>
                                     <FormLabel>
-                                        <p>Show quick links</p>
+                                        <p>Show pinned links</p>
                                         <p className="text-sm font-normal text-muted-foreground">
                                             Quickly navigate between pages
                                         </p>

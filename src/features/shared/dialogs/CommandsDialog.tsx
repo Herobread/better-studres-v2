@@ -84,7 +84,7 @@ export default NiceModal.create(() => {
                         🌱 Go to homepage
                     </CommandItem>
                 </CommandGroup>
-                <CommandGroup heading="Quick links">
+                <CommandGroup heading="Pinned links">
                     {quickLinks &&
                         quickLinks.map((quickLink) => {
                             const { id, href, icon, name } = quickLink

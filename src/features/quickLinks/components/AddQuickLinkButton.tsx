@@ -22,7 +22,7 @@ export function AddQuickLinkButton() {
     return (
         <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger asChild>
-                <QuickLinkButton icon="➕" content="Save" />
+                <QuickLinkButton icon="➕" content="Pin" />
             </PopoverTrigger>
             <PopoverContent>
                 <AddQuickLinkForm

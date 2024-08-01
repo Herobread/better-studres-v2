@@ -95,7 +95,7 @@ export default function NotFound() {
                 </CompactLayout>
                 {showQuickLinks && quickLinks && (
                     <CompactLayout>
-                        <p>Or your quick links:</p>
+                        <p>Or your pinned links:</p>
                         <QuickLinkContainer>
                             <QuickLinkList />
                         </QuickLinkContainer>
