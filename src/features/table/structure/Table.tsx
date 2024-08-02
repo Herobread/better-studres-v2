@@ -1,4 +1,3 @@
-import { useDownloadInfo } from "@src/features/fileDownload/DownloadInfoContext"
 import { FullFileLink } from "@src/features/parser"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import FileCard from "@src/features/table/fileCard/FileCard"
@@ -22,11 +21,8 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
 
     const state = isLoading ? "closed" : "open"
 
-    const { currentlyDownloadingFileKeys } = useDownloadInfo()
-
     return (
         <>
-            {JSON.stringify(currentlyDownloadingFileKeys)}
             <div
                 data-state={state}
                 data-direction={transitionData?.direction}

@@ -6,8 +6,6 @@
     :root {
         --background: 0 0% 100%;
         --background-layer-1: 0 0% 98%;
-        --background-flow-start: 208 56% 98%;
-        --background-flow-end: 208 56% 70%;
         --foreground: 0 0% 3.9%;
         --card: 0 0% 100%;
         --card-foreground: 0 0% 3.9%;
@@ -32,8 +30,6 @@
     .dark {
         --background: 0 0% 3.9%;
         --background-layer-1: 0 0% 7%;
-        --background-flow-start: 0 0% 33%;
-        --background-flow-end: 0 0% 66%;
         --foreground: 0 0% 98%;
         --card: 0 0% 3.9%;
         --card-foreground: 0 0% 98%;

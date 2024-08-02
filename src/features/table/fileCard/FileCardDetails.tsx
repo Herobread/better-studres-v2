@@ -39,7 +39,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
             <Link
                 ref={ref}
                 data-downloading={isDownloading}
-                className="data-[downloading=true]:outline-white data-[downloading=true]:outline-none data-[downloading=true]:outline-4 data-[downloading=true]:outline-offset-0 data-[downloading=true]:bg-gradient-flow bg-200% animate-background-flow col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-background-layer-1 p-3 hover:bg-accent"
+                className="col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-background-layer-1 p-3 hover:bg-accent"
                 href={href}
                 transitionData={transitionData}
             >
@@ -56,6 +56,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
                             fullName={fileLink.fullName}
                             name={fileLink.name}
                             showExtension={isLongExtensionName}
+                            isDownloading={isDownloading}
                         />
                         {!isParentDir && (
                             <FileTags fileKey={fileLink.fileKey} />

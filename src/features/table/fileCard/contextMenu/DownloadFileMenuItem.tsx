@@ -1,5 +1,6 @@
 import { ContextMenuItem } from "@src/components/ui/context-menu"
 import { useToast } from "@src/components/ui/use-toast"
+import { saveFolder } from "@src/features/fileDownload"
 import { useDownloadInfo } from "@src/features/fileDownload/DownloadInfoContext"
 import { generateQuickLinkInfo } from "@src/features/quickLinks"
 import { downloadFile } from "@src/lib/utils"
@@ -32,8 +33,7 @@ export default function DownloadFileMenuItem({
             description: "Fetching and archiving files.",
         })
         try {
-            // await saveFolder(href)
-            await new Promise((r) => setTimeout(r, 4000))
+            await saveFolder(href)
             toast({
                 title: "✅ Success",
                 description: `Downloaded ${name}.`,

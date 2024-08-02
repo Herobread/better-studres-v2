@@ -1,11 +1,22 @@
 interface FileNameProps {
     name: string
     fullName: string
-    showExtension: boolean
+    showExtension?: boolean
+    isDownloading?: boolean
 }
 
-export function FileName({ name, fullName, showExtension }: FileNameProps) {
+export function FileName({
+    name,
+    fullName,
+    showExtension,
+    isDownloading,
+}: FileNameProps) {
     const content = showExtension ? fullName : name
 
-    return <span className="font-bold">{content}</span>
+    return (
+        <span className="font-bold">
+            {content}
+            {isDownloading && <span className="animate-pulse"> 📥</span>}
+        </span>
+    )
 }
