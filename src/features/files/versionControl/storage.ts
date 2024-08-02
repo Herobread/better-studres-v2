@@ -69,7 +69,9 @@ export const GET_TRACKED_FILE_LINK_QUERY_KEY_BASE = "getTrackedFileLink"
 export async function getTrackedFileLink(
     key: string
 ): Promise<TrackedFileLinkData | undefined> {
-    return await getFileData(key, VERSION_CONTROL_FILE_DATA_KEY)
+    return (await getFileData(key, VERSION_CONTROL_FILE_DATA_KEY)) as
+        | TrackedFileLinkData
+        | undefined
 }
 
 /**

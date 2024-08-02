@@ -4,7 +4,7 @@ import { isFileLinkTracked } from "./ignore"
 import {
     TrackedFileLinkData,
     TrackedMinimizedFileLink,
-    generateFileLinkKeyDeprecated,
+    generateFileKey,
     getTrackedFileLink,
     minimizeAndTrackFileLink,
     saveTrackedFileLinkToStorage,
@@ -33,7 +33,7 @@ export async function trackFileLink(fileLink: FullFileLink) {
     const minimizedFileLink: TrackedMinimizedFileLink =
         minimizeAndTrackFileLink(fileLink)
 
-    const key = generateFileLinkKeyDeprecated(fileLink)
+    const key = generateFileKey(fileLink.urlSegments)
 
     const record = await getTrackedFileLink(key)
 

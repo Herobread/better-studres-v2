@@ -157,7 +157,8 @@ function ChangesList({ changes }: ChangesListProps) {
     return (
         <ul>
             {changes.map((change) => {
-                if (change === "0B") {
+                const UNKNOWN_SIZE_STRING = "  - "
+                if (change === UNKNOWN_SIZE_STRING) {
                     change = "Unknown size"
                 }
 
