@@ -71,14 +71,23 @@ export default function PopupActive() {
                             {pkg.version}
                         </span>
                     </h1>
-                    <a
-                        href="https://github.com/Herobread/better-studres-v2"
-                        className="text-sm text-muted-foreground"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        Contribute on GitHub
-                    </a>
+                    <div className="flex gap-1 text-sm text-muted-foreground">
+                        <a
+                            href="https://github.com/Herobread/better-studres-v2"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            GitHub
+                        </a>
+                        <span>·</span>
+                        <a
+                            href="https://forms.gle/769gnJuMzdSjgrZC7"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            Send Feedback
+                        </a>
+                    </div>
                 </div>
                 <BlacklistToggle />
                 <ExtensionToggle />
