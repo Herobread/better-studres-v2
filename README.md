@@ -34,7 +34,7 @@ An open-source browser extension, that improves appearance of the <b>St Andrews 
 - smooth navigation between pages
 - breadcrumbs in navigation
 
-### Files
+### File Enhancements
 
 - file and folder download
 - code syntax highlighting
