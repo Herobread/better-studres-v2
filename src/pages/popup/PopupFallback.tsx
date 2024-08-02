@@ -1,5 +1,4 @@
 import pkg from "@src/../package.json"
-import CompactLayout from "@src/components/layouts/CompactLayout"
 import {
     BASE_URL,
     MMS_BASE_URL,
@@ -24,7 +23,7 @@ export default function PopupFallback() {
     })
 
     return (
-        <body className="_tailwind_preflight_reset grid h-min gap-4 bg-background p-2 text-base text-foreground">
+        <body className="_tailwind_preflight_reset h-min space-y-4 bg-background p-2 text-base text-foreground">
             <div className="space-y-1">
                 <h1 className="flex flex-grow items-baseline gap-1 text-xl font-bold">
                     Better studres
@@ -40,7 +39,7 @@ export default function PopupFallback() {
                     .
                 </p>
             </div>
-            <CompactLayout>
+            <div className="space-y-1">
                 <p>Try one of those:</p>
                 <QuickLinkContainer>
                     <QuickLinkLink
@@ -84,16 +83,14 @@ export default function PopupFallback() {
                         }}
                     />
                 </QuickLinkContainer>
-            </CompactLayout>
+            </div>
             {quickLinks && quickLinks?.length > 0 && (
-                <>
-                    <CompactLayout>
-                        <p>Or your pinned links:</p>
-                        <QuickLinkContainer>
-                            <QuickLinkList linkConfig={{ target: "_blank" }} />
-                        </QuickLinkContainer>
-                    </CompactLayout>
-                </>
+                <div className="space-y-1">
+                    <p>Or your pinned links:</p>
+                    <QuickLinkContainer>
+                        <QuickLinkList linkConfig={{ target: "_blank" }} />
+                    </QuickLinkContainer>
+                </div>
             )}
         </body>
     )
