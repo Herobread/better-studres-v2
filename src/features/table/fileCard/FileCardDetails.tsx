@@ -1,7 +1,7 @@
 import { Separator } from "@src/components/ui/separator"
 import { useDownloadInfo } from "@src/features/fileDownload/DownloadInfoContext"
 import { FullFileLink } from "@src/features/parser"
-import Link from "@src/features/router/Link"
+import Link, { LinkProps } from "@src/features/router/Link"
 import { TransitionData } from "@src/features/router/PageStateContext"
 import { FileCustomDescription } from "@src/features/table/fileCard/FileCustomDescription"
 import { forwardRef } from "react"
@@ -13,12 +13,12 @@ import { FileName } from "./FileName"
 import { FileSize } from "./FileSize"
 import { FileTags } from "./FileTags"
 
-export interface FileCardDetailsProps {
+export type FileCardDetailsProps = {
     fileLink: FullFileLink
-}
+} & LinkProps
 
 const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
-    ({ fileLink }, ref) => {
+    ({ fileLink, ...props }, ref) => {
         const { isKeyDownloading } = useDownloadInfo()
 
         const { href, extension, fullName, fileKey } = fileLink
@@ -42,6 +42,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
                 className="col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-background-layer-1 p-3 hover:bg-accent"
                 href={href}
                 transitionData={transitionData}
+                {...props}
             >
                 <div className="grid w-full justify-items-center">
                     <FileIcon fileLink={fileLink} />

@@ -3,6 +3,7 @@ import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
+import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent"
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
@@ -40,6 +41,7 @@ export default function Folder({ content }: FolderProps) {
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
             <CommandsShortcutMount />
+            <SkipToMainContent />
             {showCommandButton && (
                 <WideLayout>
                     <CommandInput onSelect={handleCommandActivation} />

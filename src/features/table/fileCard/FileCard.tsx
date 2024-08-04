@@ -14,8 +14,9 @@ import FileCardContextMenuContent from "./contextMenu/FileCardContextMenu"
 interface FileCardProps extends FileCardDetailsProps {
     fileLink: FullFileLink
 }
+
 const FileCard = forwardRef<HTMLAnchorElement, FileCardProps>(
-    ({ fileLink }, ref) => {
+    ({ fileLink, ...props }, ref) => {
         const { imagePreviewOnHover } = useContext(ConfigContext)
 
         if (imagePreviewOnHover && fileLink.isImage) {
@@ -25,21 +26,27 @@ const FileCard = forwardRef<HTMLAnchorElement, FileCardProps>(
                     title={fileLink.fullName}
                     className="col-span-full grid grid-cols-subgrid"
                 >
-                    <FileCardWithContextMenu fileLink={fileLink} ref={ref} />
+                    <FileCardWithContextMenu
+                        fileLink={fileLink}
+                        ref={ref}
+                        {...props}
+                    />
                 </ImagePreviewWrapper>
             )
         }
 
-        return <FileCardWithContextMenu fileLink={fileLink} ref={ref} />
+        return (
+            <FileCardWithContextMenu fileLink={fileLink} ref={ref} {...props} />
+        )
     }
 )
 
 const FileCardWithContextMenu = forwardRef<HTMLAnchorElement, FileCardProps>(
-    ({ fileLink }, ref) => {
+    ({ fileLink, ...props }, ref) => {
         return (
             <ContextMenu>
                 <ContextMenuTrigger className="col-span-full grid grid-cols-subgrid">
-                    <FileCardDetails fileLink={fileLink} ref={ref} />
+                    <FileCardDetails fileLink={fileLink} ref={ref} {...props} />
                 </ContextMenuTrigger>
                 <FileCardContextMenuContent fileLink={fileLink} />
             </ContextMenu>

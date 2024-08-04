@@ -37,9 +37,15 @@ export function Table({ fileLinks, sortLinks }: TableProps) {
                 "
             >
                 <TableHeader sortLinks={sortLinks} />
-                {fileLinks.map((fileLink) => {
+                {fileLinks.map((fileLink, i) => {
+                    const id = i === 0 ? "main-content" : ""
+
                     return (
-                        <FileCard fileLink={fileLink} key={fileLink.fileKey} />
+                        <FileCard
+                            fileLink={fileLink}
+                            key={fileLink.fileKey}
+                            id={id}
+                        />
                     )
                 })}
                 {fileLinks.length === 1 && <EmptyFolderMessage />}
