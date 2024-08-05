@@ -16,9 +16,5 @@ export default function Popup() {
 
     const url = activeTab?.url
 
-    return (
-        <div id="__better_studres_theme_root">
-            {url?.includes(BASE_URL) ? <PopupActive /> : <PopupFallback />}
-        </div>
-    )
+    return <>{url?.includes(BASE_URL) ? <PopupActive /> : <PopupFallback />}</>
 }
