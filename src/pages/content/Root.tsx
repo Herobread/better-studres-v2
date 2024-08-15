@@ -4,6 +4,7 @@ import { FilePreview } from "@src/pages/content/pages/FilePreview"
 import { useContext } from "react"
 import Folder from "./pages/Folder"
 import NotFound from "./pages/NotFound"
+import RootPage from "./pages/RootPage"
 
 interface RootProps {
     initialPageData: PageData
@@ -11,19 +12,23 @@ interface RootProps {
 
 export default function Root({ initialPageData }: RootProps) {
     const { pageData: contextPageData } = useContext(PageStateContext)
-
     const pageData = contextPageData || initialPageData
-
+    
     if (pageData.type === "not found") {
         return <NotFound />
     }
-
+    
     if (pageData.type === "file") {
         return <FilePreview content={pageData.content} />
     }
 
     if (pageData.type === "folder") {
         return <Folder content={pageData.content} />
+    }
+
+    if (pageData.type === "root") {
+        console.log(pageData)
+        return <RootPage />
     }
 
     location.reload()
