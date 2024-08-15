@@ -13,6 +13,7 @@ import { createRoot } from "react-dom/client"
 import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
+import RootPage from "./pages/RootPage"
 
 async function initialize() {
     const currentUrl = location.href
@@ -68,9 +69,17 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
-            resetRootStyles()
-
-            throw new Error("root page")
+            const rootRoot = document.createElement("div")
+            rootRoot.setAttribute("id", "__better_studres_theme_root")
+            document.body.innerHTML = ""
+            rootContainer.appendChild(rootRoot)
+            const root = createRoot(rootRoot)
+            root.render(
+                <Providers overrideTheme={theme}>
+                    <Root initialPageData={pageData}/>
+                </Providers>
+            )
+            return
         }
 
         if (!rootContainer) {
@@ -97,6 +106,7 @@ async function initialize() {
         )
     } catch (e) {
         // load only commands then
+        console.log(e)
         const div = document.createElement("div")
         div.className = "__better_studres__root _tailwind_preflight_reset"
         document.body.appendChild(div)
