@@ -21,7 +21,6 @@ const escapedBaseUrl = BASE_URL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
 
 const EXCLUDED_SMOOTH_NAVIGATION_HREF_PATTERNS = [
     // Exact match for BASE_URL
-    new RegExp(`^${escapedBaseUrl}$`, "i"),
     // Match URLs with a dot in the final segment
     // unfortunately, doesn't work for files with no extension
     new RegExp(`^${escapedBaseUrl}.*\\.[^/]+$`, "i"),

@@ -13,7 +13,6 @@ import { createRoot } from "react-dom/client"
 import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
-import RootPage from "./pages/RootPage"
 
 async function initialize() {
     const currentUrl = location.href
@@ -69,17 +68,25 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
-            const rootRoot = document.createElement("div")
-            rootRoot.setAttribute("id", "__better_studres_theme_root")
-            document.body.innerHTML = ""
-            rootContainer.appendChild(rootRoot)
-            const root = createRoot(rootRoot)
+            const rootRoot = document.createElement("div");
+            rootRoot.setAttribute("id", "__better_studres_theme_root");
+            document.body.innerHTML = "";
+        
+            const styleElements = document.querySelectorAll('style, link[rel="stylesheet"]');
+            styleElements.forEach(el => el.remove());
+            
+            document.body.style.margin = "0";
+            document.body.style.padding = "0";
+            
+            document.body.appendChild(rootRoot);
+            const root = createRoot(rootRoot);
             root.render(
                 <Providers overrideTheme={theme}>
-                    <Root initialPageData={pageData}/>
+                    <Root initialPageData={pageData} />
                 </Providers>
-            )
-            return
+            );
+            
+            return;
         }
 
         if (!rootContainer) {
