@@ -5,14 +5,17 @@ import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent
 import CommandInput from "@src/features/command/CommandInput";
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount";
 import { ConfigContext } from "@src/features/config";
+import { RootContent } from "@src/features/parser";
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog";
 import { useContext } from "react";
 
+interface RootProps {
+    content: RootContent[]
+}
 
-
-export function RootPage() {
+export function RootPage({ content }: RootProps) {
     const { showCommandButton } = useContext(ConfigContext);
-
+    const modules = content
     const handleCommandActivation = () => {
         NiceModal.show(CommandsDialog);
     };
@@ -26,12 +29,8 @@ export function RootPage() {
             </WideLayout>
             )}
             <SkipToMainContent />    
-             <MainSection />
-             
-                
-     
-                
-            {/* Render the CommandInput if showCommandButton is true */}
+            <MainSection content={content}/>
+
         </div>
     );
 }

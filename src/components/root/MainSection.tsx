@@ -1,6 +1,10 @@
+import { RootContent } from '@src/features/parser';
 import React from 'react';
 
-// Placeholder data for the page content. You can replace this with your actual data.
+interface MainSectionProps {
+  content: RootContent[];
+}
+
 const yearLevels = [
   { label: 'First year', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/First' },
   { label: 'Second year', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Second' },
@@ -9,12 +13,8 @@ const yearLevels = [
   { label: 'Masters', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Masters' }
 ];
 
-const modules = [
-  ['CS1002', 'CS1003', 'CS1006', 'CS1007'],
-  ['CS2001', 'CS2002', 'CS2003', 'CS2006', 'CS2101'],
-];
 
-const MainSection: React.FC = () => (
+const MainSection: React.FC<MainSectionProps> = ( { content }) => (
   <section className="main py-10 bg-gray-50">
     <div className="container mx-auto">
       <p className="text-lg text-gray-700">
@@ -49,15 +49,13 @@ const MainSection: React.FC = () => (
       </div>
 
       <h2 className="text-2xl font-semibold mt-8">Modules</h2>
-      {modules.map((moduleGroup, index) => (
-        <p key={index}>
-          {moduleGroup.map(module => (
-            <a key={module} href={`/${module}`} className="text-blue-600 underline mx-1">
-              {module}
-            </a>
-          ))}
-        </p>
-      ))}
+      <div className="flex flex-wrap mt-4">
+        {content.map((module, index) => (
+          <a key={index} href={module.url} className="text-blue-600 underline mx-2 my-2">
+            {module.code}
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 );
