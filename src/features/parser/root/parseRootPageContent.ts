@@ -37,8 +37,7 @@ export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[
 
         links.forEach(link => {
             const moduleCode = link.textContent?.trim() || "";
-            const moduleUrl = link.getAttribute('href') || "";
-
+            const moduleUrl = link.href || "";
             if (moduleCode && moduleUrl) {
                 modules.push({
                     code: moduleCode,
@@ -69,7 +68,7 @@ export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
 
             links.forEach(link => {
                 const moduleCode = link.textContent?.trim();
-                const moduleUrl = link.getAttribute('href') || "";
+                let moduleUrl = link.href || "";
 
                 if (moduleCode && moduleUrl) {
                     modules.push({

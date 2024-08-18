@@ -6,7 +6,6 @@ import CommandInput from "@src/features/command/CommandInput";
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount";
 import { ConfigContext } from "@src/features/config";
 import { RootContent } from "@src/features/parser";
-import { ModuleContent } from "@src/features/parser/root/parseRootPageContent";
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog";
 import { useContext } from "react";
 
