@@ -28,7 +28,7 @@ export default function Root({ initialPageData }: RootProps) {
 
     if (pageData.type === "root") {
         console.log(pageData)
-        return <RootPage />
+        return <RootPage content={pageData.content}/>
     }
 
     location.reload()
