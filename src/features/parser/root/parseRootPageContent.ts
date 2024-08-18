@@ -4,14 +4,59 @@ export interface ModuleContent {
 }
 
 /**
- * Parses the root page to extract the modules and their URLs.
+ * Main function that orchestrates the parsing of the root page.
+ * It delegates the extraction of taught students' links and modules to other functions.
  * @param {HTMLElement} content - The content of the root page to parse.
- * @returns {ModuleContent[]} An array of RootContent objects representing modules and their URLs.
+ * @returns {object} An object containing arrays of ModuleContent for modules and taught students.
  */
 export function parseRootPage(content: HTMLElement): {
-    modules: ModuleContent[]
-    taught_students: ModuleContent[]} {
-    const taught_students: ModuleContent[] = extractLinksFromHTML(content);
+    modules: ModuleContent[],
+    taught_students: ModuleContent[]
+} {
+    const taught_students = extractTaughtStudentsLinks(content);
+    const modules = extractModulesLinks(content);
+
+    return {
+        modules: modules,
+        taught_students: taught_students
+    };
+}
+
+/**
+ * Extracts the links related to taught students from the specific <p> element.
+ * @param {HTMLElement} content - The content of the page to parse.
+ * @returns {ModuleContent[]} An array of ModuleContent objects representing the links and their labels.
+ */
+export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[] {
+    const modules: ModuleContent[] = [];
+
+    const linkContainer = content.querySelector('p a[href*="studres.cs.st-andrews.ac.uk/Teaching/"]')?.parentElement;
+
+    if (linkContainer) {
+        const links = linkContainer.querySelectorAll('a');
+
+        links.forEach(link => {
+            const moduleCode = link.textContent?.trim() || "";
+            const moduleUrl = link.getAttribute('href') || "";
+
+            if (moduleCode && moduleUrl) {
+                modules.push({
+                    code: moduleCode,
+                    url: moduleUrl
+                });
+            }
+        });
+    }
+
+    return modules;
+}
+
+/**
+ * Extracts the modules and their URLs from the section after the "Modules" header.
+ * @param {HTMLElement} content - The content of the page to parse.
+ * @returns {ModuleContent[]} An array of ModuleContent objects representing modules and their URLs.
+ */
+export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
     const modules: ModuleContent[] = [];
 
     const modulesHeader = Array.from(content.querySelectorAll('h2')).find(h2 => h2.textContent === 'Modules');
@@ -38,42 +83,5 @@ export function parseRootPage(content: HTMLElement): {
         }
     }
 
-    return {
-        modules: modules,
-        taught_students: taught_students
-    } ;
-}
-
-/**
- * Extracts the links from the specific <p> element containing links related to teaching modules.
- * @param {HTMLElement} content - The content of the page to parse.
- * @returns {ModuleContent[]} An array of ModuleContent objects representing the links and their labels.
- */
-export function extractLinksFromHTML(content: HTMLElement): ModuleContent[] {
-    const modules: ModuleContent[] = [];
-
-    // Query for the specific <p> element containing the links
-    const linkContainer = content.querySelector('p a[href*="studres.cs.st-andrews.ac.uk/Teaching/"]')?.parentElement;
-
-    // If the link container is found, extract the links
-    if (linkContainer) {
-        const links = linkContainer.querySelectorAll('a');
-
-        // Iterate over each link and extract the data
-        links.forEach(link => {
-            const moduleCode = link.textContent?.trim() || "";
-            const moduleUrl = link.getAttribute('href') || "";
-
-            // Push the link data into the modules array
-            if (moduleCode && moduleUrl) {
-                modules.push({
-                    code: moduleCode,
-                    url: moduleUrl
-                });
-            }
-        });
-    }
-
-    // Return the extracted modules
     return modules;
 }
