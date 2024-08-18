@@ -1,18 +1,10 @@
 import { RootContent } from '@src/features/parser';
-import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
 import React from 'react';
+
 
 interface MainSectionProps {
   content: RootContent;
 }
-
-const yearLevels = [
-  { label: 'First year', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/First' },
-  { label: 'Second year', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Second' },
-  { label: 'Honours', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Hons' },
-  { label: 'MSci', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/MSci' },
-  { label: 'Masters', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Masters' }
-];
 
 const MainSection: React.FC<MainSectionProps> = ( { content }) => (
   <section className="main py-10 bg-gray-50">
@@ -37,13 +29,13 @@ const MainSection: React.FC<MainSectionProps> = ( { content }) => (
       <p>Materials relevant to students on taught programmes.</p>
 
       <div className="flex flex-wrap mt-4">
-        {yearLevels.map(({ href, label }) => (
+        {content.taught_students.map(({ code, url }) => (
           <a
-            key={label}
-            href={href}
+            key={code}
+            href={url}
             className="btn btn-primary btn-lg bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md px-4 py-2 mx-2 my-2"
           >
-            {label}
+            {code}
           </a>
         ))}
       </div>

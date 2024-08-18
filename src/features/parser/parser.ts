@@ -31,6 +31,7 @@ export interface NotFoundPageData extends BasePageData {
 
 export interface RootContent{
     modules: ModuleContent[]
+    taught_students: ModuleContent[]
 }
 
 export interface RootPageData extends BasePageData {
@@ -71,11 +72,12 @@ export function parsePageContent(content: HTMLElement): PageData {
     }
 
     if (isRootPage(content)) {
-        const {modules} = parseRootPage(content)
+        const { modules, taught_students } = parseRootPage(content)
         return {
             type: "root",
             content: {
-                modules
+                modules,
+                taught_students
             } 
         } 
     }
