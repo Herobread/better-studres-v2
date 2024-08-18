@@ -5,7 +5,7 @@ import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { isRootPage } from "@src/features/router/isRootPage"
 import { SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
-import { parseRootPage } from "./parseRootPageContent"
+import { ModuleContent, parseRootPage } from "./root/parseRootPageContent"
 
 export type PageType = "folder" | "not found" | "root" | "file" | "unknown"
 
@@ -29,14 +29,13 @@ export interface NotFoundPageData extends BasePageData {
     type: "not found"
 }
 
-export interface RootContent {
-    code: string;
-    url: string;
+export interface RootContent{
+    modules: ModuleContent[]
 }
 
 export interface RootPageData extends BasePageData {
     type: "root"
-    content: RootContent[]
+    content: RootContent
 }
 
 export interface FileContent {
@@ -72,10 +71,13 @@ export function parsePageContent(content: HTMLElement): PageData {
     }
 
     if (isRootPage(content)) {
+        const {modules} = parseRootPage(content)
         return {
             type: "root",
-            content: parseRootPage(content)
-        }
+            content: {
+                modules
+            } 
+        } 
     }
 
     if (isFilePage(content)) {

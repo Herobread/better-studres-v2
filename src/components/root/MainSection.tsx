@@ -1,8 +1,9 @@
 import { RootContent } from '@src/features/parser';
+import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
 import React from 'react';
 
 interface MainSectionProps {
-  content: RootContent[];
+  content: RootContent;
 }
 
 const yearLevels = [
@@ -12,7 +13,6 @@ const yearLevels = [
   { label: 'MSci', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/MSci' },
   { label: 'Masters', href: 'https://studres.cs.st-andrews.ac.uk/Teaching/Masters' }
 ];
-
 
 const MainSection: React.FC<MainSectionProps> = ( { content }) => (
   <section className="main py-10 bg-gray-50">
@@ -50,7 +50,7 @@ const MainSection: React.FC<MainSectionProps> = ( { content }) => (
 
       <h2 className="text-2xl font-semibold mt-8">Modules</h2>
       <div className="flex flex-wrap mt-4">
-        {content.map((module, index) => (
+        {content.modules.map((module, index) => (
           <a key={index} href={module.url} className="text-blue-600 underline mx-2 my-2">
             {module.code}
           </a>
