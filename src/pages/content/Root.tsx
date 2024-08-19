@@ -27,7 +27,6 @@ export default function Root({ initialPageData }: RootProps) {
     }
 
     if (pageData.type === "root") {
-        console.log(pageData)
         return <RootPage content={pageData.content}/>
     }
 
