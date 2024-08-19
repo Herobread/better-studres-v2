@@ -3,73 +3,98 @@ import { RootContent } from '@src/features/parser';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
 import React from 'react';
 
-
 interface MainSectionProps {
   content: RootContent;
 }
 
-const MainSection: React.FC<MainSectionProps> = ({ content }) => (
-  <div className="main py-10 bg-gray-50">
+const MainSection: React.FC<MainSectionProps> = ({ content }) => {
+  const renderModules = (modules: any[]) => {
+    let previousPrefix = '';
+    let previousThirdChar = '';
 
-      <p className="text-lg text-gray-700">
-        Student Resources (StudRes) is a repository of teaching materials, principally for students enrolled on Computer Science modules. Staff may add or remove items to this library; students may read, copy or download them.
-      </p>
+    return modules.map((module, index) => {
+      const currentPrefix = module.code.slice(0, 2); 
+      const currentThirdChar = module.code.charAt(2);
+
+      const shouldBreak =
+        index === 0 || currentPrefix !== previousPrefix || currentThirdChar !== previousThirdChar;
+
+      previousPrefix = currentPrefix;
+      previousThirdChar = currentThirdChar;
+
+      return (
+        <React.Fragment key={index}>
+          {shouldBreak && index !== 0 && <div className="w-full"></div>}
+          <QuickLinkLink
+            quickLink={{
+              href: module.url,
+              icon: getModuleEmoji(module.url),
+              id: index,
+              name: module.code,
+            }}
+          />
+        </React.Fragment>
+      );
+    });
+  };
+
+  return (
+    <div
+      className="
+      data-[state=open]:animate-in data-[state=closed]:animate-out 
+      data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
+      data-[direction=bottom][data-state=open]:slide-in-from-bottom-10 
+      data-[direction=left][data-state=open]:slide-in-from-left-10
+      data-[direction=right][data-state=open]:slide-in-from-right-10
+      data-[direction=top][data-state=open]:slide-in-from-top-10
+    "
+    >
+      <h3 className="text-xl font-semibold">Postgraduate research students</h3>
+      <div className='flex flex-wrap'>
       <QuickLinkLink
         quickLink={{
-          href: "https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes",
-          icon: getModuleEmoji("More about Student Resources"),
+          href: 'https://studres.cs.st-andrews.ac.uk/PGR',
+          icon: getModuleEmoji('Materials relevant to PGR students'),
           id: 0,
-          name: "More about Student Resources",
+          name: 'Materials relevant to PGR students',
         }}
       />
-      <h2 className="text-2xl font-semibold mt-8">Level-based resources</h2>
-
-      <h3 className="text-xl font-semibold mt-4">Postgraduate research students</h3>
-      
-      <QuickLinkLink
-        quickLink={{
-          href: "https://studres.cs.st-andrews.ac.uk/PGR",
-          icon: getModuleEmoji("Materials relevant to PGR students"),
-          id: 0,
-          name: "Materials relevant to PGR students",
-        }}
-      />
-    
-
-      <h3 className="text-xl font-semibold mt-4">Taught students</h3>
-      <p className="text-gray-700">Materials relevant to students on taught programmes.</p>
-
-      <div className="flex flex-wrap mt-4">
-      {content.taught_students.map((module, index) => (
-        <QuickLinkLink
-          quickLink={{
-            href: module.url,
-            icon: getModuleEmoji(module.url.split('/').pop() || ""),
-            id: index, 
-            name: module.url.split('/').pop() || "",
-          }}
-        />
-      ))}
       </div>
 
+      <h3 className="text-xl font-semibold mt-4">Taught students</h3>
+      <p>Materials relevant to students on taught programmes.</p>
 
-    <h2 className="text-2xl font-semibold mt-8">Modules</h2>
+      <div className="flex flex-wrap mt-4">
+        {content.taught_students.map((module, index) => (
+          <QuickLinkLink
+            key={index}
+            quickLink={{
+              href: module.url,
+              icon: getModuleEmoji(module.url.split('/').pop() || ''),
+              id: index,
+              name: module.url.split('/').pop() || '',
+            }}
+          />
+        ))}
+      </div>
 
-    <div className="flex flex-wrap mt-4">
-      {content.modules.map((module, index) => (
-
+      <h3 className="text-xl font-semibold mt-4">Studres Wiki</h3>
+      <div className='flex flex-wrap'>
         <QuickLinkLink
           quickLink={{
-            href: module.url,
-            icon: getModuleEmoji(module.url),
-            id: index,
-            name: module.code,
+            href: 'https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes',
+            icon: getModuleEmoji('More about Student Resources'),
+            id: 0,
+            name: 'More about Student Resources',
           }}
         />
-      ))}
-    </div>
+      </div>
 
-  </div>
-);
+      <h2 className="text-2xl font-semibold mt-8">Modules</h2>
+
+      <div className="flex flex-wrap mt-4">{renderModules(content.modules)}</div>
+    </div>
+  );
+};
 
 export default MainSection;
