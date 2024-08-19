@@ -8,6 +8,7 @@ import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent
 import CommandInput from "@src/features/command/CommandInput";
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount";
 import { ConfigContext } from "@src/features/config";
+import RootHeader from "@src/features/header/RootHeader";
 import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs";
 import { RootContent } from "@src/features/parser";
 import { AddQuickLinkButton, QuickLinkContainer, QuickLinkList } from "@src/features/quickLinks/components";
@@ -37,6 +38,7 @@ export function RootPage({ content }: RootProps) {
             <MainLayout>
                 <CompactLayout>
                     <div className="grid grid-cols-[1fr_max-content]">
+                        <RootHeader />
                         <ThemeToggle />
                     </div>
                     <SubheaderBreadcrumbs />
