@@ -1,5 +1,6 @@
 import { getModuleEmoji } from '@src/features/contentEnhancers/emoji/modules';
 import { RootContent } from '@src/features/parser';
+import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
 import React from 'react';
 
@@ -8,7 +9,7 @@ interface MainSectionProps {
 }
 
 const MainSection: React.FC<MainSectionProps> = ({ content }) => {
-  const renderModules = (modules: any[]) => {
+  const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
 

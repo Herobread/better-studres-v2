@@ -68,7 +68,7 @@ export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
 
             links.forEach(link => {
                 const moduleCode = link.textContent?.trim();
-                let moduleUrl = link.href || "";
+                const moduleUrl = link.href || "";
 
                 if (moduleCode && moduleUrl) {
                     modules.push({

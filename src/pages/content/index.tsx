@@ -68,6 +68,8 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
+            resetRootStyles()
+            
             rootContainer.setAttribute("id", "__better_studres_theme_root");
             rootContainer.style.overflowY = "scroll";
         
