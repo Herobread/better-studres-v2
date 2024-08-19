@@ -28,7 +28,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
           <QuickLinkLink
             quickLink={{
               href: module.url,
-              icon: getModuleEmoji(module.url),
+              icon: getModuleEmoji(module.code),
               id: index,
               name: module.code,
             }}
@@ -54,7 +54,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
       <QuickLinkLink
         quickLink={{
           href: 'https://studres.cs.st-andrews.ac.uk/PGR',
-          icon: getModuleEmoji('Materials relevant to PGR students'),
+          icon: getModuleEmoji('Materials_relevant_to_PGR_students'),
           id: 0,
           name: 'Materials relevant to PGR students',
         }}
@@ -83,7 +83,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
         <QuickLinkLink
           quickLink={{
             href: 'https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes',
-            icon: getModuleEmoji('More about Student Resources'),
+            icon: getModuleEmoji('More_about_Student_Resources'),
             id: 0,
             name: 'More about Student Resources',
           }}
