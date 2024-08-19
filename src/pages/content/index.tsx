@@ -68,24 +68,24 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
-            const rootRoot = document.createElement("div");
-            rootRoot.setAttribute("id", "__better_studres_theme_root");
-            document.body.innerHTML = "";
+            rootContainer.setAttribute("id", "__better_studres_theme_root");
+            rootContainer.style.overflowY = "scroll";
+        
+            rootContainer.innerHTML = "";
         
             const styleElements = document.querySelectorAll('style, link[rel="stylesheet"]');
             styleElements.forEach(el => el.remove());
-            
-            document.body.style.margin = "0";
-            document.body.style.padding = "0";
-            
-            document.body.appendChild(rootRoot);
-            const root = createRoot(rootRoot);
+        
+            rootContainer.style.margin = "0";
+            rootContainer.style.padding = "0";
+        
+            const root = createRoot(rootContainer);
             root.render(
                 <Providers overrideTheme={theme}>
                     <Root initialPageData={pageData} />
                 </Providers>
             );
-            
+        
             return;
         }
 
