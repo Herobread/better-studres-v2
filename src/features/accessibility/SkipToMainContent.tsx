@@ -6,9 +6,8 @@ export function SkipToMainContent() {
     return (
         <button
             onClick={handleSkip}
-            className="focus:clip-auto absolute h-1 w-1 overflow-hidden bg-background focus:z-50 focus:h-auto focus:w-auto focus:overflow-visible"
+            className="sr-only focus:not-sr-only"
         >
-            Skip to main content
         </button>
     )
 }
