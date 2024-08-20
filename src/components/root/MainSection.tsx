@@ -12,20 +12,24 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
+    const moduleElements: JSX.Element[] = [];
 
-    return modules.map((module, index) => {
-      const currentPrefix = module.code.slice(0, 2); 
+    for (let index = 0; index < modules.length; index++) {
+      const module = modules[index];
+      const currentPrefix = module.code.slice(0, 2);
       const currentThirdChar = module.code.charAt(2);
 
-      const shouldBreak =
-        index === 0 || currentPrefix !== previousPrefix || currentThirdChar !== previousThirdChar;
+      const shouldBreak = index !== 0 && (currentPrefix !== previousPrefix || currentThirdChar !== previousThirdChar);
 
       previousPrefix = currentPrefix;
       previousThirdChar = currentThirdChar;
 
-      return (
-        <React.Fragment key={index}>
-          {shouldBreak && index !== 0 && <div className="w-full"></div>}
+      if (shouldBreak) {
+        moduleElements.push(<div className="col-span-full" key={`break-${index}`} />);
+      }
+
+      moduleElements.push(
+        <div key={index} className="flex justify-center items-center">
           <QuickLinkLink
             quickLink={{
               href: module.url,
@@ -34,9 +38,11 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
               name: module.code,
             }}
           />
-        </React.Fragment>
+        </div>
       );
-    });
+    }
+
+    return moduleElements;
   };
 
   return (
@@ -52,30 +58,31 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
     >
       <h3 className="text-xl font-semibold">Postgraduate research students</h3>
       <div className='flex flex-wrap'>
-      <QuickLinkLink
-        quickLink={{
-          href: 'https://studres.cs.st-andrews.ac.uk/PGR',
-          icon: getModuleEmoji('Materials_relevant_to_PGR_students'),
-          id: 0,
-          name: 'Materials relevant to PGR students',
-        }}
-      />
+        <QuickLinkLink
+          quickLink={{
+            href: 'https://studres.cs.st-andrews.ac.uk/PGR',
+            icon: getModuleEmoji('Materials_relevant_to_PGR_students'),
+            id: 0,
+            name: 'Materials relevant to PGR students',
+          }}
+        />
       </div>
 
       <h3 className="text-xl font-semibold mt-4">Taught students</h3>
       <p>Materials relevant to students on taught programmes.</p>
 
-      <div className="flex flex-wrap mt-4">
+      <div className="grid grid-cols-6 gap-4 mt-4">
         {content.taught_students.map((module, index) => (
-          <QuickLinkLink
-            key={index}
-            quickLink={{
-              href: module.url,
-              icon: getModuleEmoji(module.url.split('/').pop() || ''),
-              id: index,
-              name: module.url.split('/').pop() || '',
-            }}
-          />
+          <div key={index} className="flex justify-center items-center">
+            <QuickLinkLink
+              quickLink={{
+                href: module.url,
+                icon: getModuleEmoji(module.url.split('/').pop() || ''),
+                id: index,
+                name: module.url.split('/').pop() || '',
+              }}
+            />
+          </div>
         ))}
       </div>
 
@@ -93,7 +100,9 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
 
       <h2 className="text-2xl font-semibold mt-8">Modules</h2>
 
-      <div className="flex flex-wrap mt-4">{renderModules(content.modules)}</div>
+      <div className="grid grid-cols-6 gap-4 mt-4">
+        {renderModules(content.modules)}
+      </div>
     </div>
   );
 };
