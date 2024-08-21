@@ -68,40 +68,22 @@ async function initialize() {
         }
 
         if (pageData.type === "root") {
-            resetRootStyles()
-            
-            rootContainer.setAttribute("id", "__better_studres_theme_root");
-            rootContainer.style.overflowY = "scroll";
-        
-            rootContainer.innerHTML = "";
-        
-            const styleElements = document.querySelectorAll('style, link[rel="stylesheet"]');
-            styleElements.forEach(el => el.remove());
-        
-            rootContainer.style.margin = "0";
-            rootContainer.style.padding = "0";
-        
-            const root = createRoot(rootContainer);
-            root.render(
-                <Providers overrideTheme={theme}>
-                    <Root initialPageData={pageData} />
-                </Providers>
-            );
-        
-            return;
+            resetStyles()
         }
 
         if (!rootContainer) {
             throw new Error("Can't find Options root element")
         }
-
+        
         history.replaceState({ ...pageData }, "", currentUrl.toString())
-
+        
+        const styleElements = document.querySelectorAll('style, link[rel="stylesheet"]');
+        styleElements.forEach(el => el.remove()); // remove initial style
+        
         const root = createRoot(rootContainer)
-
         rootContainer.setAttribute("id", "__better_studres_theme_root")
-
-        resetFolderStyles()
+        
+        resetStyles()
         addHeadMeta()
         addHtmlLang()
         addDoctype()
@@ -140,17 +122,7 @@ async function initialize() {
 
 initialize()
 
-function resetRootStyles() {
-    const style = document.createElement("style")
-    style.textContent = `
-        html {
-            font-size: 16px !important;
-        }
-    `
-    document.head.appendChild(style)
-}
-
-function resetFolderStyles() {
+function resetStyles() {
     const style = document.createElement("style")
     style.textContent = `
         * {
