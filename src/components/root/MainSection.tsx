@@ -1,6 +1,7 @@
 import { getModuleEmoji } from '@src/features/contentEnhancers/emoji/modules';
 import { RootContent } from '@src/features/parser';
 import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
+import { QuickLinkContainer } from '@src/features/quickLinks/components';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
 import React from 'react';
 
@@ -29,7 +30,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
       }
 
       moduleElements.push(
-        <div key={index} className="flex justify-center items-center">
+        <QuickLinkContainer>
           <QuickLinkLink
             quickLink={{
               href: module.url,
@@ -38,7 +39,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
               name: module.code,
             }}
           />
-        </div>
+        </QuickLinkContainer>
       );
     }
 
@@ -57,7 +58,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
     "
     >
       <h3 className="text-xl font-semibold">Postgraduate research students</h3>
-      <div className='flex flex-wrap'>
+      <QuickLinkContainer>
         <QuickLinkLink
           quickLink={{
             href: 'https://studres.cs.st-andrews.ac.uk/PGR',
@@ -66,14 +67,15 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
             name: 'Materials relevant to PGR students',
           }}
         />
-      </div>
+      </QuickLinkContainer>
+
 
       <h3 className="text-xl font-semibold mt-4">Taught students</h3>
       <p>Materials relevant to students on taught programmes.</p>
 
       <div className="grid grid-cols-6 gap-4 mt-4">
         {content.taught_students.map((module, index) => (
-          <div key={index} className="flex justify-center items-center">
+          <QuickLinkContainer>
             <QuickLinkLink
               quickLink={{
                 href: module.url,
@@ -82,12 +84,12 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
                 name: module.url.split('/').pop() || '',
               }}
             />
-          </div>
+          </QuickLinkContainer>
         ))}
       </div>
 
       <h3 className="text-xl font-semibold mt-4">Studres Wiki</h3>
-      <div className='flex flex-wrap'>
+      <QuickLinkContainer>
         <QuickLinkLink
           quickLink={{
             href: 'https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes',
@@ -96,7 +98,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
             name: 'More about Student Resources',
           }}
         />
-      </div>
+      </QuickLinkContainer>
 
       <h2 className="text-2xl font-semibold mt-8">Modules</h2>
 
