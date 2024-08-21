@@ -3,12 +3,12 @@ import CompactLayout from "@src/components/layouts/CompactLayout";
 import MainLayout from "@src/components/layouts/MainLayout";
 import WideLayout from "@src/components/layouts/WideLayout";
 import MainSection from "@src/components/root/MainSection";
+import H1 from "@src/components/typography/H1";
 import { ThemeToggle } from "@src/components/ui/theme-toggle";
 import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent";
 import CommandInput from "@src/features/command/CommandInput";
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount";
 import { ConfigContext } from "@src/features/config";
-import RootHeader from "@src/features/header/RootHeader";
 import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs";
 import { RootContent } from "@src/features/parser";
 import { AddQuickLinkButton, QuickLinkContainer, QuickLinkList } from "@src/features/quickLinks/components";
@@ -38,7 +38,7 @@ export function RootPage({ content }: RootProps) {
             <MainLayout>
                 <CompactLayout>
                     <div className="grid grid-cols-[1fr_max-content]">
-                        <RootHeader />
+                        <H1>Student Resources</H1>
                         <ThemeToggle />
                     </div>
                     <SubheaderBreadcrumbs />
