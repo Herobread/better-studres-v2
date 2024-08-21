@@ -2,7 +2,7 @@ import NiceModal from "@ebay/nice-modal-react";
 import CompactLayout from "@src/components/layouts/CompactLayout";
 import MainLayout from "@src/components/layouts/MainLayout";
 import WideLayout from "@src/components/layouts/WideLayout";
-import MainSection from "@src/components/root/MainSection";
+import MainSection from "@src/features/root/MainSection";
 import H1 from "@src/components/typography/H1";
 import { ThemeToggle } from "@src/components/ui/theme-toggle";
 import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent";
