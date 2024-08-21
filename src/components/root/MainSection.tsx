@@ -3,13 +3,12 @@ import { RootContent } from '@src/features/parser';
 import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
 import { QuickLinkContainer } from '@src/features/quickLinks/components';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
-import React from 'react';
 
 interface MainSectionProps {
   content: RootContent;
 }
 
-const MainSection: React.FC<MainSectionProps> = ({ content }) => {
+export function MainSection({ content }: MainSectionProps) {
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
@@ -30,7 +29,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
       }
 
       moduleElements.push(
-        <QuickLinkContainer>
+        <QuickLinkContainer key={index}>
           <QuickLinkLink
             quickLink={{
               href: module.url,
@@ -75,7 +74,7 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
 
       <div className="grid grid-cols-6 gap-4 mt-4">
         {content.taught_students.map((module, index) => (
-          <QuickLinkContainer>
+          <QuickLinkContainer key={index}>
             <QuickLinkLink
               quickLink={{
                 href: module.url,
@@ -107,6 +106,6 @@ const MainSection: React.FC<MainSectionProps> = ({ content }) => {
       </div>
     </div>
   );
-};
+}
 
 export default MainSection;
