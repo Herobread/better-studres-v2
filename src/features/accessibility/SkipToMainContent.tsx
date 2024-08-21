@@ -8,6 +8,7 @@ export function SkipToMainContent() {
             onClick={handleSkip}
             className="sr-only focus:not-sr-only"
         >
+            Skip to main content
         </button>
     )
 }
