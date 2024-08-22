@@ -9,6 +9,10 @@ interface MainSectionProps {
 }
 
 export function MainSection({ content }: MainSectionProps) {
+  const ensureTrailingSlash = (url: string) => {
+    return url.endsWith('/') ? url : `${url}/`;
+  };
+
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
@@ -32,7 +36,7 @@ export function MainSection({ content }: MainSectionProps) {
         <QuickLinkContainer key={index}>
           <QuickLinkLink
             quickLink={{
-              href: module.url,
+              href: ensureTrailingSlash(module.url),
               icon: getModuleEmoji(module.code),
               id: index,
               name: module.code,
@@ -60,7 +64,7 @@ export function MainSection({ content }: MainSectionProps) {
       <QuickLinkContainer>
         <QuickLinkLink
           quickLink={{
-            href: 'https://studres.cs.st-andrews.ac.uk/PGR',
+            href: ensureTrailingSlash('https://studres.cs.st-andrews.ac.uk/PGR'),
             icon: getModuleEmoji('Materials_relevant_to_PGR_students'),
             id: 0,
             name: 'Materials relevant to PGR students',
@@ -77,7 +81,7 @@ export function MainSection({ content }: MainSectionProps) {
           <QuickLinkContainer key={index}>
             <QuickLinkLink
               quickLink={{
-                href: module.url,
+                href: ensureTrailingSlash(module.url),
                 icon: getModuleEmoji(module.url.split('/').pop() || ''),
                 id: index,
                 name: module.url.split('/').pop() || '',
@@ -91,7 +95,7 @@ export function MainSection({ content }: MainSectionProps) {
       <QuickLinkContainer>
         <QuickLinkLink
           quickLink={{
-            href: 'https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes',
+            href: ensureTrailingSlash('https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes'),
             icon: getModuleEmoji('More_about_Student_Resources'),
             id: 0,
             name: 'More about Student Resources',
