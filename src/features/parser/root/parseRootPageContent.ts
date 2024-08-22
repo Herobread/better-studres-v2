@@ -23,33 +23,50 @@ export function parseRootPage(content: HTMLElement): {
 }
 
 /**
- * Extracts the links related to taught students from the specific <p> element.
+ * Extracts the links related to taught students from the specific section.
  * @param {HTMLElement} content - The content of the page to parse.
  * @returns {ModuleContent[]} An array of ModuleContent objects representing the links and their labels.
  */
 export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[] {
     const modules: ModuleContent[] = [];
+    
+    // Find the heading or element that contains "Taught students"
+    const taughtStudentsHeader = Array.from(content.querySelectorAll('h2, h3, p'))
+        .find(el => el.textContent?.toLowerCase().includes("taught students"));
+    
+    if (taughtStudentsHeader) {
+        // The next paragraph or block might contain the relevant links
+        let currentElement = taughtStudentsHeader.nextElementSibling;
 
-    const linkContainer = content.querySelector('p a[href*="studres.cs.st-andrews.ac.uk/Teaching/"]')?.parentElement;
+        // Continue iterating through sibling elements until we find the links
+        while (currentElement) {
+            const links = currentElement.querySelectorAll('a');
 
-    if (linkContainer) {
-        const links = linkContainer.querySelectorAll('a');
-
-        links.forEach(link => {
-            const moduleCode = link.textContent?.trim() || "";
-            const moduleUrl = link.href || "";
-            if (moduleCode && moduleUrl) {
-                modules.push({
-                    code: moduleCode,
-                    url: moduleUrl
+            if (links.length > 0) {
+                links.forEach(link => {
+                    const moduleCode = link.textContent?.trim() || "";
+                    const moduleUrl = link.href || "";
+                    if (moduleCode && moduleUrl) {
+                        modules.push({
+                            code: moduleCode,
+                            url: moduleUrl
+                        });
+                    }
                 });
             }
-        });
+
+            // If we find links, we assume this is the correct block and can stop
+            if (modules.length > 0) {
+                break;
+            }
+
+            // Move to the next sibling element
+            currentElement = currentElement.nextElementSibling;
+        }
     }
 
     return modules;
 }
-
 /**
  * Extracts the modules and their URLs from the section after the "Modules" header.
  * @param {HTMLElement} content - The content of the page to parse.
