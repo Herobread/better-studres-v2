@@ -55,7 +55,7 @@ export function MainSection({ content }: MainSectionProps) {
       data-[direction=left][data-state=open]:slide-in-from-left-10
       data-[direction=right][data-state=open]:slide-in-from-right-10
       data-[direction=top][data-state=open]:slide-in-from-top-10
-    "
+      space-y-8"
     >
       <h3 className="text-xl font-semibold">Postgraduate research students</h3>
       <QuickLinkContainer>
@@ -69,41 +69,46 @@ export function MainSection({ content }: MainSectionProps) {
         />
       </QuickLinkContainer>
 
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold">Taught students</h3>
+        <p>Materials relevant to students on taught programmes.</p>
 
-      <h3 className="text-xl font-semibold mt-4">Taught students</h3>
-      <p>Materials relevant to students on taught programmes.</p>
-
-      <div className="grid grid-cols-6 gap-4 mt-4">
-        {content.taught_students.map((module, index) => (
-          <QuickLinkContainer key={index}>
-            <QuickLinkLink
-              quickLink={{
-                href: module.url,
-                icon: getModuleEmoji(module.url.split('/').pop() || ''),
-                id: index,
-                name: module.code,
-              }}
-            />
-          </QuickLinkContainer>
-        ))}
+        <div className="grid grid-cols-6 gap-4">
+          {content.taught_students.map((module, index) => (
+            <QuickLinkContainer key={index}>
+              <QuickLinkLink
+                quickLink={{
+                  href: module.url,
+                  icon: getModuleEmoji(module.url.split('/').pop() || ''),
+                  id: index,
+                  name: module.code,
+                }}
+              />
+            </QuickLinkContainer>
+          ))}
+        </div>
       </div>
 
-      <h3 className="text-xl font-semibold mt-4">Studres Wiki</h3>
-      <QuickLinkContainer>
-        <QuickLinkLink
-          quickLink={{
-            href: ensureTrailingSlash('https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes'),
-            icon: getModuleEmoji('More_about_Student_Resources'),
-            id: 0,
-            name: 'More about Student Resources',
-          }}
-        />
-      </QuickLinkContainer>
+      <div className="space-y-4">
+        <h3 className="text-xl font-semibold">Studres Wiki</h3>
+        <QuickLinkContainer>
+          <QuickLinkLink
+            quickLink={{
+              href: ensureTrailingSlash('https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes'),
+              icon: getModuleEmoji('More_about_Student_Resources'),
+              id: 0,
+              name: 'More about Student Resources',
+            }}
+          />
+        </QuickLinkContainer>
+      </div>
 
-      <h2 className="text-2xl font-semibold mt-8">Modules</h2>
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">Modules</h2>
 
-      <div className="grid grid-cols-6 gap-4 mt-4">
-        {renderModules(content.modules)}
+        <div className="grid grid-cols-6 gap-4">
+          {renderModules(content.modules)}
+        </div>
       </div>
     </div>
   );
