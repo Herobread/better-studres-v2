@@ -10,9 +10,10 @@ interface MainSectionProps {
   content: RootContent;
 }
 
-export function MainSection({ content }: MainSectionProps) {
-  const { isLoading } = useContext(PageStateContext)
-  const state = isLoading ? "closed" : "open"
+export default function MainSection({ content }: MainSectionProps) {
+  const { isLoading } = useContext(PageStateContext);
+  const state = isLoading ? "closed" : "open";
+
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
@@ -29,20 +30,20 @@ export function MainSection({ content }: MainSectionProps) {
       previousThirdChar = currentThirdChar;
 
       if (shouldBreak) {
-        moduleElements.push(<div className="col-span-full" key={`break-${index}`} />);
+        // Ensure that the break div creates some spacing
+        moduleElements.push(<div className="w-full my-2" key={`break-${index}`} />);
       }
 
       moduleElements.push(
-        <QuickLinkContainer key={index}>
-          <QuickLinkLink
-            quickLink={{
-              href: module.url,
-              icon: getModuleEmoji(module.code),
-              id: index,
-              name: module.code,
-            }}
-          />
-        </QuickLinkContainer>
+        <QuickLinkLink
+          key={index}  
+          quickLink={{
+            href: module.url,
+            icon: getModuleEmoji(module.code),
+            id: index,
+            name: module.code,
+          }}
+        />
       );
     }
 
@@ -53,13 +54,13 @@ export function MainSection({ content }: MainSectionProps) {
     <div
       data-state={state}
       className="
-      data-[state=open]:animate-in data-[state=closed]:animate-out 
-      data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
-      data-[direction=bottom][data-state=open]:slide-in-from-bottom-10 
-      data-[direction=left][data-state=open]:slide-in-from-left-10
-      data-[direction=right][data-state=open]:slide-in-from-right-10
-      data-[direction=top][data-state=open]:slide-in-from-top-10
-      space-y-8"
+        data-[state=open]:animate-in data-[state=closed]:animate-out 
+        data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
+        data-[direction=bottom][data-state=open]:slide-in-from-bottom-10 
+        data-[direction=left][data-state=open]:slide-in-from-left-10
+        data-[direction=right][data-state=open]:slide-in-from-right-10
+        data-[direction=top][data-state=open]:slide-in-from-top-10
+        space-y-8"
     >
       <h3 className="text-xl font-semibold">Postgraduate research students</h3>
       <QuickLinkContainer>
@@ -77,10 +78,11 @@ export function MainSection({ content }: MainSectionProps) {
         <h3 className="text-xl font-semibold">Taught students</h3>
         <p>Materials relevant to students on taught programmes.</p>
 
-        <div className="grid grid-cols-6 gap-4">
-          {content.taught_students.map((module, index) => (
-            <QuickLinkContainer key={index}>
+        <div className="flex gap-4">
+          <QuickLinkContainer>
+            {content.taught_students.map((module, index) => (
               <QuickLinkLink
+                key={index}  // Add a key to the QuickLinkLink component
                 quickLink={{
                   href: module.url,
                   icon: getModuleEmoji(module.url.split('/').pop() || ''),
@@ -88,8 +90,8 @@ export function MainSection({ content }: MainSectionProps) {
                   name: module.code,
                 }}
               />
-            </QuickLinkContainer>
-          ))}
+            ))}
+          </QuickLinkContainer>
         </div>
       </div>
 
@@ -109,13 +111,10 @@ export function MainSection({ content }: MainSectionProps) {
 
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Modules</h2>
-
-        <div className="grid grid-cols-6 gap-4">
+        <QuickLinkContainer>  {/* Use a grid layout */}
           {renderModules(content.modules)}
-        </div>
+        </QuickLinkContainer>
       </div>
     </div>
   );
 }
-
-export default MainSection;
