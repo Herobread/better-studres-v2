@@ -1,6 +1,6 @@
 import { getModuleEmoji } from '@src/features/contentEnhancers/emoji/modules';
 import { RootContent } from '@src/features/parser';
-import { ModuleContent } from '@src/features/parser/root/parseRootPageContent';
+import { ModuleContent, ensureTrailingSlash } from '@src/features/parser/root/parseRootPageContent';
 import { QuickLinkContainer } from '@src/features/quickLinks/components';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
 
@@ -9,9 +9,6 @@ interface MainSectionProps {
 }
 
 export function MainSection({ content }: MainSectionProps) {
-  const ensureTrailingSlash = (url: string) => {
-    return url.endsWith('/') ? url : `${url}/`;
-  };
 
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
@@ -36,7 +33,7 @@ export function MainSection({ content }: MainSectionProps) {
         <QuickLinkContainer key={index}>
           <QuickLinkLink
             quickLink={{
-              href: ensureTrailingSlash(module.url),
+              href: module.url,
               icon: getModuleEmoji(module.code),
               id: index,
               name: module.code,
@@ -81,10 +78,10 @@ export function MainSection({ content }: MainSectionProps) {
           <QuickLinkContainer key={index}>
             <QuickLinkLink
               quickLink={{
-                href: ensureTrailingSlash(module.url),
+                href: module.url,
                 icon: getModuleEmoji(module.url.split('/').pop() || ''),
                 id: index,
-                name: module.url.split('/').pop() || '',
+                name: module.code,
               }}
             />
           </QuickLinkContainer>
