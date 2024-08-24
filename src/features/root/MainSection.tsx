@@ -3,13 +3,16 @@ import { RootContent } from '@src/features/parser';
 import { ModuleContent, ensureTrailingSlash } from '@src/features/parser/root/parseRootPageContent';
 import { QuickLinkContainer } from '@src/features/quickLinks/components';
 import { QuickLinkLink } from '@src/features/quickLinks/components/quickLink/QuickLinkLink';
+import { useContext } from 'react';
+import { PageStateContext } from '../router/PageStateContext';
 
 interface MainSectionProps {
   content: RootContent;
 }
 
 export function MainSection({ content }: MainSectionProps) {
-
+  const { isLoading } = useContext(PageStateContext)
+  const state = isLoading ? "closed" : "open"
   const renderModules = (modules: ModuleContent[]) => {
     let previousPrefix = '';
     let previousThirdChar = '';
@@ -48,6 +51,7 @@ export function MainSection({ content }: MainSectionProps) {
 
   return (
     <div
+      data-state={state}
       className="
       data-[state=open]:animate-in data-[state=closed]:animate-out 
       data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 
