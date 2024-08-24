@@ -4,6 +4,13 @@ export interface ModuleContent {
 }
 
 /**
+ * Ensures the URL has a trailing slash.
+ * @param {string} url - The URL to modify.
+ * @returns {string} The modified URL with a trailing slash.
+ */
+export const ensureTrailingSlash = (url: string) => url.endsWith('/') ? url : `${url}/`;
+
+/**
  * Main function that orchestrates the parsing of the root page.
  * It delegates the extraction of taught students' links and modules to other functions.
  * @param {HTMLElement} content - The content of the root page to parse.
@@ -45,7 +52,7 @@ export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[
             if (links.length > 0) {
                 links.forEach(link => {
                     const moduleCode = link.textContent?.trim() || "";
-                    const moduleUrl = link.href || "";
+                    const moduleUrl = ensureTrailingSlash(link.href)
                     if (moduleCode && moduleUrl) {
                         modules.push({
                             code: moduleCode,
@@ -67,6 +74,7 @@ export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[
 
     return modules;
 }
+
 /**
  * Extracts the modules and their URLs from the section after the "Modules" header.
  * @param {HTMLElement} content - The content of the page to parse.
@@ -85,7 +93,7 @@ export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
 
             links.forEach(link => {
                 const moduleCode = link.textContent?.trim();
-                const moduleUrl = link.href || "";
+                const moduleUrl = ensureTrailingSlash(link.href || "");
 
                 if (moduleCode && moduleUrl) {
                     modules.push({
