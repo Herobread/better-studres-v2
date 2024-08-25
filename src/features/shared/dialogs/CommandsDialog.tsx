@@ -27,10 +27,11 @@ import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
 } from "@src/features/quickLinks"
-import { redirect } from "@src/features/router"
+import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import { useQuery } from "@tanstack/react-query"
 
 export default NiceModal.create(() => {
+    const { navigateToPage } = useSmoothRouter()
     const modalHandler = useModal()
 
     const { data: commandsData } = useQuery({
@@ -52,15 +53,18 @@ export default NiceModal.create(() => {
     const handleGoToParent = () => {
         currentUrlSegments.pop()
 
-        redirect(convertUrlSegmentsToUrl(currentUrlSegments), "userClick")
+        navigateToPage(convertUrlSegmentsToUrl(currentUrlSegments))
+        modalHandler.hide()
     }
 
     const handleGoToModuleRoot = () => {
-        redirect(convertUrlSegmentsToUrl([currentUrlSegments[0]]))
+        navigateToPage(convertUrlSegmentsToUrl([currentUrlSegments[0]]))
+        modalHandler.hide()
     }
 
     const handleGoToRoot = () => {
-        redirect(BASE_URL)
+        navigateToPage(BASE_URL)
+        modalHandler.hide()
     }
 
     return (
@@ -93,7 +97,8 @@ export default NiceModal.create(() => {
                                 <CommandItem
                                     key={id}
                                     onSelect={() => {
-                                        redirect(href, "userClick")
+                                        navigateToPage(href)
+                                        modalHandler.hide();
                                     }}
                                 >
                                     {icon} {name}
@@ -119,7 +124,8 @@ export default NiceModal.create(() => {
                                     keywords={[item.href, ...item.tags]}
                                     key={urlSegmentsString}
                                     onSelect={() => {
-                                        redirect(item.href, "userClick")
+                                        navigateToPage(item.href)
+                                        modalHandler.hide()
                                     }}
                                     className="grid gap-1"
                                 >
