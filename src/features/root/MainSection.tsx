@@ -21,58 +21,28 @@ export default function MainSection({ content }: MainSectionProps) {
         return <MainSectionSkeleton />
     }
 
-    const renderModules = (modules: ModuleContent[]) => {
-        let previousPrefix = ""
-        let previousThirdChar = ""
-        const moduleElements: JSX.Element[] = []
+    const renderModules = (modulesGroups: ModuleContent[][]) => {
+        return modulesGroups.map((modules, groupIndex) => (
+            <QuickLinkContainer key={groupIndex}>
+                {modules.map((module, index) => (
+                    <QuickLinkLink
+                        key={index}
+                        quickLink={{
+                            href: module.url,
+                            icon: getModuleEmoji(module.code),
+                            id: index,
+                            name: module.code,
+                        }}
+                    />
+                ))}
 
-        for (let index = 0; index < modules.length; index++) {
-            const module = modules[index]
-            const currentPrefix = module.code.slice(0, 2)
-            const currentThirdChar = module.code.charAt(2)
-
-            const shouldBreak =
-                index !== 0 &&
-                (currentPrefix !== previousPrefix ||
-                    currentThirdChar !== previousThirdChar)
-
-            previousPrefix = currentPrefix
-            previousThirdChar = currentThirdChar
-
-            if (shouldBreak) {
-                // Ensure that the break div creates some spacing
-                moduleElements.push(
-                    <div className="my-2 w-full" key={`break-${index}`} />
-                )
-            }
-
-            moduleElements.push(
-                <QuickLinkLink
-                    key={index}
-                    quickLink={{
-                        href: module.url,
-                        icon: getModuleEmoji(module.code),
-                        id: index,
-                        name: module.code,
-                    }}
-                />
-            )
-        }
-
-        return moduleElements
+                <div className="my-2 w-full"></div>
+            </QuickLinkContainer>
+        ))
     }
 
     return (
-        <div
-            className="
-        space-y-8 data-[state=open]:animate-in 
-        data-[state=closed]:animate-out data-[state=closed]:fade-out-0 
-        data-[state=open]:fade-in-0 
-        data-[direction=bottom][data-state=open]:slide-in-from-bottom-10
-        data-[direction=left][data-state=open]:slide-in-from-left-10
-        data-[direction=right][data-state=open]:slide-in-from-right-10
-        data-[direction=top][data-state=open]:slide-in-from-top-10"
-        >
+        <div className="space-y-8">
             <h3 className="text-xl font-semibold">
                 Postgraduate research students
             </h3>
@@ -99,7 +69,7 @@ export default function MainSection({ content }: MainSectionProps) {
                     <QuickLinkContainer>
                         {content.taught_students.map((module, index) => (
                             <QuickLinkLink
-                                key={index} // Add a key to the QuickLinkLink component
+                                key={index}
                                 quickLink={{
                                     href: module.url,
                                     icon: getModuleEmoji(
@@ -116,11 +86,8 @@ export default function MainSection({ content }: MainSectionProps) {
 
             <div className="space-y-4">
                 <h2 className="text-2xl font-semibold">Modules</h2>
-                <QuickLinkContainer>
-                    {" "}
-                    {/* Use a grid layout */}
-                    {renderModules(content.modules)}
-                </QuickLinkContainer>
+
+                {renderModules(content.modules)}
             </div>
         </div>
     )

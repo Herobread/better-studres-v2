@@ -30,7 +30,7 @@ export interface NotFoundPageData extends BasePageData {
 }
 
 export interface RootContent{
-    modules: ModuleContent[]
+    modules: ModuleContent[][]
     taught_students: ModuleContent[]
 }
 
