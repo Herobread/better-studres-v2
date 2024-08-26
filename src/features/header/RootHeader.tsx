@@ -1,25 +1,31 @@
 import H1 from "@src/components/typography/H1"
-import { ThemeToggle } from "@src/components/ui/theme-toggle"
+import StudresIcon from "@src/components/ui/icons/StudresIcon"
+import StudresDarkIcon from "@src/components/ui/icons/StudresDarkIcon"
 import SubheaderBreadcrumbs from "./SubheaderBreadCrumbs"
 import Link from "../router/Link"
+import { useTheme } from "../theme"
 
 export default function ModuleHeader() {
+    const { actualTheme } = useTheme()
+
     return (
-        <div>
-            <H1>Student Resources</H1>
-            <div className="space-y-4">
-                <SubheaderBreadcrumbs />
-                <p>
-                    Student Resources (StudRes) is a repository of teaching
-                    materials, principally for students enrolled on Computer
-                    Science modules. Staff may add or remove items to this
-                    library; students may read, copy or download them.
-                </p>
-                <div className="underline">
-                    <Link href="https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes">
-                        More about Student Resources
-                    </Link>
-                </div>
+        <div className="space-y-4">
+            <div className="flex items-baseline space-x-4">
+                {actualTheme === "dark" ? <StudresDarkIcon /> : <StudresIcon />}
+                <H1>Student Resources</H1>
+            </div>
+
+            <SubheaderBreadcrumbs />
+            <p>
+                Student Resources (StudRes) is a repository of teaching
+                materials, principally for students enrolled on Computer Science
+                modules. Staff may add or remove items to this library; students
+                may read, copy or download them.
+            </p>
+            <div className="underline">
+                <Link href="https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes">
+                    More about Student Resources
+                </Link>
             </div>
         </div>
     )
