@@ -17,11 +17,11 @@ export const ensureTrailingSlash = (url: string) => url.endsWith('/') ? url : `$
  * @returns {object} An object containing arrays of ModuleContent for modules and taught students.
  */
 export function parseRootPage(content: HTMLElement): {
-    modules: ModuleContent[],
+    modules: ModuleContent[][],
     taught_students: ModuleContent[]
 } {
-    const taught_students = extractTaughtStudentsLinks(content);
-    const modules = extractModulesLinks(content);
+    const taught_students = extractTaughtStudentsLinks(content);  // No grouping here
+    const modules = extractModulesLinks(content);  // Grouping applied
 
     return {
         modules: modules,
@@ -80,8 +80,9 @@ export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[
  * @param {HTMLElement} content - The content of the page to parse.
  * @returns {ModuleContent[]} An array of ModuleContent objects representing modules and their URLs.
  */
-export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
-    const modules: ModuleContent[] = [];
+export function extractModulesLinks(content: HTMLElement): ModuleContent[][] {
+    const groupedModules: ModuleContent[][] = [];
+    let currentGroup: ModuleContent[] = [];
 
     const modulesHeader = Array.from(content.querySelectorAll('h2')).find(h2 => h2.textContent === 'Modules');
 
@@ -96,16 +97,33 @@ export function extractModulesLinks(content: HTMLElement): ModuleContent[] {
                 const moduleUrl = ensureTrailingSlash(link.href || "");
 
                 if (moduleCode && moduleUrl) {
-                    modules.push({
+                    const module: ModuleContent = {
                         code: moduleCode,
                         url: moduleUrl
-                    });
+                    };
+
+                    // Apply grouping logic for modules
+                    if (currentGroup.length > 0 && shouldBreakGroup(currentGroup[currentGroup.length - 1], module)) {
+                        groupedModules.push(currentGroup);
+                        currentGroup = [];
+                    }
+
+                    currentGroup.push(module);
                 }
             });
 
             nextElement = nextElement.nextElementSibling;
         }
+
+        if (currentGroup.length > 0) {
+            groupedModules.push(currentGroup);
+        }
     }
 
-    return modules;
+    return groupedModules;
+}
+
+function shouldBreakGroup(prevModule: ModuleContent, currentModule: ModuleContent): boolean {
+    return prevModule.code.slice(0, 2) !== currentModule.code.slice(0, 2) ||
+           prevModule.code.charAt(2) !== currentModule.code.charAt(2);
 }
