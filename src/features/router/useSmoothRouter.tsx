@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react"
 
-import { PageData, parsePageContent } from "@src/features/parser"
+import { PageData, PageType, parsePageContent } from "@src/features/parser"
 import { redirect } from "@src/features/router/"
 import { checkIsUrlBlackListed } from "../extensionToggle/blacklist"
 import { parseDocumentFromText } from "../fileDownload/parseDocumentFromText"
@@ -9,14 +9,28 @@ import { PageStateContext } from "./PageStateContext"
 const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
 
+    const isSmoothNavigationSupported = (pageType: PageType) => {
+        if (pageType === "file") {
+            return true
+        }
+
+        return false
+    }
+
     const navigateToPage = useCallback(
-        async (href: string, state?: PageData) => {
+        async (href: string, newState?: PageData) => {
             try {
+                const currentPageState =
+                    (history.state as PageData) || undefined
+
                 setIsLoading(true)
 
                 const isBlackListed = await checkIsUrlBlackListed(href)
+                const isSupported = isSmoothNavigationSupported(
+                    currentPageState.type
+                )
 
-                if (isBlackListed) {
+                if (isBlackListed && !isSupported) {
                     setIsLoading(false)
                     redirect(href)
                     return
@@ -25,8 +39,8 @@ const useSmoothRouter = () => {
                 let pageData
                 let title = "Studres"
 
-                if (state) {
-                    pageData = state
+                if (newState) {
+                    pageData = newState
                 } else {
                     history.pushState(null, "", href)
 
@@ -35,6 +49,7 @@ const useSmoothRouter = () => {
                     const document = await parseDocumentFromText(htmlText)
 
                     pageData = parsePageContent(document.body)
+
                     title = document.title
 
                     history.replaceState({ ...pageData }, "", href)
