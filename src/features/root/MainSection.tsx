@@ -115,24 +115,6 @@ export default function MainSection({ content }: MainSectionProps) {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold">Studres Wiki</h3>
-                <QuickLinkContainer>
-                    <QuickLinkLink
-                        quickLink={{
-                            href: ensureTrailingSlash(
-                                "https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes"
-                            ),
-                            icon: getModuleEmoji(
-                                "More_about_Student_Resources"
-                            ),
-                            id: 0,
-                            name: "More about Student Resources",
-                        }}
-                    />
-                </QuickLinkContainer>
-            </div>
-
-            <div className="space-y-4">
                 <h2 className="text-2xl font-semibold">Modules</h2>
                 <QuickLinkContainer>
                     {" "}
