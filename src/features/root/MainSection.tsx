@@ -10,6 +10,7 @@ import { MainSectionSkeleton } from "@src/features/root/MainSectionSkeleton"
 import { useContext } from "react"
 import { PageStateContext } from "../router/PageStateContext"
 import Link from "../router/Link"
+import H3 from "@src/components/typography/H3"
 
 interface MainSectionProps {
     content: RootContent
@@ -44,9 +45,9 @@ export default function MainSection({ content }: MainSectionProps) {
 
     return (
         <div className="space-y-8">
-            <h3 className="text-xl font-semibold">
+            <H3>
                 Postgraduate research students
-            </h3>
+            </H3>
             <QuickLinkContainer>
                 <QuickLinkLink
                     quickLink={{
@@ -63,7 +64,7 @@ export default function MainSection({ content }: MainSectionProps) {
             </QuickLinkContainer>
 
             <div className="space-y-4">
-                <h3 className="text-xl font-semibold">Taught students</h3>
+                <H3>Taught students</H3>
                 <p>Materials relevant to students on taught programmes.</p>
 
                 <div className="flex gap-4">
@@ -86,20 +87,27 @@ export default function MainSection({ content }: MainSectionProps) {
             </div>
 
             <div className="space-y-4">
-                <h3 className="text-2xl font-semibold">Modules</h3>
+                <H3>Modules</H3>
                 {renderModules(content.modules)}
             </div>
             <div className="space-y-4">
-            <h3 className="text-2xl font-semibold">Sessions</h3>
+                <H3>Sessions</H3>
                 <QuickLinkContainer>
-                    <Link href="https://studres.cs.st-andrews.ac.uk/_this_session" className="no-underline hover:underline">
+                    <Link
+                        href="https://studres.cs.st-andrews.ac.uk/_this_session"
+                        className="no-underline hover:underline"
+                    >
                         This session
                     </Link>
                 </QuickLinkContainer>
 
                 <QuickLinkContainer>
                     {content.sessions.map((module, index) => (
-                        <Link key={index} href={module.url} className="no-underline hover:underline">
+                        <Link
+                            key={index}
+                            href={module.url}
+                            className="no-underline hover:underline"
+                        >
                             {module.code}
                         </Link>
                     ))}
