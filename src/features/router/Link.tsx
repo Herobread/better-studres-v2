@@ -5,6 +5,7 @@ import {
 } from "@src/features/router/PageStateContext"
 import { AnchorHTMLAttributes, MouseEvent, forwardRef, useContext } from "react"
 import useSmoothRouter from "./useSmoothRouter"
+import { BASE_URL, checkIfStringMatchesStringPatterns } from "../files"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -12,6 +13,12 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     isHard?: boolean
     transitionData?: TransitionData
 }
+
+const escapedBaseUrl = BASE_URL.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+
+const EXCLUDED_SMOOTH_NAVIGATION_HREF_PATTERNS = [
+    new RegExp(`^${escapedBaseUrl}.*\\.[^/]+$`, "i"),
+]
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
     const { href, isHard, target, onClick, transitionData } = props
@@ -35,6 +42,15 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
             return
         }
 
+        const isExcluded = checkIfStringMatchesStringPatterns(
+            href,
+            EXCLUDED_SMOOTH_NAVIGATION_HREF_PATTERNS
+        )
+        if (isExcluded) {
+            redirect(href, "userClick")
+            return
+        }
+        
         setTransitionData(transitionData)
 
         navigateToPage(href)
