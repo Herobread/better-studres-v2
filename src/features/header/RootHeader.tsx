@@ -1,11 +1,11 @@
 import H1 from "@src/components/typography/H1"
-import StudresIcon from "@src/components/ui/icons/StudresIcon"
+import StudresIcon from "@src/components/ui/icons/StudresLightIcon"
 import StudresDarkIcon from "@src/components/ui/icons/StudresDarkIcon"
 import SubheaderBreadcrumbs from "./SubheaderBreadCrumbs"
 import Link from "../router/Link"
 import { useTheme } from "../theme"
 
-export default function ModuleHeader() {
+export default function RootHeader() {
     const { actualTheme } = useTheme()
 
     return (
@@ -22,11 +22,13 @@ export default function ModuleHeader() {
                 modules. Staff may add or remove items to this library; students
                 may read, copy or download them.
             </p>
-            <div className="underline">
-                <Link href="https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes">
-                    More about Student Resources
-                </Link>
-            </div>
+
+            <Link
+                href="https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes"
+                className="underline"
+            >
+                More about Student Resources
+            </Link>
         </div>
     )
 }

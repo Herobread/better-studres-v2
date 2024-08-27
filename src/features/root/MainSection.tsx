@@ -38,7 +38,6 @@ export default function MainSection({ content }: MainSectionProps) {
                     />
                 ))}
 
-                <div className="my-2 w-full"></div>
             </QuickLinkContainer>
         ))
     }
@@ -48,6 +47,7 @@ export default function MainSection({ content }: MainSectionProps) {
             <H3>Postgraduate research students</H3>
             <QuickLinkContainer>
                 <QuickLinkLink
+                    id="main-content"
                     quickLink={{
                         href: ensureTrailingSlash(
                             "https://studres.cs.st-andrews.ac.uk/PGR"
@@ -67,7 +67,7 @@ export default function MainSection({ content }: MainSectionProps) {
 
                 <div className="flex gap-4">
                     <QuickLinkContainer>
-                        {content.taught_students.map((module, index) => (
+                        {content.taughtStudents.map((module, index) => (
                             <QuickLinkLink
                                 key={index}
                                 quickLink={{

@@ -32,12 +32,12 @@ export function RootPage({ content }: RootProps) {
     return (
         <div className="flex min-h-screen flex-col bg-background py-2 text-foreground">
             <CommandsShortcutMount />
+            <SkipToMainContent />
             {showCommandButton && (
                 <WideLayout>
                     <CommandInput onSelect={handleCommandActivation} />
                 </WideLayout>
             )}
-            <SkipToMainContent />
             <MainLayout>
                 <CompactLayout>
                     <div className="grid grid-cols-[1fr_max-content]">
