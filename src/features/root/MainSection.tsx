@@ -1,16 +1,14 @@
-import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
-import { RootContent } from "@src/features/parser"
-import {
-    ModuleContent,
-    ensureTrailingSlash,
-} from "@src/features/parser/root/parseRootPageContent"
-import { QuickLinkContainer } from "@src/features/quickLinks/components"
-import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
-import { MainSectionSkeleton } from "@src/features/root/MainSectionSkeleton"
 import { useContext } from "react"
 import { PageStateContext } from "../router/PageStateContext"
 import Link from "../router/Link"
 import H3 from "@src/components/typography/H3"
+import { QuickLinkContainer } from "@src/features/quickLinks/components"
+import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
+import { MainSectionSkeleton } from "@src/features/root/MainSectionSkeleton"
+import { RootContent } from "@src/features/parser"
+import { ensureTrailingSlash } from "@src/features/parser/root/parseRootPageContent"
+import MainSectionModules from "./MainSectionModules"
+import { getModuleEmoji } from "../contentEnhancers/emoji/modules"
 
 interface MainSectionProps {
     content: RootContent
@@ -21,25 +19,6 @@ export default function MainSection({ content }: MainSectionProps) {
 
     if (isLoading) {
         return <MainSectionSkeleton />
-    }
-
-    const renderModules = (modulesGroups: ModuleContent[][]) => {
-        return modulesGroups.map((modules, groupIndex) => (
-            <QuickLinkContainer key={groupIndex}>
-                {modules.map((module, index) => (
-                    <QuickLinkLink
-                        key={index}
-                        quickLink={{
-                            href: module.url,
-                            icon: getModuleEmoji(module.code),
-                            id: index,
-                            name: module.code,
-                        }}
-                    />
-                ))}
-
-            </QuickLinkContainer>
-        ))
     }
 
     return (
@@ -83,6 +62,7 @@ export default function MainSection({ content }: MainSectionProps) {
                     </QuickLinkContainer>
                 </div>
             </div>
+            
             <div className="space-y-4">
                 <H3>Miscellaneous</H3>
                 <QuickLinkContainer>
@@ -107,12 +87,11 @@ export default function MainSection({ content }: MainSectionProps) {
                     />{" "}
                     - Timetables for taught programmes.
                 </QuickLinkContainer>
-                
             </div>
-            <div className="space-y-4">
-                <H3>Modules</H3>
-                {renderModules(content.modules)}
-            </div>
+
+           
+            <MainSectionModules modulesGroups={content.modules} />
+
             <div className="space-y-4">
                 <H3>Sessions</H3>
                 <QuickLinkContainer>
