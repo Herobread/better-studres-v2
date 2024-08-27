@@ -45,9 +45,7 @@ export default function MainSection({ content }: MainSectionProps) {
 
     return (
         <div className="space-y-8">
-            <H3>
-                Postgraduate research students
-            </H3>
+            <H3>Postgraduate research students</H3>
             <QuickLinkContainer>
                 <QuickLinkLink
                     quickLink={{
@@ -85,7 +83,32 @@ export default function MainSection({ content }: MainSectionProps) {
                     </QuickLinkContainer>
                 </div>
             </div>
-
+            <div className="space-y-4">
+                <H3>Miscellaneous</H3>
+                <QuickLinkContainer>
+                    <QuickLinkLink
+                        quickLink={{
+                            href: "https://studres.cs.st-andrews.ac.uk/Library",
+                            icon: getModuleEmoji("library"),
+                            id: 0,
+                            name: "Library",
+                        }}
+                    />{" "}
+                    - Local copies of books, software, websites, etc.
+                </QuickLinkContainer>
+                <QuickLinkContainer>
+                    <QuickLinkLink
+                        quickLink={{
+                            href: "https://studres.cs.st-andrews.ac.uk/Timetables",
+                            icon: getModuleEmoji("timetables"),
+                            id: 0,
+                            name: "Timetables",
+                        }}
+                    />{" "}
+                    - Timetables for taught programmes.
+                </QuickLinkContainer>
+                
+            </div>
             <div className="space-y-4">
                 <H3>Modules</H3>
                 {renderModules(content.modules)}
