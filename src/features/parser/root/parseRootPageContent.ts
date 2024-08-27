@@ -18,14 +18,17 @@ export const ensureTrailingSlash = (url: string) => url.endsWith('/') ? url : `$
  */
 export function parseRootPage(content: HTMLElement): {
     modules: ModuleContent[][],
-    taught_students: ModuleContent[]
+    taught_students: ModuleContent[],
+    sessions: ModuleContent[]
 } {
-    const taught_students = extractTaughtStudentsLinks(content);  // No grouping here
-    const modules = extractModulesLinks(content);  // Grouping applied
+    const taught_students = extractTaughtStudentsLinks(content);
+    const modules = extractModulesLinks(content);  
+    const sessions = extractSessions(content);
 
     return {
         modules: modules,
-        taught_students: taught_students
+        taught_students: taught_students,
+        sessions: sessions
     };
 }
 
@@ -44,6 +47,46 @@ export function extractTaughtStudentsLinks(content: HTMLElement): ModuleContent[
     if (taughtStudentsHeader) {
         // The next paragraph or block might contain the relevant links
         let currentElement = taughtStudentsHeader.nextElementSibling;
+
+        // Continue iterating through sibling elements until we find the links
+        while (currentElement) {
+            const links = currentElement.querySelectorAll('a');
+
+            if (links.length > 0) {
+                links.forEach(link => {
+                    const moduleCode = link.textContent?.trim() || "";
+                    const moduleUrl = ensureTrailingSlash(link.href)
+                    if (moduleCode && moduleUrl) {
+                        modules.push({
+                            code: moduleCode,
+                            url: moduleUrl
+                        });
+                    }
+                });
+            }
+
+            // If we find links, we assume this is the correct block and can stop
+            if (modules.length > 0) {
+                break;
+            }
+
+            // Move to the next sibling element
+            currentElement = currentElement.nextElementSibling;
+        }
+    }
+
+    return modules;
+}
+
+export function extractSessions(content: HTMLElement): ModuleContent[] {
+    const modules: ModuleContent[] = [];
+    
+    const sessionHeader = Array.from(content.querySelectorAll('h2, h3, p'))
+        .find(el => el.textContent?.toLowerCase().includes("session"));
+    
+    if (sessionHeader) {
+        // The next paragraph or block might contain the relevant links
+        let currentElement = sessionHeader.nextElementSibling?.nextElementSibling;
 
         // Continue iterating through sibling elements until we find the links
         while (currentElement) {
