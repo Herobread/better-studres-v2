@@ -29,7 +29,7 @@ export interface NotFoundPageData extends BasePageData {
     type: "not found"
 }
 
-export interface RootContent{
+export interface RootContent {
     modules: ModuleContent[][]
     taughtStudents: ModuleContent[]
     sessions: ModuleContent[]
@@ -79,9 +79,9 @@ export function parsePageContent(content: HTMLElement): PageData {
             content: {
                 modules,
                 taughtStudents,
-                sessions
-            } 
-        } 
+                sessions,
+            },
+        }
     }
 
     if (isFilePage(content)) {

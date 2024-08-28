@@ -98,7 +98,7 @@ export default NiceModal.create(() => {
                                     key={id}
                                     onSelect={() => {
                                         navigateToPage(href)
-                                        modalHandler.hide();
+                                        modalHandler.hide()
                                     }}
                                 >
                                     {icon} {name}

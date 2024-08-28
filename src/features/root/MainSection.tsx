@@ -62,7 +62,7 @@ export default function MainSection({ content }: MainSectionProps) {
                     </QuickLinkContainer>
                 </div>
             </div>
-            
+
             <div className="space-y-4">
                 <H3>Miscellaneous</H3>
                 <QuickLinkContainer>
@@ -89,7 +89,6 @@ export default function MainSection({ content }: MainSectionProps) {
                 </QuickLinkContainer>
             </div>
 
-           
             <MainSectionModules modulesGroups={content.modules} />
 
             <div className="space-y-4">

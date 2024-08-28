@@ -50,7 +50,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
             redirect(href, "userClick")
             return
         }
-        
+
         setTransitionData(transitionData)
 
         navigateToPage(href)

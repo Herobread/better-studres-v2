@@ -74,15 +74,17 @@ async function initialize() {
         if (!rootContainer) {
             throw new Error("Can't find Options root element")
         }
-        
+
         history.replaceState({ ...pageData }, "", currentUrl.toString())
-        
-        const styleElements = document.querySelectorAll('style, link[rel="stylesheet"]');
-        styleElements.forEach(el => el.remove()); // remove initial style
-        
+
+        const styleElements = document.querySelectorAll(
+            'style, link[rel="stylesheet"]'
+        )
+        styleElements.forEach((el) => el.remove()) // remove initial style
+
         const root = createRoot(rootContainer)
         rootContainer.setAttribute("id", "__better_studres_theme_root")
-        
+
         resetStyles()
         addHeadMeta()
         addHtmlLang()

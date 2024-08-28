@@ -13,11 +13,11 @@ interface RootProps {
 export default function Root({ initialPageData }: RootProps) {
     const { pageData: contextPageData } = useContext(PageStateContext)
     const pageData = contextPageData || initialPageData
-    
+
     if (pageData.type === "not found") {
         return <NotFound />
     }
-    
+
     if (pageData.type === "file") {
         return <FilePreview content={pageData.content} />
     }
@@ -27,7 +27,7 @@ export default function Root({ initialPageData }: RootProps) {
     }
 
     if (pageData.type === "root") {
-        return <RootPage content={pageData.content}/>
+        return <RootPage content={pageData.content} />
     }
 
     location.reload()

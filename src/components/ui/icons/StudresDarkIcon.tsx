@@ -2,7 +2,7 @@ import React from "react"
 
 const StudresDarkIcon: React.FC = () => {
     return (
-        <div className="overflow-hidden -m-[2.75px]">
+        <div className="-m-[2.75px] overflow-hidden">
             <svg
                 width="32"
                 height="32"

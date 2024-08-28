@@ -3,7 +3,7 @@ import {
     scopedPreflightStyles,
 } from "tailwindcss-scoped-preflight"
 
-/ @type {import('tailwindcss').Config} */
+;/ @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ["class"],
     content: [

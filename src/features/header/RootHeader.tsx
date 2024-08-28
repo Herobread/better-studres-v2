@@ -1,9 +1,9 @@
 import H1 from "@src/components/typography/H1"
-import StudresIcon from "@src/components/ui/icons/StudresLightIcon"
 import StudresDarkIcon from "@src/components/ui/icons/StudresDarkIcon"
-import SubheaderBreadcrumbs from "./SubheaderBreadCrumbs"
+import StudresIcon from "@src/components/ui/icons/StudresLightIcon"
 import Link from "../router/Link"
 import { useTheme } from "../theme"
+import SubheaderBreadcrumbs from "./SubheaderBreadCrumbs"
 
 export default function RootHeader() {
     const { actualTheme } = useTheme()
