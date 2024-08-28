@@ -1,8 +1,6 @@
 import NiceModal from "@ebay/nice-modal-react"
-import CompactLayout from "@src/components/layouts/CompactLayout"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
-import { ThemeToggle } from "@src/components/ui/theme-toggle"
 import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent"
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
@@ -39,12 +37,7 @@ export function RootPage({ content }: RootProps) {
                 </WideLayout>
             )}
             <MainLayout>
-                <CompactLayout>
-                    <div className="grid grid-cols-[1fr_max-content]">
-                        <RootHeader />
-                        <ThemeToggle />
-                    </div>
-                </CompactLayout>
+                <RootHeader />
                 {showQuickLinks && (
                     <QuickLinkContainer>
                         <AddQuickLinkButton />
