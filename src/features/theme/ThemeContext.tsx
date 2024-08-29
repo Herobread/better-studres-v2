@@ -35,6 +35,18 @@ export function getCurrentTheme(theme: PreferredTheme): Theme {
 
 export const THEME_STORAGE_KEY = "vite-ui-theme"
 
+function applyTheme(theme: Theme) {
+    const root = window.document.getElementById("__better_studres_theme_root")
+
+    if (!root) {
+        return
+    }
+
+    root.classList.remove("light", "dark")
+    root.classList.add(theme)
+    root.style.colorScheme = theme
+}
+
 export function ThemeProvider({
     children,
     defaultTheme = "system",
@@ -54,36 +66,16 @@ export function ThemeProvider({
     })
 
     useEffect(() => {
-        const root = window.document.getElementById(
-            "__better_studres_theme_root"
-        )
-
-        if (!root) {
-            return
-        }
-
-        root.classList.remove("light", "dark")
-
         const appliedTheme = getCurrentTheme(theme)
-        root.classList.add(appliedTheme)
+        applyTheme(appliedTheme)
         setActualTheme(appliedTheme)
-        root.style.colorScheme = appliedTheme
     }, [theme])
 
     useEffect(() => {
         const onSystemThemeChange = (e: MediaQueryListEvent) => {
             const newTheme = e.matches ? "dark" : "light"
             setActualTheme(newTheme)
-
-            const root = window.document.getElementById(
-                "__better_studres_theme_root"
-            )
-
-            if (root) {
-                root.classList.remove("light", "dark")
-                root.classList.add(newTheme)
-                root.style.colorScheme = newTheme
-            }
+            applyTheme(newTheme)
         }
 
         const darkModeMediaQuery = window.matchMedia(
