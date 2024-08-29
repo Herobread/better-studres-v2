@@ -8,6 +8,10 @@ import { MODULE_EMOJI_MAP } from "./moduleEmojiMap"
 export function getModuleEmoji(moduleCode: string): string {
     const FALLBACK_EMOJI = "🖥"
 
+    if (isSpecialDay()) {
+        return "🧀"
+    }
+
     if (!moduleCode) {
         return FALLBACK_EMOJI
     }
@@ -15,4 +19,13 @@ export function getModuleEmoji(moduleCode: string): string {
     moduleCode = moduleCode.replaceAll("/", "")
 
     return MODULE_EMOJI_MAP[moduleCode] || FALLBACK_EMOJI
+}
+
+function isSpecialDay() {
+    const now = new Date()
+
+    const month = now.getMonth()
+    const day = now.getDate()
+
+    return day === 1 && month === 3
 }
