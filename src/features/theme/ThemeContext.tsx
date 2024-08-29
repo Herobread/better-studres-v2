@@ -70,6 +70,38 @@ export function ThemeProvider({
         root.style.colorScheme = appliedTheme
     }, [theme])
 
+    useEffect(() => {
+        const onSystemThemeChange = (e: MediaQueryListEvent) => {
+            const newTheme = e.matches ? "dark" : "light"
+            setActualTheme(newTheme)
+
+            const root = window.document.getElementById(
+                "__better_studres_theme_root"
+            )
+
+            if (root) {
+                root.classList.remove("light", "dark")
+                root.classList.add(newTheme)
+                root.style.colorScheme = newTheme
+            }
+        }
+
+        const darkModeMediaQuery = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        )
+
+        if (theme === "system") {
+            darkModeMediaQuery.addEventListener("change", onSystemThemeChange)
+        }
+
+        return () => {
+            darkModeMediaQuery.removeEventListener(
+                "change",
+                onSystemThemeChange
+            )
+        }
+    }, [theme])
+
     const value = {
         theme,
         setTheme: async (newTheme: PreferredTheme) => {
