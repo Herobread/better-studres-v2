@@ -21,6 +21,13 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
 
     return (
         <div className="box-sizing-unset _tailwind_preflight_reset">
+            <div
+                id="focusResetter"
+                tabIndex={-1}
+                className="absolute left-[-9999px] top-[-9999px]"
+            >
+                .
+            </div>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider
                     defaultTheme={"system"}

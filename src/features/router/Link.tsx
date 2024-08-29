@@ -4,8 +4,8 @@ import {
     TransitionData,
 } from "@src/features/router/PageStateContext"
 import { AnchorHTMLAttributes, MouseEvent, forwardRef, useContext } from "react"
-import useSmoothRouter from "./useSmoothRouter"
 import { BASE_URL, checkIfStringMatchesStringPatterns } from "../files"
+import useSmoothRouter from "./useSmoothRouter"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -52,8 +52,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
         }
 
         setTransitionData(transitionData)
-
         navigateToPage(href)
+        document.getElementById("focusResetter")?.focus()
     }
 
     return <a ref={ref} {...props} onClick={handleNavigation} />
