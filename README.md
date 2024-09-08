@@ -2,7 +2,9 @@
   <img width=100 src="https://github.com/user-attachments/assets/4be0f302-862d-4f13-87c2-0aa9c3f8275c" />
 </p>
 <h1 align="center">
-  Better StudRes v2
+  <a href='https://better-studres.netlify.app/'>
+    Better StudRes v2
+  </a>
 </h1>
 <p align="center">
 An open-source browser extension, that improves appearance of the <b>St Andrews Student Resources</b>, featuring a completely redesigned UI and UX, enhanced accessibility, and a range of new functionalities.
