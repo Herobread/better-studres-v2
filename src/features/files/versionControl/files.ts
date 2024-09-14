@@ -45,16 +45,18 @@ export async function getFormattedFilesListForCommand(): Promise<
         const moduleCode = urlSegments[0]
         const moduleEmoji = getModuleEmoji(moduleCode)
         let name = `${moduleEmoji} ${moduleCode}`
+        let href = BASE_URL + filePath
         if (urlSegments.length > 1) {
             // works for most of the folders
             const isFolder = !urlSegments[urlSegments.length - 1].includes(".")
             const folderChar = isFolder ? "/" : ""
+            href += folderChar
             const fileName = decodeURI(urlSegments[urlSegments.length - 1])
             const fileEmoji = getFileEmoji(fileName + folderChar)
             name += ` - ${fileEmoji} ${fileName}`
         }
         result.push({
-            href: BASE_URL + filePath,
+            href,
             name,
             tags: tagNames,
         })
