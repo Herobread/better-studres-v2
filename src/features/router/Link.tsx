@@ -37,7 +37,10 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
             return
         }
 
-        if (isHard || (target && target === "_blank")) {
+        const isCtrlPressed = e.ctrlKey
+        const isBlankTarget = target && target === "_blank"
+
+        if (isCtrlPressed || isHard || isBlankTarget) {
             redirect(href, "userClick", true)
             return
         }
