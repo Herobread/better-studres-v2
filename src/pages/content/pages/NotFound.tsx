@@ -71,11 +71,25 @@ export default function NotFound() {
                     <p className="text-muted-foreground">
                         Requested url was not found on the server.
                     </p>
-                        <p className="font-mono">
-                            {location.href.toString()}
-                        </p>{" "}
-                    <p className="text-muted-foreground">If the previous URL(it might not be shown in history) doesn&apos;t have a trailing slash, that could be the issue. Check for trailing slash at the end of the url as you navigate and add it if it is not there.</p>
-                    <p className="text-muted-foreground">If this doesn&apos;t resolve the problem, temporarily disable the extension and report the issue on <a href="https://github.com/Herobread/better-studres-v2" rel="noreferrer" target="_blank">GitHub</a>.</p>
+                    <p className="font-mono">{location.href.toString()}</p>{" "}
+                    <p className="text-muted-foreground">
+                        If the previous URL(it might not be shown in history)
+                        doesn&apos;t have a trailing slash, that could be the
+                        issue. Check for trailing slash at the end of the url as
+                        you navigate and add it if it is not there.
+                    </p>
+                    <p className="text-muted-foreground">
+                        If this doesn&apos;t resolve the problem, temporarily
+                        disable the extension and report the issue on{" "}
+                        <a
+                            href="https://github.com/Herobread/better-studres-v2"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            GitHub
+                        </a>
+                        .
+                    </p>
                 </CompactLayout>
                 <CompactLayout>
                     <p>
@@ -94,7 +108,7 @@ export default function NotFound() {
                         })}
                     </QuickLinkContainer>
                 </CompactLayout>
-                {showQuickLinks && quickLinks && (
+                {showQuickLinks && quickLinks && quickLinks?.length > 0 && (
                     <CompactLayout>
                         <p>Or your pinned links:</p>
                         <QuickLinkContainer>

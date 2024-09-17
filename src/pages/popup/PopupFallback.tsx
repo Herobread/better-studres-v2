@@ -1,4 +1,5 @@
 import pkg from "@src/../package.json"
+import { ConfigContext } from "@src/features/config"
 import {
     BASE_URL,
     MMS_BASE_URL,
@@ -15,12 +16,15 @@ import {
 } from "@src/features/quickLinks/components"
 import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
 import { useQuery } from "@tanstack/react-query"
+import { useContext } from "react"
 
 export default function PopupFallback() {
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
     })
+
+    const { showQuickLinks } = useContext(ConfigContext)
 
     return (
         <body className="_tailwind_preflight_reset h-min space-y-4 bg-background p-2 text-base text-foreground">
@@ -84,7 +88,7 @@ export default function PopupFallback() {
                     />
                 </QuickLinkContainer>
             </div>
-            {quickLinks && quickLinks?.length > 0 && (
+            {showQuickLinks && quickLinks && quickLinks?.length > 0 && (
                 <div className="space-y-1">
                     <p>Or your pinned links:</p>
                     <QuickLinkContainer>
