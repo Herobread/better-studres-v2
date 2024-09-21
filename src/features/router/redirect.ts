@@ -9,11 +9,7 @@ export function redirect(
     isBlank?: boolean
 ) {
     if (isBlank) {
-        if (typeof chrome?.tabs?.create === "function") {
-            chrome.tabs.create({ url: href })
-        } else {
-            window.open(href, "_blank")
-        }
+        window.open(href, "_blank")
 
         return
     }

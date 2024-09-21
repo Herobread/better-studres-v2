@@ -11,7 +11,7 @@
     "icons": {
         "128": "icon-128.png"
     },
-    "permissions": ["storage", "activeTab", "tabs"],
+    "permissions": ["storage", "activeTab"],
     "content_scripts": [
         {
             "matches": ["https://studres.cs.st-andrews.ac.uk/*"],
