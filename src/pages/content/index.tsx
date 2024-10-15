@@ -88,7 +88,6 @@ async function initialize() {
         resetStyles()
         addHeadMeta()
         addHtmlLang()
-        addDoctype()
 
         rootContainer.style.overflowY = "scroll" // show scroll bar
 
@@ -141,20 +140,6 @@ function addHeadMeta() {
     meta.content = "width=device-width, initial-scale=1"
 
     document.head.appendChild(meta)
-}
-
-function addDoctype() {
-    const newDoctype = document.implementation.createDocumentType(
-        "html",
-        "",
-        ""
-    )
-
-    if (document.doctype) {
-        document.doctype.parentNode?.replaceChild(newDoctype, document.doctype)
-    } else {
-        document.insertBefore(newDoctype, document.documentElement)
-    }
 }
 
 function addHtmlLang() {
