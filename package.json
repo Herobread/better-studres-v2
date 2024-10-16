@@ -1,6 +1,6 @@
 {
     "name": "better-studres",
-    "version": "2.9.2.2",
+    "version": "2.9.2.3",
     "description": "Improves appearance of the St Andrews student resources platform, featuring a completely redesigned UI and UX.",
     "license": "MIT",
     "repository": {
@@ -8,7 +8,7 @@
         "url": "https://github.com/Herobread/better-studres-v2"
     },
     "scripts": {
-        "build": "vite build",
+        "build": "vite build && bun vite/fixes/postBuildFixes.ts",
         "build:firefox": "cross-env BROWSER=firefox vite build",
         "dev": "nodemon",
         "dev:firefox": "cross-env BROWSER=firefox nodemon",
