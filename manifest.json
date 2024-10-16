@@ -23,5 +23,9 @@
             "resources": ["icon-128.png", "icon-32.png"],
             "matches": []
         }
-    ]
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';",
+        "content_scripts": "script-src 'self'; object-src 'self';"
+    }
 }
