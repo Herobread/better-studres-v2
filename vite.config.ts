@@ -9,7 +9,6 @@ import manifest from "./manifest.json"
 
 import pkg from "./package.json"
 import { stripDevIcons } from "./vite/plugins/stripDevIcons"
-import { viteManifestHackIssue846 } from "./vite/plugins/viteManifestHackIssue846"
 
 const root = resolve(__dirname, "src")
 const pagesDir = resolve(root, "pages")
@@ -37,15 +36,14 @@ export default defineConfig({
         },
     },
     plugins: [
-        viteManifestHackIssue846,
-        stripDevIcons(isDev),
-        react(),
         crx({
             manifest: extensionManifest as ManifestV3Export,
             contentScripts: {
                 injectCss: true,
             },
         }),
+        stripDevIcons(isDev),
+        react(),
     ],
     publicDir,
     build: {
