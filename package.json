@@ -8,7 +8,7 @@
         "url": "https://github.com/Herobread/better-studres-v2"
     },
     "scripts": {
-        "build": "vite build && bun vite/fixes/postBuildFixes.ts",
+        "build": "vite build",
         "build:firefox": "cross-env BROWSER=firefox vite build",
         "dev": "nodemon",
         "dev:firefox": "cross-env BROWSER=firefox nodemon",
@@ -55,7 +55,7 @@
         "zod": "^3.23.8"
     },
     "devDependencies": {
-        "@crxjs/vite-plugin": "^1.0.14",
+        "@crxjs/vite-plugin": "2.0.0-beta.26",
         "@tailwindcss/typography": "^0.5.13",
         "@tanstack/eslint-plugin-query": "^5.51.12",
         "@types/chrome": "^0.0.268",
