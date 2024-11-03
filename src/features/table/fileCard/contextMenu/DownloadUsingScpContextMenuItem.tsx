@@ -4,12 +4,10 @@ import DownloadUsingScpDialog from "@src/features/shared/dialogs/DownloadUsingSc
 import { CloudDownloadIcon } from "lucide-react"
 
 interface DownloadUsingScpContextMenuItemProps {
-    fileName: string
     fileKey: string
 }
 
 export default function DownloadUsingScpContextMenuItem({
-    fileName,
     fileKey,
 }: DownloadUsingScpContextMenuItemProps) {
     const handleCopySshCommand = async () => {

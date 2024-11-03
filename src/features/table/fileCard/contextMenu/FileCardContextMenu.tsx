@@ -70,10 +70,7 @@ const FileCardContextMenuContent = forwardRef<
                 isFolder={fileLink.isFolder}
                 fileName={fileLink.fullName}
             />
-            <DownloadUsingScpContextMenuItem
-                fileKey={fileLink.fileKey}
-                fileName={fileLink.fullName}
-            />
+            <DownloadUsingScpContextMenuItem fileKey={fileLink.fileKey} />
 
             <AddNoteContextMenuItem fileKey={fileLink.fileKey} />
 
