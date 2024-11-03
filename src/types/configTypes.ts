@@ -8,4 +8,5 @@ export interface ConfigTypes {
     imagePreviewOnHover: boolean
     showQuickLinks: boolean
     showCommandButton: boolean
+    username?: string
 }

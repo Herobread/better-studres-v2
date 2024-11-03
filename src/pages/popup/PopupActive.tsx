@@ -50,7 +50,7 @@ export default function PopupActive() {
     const isSubmitDisabled = !isDirty
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        await saveConfig(values)
+        await saveConfig({ ...config, ...values })
 
         reset(values)
     }
