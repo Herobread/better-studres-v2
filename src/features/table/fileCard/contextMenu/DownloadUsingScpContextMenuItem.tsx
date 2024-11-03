@@ -14,8 +14,6 @@ export default function DownloadUsingScpContextMenuItem({
         NiceModal.show(DownloadUsingScpDialog, { fileKey })
     }
 
-    // scp -r on6@on6.teaching.cs.st-andrews.ac.uk:/cs/studres/CS2003/Coursework/CS2003-C3-microblog/ Documents
-
     return (
         <ContextMenuItem onSelect={handleCopySshCommand}>
             <CloudDownloadIcon className="h-4 w-4" /> SSH download

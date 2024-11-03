@@ -20,16 +20,26 @@ import {
 import { Input } from "@src/components/ui/input"
 import { useToast } from "@src/components/ui/use-toast"
 import { CONFIG_FALLBACK, loadConfig, saveConfig } from "@src/features/config"
+import { getOs } from "@src/lib/utils"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 const formSchema = z.object({
-    username: z.string(),
-    source: z.string(),
-    target: z.string(),
+    username: z.string().min(1),
+    source: z.string().min(1),
+    target: z.string().min(1),
 })
+
+function getOsDownloadsPath() {
+    const os = getOs()
+
+    if (os === "windows") {
+        return "%USERPROFILE%\\Downloads"
+    }
+    return "~/Downloads"
+}
 
 export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
     const { toast } = useToast()
@@ -44,7 +54,7 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
         defaultValues: {
             username: config?.username || "",
             source: "/cs/studres/" + fileKey,
-            target: "Downloads",
+            target: config?.downloadPathPreference || getOsDownloadsPath(),
         },
     })
 
@@ -52,7 +62,7 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
         form.reset({
             username: config?.username || "",
             source: "/cs/studres/" + fileKey,
-            target: "Downloads",
+            target: config?.downloadPathPreference || getOsDownloadsPath(),
         })
     }, [fileKey, config?.username, form.reset])
 
@@ -65,6 +75,7 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
             }
 
             config.username = username
+            config.downloadPathPreference = target
             await saveConfig(config)
 
             const command = `scp -r ${username}@${username}.teaching.cs.st-andrews.ac.uk:${source} ${target}`
@@ -73,7 +84,8 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
 
             toast({
                 title: "✅ Success",
-                description: `Copied command to clipboard.`,
+                description:
+                    "Command copied. Paste, verify, and run in your terminal.",
             })
             modalHandler.hide()
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -94,9 +106,10 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
         <Dialog handler={modalHandler}>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>SSH copy using scp</DialogTitle>
+                    <DialogTitle>SSH download using scp</DialogTitle>
                     <DialogDescription>
-                        Generate scp command to copy from remote using ssh.
+                        Generate an SCP command to copy files from the studres
+                        server using SSH.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>

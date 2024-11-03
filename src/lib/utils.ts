@@ -59,3 +59,22 @@ export function deepEqual(obj1: any, obj2: any) {
     }
     return true
 }
+
+export function getOs() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const userAgentData = (navigator as any).userAgentData
+    const userAgent = navigator.userAgent.toLowerCase()
+
+    if (userAgentData && userAgentData.platform) {
+        if (userAgentData.platform.includes("Win")) return "windows"
+        if (userAgentData.platform.includes("Mac")) return "mac"
+        if (userAgentData.platform.includes("Linux")) return "linux"
+    } else {
+        // Fallback using userAgent
+        if (userAgent.includes("win")) return "windows"
+        if (userAgent.includes("mac")) return "mac"
+        if (userAgent.includes("linux")) return "linux"
+    }
+
+    return "Unknown OS"
+}

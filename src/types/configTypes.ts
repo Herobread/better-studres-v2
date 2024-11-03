@@ -9,4 +9,5 @@ export interface ConfigTypes {
     showQuickLinks: boolean
     showCommandButton: boolean
     username?: string
+    downloadPathPreference?: string
 }
