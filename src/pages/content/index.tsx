@@ -47,7 +47,7 @@ async function initialize() {
         const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
         const theme = themeObject[THEME_STORAGE_KEY]
 
-        if (currentUrl.endsWith(".html")) {
+        if (currentUrl.endsWith(".html") || currentUrl.endsWith(".htm")) {
             const enhancerRoot = document.createElement("div")
             enhancerRoot.setAttribute("id", "__better_studres_theme_root")
             rootContainer.appendChild(enhancerRoot)
