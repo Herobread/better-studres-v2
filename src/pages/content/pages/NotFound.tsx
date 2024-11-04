@@ -68,10 +68,10 @@ export default function NotFound() {
                         <TriangleAlert />
                         <H1>Not Found</H1>
                     </div>
+                    <p className="font-mono">{location.href.toString()}</p>{" "}
                     <p className="text-muted-foreground">
                         Requested url was not found on the server.
                     </p>
-                    <p className="font-mono">{location.href.toString()}</p>{" "}
                     <p className="text-muted-foreground">
                         If the previous URL(it might not be shown in history)
                         doesn&apos;t have a trailing slash, that could be the
