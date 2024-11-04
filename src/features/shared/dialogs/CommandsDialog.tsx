@@ -15,6 +15,7 @@ import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionT
 import SaveQuickLinkCommand from "@src/features/command/SaveQuickLinkCommand"
 import { ToggleEnhancePageCommand } from "@src/features/command/ToggleEnhancePageCommand"
 import ToggleThemeCommand from "@src/features/command/ToggleThemeCommand"
+import ViewArchiveCommand from "@src/features/command/ViewArchiveCommand"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import {
     BASE_URL,
@@ -112,6 +113,7 @@ export default NiceModal.create(() => {
                     <ToggleEnhancePageCommand />
                     <ClearVersionTrackingDataCommand />
                     <ClearBlackListCommand />
+                    <ViewArchiveCommand />
                 </CommandGroup>
                 <CommandGroup heading="Visited paths">
                     {commandsData &&
