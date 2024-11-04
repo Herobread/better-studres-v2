@@ -13,15 +13,23 @@ const COMMAND_KEYWORDS = [
     "time",
     "travel",
     "archive",
-    "back",
     "previous",
     "go",
+    "back",
+    "go back",
     "history",
 ]
 
 export default function ViewArchiveCommand() {
     const currentUrl = window.location.toString()
     const currentUrlSegments = extractUrlSegments(currentUrl)
+
+    if (
+        currentUrlSegments[0] === "_this_session" ||
+        currentUrlSegments[0] === "icons"
+    ) {
+        return null
+    }
 
     if (
         currentUrlSegments[0] &&
