@@ -51,6 +51,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     hs: "🌀",
     h: "🅷",
     c: "🅲",
+    cc: "➕",
     cpp: "➕",
     ppc64: "💻",
     st: "💻",
