@@ -8,7 +8,9 @@ import { getSegmentType } from "@src/features/router/getSegmentType"
 export default function ModuleHeader() {
     const currentUrl = location.href.toString()
 
-    const urlSegments = extractUrlSegments(currentUrl)
+    const urlSegments = extractUrlSegments(currentUrl).map((segment) =>
+        decodeURI(segment)
+    )
 
     const homePath = urlSegments[0]
 
