@@ -10,11 +10,8 @@ const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
 
     const isSmoothNavigationSupported = (pageType: PageType) => {
-        if (pageType === "file") {
-            return true
-        }
-
-        return false
+        const supportedPageTypes: PageType[] = ["folder", "not found", "root"]
+        return supportedPageTypes.includes(pageType)
     }
 
     const navigateToPage = useCallback(
@@ -30,7 +27,7 @@ const useSmoothRouter = () => {
                     currentPageState.type
                 )
 
-                if (isBlackListed && !isSupported) {
+                if (isBlackListed || !isSupported) {
                     setIsLoading(false)
                     redirect(href)
                     return
