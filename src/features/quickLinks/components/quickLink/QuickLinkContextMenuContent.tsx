@@ -64,7 +64,7 @@ export const QuickLinkContextMenuContent = forwardRef<
             <ContextMenuItem onSelect={handleEditQuickLink}>
                 <Edit2Icon className="h-4 w-4" /> Edit
             </ContextMenuItem>
-            <CopyTextMenuItem name="URL" textToCopy={quickLink.href} />
+            <CopyTextMenuItem name="Copy URL" textToCopy={quickLink.href} />
             <ContextMenuItem
                 disabled={isLast}
                 onSelect={async () => {

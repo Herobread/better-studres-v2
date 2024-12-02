@@ -10,9 +10,9 @@ import {
 } from "@src/features/files"
 import { FullFileLink } from "@src/features/parser"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
-import CopyTextMenuItem from "@src/features/shared/contextMenuItems/CopyTextMenuItem"
 import { AddNoteContextMenuItem } from "@src/features/table/fileCard/contextMenu/AddNoteContextMenuItem"
 import { AddQuickLinkMenuItem } from "@src/features/table/fileCard/contextMenu/AddQuickLinkMenuItem"
+import { CopyMenuSub } from "@src/features/table/fileCard/contextMenu/CopyMenuSub"
 import DownloadUsingScpContextMenuItem from "@src/features/table/fileCard/contextMenu/DownloadUsingScpContextMenuItem"
 import { FolderIcon, FolderRootIcon } from "lucide-react"
 import { forwardRef } from "react"
@@ -62,8 +62,8 @@ const FileCardContextMenuContent = forwardRef<
 
             <AddQuickLinkMenuItem href={fileLink.href} />
             <UpdatesMenuItem fileLink={fileLink} />
-            <CopyTextMenuItem name="URL" textToCopy={fileLink.href} />
-            <CopyTextMenuItem name="file name" textToCopy={fileLink.fullName} />
+
+            <CopyMenuSub fileLink={fileLink} />
             <DownloadFileMenuItem
                 fileKey={fileLink.fileKey}
                 href={fileLink.href}
