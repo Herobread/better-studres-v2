@@ -22,6 +22,10 @@ export type UrlSegments = string[]
  * @returns The constructed full URL.
  */
 export function convertUrlSegmentsToUrl(segments: UrlSegments): string {
+    if (segments.length === 0) {
+        return BASE_URL
+    }
+
     return BASE_URL + segments.join("/") + "/"
 }
 
