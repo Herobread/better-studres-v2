@@ -1,5 +1,5 @@
 <p align="center">
-  <img width=100 src="https://github.com/user-attachments/assets/4be0f302-862d-4f13-87c2-0aa9c3f8275c" />
+  <img width=100 src="https://github.com/user-attachments/assets/a909f01c-e454-43d6-9d92-97d8108acbeb" />
 </p>
 <h1 align="center">
   <a href='https://better-studres.netlify.app/'>
@@ -91,16 +91,16 @@ Use popup to change date display mode, icons, and UI elements visibility.
 
 ## How to build
 
-    chrome:
-    ```bash
-    bun run build
-    ```
+  chrome:
+  ```bash
+  bun run build
+  ```
     
-    firefox:
-    ```bash
-    bun run build:firefox
-    ```
+  firefox:
+  ```bash
+  bun run build:firefox
+  ```
 
-    Output will be stored in the dist/
+  Output will be stored in the dist/
 
 Enjoy the improved StudRes experience!
