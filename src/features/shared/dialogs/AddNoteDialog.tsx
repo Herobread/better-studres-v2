@@ -65,10 +65,6 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
                 queryKey: [GET_NOTE_QUERY_KEY, fileKey],
             })
 
-            toast({
-                title: "✅ Success",
-                description: "Added note to the file.",
-            })
             modalHandler.hide()
         } catch (error: any) {
             toast({
