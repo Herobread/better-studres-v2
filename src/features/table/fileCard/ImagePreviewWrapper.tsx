@@ -21,8 +21,15 @@ const ImagePreviewWrapper = forwardRef<
             <HoverCardTrigger ref={ref} className={className}>
                 {children}
             </HoverCardTrigger>
-            <HoverCardContent className="w-full max-w-96" padding="no-padding">
-                <img src={src} alt={title} />
+            <HoverCardContent className="flex h-fit w-auto max-w-[var(--radix-hover-card-trigger-width)] items-center justify-center">
+                <div className="flex min-w-16 items-center justify-center">
+                    <img
+                        src={src}
+                        alt={title}
+                        style={{ imageRendering: "pixelated" }}
+                        className="max-h-[40vh] w-full object-contain"
+                    />
+                </div>
             </HoverCardContent>
         </HoverCard>
     )
