@@ -21,9 +21,8 @@ const ImagePreviewWrapper = forwardRef<
             <HoverCardTrigger ref={ref} className={className}>
                 {children}
             </HoverCardTrigger>
-            <HoverCardContent className="w-full max-w-96">
+            <HoverCardContent className="w-full max-w-96" padding="no-padding">
                 <img src={src} alt={title} />
-                <p className="text-center">{title}</p>
             </HoverCardContent>
         </HoverCard>
     )
