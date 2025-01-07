@@ -78,3 +78,9 @@ export function getOs() {
 
     return "Unknown OS"
 }
+
+export const isSmallImage = (src: string) => {
+    const img = new Image()
+    img.src = src
+    return img.width <= 32 && img.height <= 32
+}
