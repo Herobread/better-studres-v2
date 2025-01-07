@@ -61,7 +61,7 @@ export default function MainSection({ content }: MainSectionProps) {
                 <H3>Miscellaneous</H3>
                 <p>
                     <Link
-                        href="https://studres.cs.st-andrews.ac.uk/Library"
+                        href="https://studres.cs.st-andrews.ac.uk/Library/"
                         className="underline"
                     >
                         Library
@@ -70,7 +70,7 @@ export default function MainSection({ content }: MainSectionProps) {
                 </p>
                 <p>
                     <Link
-                        href="https://studres.cs.st-andrews.ac.uk/Timetables"
+                        href="https://studres.cs.st-andrews.ac.uk/Timetables/"
                         className="underline"
                     >
                         Timetables
@@ -91,7 +91,7 @@ export default function MainSection({ content }: MainSectionProps) {
             <H3>Sessions</H3>
             <div className="space-y-2">
                 <Link
-                    href="https://studres.cs.st-andrews.ac.uk/_this_session"
+                    href="https://studres.cs.st-andrews.ac.uk/_this_session/"
                     className="no-underline hover:underline"
                 >
                     This session
