@@ -3,6 +3,7 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@src/components/ui/hover-card"
+import { isSmallImage } from "@src/lib/utils"
 import { forwardRef } from "react"
 
 interface ImagePreviewWrapperProps {
@@ -16,6 +17,8 @@ const ImagePreviewWrapper = forwardRef<
     HTMLAnchorElement,
     ImagePreviewWrapperProps
 >(({ src, title, className, children }, ref) => {
+    const imageRendering = isSmallImage(src) ? "pixelated" : "auto"
+
     return (
         <HoverCard>
             <HoverCardTrigger ref={ref} className={className}>
@@ -26,7 +29,9 @@ const ImagePreviewWrapper = forwardRef<
                     <img
                         src={src}
                         alt={title}
-                        style={{ imageRendering: "pixelated" }}
+                        style={{
+                            imageRendering,
+                        }}
                         className="max-h-[40vh] w-full object-contain"
                     />
                 </div>
