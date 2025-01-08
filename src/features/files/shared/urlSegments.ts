@@ -26,6 +26,11 @@ export function convertUrlSegmentsToUrl(segments: UrlSegments): string {
         return BASE_URL
     }
 
+    // potentially file, don't add extra '/'
+    if (segments[segments.length - 1].includes(".")) {
+        return BASE_URL + segments.join("/")
+    }
+
     return BASE_URL + segments.join("/") + "/"
 }
 
