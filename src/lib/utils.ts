@@ -84,3 +84,13 @@ export const isSmallImage = (src: string) => {
     img.src = src
     return img.width <= 32 && img.height <= 32
 }
+
+export function getAcademicYearEnd(currentDate = new Date()): number {
+    return currentDate.getMonth() >= 8
+        ? currentDate.getFullYear() + 1
+        : currentDate.getFullYear()
+}
+
+export function getAcademicYearStart(currentDate = new Date()): number {
+    return getAcademicYearEnd(currentDate) - 1
+}

@@ -12,13 +12,13 @@ import {
     convertUrlSegmentsToUrl,
     extractUrlSegments,
 } from "@src/features/files"
+import { getSegmentType } from "@src/features/router/getSegmentType"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
+import { getAcademicYearEnd } from "@src/lib/utils"
 
 function generateArchivedYears() {
-    const now = new Date()
-
     const STUDRES_ARCHIVE_YEAR_START = 2009
-    const STUDRES_ARCHIVE_YEAR_END = now.getFullYear()
+    const STUDRES_ARCHIVE_YEAR_END = getAcademicYearEnd()
 
     const result = []
 
@@ -43,7 +43,13 @@ export default NiceModal.create(() => {
         const currentUrl = window.location.toString()
         const currentUrlSegments = extractUrlSegments(currentUrl)
 
-        currentUrlSegments.unshift(archiveYear)
+        if (getSegmentType(currentUrlSegments[0]) === "archive") {
+            currentUrlSegments.splice(0, 1)
+        }
+
+        if (!archiveYear.includes(getAcademicYearEnd().toString())) {
+            currentUrlSegments.unshift(archiveYear)
+        }
 
         navigateToPage(convertUrlSegmentsToUrl(currentUrlSegments))
         modalHandler.hide()
@@ -53,7 +59,9 @@ export default NiceModal.create(() => {
         <CommandDialog handler={modalHandler}>
             <VisuallyHidden>
                 <DialogTitle>
-                    <DialogDescription>Command dialog</DialogDescription>
+                    <DialogDescription>
+                        Archive selection dialog
+                    </DialogDescription>
                 </DialogTitle>
             </VisuallyHidden>
             <CommandInput placeholder="Search archive year..." />
