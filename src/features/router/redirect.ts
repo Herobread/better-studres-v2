@@ -1,3 +1,5 @@
+import { sanitizeUrl } from "@src/features/router/sanitizeUrl"
+
 /**
  * Redirects the browser to a new URL based on the type of redirection.
  * @param {string} href - The URL to redirect to.
@@ -8,6 +10,8 @@ export function redirect(
     type?: "userClick" | "http",
     isBlank?: boolean
 ) {
+    href = sanitizeUrl(href)
+
     if (isBlank) {
         window.open(href, "_blank")
 
