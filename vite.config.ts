@@ -47,8 +47,16 @@ export default defineConfig({
     ],
     publicDir,
     build: {
+        minify: "esbuild",
         outDir,
         sourcemap: isDev ? "inline" : false,
         emptyOutDir: !isDev,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ["react", "react-dom"],
+                },
+            },
+        },
     },
 })
