@@ -28,6 +28,7 @@ import {
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
+import { useCommandState } from "cmdk"
 
 export function Commands() {
     const { navigateToPage } = useSmoothRouter()
@@ -64,6 +65,8 @@ export function Commands() {
         navigateToPage(BASE_URL)
         NiceModal.hide(CommandsDialog)
     }
+
+    const search = useCommandState((state) => state.search)
 
     return (
         <>
@@ -107,40 +110,48 @@ export function Commands() {
                     <ClearBlackListCommand />
                     <ViewArchiveCommand />
                 </CommandGroup>
-                <CommandGroup heading="Visited paths">
-                    {commandsData &&
-                        commandsData.map((item) => {
-                            const urlSegments = extractUrlSegments(item.href)
-                            const urlSegmentsString = urlSegments.join("/")
+                {search && (
+                    <CommandGroup heading="Visited paths">
+                        {commandsData &&
+                            commandsData.map((item) => {
+                                const urlSegments = extractUrlSegments(
+                                    item.href
+                                )
+                                const urlSegmentsString = urlSegments.join("/")
 
-                            return (
-                                <CommandItem
-                                    keywords={[item.href, ...item.tags]}
-                                    key={urlSegmentsString}
-                                    onSelect={() => {
-                                        navigateToPage(item.href)
-                                        NiceModal.hide(CommandsDialog)
-                                    }}
-                                    className="grid gap-1"
-                                >
-                                    <div className="flex flex-wrap gap-2">
-                                        {item.name}
-                                        {item.tags.length > 0 &&
-                                            item.tags.map((tag) => {
-                                                return (
-                                                    <Badge key={tag}>
-                                                        {tag}
-                                                    </Badge>
-                                                )
-                                            })}
-                                    </div>
-                                    <span className="text-muted-foreground">
-                                        {urlSegmentsString}
-                                    </span>
-                                </CommandItem>
-                            )
-                        })}
-                </CommandGroup>
+                                return (
+                                    <CommandItem
+                                        value={urlSegmentsString}
+                                        keywords={[
+                                            ...urlSegments,
+                                            ...item.tags,
+                                        ]}
+                                        key={urlSegmentsString}
+                                        onSelect={() => {
+                                            navigateToPage(item.href)
+                                            NiceModal.hide(CommandsDialog)
+                                        }}
+                                        className="grid gap-1"
+                                    >
+                                        <div className="flex flex-wrap gap-2">
+                                            {item.name}
+                                            {item.tags.length > 0 &&
+                                                item.tags.map((tag) => {
+                                                    return (
+                                                        <Badge key={tag}>
+                                                            {tag}
+                                                        </Badge>
+                                                    )
+                                                })}
+                                        </div>
+                                        <span className="text-muted-foreground">
+                                            {urlSegmentsString}
+                                        </span>
+                                    </CommandItem>
+                                )
+                            })}
+                    </CommandGroup>
+                )}
             </CommandList>
         </>
     )
