@@ -6,6 +6,7 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
+    SubCommandItem,
 } from "@src/components/ui/command"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
@@ -80,12 +81,12 @@ export function Commands() {
                         <CommandItem onSelect={handleGoToParent}>
                             🔙 Go to Parent Directory
                         </CommandItem>
-                        <CommandItem onSelect={handleGoToModuleRoot}>
+                        <SubCommandItem onSelect={handleGoToModuleRoot}>
                             {moduleEmoji} Go to {moduleCode} root
-                        </CommandItem>
-                        <CommandItem onSelect={handleGoToRoot}>
+                        </SubCommandItem>
+                        <SubCommandItem onSelect={handleGoToRoot}>
                             🌱 Go to root
-                        </CommandItem>
+                        </SubCommandItem>
                     </CommandGroup>
                 )}
                 <CommandGroup heading="Pinned links">
