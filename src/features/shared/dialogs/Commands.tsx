@@ -61,6 +61,8 @@ export function Commands() {
         NiceModal.hide(CommandsDialog)
     }
 
+    const isRootPage = currentUrlSegments.length === 0
+
     const handleGoToRoot = () => {
         navigateToPage(BASE_URL)
         NiceModal.hide(CommandsDialog)
@@ -73,17 +75,19 @@ export function Commands() {
             <CommandInput placeholder="Type a command or search..." />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Navigation">
-                    <CommandItem onSelect={handleGoToParent}>
-                        🔙 Go to Parent Directory
-                    </CommandItem>
-                    <CommandItem onSelect={handleGoToModuleRoot}>
-                        {moduleEmoji} Go to {moduleCode} root
-                    </CommandItem>
-                    <CommandItem onSelect={handleGoToRoot}>
-                        🌱 Go to homepage
-                    </CommandItem>
-                </CommandGroup>
+                {!isRootPage && (
+                    <CommandGroup heading="Navigation">
+                        <CommandItem onSelect={handleGoToParent}>
+                            🔙 Go to Parent Directory
+                        </CommandItem>
+                        <CommandItem onSelect={handleGoToModuleRoot}>
+                            {moduleEmoji} Go to {moduleCode} root
+                        </CommandItem>
+                        <CommandItem onSelect={handleGoToRoot}>
+                            🌱 Go to root
+                        </CommandItem>
+                    </CommandGroup>
+                )}
                 <CommandGroup heading="Pinned links">
                     {quickLinks &&
                         quickLinks.map((quickLink) => {
@@ -101,7 +105,7 @@ export function Commands() {
                                 </CommandItem>
                             )
                         })}
-                    <SaveQuickLinkCommand />
+                    {!isRootPage && <SaveQuickLinkCommand />}
                 </CommandGroup>
                 <CommandGroup heading="Commands">
                     <ToggleThemeCommand />
