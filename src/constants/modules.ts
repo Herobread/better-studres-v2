@@ -1,3 +1,5 @@
+export const departments = ["CS", "ID", "IS"]
+
 export const modules: { code: string; name: string }[] = [
     { code: "CS1002", name: "Object-Oriented Programming" },
     { code: "CS1003", name: "Programming with Data" },
