@@ -8,7 +8,7 @@ import {
     CommandList,
     SubCommandItem,
 } from "@src/components/ui/command"
-import { modules } from "@src/constants/modules"
+import { departments, modules } from "@src/constants/modules"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
 import SaveQuickLinkCommand from "@src/features/command/SaveQuickLinkCommand"
@@ -116,26 +116,29 @@ export function Commands() {
                     <ClearBlackListCommand />
                     <ViewArchiveCommand />
                 </CommandGroup>
-                {search && (
-                    <CommandGroup heading="Modules">
-                        {modules.map(({ code, name }) => (
-                            <CommandItem
-                                className="grid gap-1"
-                                key={code}
-                                value={code}
-                                onSelect={() => {
-                                    navigateToPage(BASE_URL + code)
-                                    NiceModal.hide(CommandsDialog)
-                                }}
-                            >
-                                {getModuleEmoji(code)} {code}
-                                <span className="text-muted-foreground">
-                                    {name}
-                                </span>
-                            </CommandItem>
-                        ))}
-                    </CommandGroup>
-                )}
+                {search &&
+                    departments.some((dept) =>
+                        search.toLowerCase().includes(dept.toLowerCase())
+                    ) && (
+                        <CommandGroup heading="Modules">
+                            {modules.map(({ code, name }) => (
+                                <CommandItem
+                                    className="grid gap-1"
+                                    key={code}
+                                    value={code}
+                                    onSelect={() => {
+                                        navigateToPage(BASE_URL + code)
+                                        NiceModal.hide(CommandsDialog)
+                                    }}
+                                >
+                                    {getModuleEmoji(code)} {code}
+                                    <span className="text-muted-foreground">
+                                        {name}
+                                    </span>
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    )}
                 {search && (
                     <CommandGroup heading="Visited paths">
                         {commandsData &&
