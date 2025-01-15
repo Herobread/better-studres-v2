@@ -1,6 +1,7 @@
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import {
+    Command,
     CommandDialog,
     CommandEmpty,
     CommandInput,
@@ -57,30 +58,32 @@ export default NiceModal.create(() => {
 
     return (
         <CommandDialog handler={modalHandler}>
-            <VisuallyHidden>
-                <DialogTitle>
-                    <DialogDescription>
-                        Archive selection dialog
-                    </DialogDescription>
-                </DialogTitle>
-            </VisuallyHidden>
-            <CommandInput placeholder="Search archive year..." />
-            <CommandList>
-                <CommandEmpty>No results found.</CommandEmpty>
-                {archivedYears.map((year) => {
-                    return (
-                        <CommandItem
-                            onSelect={() => {
-                                handleSelection(year)
-                            }}
-                            key={year}
-                            value={year}
-                        >
-                            {year}
-                        </CommandItem>
-                    )
-                })}
-            </CommandList>
+            <Command>
+                <VisuallyHidden>
+                    <DialogTitle>
+                        <DialogDescription>
+                            Archive selection dialog
+                        </DialogDescription>
+                    </DialogTitle>
+                </VisuallyHidden>
+                <CommandInput placeholder="Search archive year..." />
+                <CommandList>
+                    <CommandEmpty>No results found.</CommandEmpty>
+                    {archivedYears.map((year) => {
+                        return (
+                            <CommandItem
+                                onSelect={() => {
+                                    handleSelection(year)
+                                }}
+                                key={year}
+                                value={year}
+                            >
+                                {year}
+                            </CommandItem>
+                        )
+                    })}
+                </CommandList>
+            </Command>
         </CommandDialog>
     )
 })

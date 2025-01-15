@@ -1,6 +1,7 @@
 import NiceModal from "@ebay/nice-modal-react"
 import { Badge } from "@src/components/ui/badge"
 import {
+    Command,
     CommandEmpty,
     CommandGroup,
     CommandInput,
@@ -35,11 +36,6 @@ import { useCommandState } from "cmdk"
 export function Commands() {
     const { navigateToPage } = useSmoothRouter()
 
-    const { data: commandsData } = useQuery({
-        queryKey: [GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY],
-        queryFn: getFormattedFilesListForCommand,
-    })
-
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
@@ -70,16 +66,8 @@ export function Commands() {
         NiceModal.hide(CommandsDialog)
     }
 
-    const search = useCommandState((state) => state.search)
-
-    const isDepartmentIncluded = departments.some((dept) =>
-        search.toLowerCase().includes(dept.toLowerCase())
-    )
-
-    const isModuleLikeSearchQuery = /\d{3,4}/.test(search)
-
     return (
-        <>
+        <Command>
             <CommandInput placeholder="Type a command or search..." />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
@@ -124,70 +112,85 @@ export function Commands() {
                     <ClearBlackListCommand />
                     <ToggleEnhancePageCommand />
                 </CommandGroup>
-                {search &&
-                    (isDepartmentIncluded || isModuleLikeSearchQuery) && (
-                        <CommandGroup heading="Modules">
-                            {modules.map(({ code, name }) => (
-                                <CommandItem
-                                    className="grid gap-1"
-                                    key={code}
-                                    value={code}
-                                    onSelect={() => {
-                                        navigateToPage(BASE_URL + code)
-                                        NiceModal.hide(CommandsDialog)
-                                    }}
-                                >
-                                    {getModuleEmoji(code)} {code}
-                                    <span className="text-muted-foreground">
-                                        {name}
-                                    </span>
-                                </CommandItem>
-                            ))}
-                        </CommandGroup>
-                    )}
-                {search && (
-                    <CommandGroup heading="Visited paths">
-                        {commandsData &&
-                            commandsData.map((item) => {
-                                const urlSegments = extractUrlSegments(
-                                    item.href
-                                )
-                                const urlSegmentsString = urlSegments.join("/")
-
-                                return (
-                                    <CommandItem
-                                        value={urlSegmentsString}
-                                        keywords={[
-                                            ...urlSegments,
-                                            ...item.tags,
-                                        ]}
-                                        key={urlSegmentsString}
-                                        onSelect={() => {
-                                            navigateToPage(item.href)
-                                            NiceModal.hide(CommandsDialog)
-                                        }}
-                                        className="grid gap-1"
-                                    >
-                                        <div className="flex flex-wrap gap-2">
-                                            {item.name}
-                                            {item.tags.length > 0 &&
-                                                item.tags.map((tag) => {
-                                                    return (
-                                                        <Badge key={tag}>
-                                                            {tag}
-                                                        </Badge>
-                                                    )
-                                                })}
-                                        </div>
-                                        <span className="text-muted-foreground">
-                                            {urlSegmentsString}
-                                        </span>
-                                    </CommandItem>
-                                )
-                            })}
-                    </CommandGroup>
-                )}
+                <ModuleCommandGroup />
+                <VisitedPathsCommandGroup />
             </CommandList>
-        </>
+        </Command>
+    )
+}
+
+function ModuleCommandGroup() {
+    const { navigateToPage } = useSmoothRouter()
+
+    const search = useCommandState((state) => state.search)
+
+    const isDepartmentIncluded = departments.some((dept) =>
+        search.toLowerCase().includes(dept.toLowerCase())
+    )
+
+    const isModuleLikeSearchQuery = /\d{3,4}/.test(search)
+
+    return (
+        (isDepartmentIncluded || isModuleLikeSearchQuery) && (
+            <CommandGroup heading="Modules">
+                {modules.map(({ code, name }) => (
+                    <CommandItem
+                        className="grid gap-1"
+                        key={code}
+                        value={code}
+                        onSelect={() => {
+                            navigateToPage(BASE_URL + code)
+                            NiceModal.hide(CommandsDialog)
+                        }}
+                    >
+                        {getModuleEmoji(code)} {code}
+                        <span className="text-muted-foreground">{name}</span>
+                    </CommandItem>
+                ))}
+            </CommandGroup>
+        )
+    )
+}
+
+function VisitedPathsCommandGroup() {
+    const { navigateToPage } = useSmoothRouter()
+
+    const { data: commandsData } = useQuery({
+        queryKey: [GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY],
+        queryFn: getFormattedFilesListForCommand,
+    })
+
+    return (
+        <CommandGroup heading="Visited paths">
+            {commandsData &&
+                commandsData.map((item) => {
+                    const urlSegments = extractUrlSegments(item.href)
+                    const urlSegmentsString = urlSegments.join("/")
+
+                    return (
+                        <CommandItem
+                            value={urlSegmentsString}
+                            keywords={[...urlSegments, ...item.tags]}
+                            key={urlSegmentsString}
+                            onSelect={() => {
+                                navigateToPage(item.href)
+                                NiceModal.hide(CommandsDialog)
+                            }}
+                            className="grid gap-1"
+                        >
+                            <div className="flex flex-wrap gap-2">
+                                {item.name}
+                                {item.tags.length > 0 &&
+                                    item.tags.map((tag) => {
+                                        return <Badge key={tag}>{tag}</Badge>
+                                    })}
+                            </div>
+                            <span className="text-muted-foreground">
+                                {urlSegmentsString}
+                            </span>
+                        </CommandItem>
+                    )
+                })}
+        </CommandGroup>
     )
 }
