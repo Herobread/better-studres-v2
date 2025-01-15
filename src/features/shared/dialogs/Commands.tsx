@@ -72,6 +72,12 @@ export function Commands() {
 
     const search = useCommandState((state) => state.search)
 
+    const isDepartmentIncluded = departments.some((dept) =>
+        search.toLowerCase().includes(dept.toLowerCase())
+    )
+
+    const isModuleLikeSearchQuery = /\d{3,4}/.test(search)
+
     return (
         <>
             <CommandInput placeholder="Type a command or search..." />
@@ -110,16 +116,16 @@ export function Commands() {
                     {!isRootPage && <SaveQuickLinkCommand />}
                 </CommandGroup>
                 <CommandGroup heading="Commands">
+                    <ViewArchiveCommand />
                     <ToggleThemeCommand />
-                    <ToggleEnhancePageCommand />
+                </CommandGroup>
+                <CommandGroup heading="Other">
                     <ClearVersionTrackingDataCommand />
                     <ClearBlackListCommand />
-                    <ViewArchiveCommand />
+                    <ToggleEnhancePageCommand />
                 </CommandGroup>
                 {search &&
-                    departments.some((dept) =>
-                        search.toLowerCase().includes(dept.toLowerCase())
-                    ) && (
+                    (isDepartmentIncluded || isModuleLikeSearchQuery) && (
                         <CommandGroup heading="Modules">
                             {modules.map(({ code, name }) => (
                                 <CommandItem
