@@ -121,17 +121,31 @@ CommandSeparator.displayName = CommandPrimitive.Separator.displayName
 
 const CommandItem = React.forwardRef<
     React.ElementRef<typeof CommandPrimitive.Item>,
-    React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
-    <CommandPrimitive.Item
-        ref={ref}
-        className={cn(
-            "_tailwind_preflight_reset relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
-            className
-        )}
-        {...props}
-    />
-))
+    React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {
+        onTab?: () => void
+    }
+>(({ className, onTab, ...props }, forwardedRef) => {
+    const internalRef: any = React.useRef<HTMLDivElement | null>(null)
+
+    React.useImperativeHandle(forwardedRef, () => internalRef.current as any)
+
+    React.useEffect(() => {
+        if (internalRef.current && onTab) {
+            internalRef.current.__onTab = onTab
+        }
+    }, [onTab])
+
+    return (
+        <CommandPrimitive.Item
+            ref={internalRef}
+            className={cn(
+                "_tailwind_preflight_reset relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
+                className
+            )}
+            {...props}
+        />
+    )
+})
 
 CommandItem.displayName = CommandPrimitive.Item.displayName
 
@@ -172,6 +186,14 @@ const CommandShortcut = ({
 }
 CommandShortcut.displayName = "CommandShortcut"
 
+const ITEM_SELECTOR = `[cmdk-item=""]`
+
+function getSelectedCommandItem(listInnerRef: React.RefObject<HTMLDivElement>) {
+    return listInnerRef.current?.querySelector(
+        `${ITEM_SELECTOR}[aria-selected="true"]`
+    )
+}
+
 export {
     Command,
     CommandDialog,
@@ -182,5 +204,6 @@ export {
     CommandList,
     CommandSeparator,
     CommandShortcut,
+    getSelectedCommandItem,
     SubCommandItem,
 }

@@ -7,6 +7,7 @@ import {
     CommandInput,
     CommandItem,
     CommandList,
+    getSelectedCommandItem,
     SubCommandItem,
 } from "@src/components/ui/command"
 import { departments, modules } from "@src/constants/modules"
@@ -19,9 +20,9 @@ import ViewArchiveCommand from "@src/features/command/ViewArchiveCommand"
 import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import {
     BASE_URL,
-    GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY,
     convertUrlSegmentsToUrl,
     extractUrlSegments,
+    GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY,
     getFormattedFilesListForCommand,
 } from "@src/features/files"
 import {
@@ -32,9 +33,14 @@ import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
 import { useCommandState } from "cmdk"
+import { useRef, useState } from "react"
 
 export function Commands() {
     const { navigateToPage } = useSmoothRouter()
+
+    const ref = useRef(null)
+    const [pages, setPages] = useState<string[]>([])
+    const [search, setSearch] = useState("")
 
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
@@ -67,10 +73,40 @@ export function Commands() {
     }
 
     return (
-        <Command>
-            <CommandInput placeholder="Type a command or search..." />
+        <Command
+            ref={ref}
+            onKeyDown={(e) => {
+                if (e.key === "Escape" || (e.key === "Backspace" && !search)) {
+                    e.preventDefault()
+                    setPages((pages) => pages.slice(0, -1))
+                }
+
+                if (e.key === "Tab") {
+                    e.preventDefault()
+
+                    const selectedItem: any = getSelectedCommandItem(ref)
+
+                    if (selectedItem && selectedItem.__onTab) {
+                        selectedItem.__onTab()
+                    }
+                }
+            }}
+        >
+            <CommandInput
+                placeholder="Type a command or search..."
+                value={search}
+                onValueChange={setSearch}
+            />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
+                Pages: {pages}
+                <CommandItem
+                    onTab={() => {
+                        setPages([...pages, "Page..."])
+                    }}
+                >
+                    Select + Tab to add new page to commands
+                </CommandItem>
                 {!isRootPage && (
                     <CommandGroup heading="Navigation">
                         <CommandItem onSelect={handleGoToParent}>
