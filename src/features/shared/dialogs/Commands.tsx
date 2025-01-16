@@ -79,7 +79,10 @@ export function Commands() {
             onKeyDown={(e) => {
                 if (e.key === "Escape" || (e.key === "Backspace" && !search)) {
                     e.preventDefault()
-                    setPages((pages) => pages.slice(0, -1))
+                    if (pages.length >= 1) {
+                        setPages((pages) => pages.slice(0, -1))
+                        setSearch(pages[pages.length - 1])
+                    }
                 }
 
                 if (e.key === "Tab") {
@@ -162,7 +165,12 @@ export function Commands() {
                             <ClearBlackListCommand />
                             <ToggleEnhancePageCommand />
                         </CommandGroup>
-                        <ModuleCommandGroup search={search} />
+                        <ModuleCommandGroup
+                            search={search}
+                            setSearch={setSearch}
+                            pages={pages}
+                            setPages={setPages}
+                        />
                         <VisitedPathsCommandGroup />
                     </>
                 )}
@@ -178,7 +186,17 @@ export function Commands() {
     )
 }
 
-function ModuleCommandGroup({ search }: { search: string }) {
+function ModuleCommandGroup({
+    search,
+    setSearch,
+    pages,
+    setPages,
+}: {
+    search: string
+    setSearch: React.Dispatch<React.SetStateAction<string>>
+    pages: string[]
+    setPages: React.Dispatch<React.SetStateAction<string[]>>
+}) {
     const { navigateToPage } = useSmoothRouter()
 
     const isDepartmentIncluded = departments.some((dept) =>
@@ -192,7 +210,10 @@ function ModuleCommandGroup({ search }: { search: string }) {
             <CommandGroup heading="Modules">
                 {modules.map(({ code, name }) => (
                     <CommandItem
-                        className="grid gap-1"
+                        onTab={() => {
+                            setPages([...pages, code])
+                            setSearch("")
+                        }}
                         key={code}
                         value={code}
                         onSelect={() => {
@@ -200,8 +221,12 @@ function ModuleCommandGroup({ search }: { search: string }) {
                             NiceModal.hide(CommandsDialog)
                         }}
                     >
-                        {getModuleEmoji(code)} {code}
-                        <span className="text-muted-foreground">{name}</span>
+                        <div className="grid gap-1">
+                            {getModuleEmoji(code)} {code}
+                            <span className="text-muted-foreground">
+                                {name}
+                            </span>
+                        </div>
                     </CommandItem>
                 ))}
             </CommandGroup>
