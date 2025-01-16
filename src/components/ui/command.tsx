@@ -125,8 +125,10 @@ const CommandItem = React.forwardRef<
         onTab?: () => void
     }
 >(({ className, onTab, ...props }, forwardedRef) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const internalRef: any = React.useRef<HTMLDivElement | null>(null)
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     React.useImperativeHandle(forwardedRef, () => internalRef.current as any)
 
     React.useEffect(() => {
