@@ -40,6 +40,7 @@ export function Commands() {
     const ref = useRef(null)
     const [pages, setPages] = useState<string[]>([])
     const [search, setSearch] = useState("")
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
@@ -87,12 +88,14 @@ export function Commands() {
                     const selectedItem: any = getSelectedCommandItem(ref)
 
                     if (selectedItem && selectedItem.__onTab) {
+                        setIsLoading(true)
                         selectedItem.__onTab()
                     }
                 }
             }}
         >
             <CommandInput
+                isLoading={isLoading}
                 pages={pages}
                 placeholder="Type a command or search..."
                 value={search}
