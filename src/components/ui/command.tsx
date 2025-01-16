@@ -144,7 +144,7 @@ const CommandItem = React.forwardRef<
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {
         onTab?: () => void
     }
->(({ className, onTab, ...props }, forwardedRef) => {
+>(({ className, onTab, children, ...props }, forwardedRef) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const internalRef: any = React.useRef<HTMLDivElement | null>(null)
 
@@ -161,11 +161,21 @@ const CommandItem = React.forwardRef<
         <CommandPrimitive.Item
             ref={internalRef}
             className={cn(
-                "_tailwind_preflight_reset relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
+                "group _tailwind_preflight_reset relative flex cursor-default select-none items-baseline rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled='true']:pointer-events-none data-[disabled='true']:opacity-50",
                 className
             )}
             {...props}
-        />
+        >
+            <span className="flex-grow">{children}</span>
+            {onTab && (
+                <div className="invisible space-x-1 group-data-[selected=true]:visible">
+                    <kbd className="whitespace-nowrap rounded-sm bg-primary px-[6px] py-[2px] font-sans text-base font-medium leading-[1rem] text-primary-foreground">
+                        Tab
+                    </kbd>
+                    <span>for more</span>
+                </div>
+            )}
+        </CommandPrimitive.Item>
     )
 })
 
