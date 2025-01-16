@@ -33,7 +33,7 @@ import { streamFolderContents } from "@src/features/router/streamFolderContents"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function Commands() {
     const { navigateToPage } = useSmoothRouter()
@@ -73,6 +73,30 @@ export function Commands() {
         NiceModal.hide(CommandsDialog)
     }
 
+    const handleDeepSearchCurrent = () => {
+        setPages([...pages, currentUrlSegments[0]])
+    }
+
+    const [searchPaths, setSearchPaths] = useState<string[]>([])
+
+    useEffect(() => {
+        if (pages.length !== 0) {
+            const fetchPath = async () => {
+                for await (const data of streamFolderContents(location.href)) {
+                    setSearchPaths((paths) => [...paths, data])
+                }
+
+                setIsLoading(false)
+            }
+
+            fetchPath()
+        }
+
+        return () => {
+            setSearchPaths([])
+        }
+    }, [pages])
+
     return (
         <Command
             ref={ref}
@@ -81,7 +105,6 @@ export function Commands() {
                     e.preventDefault()
                     if (pages.length >= 1) {
                         setPages((pages) => pages.slice(0, -1))
-                        setSearch(pages[pages.length - 1])
                     }
                 }
 
@@ -109,25 +132,13 @@ export function Commands() {
                 <CommandEmpty>No results found.</CommandEmpty>
                 {pages.length === 0 && (
                     <>
-                        <CommandItem
-                            onTab={() => {
-                                setPages([...pages, "CS1002"])
-                                setSearch("")
-                            }}
-                            onSelect={async () => {
-                                for await (const data of streamFolderContents(
-                                    location.href
-                                )) {
-                                    console.log(data)
-                                }
-                            }}
-                        >
-                            Select + Tab to add new page to commands
-                        </CommandItem>
                         {!isRootPage && (
                             <CommandGroup heading="Navigation">
                                 <CommandItem onSelect={handleGoToParent}>
-                                    🔙 Go to Parent Directory
+                                    🔙 Parent Directory
+                                </CommandItem>
+                                <CommandItem onSelect={handleDeepSearchCurrent}>
+                                    🔍 Search subfolders
                                 </CommandItem>
                                 <SubCommandItem onSelect={handleGoToModuleRoot}>
                                     {moduleEmoji} Go to {moduleCode} root
@@ -171,14 +182,18 @@ export function Commands() {
                             pages={pages}
                             setPages={setPages}
                         />
-                        <VisitedPathsCommandGroup />
+                        <VisitedPathsCommandGroup search={search} />
                     </>
                 )}
                 {pages.length === 1 && (
                     <>
-                        <CommandItem>
-                            module specific links commands
-                        </CommandItem>
+                        {searchPaths.map((searchPath) => {
+                            return (
+                                <CommandItem key={searchPath}>
+                                    {searchPath}
+                                </CommandItem>
+                            )
+                        })}
                     </>
                 )}
             </CommandList>
@@ -234,7 +249,7 @@ function ModuleCommandGroup({
     )
 }
 
-function VisitedPathsCommandGroup() {
+function VisitedPathsCommandGroup({ search }: { search: string }) {
     const { navigateToPage } = useSmoothRouter()
 
     const { data: commandsData } = useQuery({
@@ -244,7 +259,8 @@ function VisitedPathsCommandGroup() {
 
     return (
         <CommandGroup heading="Visited paths">
-            {commandsData &&
+            {search &&
+                commandsData &&
                 commandsData.map((item) => {
                     const urlSegments = extractUrlSegments(item.href)
                     const urlSegmentsString = urlSegments.join("/")
