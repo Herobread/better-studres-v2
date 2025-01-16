@@ -29,6 +29,7 @@ import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
 } from "@src/features/quickLinks"
+import { fetchFolderContent } from "@src/features/router/getFolderContents"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
@@ -109,6 +110,12 @@ export function Commands() {
                             onTab={() => {
                                 setPages([...pages, "CS1002"])
                                 setSearch("")
+                            }}
+                            onSelect={async () => {
+                                const data = await fetchFolderContent(
+                                    location.href
+                                )
+                                console.log(data)
                             }}
                         >
                             Select + Tab to add new page to commands
