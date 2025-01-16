@@ -8,16 +8,15 @@ function isFileLikeUrl(url: string) {
     return urSegments[urSegments.length - 1].includes(".")
 }
 
-export async function fetchFolderContent(
+export async function* streamFolderContents(
     url: string,
     baseUrl?: string
-): Promise<string[]> {
-    let result: string[] = []
-
+): AsyncGenerator<string, void, unknown> {
     if (isFileLikeUrl(url)) {
-        return [url]
-    } else {
-        result.push(url)
+        yield url
+        return
+    } else if (baseUrl) {
+        yield url
     }
 
     const page = await fetch(url)
@@ -31,11 +30,6 @@ export async function fetchFolderContent(
         baseUrl = url
     }
 
-    if (pageData.type === "unknown") {
-        const path = url.replace(baseUrl, "").replace(/^\//, "")
-        return [baseUrl + path]
-    }
-
     if (pageData.type === "folder") {
         const {
             content: { fileLinks },
@@ -46,18 +40,14 @@ export async function fetchFolderContent(
                 continue
             }
 
-            const folderContent = await fetchFolderContent(
+            const contents = await streamFolderContents(
                 url + fileLink.hrefAttribute,
                 baseUrl
             )
 
-            if (!folderContent) {
-                continue
+            for await (const fileLink of contents) {
+                yield fileLink
             }
-
-            result = result.concat(folderContent)
         }
     }
-
-    return result
 }
