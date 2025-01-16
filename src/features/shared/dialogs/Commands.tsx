@@ -84,6 +84,7 @@ export function Commands() {
                 if (e.key === "Tab") {
                     e.preventDefault()
 
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const selectedItem: any = getSelectedCommandItem(ref)
 
                     if (selectedItem && selectedItem.__onTab) {
