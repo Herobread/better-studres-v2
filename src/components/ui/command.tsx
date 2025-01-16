@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive, useCommandState } from "cmdk"
-import { LoaderPinwheel, Search } from "lucide-react"
+import { Loader2, Search } from "lucide-react"
 import * as React from "react"
 
 import { NiceModalHandler } from "@ebay/nice-modal-react"
@@ -52,7 +52,7 @@ const CommandInput = React.forwardRef<
         cmdk-input-wrapper=""
     >
         {isLoading ? (
-            <LoaderPinwheel className="h-4 w-4 shrink-0 animate-spin opacity-50" />
+            <Loader2 className="h-4 w-4 shrink-0 animate-spin opacity-50" />
         ) : (
             <Search className="h-4 w-4 shrink-0 opacity-50" />
         )}
