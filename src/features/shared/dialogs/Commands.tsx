@@ -32,7 +32,6 @@ import {
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
-import { useCommandState } from "cmdk"
 import { useRef, useState } from "react"
 
 export function Commands() {
@@ -94,72 +93,82 @@ export function Commands() {
             }}
         >
             <CommandInput
+                pages={pages}
                 placeholder="Type a command or search..."
                 value={search}
                 onValueChange={setSearch}
             />
             <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                Pages: {pages}
-                <CommandItem
-                    onTab={() => {
-                        setPages([...pages, "Page..."])
-                    }}
-                >
-                    Select + Tab to add new page to commands
-                </CommandItem>
-                {!isRootPage && (
-                    <CommandGroup heading="Navigation">
-                        <CommandItem onSelect={handleGoToParent}>
-                            🔙 Go to Parent Directory
+                {pages.length === 0 && (
+                    <>
+                        <CommandItem
+                            onTab={() => {
+                                setPages([...pages, "CS1002"])
+                                setSearch("")
+                            }}
+                        >
+                            Select + Tab to add new page to commands
                         </CommandItem>
-                        <SubCommandItem onSelect={handleGoToModuleRoot}>
-                            {moduleEmoji} Go to {moduleCode} root
-                        </SubCommandItem>
-                        <SubCommandItem onSelect={handleGoToRoot}>
-                            🌱 Go to root
-                        </SubCommandItem>
-                    </CommandGroup>
-                )}
-                <CommandGroup heading="Pinned links">
-                    {quickLinks &&
-                        quickLinks.map((quickLink) => {
-                            const { id, href, icon, name } = quickLink
-
-                            return (
-                                <CommandItem
-                                    key={id}
-                                    onSelect={() => {
-                                        navigateToPage(href)
-                                        NiceModal.hide(CommandsDialog)
-                                    }}
-                                >
-                                    {icon} {name}
+                        {!isRootPage && (
+                            <CommandGroup heading="Navigation">
+                                <CommandItem onSelect={handleGoToParent}>
+                                    🔙 Go to Parent Directory
                                 </CommandItem>
-                            )
-                        })}
-                    {!isRootPage && <SaveQuickLinkCommand />}
-                </CommandGroup>
-                <CommandGroup heading="Commands">
-                    <ViewArchiveCommand />
-                    <ToggleThemeCommand />
-                </CommandGroup>
-                <CommandGroup heading="Other">
-                    <ClearVersionTrackingDataCommand />
-                    <ClearBlackListCommand />
-                    <ToggleEnhancePageCommand />
-                </CommandGroup>
-                <ModuleCommandGroup />
-                <VisitedPathsCommandGroup />
+                                <SubCommandItem onSelect={handleGoToModuleRoot}>
+                                    {moduleEmoji} Go to {moduleCode} root
+                                </SubCommandItem>
+                                <SubCommandItem onSelect={handleGoToRoot}>
+                                    🌱 Go to root
+                                </SubCommandItem>
+                            </CommandGroup>
+                        )}
+                        <CommandGroup heading="Pinned links">
+                            {quickLinks &&
+                                quickLinks.map((quickLink) => {
+                                    const { id, href, icon, name } = quickLink
+
+                                    return (
+                                        <CommandItem
+                                            key={id}
+                                            onSelect={() => {
+                                                navigateToPage(href)
+                                                NiceModal.hide(CommandsDialog)
+                                            }}
+                                        >
+                                            {icon} {name}
+                                        </CommandItem>
+                                    )
+                                })}
+                            {!isRootPage && <SaveQuickLinkCommand />}
+                        </CommandGroup>
+                        <CommandGroup heading="Commands">
+                            <ViewArchiveCommand />
+                            <ToggleThemeCommand />
+                        </CommandGroup>
+                        <CommandGroup heading="Other">
+                            <ClearVersionTrackingDataCommand />
+                            <ClearBlackListCommand />
+                            <ToggleEnhancePageCommand />
+                        </CommandGroup>
+                        <ModuleCommandGroup search={search} />
+                        <VisitedPathsCommandGroup />
+                    </>
+                )}
+                {pages.length === 1 && (
+                    <>
+                        <CommandItem>
+                            module specific links commands
+                        </CommandItem>
+                    </>
+                )}
             </CommandList>
         </Command>
     )
 }
 
-function ModuleCommandGroup() {
+function ModuleCommandGroup({ search }: { search: string }) {
     const { navigateToPage } = useSmoothRouter()
-
-    const search = useCommandState((state) => state.search)
 
     const isDepartmentIncluded = departments.some((dept) =>
         search.toLowerCase().includes(dept.toLowerCase())
