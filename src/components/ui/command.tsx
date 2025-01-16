@@ -41,14 +41,29 @@ const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
 
 const CommandInput = React.forwardRef<
     React.ElementRef<typeof CommandPrimitive.Input>,
-    React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
+    React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
+        pages?: string[]
+    }
+>(({ className, pages, ...props }, ref) => (
     <div
-        className="_tailwind_preflight_reset flex items-center border-b border-muted px-3"
+        className="_tailwind_preflight_reset flex items-center gap-2 border-b border-muted px-3"
         // eslint-disable-next-line react/no-unknown-property
         cmdk-input-wrapper=""
     >
-        <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+        <Search className="h-4 w-4 shrink-0 opacity-50" />
+        {pages?.map((page) => {
+            return (
+                <>
+                    <div
+                        key={page}
+                        className="h-11 py-3 text-sm text-foreground"
+                    >
+                        {page}
+                    </div>
+                    <span>/</span>
+                </>
+            )
+        })}
         <CommandPrimitive.Input
             ref={ref}
             className={cn(
