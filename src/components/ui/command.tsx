@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { type DialogProps } from "@radix-ui/react-dialog"
 import { Command as CommandPrimitive, useCommandState } from "cmdk"
-import { Search } from "lucide-react"
+import { LoaderPinwheel, Search } from "lucide-react"
 import * as React from "react"
 
 import { NiceModalHandler } from "@ebay/nice-modal-react"
@@ -43,14 +43,19 @@ const CommandInput = React.forwardRef<
     React.ElementRef<typeof CommandPrimitive.Input>,
     React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
         pages?: string[]
+        isLoading?: boolean
     }
->(({ className, pages, ...props }, ref) => (
+>(({ className, isLoading, pages, ...props }, ref) => (
     <div
         className="_tailwind_preflight_reset flex items-center gap-2 border-b border-muted px-3"
         // eslint-disable-next-line react/no-unknown-property
         cmdk-input-wrapper=""
     >
-        <Search className="h-4 w-4 shrink-0 opacity-50" />
+        {isLoading ? (
+            <LoaderPinwheel className="h-4 w-4 shrink-0 animate-spin opacity-50" />
+        ) : (
+            <Search className="h-4 w-4 shrink-0 opacity-50" />
+        )}
         {pages?.map((page) => {
             return (
                 <>
