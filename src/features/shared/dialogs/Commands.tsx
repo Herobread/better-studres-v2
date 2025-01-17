@@ -1,4 +1,4 @@
-import NiceModal from "@ebay/nice-modal-react"
+import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { Badge } from "@src/components/ui/badge"
 import {
     Command,
@@ -43,6 +43,8 @@ export function Commands() {
     const [search, setSearch] = useState("")
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
+    const cancelFetchRef = useRef(false)
+
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
         queryFn: getQuickLinks,
@@ -74,7 +76,7 @@ export function Commands() {
     }
 
     const handleDeepSearchCurrent = () => {
-        setPages([...pages, currentUrlSegments[0]])
+        setPages([...pages, ...currentUrlSegments])
     }
 
     const [searchPaths, setSearchPaths] = useState<string[]>([])
@@ -82,11 +84,22 @@ export function Commands() {
     useEffect(() => {
         if (pages.length !== 0) {
             const fetchPath = async () => {
-                for await (const data of streamFolderContents(location.href)) {
+                setIsLoading(true)
+                const targetPath = convertUrlSegmentsToUrl(pages)
+
+                for await (const data of streamFolderContents(targetPath)) {
+                    console.log(cancelFetchRef.current)
+
+                    if (cancelFetchRef.current) {
+                        return
+                    }
+
                     setSearchPaths((paths) => [...paths, data])
                 }
 
-                setIsLoading(false)
+                if (!cancelFetchRef.current) {
+                    setIsLoading(false)
+                }
             }
 
             fetchPath()
@@ -97,6 +110,12 @@ export function Commands() {
         }
     }, [pages])
 
+    const { visible } = useModal(CommandsDialog)
+
+    useEffect(() => {
+        cancelFetchRef.current = !visible
+    }, [visible])
+
     return (
         <Command
             ref={ref}
@@ -105,6 +124,8 @@ export function Commands() {
                     e.preventDefault()
                     if (pages.length >= 1) {
                         setPages((pages) => pages.slice(0, -1))
+                    } else {
+                        cancelFetchRef.current = true
                     }
                 }
 
@@ -185,7 +206,7 @@ export function Commands() {
                         <VisitedPathsCommandGroup search={search} />
                     </>
                 )}
-                {pages.length === 1 && (
+                {pages.length >= 1 && (
                     <>
                         {searchPaths.map((searchPath) => {
                             return (
@@ -258,37 +279,51 @@ function VisitedPathsCommandGroup({ search }: { search: string }) {
     })
 
     return (
-        <CommandGroup heading="Visited paths">
-            {search &&
-                commandsData &&
-                commandsData.map((item) => {
-                    const urlSegments = extractUrlSegments(item.href)
-                    const urlSegmentsString = urlSegments.join("/")
+        <>
+            {search && (
+                <>
+                    <CommandGroup heading="Visited paths">
+                        {commandsData &&
+                            commandsData.map((item) => {
+                                const urlSegments = extractUrlSegments(
+                                    item.href
+                                )
+                                const urlSegmentsString = urlSegments.join("/")
 
-                    return (
-                        <CommandItem
-                            value={urlSegmentsString}
-                            keywords={[...urlSegments, ...item.tags]}
-                            key={urlSegmentsString}
-                            onSelect={() => {
-                                navigateToPage(item.href)
-                                NiceModal.hide(CommandsDialog)
-                            }}
-                            className="grid gap-1"
-                        >
-                            <div className="flex flex-wrap gap-2">
-                                {item.name}
-                                {item.tags.length > 0 &&
-                                    item.tags.map((tag) => {
-                                        return <Badge key={tag}>{tag}</Badge>
-                                    })}
-                            </div>
-                            <span className="text-muted-foreground">
-                                {urlSegmentsString}
-                            </span>
-                        </CommandItem>
-                    )
-                })}
-        </CommandGroup>
+                                return (
+                                    <CommandItem
+                                        value={urlSegmentsString}
+                                        keywords={[
+                                            ...urlSegments,
+                                            ...item.tags,
+                                        ]}
+                                        key={urlSegmentsString}
+                                        onSelect={() => {
+                                            navigateToPage(item.href)
+                                            NiceModal.hide(CommandsDialog)
+                                        }}
+                                        className="grid gap-1"
+                                    >
+                                        <div className="flex flex-wrap gap-2">
+                                            {item.name}
+                                            {item.tags.length > 0 &&
+                                                item.tags.map((tag) => {
+                                                    return (
+                                                        <Badge key={tag}>
+                                                            {tag}
+                                                        </Badge>
+                                                    )
+                                                })}
+                                        </div>
+                                        <span className="text-muted-foreground">
+                                            {urlSegmentsString}
+                                        </span>
+                                    </CommandItem>
+                                )
+                            })}
+                    </CommandGroup>
+                </>
+            )}
+        </>
     )
 }
