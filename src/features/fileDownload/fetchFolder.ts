@@ -115,4 +115,6 @@ export async function saveFolder(url: string) {
     let { name } = generateQuickLinkInfo(url)
     name = name.replaceAll(" - ", "-").replaceAll(" ", "_")
     await archiveAndSaveBlobs(folderContent, name)
+
+    return name
 }
