@@ -45,40 +45,43 @@ const CommandInput = React.forwardRef<
         pages?: string[]
         isLoading?: boolean
     }
->(({ className, isLoading, pages, ...props }, ref) => (
-    <div
-        className="_tailwind_preflight_reset flex items-center gap-2 border-b border-muted px-3"
-        // eslint-disable-next-line react/no-unknown-property
-        cmdk-input-wrapper=""
-    >
-        {isLoading ? (
-            <Loader2 className="h-4 w-4 shrink-0 animate-spin opacity-50" />
-        ) : (
-            <Search className="h-4 w-4 shrink-0 opacity-50" />
-        )}
-        {pages?.map((page) => {
-            return (
-                <>
-                    <div
-                        key={page}
-                        className="h-11 py-3 text-sm text-foreground"
-                    >
-                        {page}
-                    </div>
-                    <span>/</span>
-                </>
-            )
-        })}
-        <CommandPrimitive.Input
-            ref={ref}
-            className={cn(
-                "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
-                className
+>(({ className, isLoading, pages, ...props }, ref) => {
+    const lastPages = pages?.slice(-2)
+    const isManyPages = (pages?.length || 0) > 2
+
+    return (
+        <div
+            className="_tailwind_preflight_reset flex items-center gap-2 border-b border-muted px-3"
+            // eslint-disable-next-line react/no-unknown-property
+            cmdk-input-wrapper=""
+        >
+            {isLoading ? (
+                <Loader2 className="h-4 w-4 shrink-0 animate-spin opacity-50" />
+            ) : (
+                <Search className="h-4 w-4 shrink-0 opacity-50" />
             )}
-            {...props}
-        />
-    </div>
-))
+            {isManyPages && <div>...</div>}
+            {lastPages?.map((page) => {
+                return (
+                    <>
+                        <div className="h-11 w-max whitespace-nowrap py-3 text-sm text-foreground">
+                            {page}
+                        </div>
+                        <span>/</span>
+                    </>
+                )
+            })}
+            <CommandPrimitive.Input
+                ref={ref}
+                className={cn(
+                    "flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50",
+                    className
+                )}
+                {...props}
+            />
+        </div>
+    )
+})
 
 CommandInput.displayName = CommandPrimitive.Input.displayName
 
