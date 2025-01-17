@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">
   <a href='https://better-studres.netlify.app/'>
-    Better StudRes v2
+    Better Studres
   </a>
 </h1>
 <p align="center">
@@ -32,9 +32,8 @@ An open-source browser extension, that improves appearance of the <b>St Andrews 
 
 - dark mode
 - pinned links
-- command panel with search for visited folders
+- command panel with search
 - smooth navigation between pages
-- breadcrumbs in navigation
 
 ### File Enhancements
 
