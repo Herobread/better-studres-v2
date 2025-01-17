@@ -15,6 +15,29 @@ export const GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY =
     "getFormattedFilesListForCommand"
 
 /**
+ * Generates a formatted name for a file based on its path.
+ * @param {string} filePath - The file path.
+ * @returns {string} The formatted file name.
+ */
+export function generateFileName(filePath: string): string {
+    const urlSegments = extractUrlSegments(filePath)
+    const moduleCode = urlSegments[0]
+    const moduleEmoji = getModuleEmoji(moduleCode)
+    let name = `${moduleEmoji} ${moduleCode}`
+
+    if (urlSegments.length > 1) {
+        // Works for most folders
+        const isFolder = !urlSegments[urlSegments.length - 1].includes(".")
+        const folderChar = isFolder ? "/" : ""
+        const fileName = decodeURI(urlSegments[urlSegments.length - 1])
+        const fileEmoji = getFileEmoji(fileName + folderChar)
+        name += ` - ${fileEmoji} ${fileName}`
+    }
+
+    return name
+}
+
+/**
  * Retrieves a list of files with their paths and formatted names.
  * @returns {Promise<FileLinkPath[]>} A promise that resolves to an array of file link paths.
  */
@@ -29,35 +52,15 @@ export async function getFormattedFilesListForCommand(): Promise<
             fileDataMap[filePath][VERSION_CONTROL_FILE_DATA_KEY]
         const tags = fileDataMap[filePath][TAGS_FILE_DATA_KEY]
 
-        const tagNames = tags
-            ? tags.map((tag) => {
-                  return tag.name
-              })
-            : []
+        const tagNames = tags ? tags.map((tag) => tag.name) : []
 
         if (!minimizedFileLink) {
             continue
         }
 
-        const urlSegments = extractUrlSegments(
-            minimizedFileLink.latestFileLink.rawHref
-        )
-        const moduleCode = urlSegments[0]
-        const moduleEmoji = getModuleEmoji(moduleCode)
-        let name = `${moduleEmoji} ${moduleCode}`
-        let href = BASE_URL + filePath
-        if (urlSegments.length > 1) {
-            // works for most of the folders
-            const isFolder = !urlSegments[urlSegments.length - 1].includes(".")
-            const folderChar = isFolder ? "/" : ""
-            href += folderChar
-            const fileName = decodeURI(urlSegments[urlSegments.length - 1])
-            const fileEmoji = getFileEmoji(fileName + folderChar)
-            name += ` - ${fileEmoji} ${fileName}`
-        }
         result.push({
-            href,
-            name,
+            href: BASE_URL + filePath,
+            name: generateFileName(minimizedFileLink.latestFileLink.rawHref),
             tags: tagNames,
         })
     }

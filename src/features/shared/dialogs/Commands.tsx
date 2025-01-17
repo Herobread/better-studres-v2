@@ -22,6 +22,8 @@ import {
     BASE_URL,
     convertUrlSegmentsToUrl,
     extractUrlSegments,
+    FileLinkPath,
+    generateFileName,
     GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY,
     getFormattedFilesListForCommand,
 } from "@src/features/files"
@@ -29,7 +31,10 @@ import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
 } from "@src/features/quickLinks"
-import { streamFolderContents } from "@src/features/router/streamFolderContents"
+import {
+    isFileLikeUrl,
+    streamFolderContents,
+} from "@src/features/router/streamFolderContents"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
@@ -113,8 +118,19 @@ export function Commands() {
     const { visible } = useModal(CommandsDialog)
 
     useEffect(() => {
+        if (pages.length === 0) {
+            cancelFetchRef.current = true
+            setIsLoading(false)
+            return
+        }
+
         cancelFetchRef.current = !visible
-    }, [visible])
+    }, [visible, pages])
+
+    const { data: commandsData } = useQuery({
+        queryKey: [GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY],
+        queryFn: getFormattedFilesListForCommand,
+    })
 
     return (
         <Command
@@ -203,15 +219,45 @@ export function Commands() {
                             pages={pages}
                             setPages={setPages}
                         />
-                        <VisitedPathsCommandGroup search={search} />
+                        <VisitedPathsCommandGroup
+                            search={search}
+                            commandsData={commandsData}
+                        />
                     </>
                 )}
                 {pages.length >= 1 && (
                     <>
-                        {searchPaths.map((searchPath) => {
+                        {searchPaths.map((url) => {
+                            const urlSegments = extractUrlSegments(url)
+                            const urlSegmentsString = urlSegments.join("/")
+                            const name = generateFileName(url)
+
+                            const onTab = isFileLikeUrl(url)
+                                ? undefined
+                                : () => {
+                                      setPages([...urlSegments])
+                                      setSearch("")
+                                  }
+
                             return (
-                                <CommandItem key={searchPath}>
-                                    {searchPath}
+                                <CommandItem
+                                    onTab={onTab}
+                                    value={urlSegmentsString}
+                                    keywords={[...urlSegments]}
+                                    key={urlSegmentsString}
+                                    onSelect={() => {
+                                        navigateToPage(url)
+                                        NiceModal.hide(CommandsDialog)
+                                    }}
+                                >
+                                    <div className="grid gap-1">
+                                        <div className="flex flex-wrap gap-2">
+                                            {name}
+                                        </div>
+                                        <span className="text-muted-foreground">
+                                            {urlSegmentsString}
+                                        </span>
+                                    </div>
                                 </CommandItem>
                             )
                         })}
@@ -270,13 +316,14 @@ function ModuleCommandGroup({
     )
 }
 
-function VisitedPathsCommandGroup({ search }: { search: string }) {
+function VisitedPathsCommandGroup({
+    search,
+    commandsData,
+}: {
+    search: string
+    commandsData: FileLinkPath[] | undefined
+}) {
     const { navigateToPage } = useSmoothRouter()
-
-    const { data: commandsData } = useQuery({
-        queryKey: [GET_FORMATTED_FILES_LIST_FOR_COMMAND_QUERY_KEY],
-        queryFn: getFormattedFilesListForCommand,
-    })
 
     return (
         <>

@@ -2,7 +2,7 @@ import { parseDocumentFromText } from "@src/features/fileDownload"
 import { extractUrlSegments } from "@src/features/files"
 import { parsePageContent } from "@src/features/parser"
 
-function isFileLikeUrl(url: string) {
+export function isFileLikeUrl(url: string) {
     const urSegments = extractUrlSegments(url)
 
     return urSegments[urSegments.length - 1].includes(".")
