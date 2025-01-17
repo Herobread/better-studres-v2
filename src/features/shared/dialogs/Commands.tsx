@@ -205,7 +205,7 @@ export function Commands() {
                             {!isRootPage && <SaveQuickLinkCommand />}
                         </CommandGroup>
                         <CommandGroup heading="Commands">
-                            <ViewArchiveCommand />
+                            {!isRootPage && <ViewArchiveCommand />}
                             <ToggleThemeCommand />
                         </CommandGroup>
                         <CommandGroup heading="Other">
