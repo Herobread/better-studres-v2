@@ -161,7 +161,7 @@ export function Commands() {
             <CommandInput
                 isLoading={isLoading}
                 pages={pages}
-                placeholder="Type a command or search..."
+                placeholder="Search..."
                 value={search}
                 onValueChange={setSearch}
             />
