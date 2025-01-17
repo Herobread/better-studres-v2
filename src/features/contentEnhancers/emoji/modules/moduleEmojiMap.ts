@@ -2,7 +2,7 @@ export const MODULE_EMOJI_MAP: { [key: string]: string } = {
     CS1002: "💻",
     CS1003: "📊",
     CS1006: "👥",
-    CS1007: "🔗",
+    CS1007: "💀",
     CS2001: "🧠",
     CS2002: "🖥️",
     CS2003: "🌐",
