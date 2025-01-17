@@ -13,7 +13,9 @@ import {
 import { departments, modules } from "@src/constants/modules"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
+import { DownloadFileCommand } from "@src/features/command/DownloadFileCommand"
 import SaveQuickLinkCommand from "@src/features/command/SaveQuickLinkCommand"
+import { SshDownloadFileCommand } from "@src/features/command/SshDownloadFileCommand"
 import { ToggleEnhancePageCommand } from "@src/features/command/ToggleEnhancePageCommand"
 import ToggleThemeCommand from "@src/features/command/ToggleThemeCommand"
 import ViewArchiveCommand from "@src/features/command/ViewArchiveCommand"
@@ -205,7 +207,15 @@ export function Commands() {
                             {!isRootPage && <SaveQuickLinkCommand />}
                         </CommandGroup>
                         <CommandGroup heading="Commands">
-                            {!isRootPage && <ViewArchiveCommand />}
+                            {!isRootPage && (
+                                <>
+                                    <ViewArchiveCommand />
+                                    <DownloadFileCommand url={location.href} />
+                                    <SshDownloadFileCommand
+                                        url={location.href}
+                                    />
+                                </>
+                            )}
                             <ToggleThemeCommand />
                         </CommandGroup>
                         <CommandGroup heading="Other">
