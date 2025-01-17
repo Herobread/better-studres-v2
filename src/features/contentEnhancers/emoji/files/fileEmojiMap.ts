@@ -59,6 +59,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     mjs: "📦",
     ipynb: "📓",
     r: "📊",
+    rs: "🦀",
     // executables
     exe: "🚀",
     com: "💻",
@@ -78,6 +79,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     gnp: "📊",
     pcapng: "📡",
     gpx: "🗺",
+    puml: "📊",
     // config
     config: "⚙️",
     properties: "⚙️",
@@ -85,6 +87,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     cabal: "⚙️",
     yaml: "⚙️",
     ipkg: "⚙️",
+    rcS: "⚙️",
     gitignore: "🙈",
     // images
     png: "🖼️",
