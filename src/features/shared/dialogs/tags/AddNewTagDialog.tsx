@@ -40,8 +40,6 @@ const formSchema = z.object({
 export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
     const isAddToFileLink = !!fileLink
 
-    // const { fullName, fileKey } = fileLink
-
     const modalHandler = useModal()
     const { toast } = useToast()
 
@@ -69,15 +67,6 @@ export default NiceModal.create(({ fileLink }: TagFileMenuDialogProps) => {
             })
 
             handleClose()
-
-            const description = isAddToFileLink
-                ? `Created new tag: ${name} and added to ${fileLink.fullName}.`
-                : `Created new tag: ${name}`
-
-            toast({
-                title: "✅ Success",
-                description,
-            })
         } catch (error) {
             toast({
                 title: "❌ Error",
