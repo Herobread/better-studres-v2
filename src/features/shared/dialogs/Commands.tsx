@@ -50,7 +50,12 @@ export function Commands() {
     const [search, setSearch] = useState("")
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const cancelFetchRef = useRef(false)
+    const abortControllerRef = useRef(new AbortController())
+
+    const abortPathsSearch = () => {
+        abortControllerRef.current.abort()
+        abortControllerRef.current = new AbortController()
+    }
 
     const { data: quickLinks } = useQuery({
         queryKey: [GET_QUICK_LINKS_QUERY_KEY],
@@ -93,18 +98,17 @@ export function Commands() {
             const fetchPath = async () => {
                 setIsLoading(true)
                 const targetPath = convertUrlSegmentsToUrl(pages)
+                const signal = abortControllerRef.current.signal
 
                 for await (const data of streamFolderContents(targetPath)) {
-                    console.log(cancelFetchRef.current)
-
-                    if (cancelFetchRef.current) {
+                    if (signal.aborted) {
                         return
                     }
 
                     setSearchPaths((paths) => [...paths, data])
                 }
 
-                if (!cancelFetchRef.current) {
+                if (!signal.aborted) {
                     setIsLoading(false)
                 }
             }
@@ -113,6 +117,7 @@ export function Commands() {
         }
 
         return () => {
+            abortPathsSearch()
             setSearchPaths([])
         }
     }, [pages])
@@ -120,13 +125,11 @@ export function Commands() {
     const { visible } = useModal(CommandsDialog)
 
     useEffect(() => {
-        if (pages.length === 0) {
-            cancelFetchRef.current = true
+        if (pages.length === 0 || !visible) {
+            abortPathsSearch()
             setIsLoading(false)
             return
         }
-
-        cancelFetchRef.current = !visible
     }, [visible, pages])
 
     const { data: commandsData } = useQuery({
@@ -143,7 +146,7 @@ export function Commands() {
                     if (pages.length >= 1) {
                         setPages((pages) => pages.slice(0, -1))
                     } else {
-                        cancelFetchRef.current = true
+                        abortPathsSearch()
                     }
                 }
 

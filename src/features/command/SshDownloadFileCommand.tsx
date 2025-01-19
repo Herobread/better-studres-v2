@@ -15,7 +15,7 @@ export function SshDownloadFileCommand({ url }: { url: string }) {
 
     return (
         <CommandItem onSelect={handleDownload} keywords={COMMAND_KEYWORDS}>
-            ☁️ SSH Download folder
+            ⬇️ SSH Download folder
         </CommandItem>
     )
 }
