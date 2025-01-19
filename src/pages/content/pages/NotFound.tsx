@@ -6,7 +6,11 @@ import H1 from "@src/components/typography/H1"
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
-import { BASE_URL } from "@src/features/files"
+import {
+    BASE_URL,
+    convertUrlSegmentsToUrl,
+    extractUrlSegments,
+} from "@src/features/files"
 import {
     GET_QUICK_LINKS_QUERY_KEY,
     getQuickLinks,
@@ -32,16 +36,19 @@ export default function NotFound() {
         NiceModal.show(CommandsDialog)
     }
 
-    const lastUrl = document.referrer
-
     const suggestedLinks: QuickLink[] = []
 
-    if (lastUrl) {
+    const url = location.href
+    const urlSegments = extractUrlSegments(url)
+    urlSegments.pop()
+    const parentUrl = convertUrlSegmentsToUrl(urlSegments)
+
+    if (urlSegments.length !== 0) {
         suggestedLinks.push({
-            href: lastUrl,
+            href: parentUrl,
             icon: "🔙",
             id: 2,
-            name: "Last URL",
+            name: "Parent directory",
         })
     }
 
@@ -68,16 +75,20 @@ export default function NotFound() {
                         <TriangleAlert />
                         <H1>Not Found</H1>
                     </div>
+                    <p>Requested url was not found on the server.</p>
                     <p className="font-mono">{location.href.toString()}</p>{" "}
                     <p className="text-muted-foreground">
-                        Requested url was not found on the server.
+                        If you are sure that url exists:
                     </p>
-                    <p className="text-muted-foreground">
-                        If the previous URL(it might not be shown in history)
-                        doesn&apos;t have a trailing slash, that could be the
-                        issue. Check for trailing slash at the end of the url as
-                        you navigate and add it if it is not there.
-                    </p>
+                    <ul className="list-inside list-disc text-muted-foreground">
+                        <li>
+                            Check url, it must have trailing slash for folders.
+                        </li>
+                        <li>
+                            If you are using pinned link - the actual url might
+                            have changed.
+                        </li>
+                    </ul>
                     <p className="text-muted-foreground">
                         If this doesn&apos;t resolve the problem, temporarily
                         disable the extension and report the issue on{" "}
