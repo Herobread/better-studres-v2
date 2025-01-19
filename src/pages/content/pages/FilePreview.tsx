@@ -1,25 +1,33 @@
-import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
-import { FileContent } from "@src/features/parser"
-import { useTheme } from "@src/features/theme"
-import SyntaxHighlighter from "react-syntax-highlighter"
 import {
-    atomOneDark,
-    atomOneLight,
-} from "react-syntax-highlighter/dist/esm/styles/hljs"
+    fileExtensionToShikiLangMap,
+    SupportedShikiFileFormats,
+} from "@src/constants/fileExtensionToShikiLangMap"
+import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
+import { FileContent, splitFileName } from "@src/features/parser"
+import { useQuery } from "@tanstack/react-query"
+import { codeToHtml } from "shiki"
 
 export function FilePreview({ content }: { content: FileContent }) {
-    const { actualTheme } = useTheme()
+    const extension = (
+        splitFileName(window.location.toString()).extension || ""
+    ).toLowerCase()
+    const lang =
+        fileExtensionToShikiLangMap[extension as SupportedShikiFileFormats] ||
+        "plaintext"
+
+    const { data: html } = useQuery({
+        queryFn: async () =>
+            codeToHtml(content.text, {
+                lang,
+                theme: "github-dark",
+            }),
+        queryKey: [window.location],
+    })
 
     return (
         <>
             <CommandsShortcutMount />
-            <SyntaxHighlighter
-                wrapLongLines
-                showLineNumbers
-                style={actualTheme === "dark" ? atomOneDark : atomOneLight}
-            >
-                {content.text}
-            </SyntaxHighlighter>
+            <div dangerouslySetInnerHTML={{ __html: html || "Loading..." }} />
         </>
     )
 }
