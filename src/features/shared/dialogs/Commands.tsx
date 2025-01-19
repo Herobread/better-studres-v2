@@ -187,25 +187,31 @@ export function Commands() {
                                 </SubCommandItem>
                             </CommandGroup>
                         )}
-                        <CommandGroup heading="Pinned links">
-                            {quickLinks &&
-                                quickLinks.map((quickLink) => {
-                                    const { id, href, icon, name } = quickLink
+                        {(!isRootPage ||
+                            (quickLinks && quickLinks.length > 0)) && (
+                            <CommandGroup heading="Pinned links">
+                                {quickLinks &&
+                                    quickLinks.map((quickLink) => {
+                                        const { id, href, icon, name } =
+                                            quickLink
 
-                                    return (
-                                        <CommandItem
-                                            key={id}
-                                            onSelect={() => {
-                                                navigateToPage(href)
-                                                NiceModal.hide(CommandsDialog)
-                                            }}
-                                        >
-                                            {icon} {name}
-                                        </CommandItem>
-                                    )
-                                })}
-                            {!isRootPage && <SaveQuickLinkCommand />}
-                        </CommandGroup>
+                                        return (
+                                            <CommandItem
+                                                key={id}
+                                                onSelect={() => {
+                                                    navigateToPage(href)
+                                                    NiceModal.hide(
+                                                        CommandsDialog
+                                                    )
+                                                }}
+                                            >
+                                                {icon} {name}
+                                            </CommandItem>
+                                        )
+                                    })}
+                                {!isRootPage && <SaveQuickLinkCommand />}
+                            </CommandGroup>
+                        )}
                         <CommandGroup heading="Commands">
                             {!isRootPage && (
                                 <>
