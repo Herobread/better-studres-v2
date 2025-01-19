@@ -24,7 +24,7 @@ export default function SaveQuickLinkCommand() {
 
     const currentPageQuickLink = quickLinks?.find((quickLink) => {
         if (quickLink.href === currentUrl) {
-            return quickLink.id
+            return quickLink
         }
     })
 
@@ -44,11 +44,6 @@ export default function SaveQuickLinkCommand() {
             await queryClient.refetchQueries({
                 queryKey: [GET_QUICK_LINKS_QUERY_KEY],
             })
-
-            toast({
-                title: "✅ Success",
-                description: `Removed ${icon} ${name} from quick links`,
-            })
         } catch (error) {
             toast({
                 title: "❌ Error",
@@ -62,7 +57,7 @@ export default function SaveQuickLinkCommand() {
     if (currentPageQuickLink) {
         return (
             <CommandItem onSelect={handleRemoveQuickLink}>
-                ➖ Unpin {icon} {name}
+                ➖ Unpin {currentPageQuickLink.icon} {currentPageQuickLink.name}
             </CommandItem>
         )
     }
@@ -80,11 +75,6 @@ export default function SaveQuickLinkCommand() {
             })
             await queryClient.refetchQueries({
                 queryKey: [GET_QUICK_LINKS_QUERY_KEY],
-            })
-
-            toast({
-                title: "✅ Success",
-                description: `Saved ${icon} ${name} to quick links`,
             })
         } catch (error) {
             toast({

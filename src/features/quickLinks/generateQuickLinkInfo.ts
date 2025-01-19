@@ -13,6 +13,8 @@ export function generateQuickLinkInfo(href: string) {
     const moduleCode = urlSegments[0]
     const icon = getModuleEmoji(moduleCode)
 
+    name = decodeURI(name)
+
     return {
         href,
         name,
