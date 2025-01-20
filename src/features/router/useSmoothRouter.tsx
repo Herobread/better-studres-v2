@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react"
 
 import { PageData, PageType, parsePageContent } from "@src/features/parser"
-import { redirect, sanitizeUrl } from "@src/features/router/"
+import { redirect } from "@src/features/router/"
 import { checkIsUrlBlackListed } from "../extensionToggle/blacklist"
 import { parseDocumentFromText } from "../fileDownload/parseDocumentFromText"
 import { PageStateContext } from "./PageStateContext"
@@ -16,8 +16,6 @@ const useSmoothRouter = () => {
 
     const navigateToPage = useCallback(
         async (href: string, newState?: PageData) => {
-            href = sanitizeUrl(href)
-
             try {
                 const currentPageState =
                     (history.state as PageData) || undefined
