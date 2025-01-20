@@ -40,6 +40,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     htm: "🌐",
     html: "🌐",
     css: "🖌️",
+    scss: "🖌️",
     sh: "🐚",
     php: "💩",
     js: "🟨",
@@ -60,6 +61,7 @@ export const EMOJI_MAP: { [key: string]: string } = {
     ipynb: "📓",
     r: "📊",
     rs: "🦀",
+    jj: "☕",
     // executables
     exe: "🚀",
     com: "💻",
@@ -142,4 +144,5 @@ export const EMOJI_MAP: { [key: string]: string } = {
     good: "✅",
     bad: "❌",
     fcfg: "👩‍🏫",
+    fp: "📜", // cs3050 p2 2024-2025
 }
