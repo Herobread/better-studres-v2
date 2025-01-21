@@ -137,6 +137,9 @@ export function Commands() {
         queryFn: getFormattedFilesListForCommand,
     })
 
+    const listRef = useRef<HTMLDivElement>(null)
+    const scrollId = useRef<ReturnType<typeof setTimeout>>()
+
     return (
         <Command
             ref={ref}
@@ -154,7 +157,7 @@ export function Commands() {
                     e.preventDefault()
 
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const selectedItem: any = getSelectedCommandItem(ref)
+                    const selectedItem: any = getSelectedCommandItem(listRef)
 
                     if (selectedItem && selectedItem.__onTab) {
                         setIsLoading(true)
@@ -168,9 +171,20 @@ export function Commands() {
                 pages={pages}
                 placeholder="Search..."
                 value={search}
-                onValueChange={setSearch}
+                onValueChange={(v) => {
+                    setSearch(v)
+
+                    // this is fix for scroll position reset on search
+                    // src: https://github.com/pacocoursey/cmdk/issues/233#issuecomment-2015998940
+                    clearTimeout(scrollId.current)
+
+                    scrollId.current = setTimeout(() => {
+                        const div = listRef.current
+                        div?.scrollTo({ top: 0 })
+                    }, 1)
+                }}
             />
-            <CommandList>
+            <CommandList ref={listRef}>
                 <CommandEmpty>No results found.</CommandEmpty>
                 {pages.length === 0 && (
                     <>
