@@ -27,10 +27,12 @@ export function FilePreview({ content }: { content: FileContent }) {
     return (
         <>
             <CommandsShortcutMount />
-            <div
-                dangerouslySetInnerHTML={{ __html: html || "Loading..." }}
-                className="w-max"
-            />
+            <div className="w-full">
+                <div
+                    dangerouslySetInnerHTML={{ __html: html || "Loading..." }}
+                    className="w-max min-w-full"
+                />
+            </div>
         </>
     )
 }
