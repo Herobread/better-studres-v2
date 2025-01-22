@@ -4,8 +4,7 @@ import {
 } from "@src/constants/fileExtensionToShikiLangMap"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { FileContent, splitFileName } from "@src/features/parser"
-import { useQuery } from "@tanstack/react-query"
-import { codeToHtml } from "shiki"
+import { highlighter } from "@src/pages/content"
 
 export function FilePreview({ content }: { content: FileContent }) {
     const extension = (
@@ -15,13 +14,9 @@ export function FilePreview({ content }: { content: FileContent }) {
         fileExtensionToShikiLangMap[extension as SupportedShikiFileFormats] ||
         "plaintext"
 
-    const { data: html } = useQuery({
-        queryFn: async () =>
-            codeToHtml(content.text, {
-                lang,
-                theme: "github-dark",
-            }),
-        queryKey: [window.location],
+    const html = highlighter.codeToHtml(content.text, {
+        lang,
+        theme: "github-dark",
     })
 
     return (
@@ -29,7 +24,7 @@ export function FilePreview({ content }: { content: FileContent }) {
             <CommandsShortcutMount />
             <div className="w-full">
                 <div
-                    dangerouslySetInnerHTML={{ __html: html || "Loading..." }}
+                    dangerouslySetInnerHTML={{ __html: html }}
                     className="w-max min-w-full"
                 />
             </div>

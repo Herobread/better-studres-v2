@@ -1,11 +1,7 @@
 export type SupportedShikiFileFormats =
     | "java"
-    | "jar"
-    | "htm"
-    | "html"
     | "css"
     | "sh"
-    | "php"
     | "js"
     | "jsx"
     | "ts"
@@ -17,9 +13,6 @@ export type SupportedShikiFileFormats =
     | "c"
     | "cc"
     | "cpp"
-    | "ppc64"
-    | "st"
-    | "idr"
     | "mjs"
     | "ipynb"
     | "r"
@@ -30,12 +23,8 @@ export const fileExtensionToShikiLangMap: Record<
     string
 > = {
     java: "java",
-    jar: "java",
-    htm: "html",
-    html: "html",
     css: "css",
     sh: "shellscript",
-    php: "php",
     js: "javascript",
     jsx: "javascript",
     ts: "typescript",
@@ -47,9 +36,6 @@ export const fileExtensionToShikiLangMap: Record<
     c: "c",
     cc: "cpp",
     cpp: "cpp",
-    ppc64: "assembly",
-    st: "plaintext",
-    idr: "plaintext",
     mjs: "javascript",
     ipynb: "python",
     r: "r",
