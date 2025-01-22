@@ -14,6 +14,43 @@ import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
 
+import { createHighlighterCore } from "shiki/core"
+import { createJavaScriptRegexEngine } from "shiki/engine/javascript"
+
+import c from "shiki/langs/c.mjs"
+import cpp from "shiki/langs/cpp-macro.mjs"
+import css from "shiki/langs/css.mjs"
+import haskell from "shiki/langs/haskell.mjs"
+import java from "shiki/langs/java.mjs"
+import javascript from "shiki/langs/javascript.mjs"
+import perl from "shiki/langs/perl.mjs"
+import python from "shiki/langs/python.mjs"
+import r from "shiki/langs/r.mjs"
+import rust from "shiki/langs/rust.mjs"
+import shellscript from "shiki/langs/shellscript.mjs"
+import typescript from "shiki/langs/typescript.mjs"
+
+import ghdark from "shiki/themes/github-dark.mjs"
+
+export const highlighter = await createHighlighterCore({
+    themes: [ghdark],
+    langs: [
+        java,
+        css,
+        shellscript,
+        javascript,
+        typescript,
+        python,
+        perl,
+        haskell,
+        c,
+        cpp,
+        r,
+        rust,
+    ],
+    engine: createJavaScriptRegexEngine(),
+})
+
 async function initialize() {
     const currentUrl = location.href
 
