@@ -22,8 +22,10 @@ import {
 } from "../../../components/ui/form"
 import { Input } from "../../../components/ui/input"
 
+const emojiRegex = /[\p{Emoji}\p{So}]/u
+
 const formSchema = z.object({
-    icon: z.string().emoji(),
+    icon: z.string().regex(emojiRegex, "Invalid emoji"),
     name: z.string().min(1, "Name is required").max(50),
     href: z.string().min(1, "Link is required"),
 })
