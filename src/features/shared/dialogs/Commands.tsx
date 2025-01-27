@@ -91,6 +91,10 @@ export function Commands() {
         setPages([...pages, ...currentUrlSegments])
     }
 
+    const handleDeepSearchModule = () => {
+        setPages([currentUrlSegments[0]])
+    }
+
     const [searchPaths, setSearchPaths] = useState<string[]>([])
 
     useEffect(() => {
@@ -193,8 +197,16 @@ export function Commands() {
                                 <CommandItem onSelect={handleGoToParent}>
                                     🔙 Parent Directory
                                 </CommandItem>
-                                <CommandItem onSelect={handleDeepSearchCurrent}>
-                                    🔍 Search subfolders
+                                {currentUrlSegments.length > 1 && (
+                                    <CommandItem
+                                        onSelect={handleDeepSearchCurrent}
+                                    >
+                                        🔍 Search subfolders
+                                    </CommandItem>
+                                )}
+                                <CommandItem onSelect={handleDeepSearchModule}>
+                                    {moduleEmoji} Search in{" "}
+                                    {currentUrlSegments[0]}
                                 </CommandItem>
                                 <SubCommandItem onSelect={handleGoToModuleRoot}>
                                     {moduleEmoji} Go to {moduleCode} root
