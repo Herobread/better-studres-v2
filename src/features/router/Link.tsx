@@ -37,10 +37,10 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ ...props }, ref) => {
             return
         }
 
-        const isCtrlPressed = e.ctrlKey
+        const isNewTabHotKeyPressed = e.ctrlKey || e.metaKey || e.button == 1
         const isBlankTarget = target && target === "_blank"
 
-        if (isCtrlPressed || isHard || isBlankTarget) {
+        if (isNewTabHotKeyPressed || isHard || isBlankTarget) {
             redirect(href, "userClick", true)
             return
         }
