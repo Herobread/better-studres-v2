@@ -88,10 +88,12 @@ export function Commands() {
     }
 
     const handleDeepSearchCurrent = () => {
+        setSearch("")
         setPages([...pages, ...currentUrlSegments])
     }
 
     const handleDeepSearchModule = () => {
+        setSearch("")
         setPages([currentUrlSegments[0]])
     }
 
