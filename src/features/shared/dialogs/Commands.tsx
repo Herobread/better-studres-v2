@@ -344,7 +344,7 @@ function ModuleCommandGroup({
                             setSearch("")
                         }}
                         key={code}
-                        value={code}
+                        value={code + " module"}
                         onSelect={() => {
                             navigateToPage(BASE_URL + code + "/")
                             NiceModal.hide(CommandsDialog)
