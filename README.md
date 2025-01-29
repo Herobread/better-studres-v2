@@ -18,7 +18,10 @@ An open-source browser extension, that improves appearance of the <b>St Andrews 
   </a>
 </p>
 
-![Better studres](https://github.com/user-attachments/assets/d8294743-b748-49bc-9e0d-e124e48dcbed)
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/24937ee5-9f70-4eeb-ae8f-19ee3dd2ede3"/>
+</p>
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg"/>
@@ -26,29 +29,18 @@ An open-source browser extension, that improves appearance of the <b>St Andrews 
   <img src="https://wakatime.com/badge/user/9572a36f-d8ee-4307-9f1b-ae487130d025/project/018eb88f-13da-4546-a0fb-cc9693bcb2be.svg"/>
 </p>
 
-## Features
+## 📂 Features
 
-### Completely overhauled UI and UX
+- 🌙 Dark mode
+- ⬆️ improved accessibility
+- 🏷️ File icons
+- 🔍 Search and run commands with CTRL + K
+- 📌 Pinned links for easy access
+- 🖱️ Right-click to download files instantly
+- 🕰️ Minimal version tracking
+- 🚀 Smooth and fast navigation
 
-- dark mode
-- pinned links
-- command panel with search
-- smooth navigation between pages
-
-### File Enhancements
-
-- file and folder download
-- code syntax highlighting
-- basic version tracking
-- file notes
-- file tags
-- "reading mode" for html
-
-### Customize
-
-Use popup to change date display mode, icons, and UI elements visibility.
-
-## Tech Stack
+## ⚛️ Tech Stack
 
 - **vite**
 - **react**
@@ -61,45 +53,62 @@ Use popup to change date display mode, icons, and UI elements visibility.
 
 [vite-web-extension](https://github.com/JohnBra/vite-web-extension) template
 
-## How to Run in dev mode
+## 🚀 Getting Started
 
-1. **Install Dependencies**
+### 📥 Local development setup
 
-    ```bash
-    bun install
-    ```
+1. clone the repo
 
-2. **Start the Development Server**
+```
+git clone https://github.com/Herobread/better-studres-v2.git
+```
 
-    chrome:
-    ```bash
-    bun run dev
-    ```
-    firefox:
-    ```bash
-    bun run dev:firefox
-    ```
+2. cd into directory
 
-    This will automatically rebuild the extension to the `dist/` directory.
+```
+cd better-studres-v2/
+```
 
-   
+3. install dependencies
 
-4. **Refresh Extensions in browser**
-   
-   After running the development server, refresh your extension(s) and the Studres page to see the changes.
+```
+bun i
+```
 
-## How to build
+4. Run in dev mode
 
-  chrome:
-  ```bash
-  bun run build
-  ```
-    
-  firefox:
-  ```bash
-  bun run build:firefox
-  ```
+Chrome:
+```
+bun run dev
+```
 
-  Output will be stored in the dist/
+Firefox:
+```
+bun run dev:firefox
+```
 
-Enjoy the improved StudRes experience!
+5. Add extension to the browser
+
+chrome:
+https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world#load-unpacked
+
+firefox:
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing
+
+when you save file in dev mode, it will automatically rebuild the extension. After that you need to reload extension in browser and reload studres page to see changes.
+
+## 🤝 Contributing
+
+If you have an idea or found a bug, please open a GitHub Issue to suggest it.
+
+Keep in mind that I'm trying to keep the extension as functional as possible, so some features might be rejected.
+
+There are no official docs yet, but if you're feeling adventurous, you can try implementing the feature yourself!
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+## 🌟 Support
+
+If you find this project useful, consider giving it a ⭐ on GitHub!
