@@ -43,7 +43,11 @@ const useSmoothRouter = () => {
 
                     const response = await fetch(href)
                     if (response.redirected) {
-                        history.pushState({ ...currentPageState }, "", href)
+                        history.pushState(
+                            { ...currentPageState },
+                            "",
+                            response.url
+                        )
                         navigateToPage(response.url)
                         return
                     }
