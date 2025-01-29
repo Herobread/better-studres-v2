@@ -15,7 +15,7 @@ const useSmoothRouter = () => {
     }
 
     const navigateToPage = useCallback(
-        async (href: string, newState?: PageData) => {
+        async (href: string, newState?: PageData, isFromRedirect?: boolean) => {
             try {
                 const currentPageState =
                     (history.state as PageData) || undefined
@@ -39,16 +39,20 @@ const useSmoothRouter = () => {
                 if (newState) {
                     pageData = newState
                 } else {
-                    history.pushState(null, "", href)
+                    if (isFromRedirect) {
+                        history.replaceState(null, "", href)
+                    } else {
+                        history.pushState(null, "", href)
+                    }
 
                     const response = await fetch(href)
                     if (response.redirected) {
-                        history.pushState(
+                        history.replaceState(
                             { ...currentPageState },
                             "",
                             response.url
                         )
-                        navigateToPage(response.url)
+                        navigateToPage(response.url, undefined, true)
                         return
                     }
                     const htmlText = await response.text()
