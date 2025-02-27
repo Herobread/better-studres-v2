@@ -55,7 +55,7 @@ export function generateChangeRecords(
                 after,
             },
             header: updatedFields.join(" and ") + " updated:",
-            timestamp: new Date(version.detectedAt),
+            timestamp: new Date(nextVersion.detectedAt),
             version: "v" + (i + 1),
         })
     }
