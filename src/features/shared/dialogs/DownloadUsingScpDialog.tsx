@@ -108,8 +108,8 @@ export default NiceModal.create(({ fileKey }: { fileKey: string }) => {
                 <DialogHeader>
                     <DialogTitle>SSH download using scp</DialogTitle>
                     <DialogDescription>
-                        Generate an SCP command to copy files from the studres
-                        server using SSH.
+                        Generates SCP command that will copy target folder and
+                        it{`'`}s contents into target path using ssh.
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
