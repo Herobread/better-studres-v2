@@ -22,10 +22,10 @@ import {
 } from "../../../components/ui/form"
 import { Input } from "../../../components/ui/input"
 
-const emojiRegex = /[\p{Emoji}\p{So}]/u
+const allowedIconsRegex = /[\p{Emoji}\p{So}]/u
 
-const formSchema = z.object({
-    icon: z.string().regex(emojiRegex, "Invalid emoji"),
+export const quickLinkFormSchema = z.object({
+    icon: z.string().regex(allowedIconsRegex, "Invalid emoji"),
     name: z.string().min(1, "Name is required").max(50),
     href: z.string().min(1, "Link is required"),
 })
@@ -47,8 +47,8 @@ export default function AddQuickLinkForm({
 
     const queryClient = useQueryClient()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof quickLinkFormSchema>>({
+        resolver: zodResolver(quickLinkFormSchema),
         defaultValues: {
             icon: moduleEmoji,
             name: decodeURI(name || ""),
@@ -56,7 +56,9 @@ export default function AddQuickLinkForm({
         },
     })
 
-    async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
+    async function onSubmit(
+        quickLinkData: z.infer<typeof quickLinkFormSchema>
+    ) {
         await addQuickLink(quickLinkData)
 
         queryClient.invalidateQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })

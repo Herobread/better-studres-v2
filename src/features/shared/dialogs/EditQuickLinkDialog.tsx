@@ -25,22 +25,17 @@ import {
     QuickLink,
     updateQuickLink,
 } from "@src/features/quickLinks"
+import { quickLinkFormSchema } from "@src/features/quickLinks/components"
 import { useQueryClient } from "@tanstack/react-query"
 import { MouseEvent, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-const formSchema = z.object({
-    icon: z.string().emoji(),
-    name: z.string().min(1, "Name is required").max(50),
-    href: z.string().min(1, "Link is required"),
-})
-
 export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
     const modalHandler = useModal()
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof quickLinkFormSchema>>({
+        resolver: zodResolver(quickLinkFormSchema),
         defaultValues: {
             ...quickLink,
         },
@@ -55,7 +50,9 @@ export default NiceModal.create(({ quickLink }: { quickLink: QuickLink }) => {
 
     const queryClient = useQueryClient()
 
-    async function onSubmit(quickLinkData: z.infer<typeof formSchema>) {
+    async function onSubmit(
+        quickLinkData: z.infer<typeof quickLinkFormSchema>
+    ) {
         await updateQuickLink(quickLink.id, quickLinkData)
 
         queryClient.invalidateQueries({ queryKey: [GET_QUICK_LINKS_QUERY_KEY] })
