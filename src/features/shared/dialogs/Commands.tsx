@@ -10,6 +10,8 @@ import {
     getSelectedCommandItem,
     SubCommandItem,
 } from "@src/components/ui/command"
+import { ToastAction } from "@src/components/ui/toast"
+import { useToast } from "@src/components/ui/use-toast"
 import { departments, modules } from "@src/constants/modules"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
@@ -38,12 +40,14 @@ import {
     streamFolderContents,
 } from "@src/features/router/streamFolderContents"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
+import AuthErrorDialog from "@src/features/shared/dialogs/AuthErrorDialog"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useRef, useState } from "react"
 
 export function Commands() {
     const { navigateToPage } = useSmoothRouter()
+    const { toast } = useToast()
 
     const ref = useRef(null)
     const [pages, setPages] = useState<string[]>([])
@@ -102,20 +106,49 @@ export function Commands() {
     useEffect(() => {
         if (pages.length !== 0) {
             const fetchPath = async () => {
-                setIsLoading(true)
-                const targetPath = convertUrlSegmentsToUrl(pages)
-                const signal = abortControllerRef.current.signal
+                try {
+                    setIsLoading(true)
+                    const targetPath = convertUrlSegmentsToUrl(pages)
+                    const signal = abortControllerRef.current.signal
 
-                for await (const data of streamFolderContents(targetPath)) {
-                    if (signal.aborted) {
-                        return
+                    for await (const data of streamFolderContents(targetPath)) {
+                        if (signal.aborted) {
+                            return
+                        }
+
+                        setSearchPaths((paths) => [...paths, data])
                     }
 
-                    setSearchPaths((paths) => [...paths, data])
-                }
+                    if (!signal.aborted) {
+                        setIsLoading(false)
+                    }
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                } catch (error: any) {
+                    console.error(error)
 
-                if (!signal.aborted) {
                     setIsLoading(false)
+
+                    let action
+
+                    if (error.name === "AuthError") {
+                        action = (
+                            <ToastAction
+                                altText="About"
+                                onClick={() => {
+                                    NiceModal.hide(CommandsDialog)
+                                    NiceModal.show(AuthErrorDialog)
+                                }}
+                            >
+                                More info
+                            </ToastAction>
+                        )
+                    }
+
+                    toast({
+                        title: "❌ Search failed.",
+                        description: error.message || "Please, try again.",
+                        action,
+                    })
                 }
             }
 
