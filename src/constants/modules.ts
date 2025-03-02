@@ -76,3 +76,16 @@ export const modules: { code: string; name: string }[] = [
     { code: "IS1901", name: "Information Technology 1" },
     { code: "IS5110", name: "Digital Heritage and Preservation" },
 ]
+
+export const otherPaths: { code: string; name: string }[] = [
+    { code: "icons", name: "File Icons" },
+    { code: "Library", name: "Library" },
+    { code: "Timetables", name: "Timetables" },
+    { code: "Teaching", name: "Teaching" },
+    { code: "Teaching/First", name: "First Years" },
+    { code: "Teaching/Second", name: "Second Years" },
+    { code: "Teaching/Hons", name: "Honours" },
+    { code: "Teaching/MSci", name: "Master of Science" },
+    { code: "Teaching/Masters", name: "Masters" },
+    { code: "PGR", name: "Postgraduate Research Students" },
+]
