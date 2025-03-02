@@ -1,13 +1,14 @@
 import { FullFileLink, parseTable } from "@src/features/parser"
 import { parseFilePageContent } from "@src/features/parser/parseFilePageContent"
 import { isFilePage } from "@src/features/router/isFilePage"
+import { isForbiddenPage } from "@src/features/router/isForbiddenPage"
 import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { isRootPage } from "@src/features/router/isRootPage"
 import { SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 import { ModuleContent, parseRootPage } from "./root/parseRootPageContent"
 
-export type PageType = "folder" | "not found" | "root" | "file" | "unknown"
+export type PageType = "folder" | "not found" | "forbidden" | "root" | "file" | "unknown"
 
 export interface BasePageData {
     type: PageType
@@ -27,6 +28,10 @@ export interface FolderPageData extends BasePageData {
 
 export interface NotFoundPageData extends BasePageData {
     type: "not found"
+}
+
+export interface ForbiddenPageData extends BasePageData {
+    type: "forbidden"
 }
 
 export interface RootContent {
@@ -56,6 +61,7 @@ export interface UnknownPageData extends BasePageData {
 export type PageData =
     | FolderPageData
     | NotFoundPageData
+    | ForbiddenPageData
     | RootPageData
     | UnknownPageData
     | FilePreviewPageData
@@ -69,6 +75,12 @@ export function parsePageContent(content: HTMLElement): PageData {
     if (isNotFoundPage(content)) {
         return {
             type: "not found",
+        }
+    }
+
+    if (isForbiddenPage(content)) {
+        return {
+            type: "forbidden",
         }
     }
 
