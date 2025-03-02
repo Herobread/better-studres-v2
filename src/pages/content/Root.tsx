@@ -3,6 +3,7 @@ import { PageStateContext } from "@src/features/router/PageStateContext"
 import { FilePreview } from "@src/pages/content/pages/FilePreview"
 import { useContext } from "react"
 import Folder from "./pages/Folder"
+import Forbidden from "./pages/Forbidden"
 import NotFound from "./pages/NotFound"
 import RootPage from "./pages/RootPage"
 
@@ -16,6 +17,10 @@ export default function Root({ initialPageData }: RootProps) {
 
     if (pageData.type === "not found") {
         return <NotFound />
+    }
+
+    if (pageData.type === "forbidden") {
+        return <Forbidden />
     }
 
     if (pageData.type === "file") {
