@@ -54,6 +54,8 @@ export const EMOJI_MAP: { [key: string]: string } = {
     c: "🅲",
     cc: "➕",
     cpp: "➕",
+    s: "🔍", // assembly file
+    asm: "🔍", // alternative assembly extension
     ppc64: "💻",
     st: "💻",
     idr: "💻",
