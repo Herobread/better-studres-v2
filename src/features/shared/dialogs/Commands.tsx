@@ -12,7 +12,7 @@ import {
 } from "@src/components/ui/command"
 import { ToastAction } from "@src/components/ui/toast"
 import { useToast } from "@src/components/ui/use-toast"
-import { departments, modules } from "@src/constants/modules"
+import { departments, modules, otherPaths } from "@src/constants/modules"
 import ClearBlackListCommand from "@src/features/command/ClearBlackListCommand"
 import ClearVersionTrackingDataCommand from "@src/features/command/ClearVersionTrackingDataCommand"
 import { DownloadFileCommand } from "@src/features/command/DownloadFileCommand"
@@ -299,6 +299,12 @@ export function Commands() {
                             pages={pages}
                             setPages={setPages}
                         />
+                        <OtherPathsCommandGroup
+                            search={search}
+                            setSearch={setSearch}
+                            pages={pages}
+                            setPages={setPages}
+                        />
                         <VisitedPathsCommandGroup
                             search={search}
                             commandsData={commandsData}
@@ -393,6 +399,44 @@ function ModuleCommandGroup({
                 ))}
             </CommandGroup>
         )
+    )
+}
+
+function OtherPathsCommandGroup({
+    search,
+    setSearch,
+    pages,
+    setPages,
+}: {
+    search: string
+    setSearch: React.Dispatch<React.SetStateAction<string>>
+    pages: string[]
+    setPages: React.Dispatch<React.SetStateAction<string[]>>
+}) {
+    const { navigateToPage } = useSmoothRouter()
+
+    return (
+        <CommandGroup heading="Misc paths">
+            {otherPaths.map(({ code, name }) => (
+                <CommandItem
+                    onTab={() => {
+                        setPages([...pages, code])
+                        setSearch("")
+                    }}
+                    key={code}
+                    value={code + " other"}
+                    onSelect={() => {
+                        navigateToPage(BASE_URL + code + "/")
+                        NiceModal.hide(CommandsDialog)
+                    }}
+                >
+                    <div className="grid gap-1">
+                        {getModuleEmoji(code)} {code}
+                        <span className="text-muted-foreground">{name}</span>
+                    </div>
+                </CommandItem>
+            ))}
+        </CommandGroup>
     )
 }
 
