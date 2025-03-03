@@ -1,6 +1,6 @@
 import { EMOJI_MAP } from "./fileEmojiMap"
 import { getFileEmojiId } from "./getFileEmojiId"
-import { getSpecialDayEmoji } from "../modules/getModuleEmoji"
+import { getSpecialDayEmoji } from "../special/getSpecialDayEmoji"
 
 /**
  * Retrieves the emoji associated with a given filename.

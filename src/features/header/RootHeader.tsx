@@ -1,17 +1,28 @@
 import H1 from "@src/components/typography/H1"
 import { StudresIcon } from "@src/components/ui/icons/StudresIcon"
 import { ThemeToggle } from "@src/components/ui/theme-toggle"
+import { getSpecialDayEmoji, getSpecialDayMessage } from "@src/features/contentEnhancers/emoji/special/getSpecialDayEmoji"
 import Link from "../router/Link"
 import SubheaderBreadcrumbs from "./SubheaderBreadCrumbs"
 
 export default function RootHeader() {
+    const specialEmoji = getSpecialDayEmoji()
+    const specialMessage = getSpecialDayMessage()
+
     return (
         <div className="space-y-3">
             <div className="space-y-2">
                 <div className="grid grid-cols-[1fr_max-content]">
                     <div className="flex items-end gap-2">
                         <StudresIcon />
-                        <H1>Student Resources</H1>
+                        <div className="flex items-baseline gap-2">
+                            <H1>Student Resources</H1>
+                            {specialEmoji && specialMessage && (
+                                <span title={specialMessage} className="text-2xl">
+                                    {specialEmoji}
+                                </span>
+                            )}
+                        </div>
                     </div>
                     <ThemeToggle />
                 </div>
