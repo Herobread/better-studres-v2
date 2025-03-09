@@ -17,19 +17,21 @@ export function Toolbar({
             aria-label="Toolbar"
             aria-expanded={!isMinimized}
             aria-live="polite"
-            className="_tailwind_preflight_reset fixed bottom-3 left-1/2 -translate-x-1/2 transform text-base text-foreground"
+            className="_tailwind_preflight_reset fixed bottom-4 right-4 transform text-base text-foreground"
         >
             <div
                 data-minimized={isMinimized}
-                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background px-3 py-2 opacity-50 
+                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background px-3 py-2 opacity-100 
                 shadow-lg
                 transition-all
-                hover:opacity-100
                 data-[minimized=true]/minimized:gap-0
-                data-[minimized=true]/minimized:p-0"
+                data-[minimized=true]/minimized:p-0
+                data-[minimized=true]/minimized:opacity-50
+                data-[minimized=true]/minimized:hover:opacity-100"
             >
                 <div
                     className={`grid grid-cols-[1fr] transition-all 
+                    
                     group-data-[minimized=true]/minimized:scale-x-0
                     group-data-[minimized=true]/minimized:grid-cols-[0fr]
                     group-data-[minimized=true]/minimized:opacity-0

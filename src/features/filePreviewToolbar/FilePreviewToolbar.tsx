@@ -20,7 +20,7 @@ export function FilePreviewToolbar() {
     const currentUrl = window.location.toString()
     const currentUrlSegments = extractUrlSegments(currentUrl)
 
-    const [isMinimized, setIsMinimized] = useState(false)
+    const [isMinimized, setIsMinimized] = useState(true)
 
     const handleGoToParent = () => {
         currentUrlSegments.pop()
