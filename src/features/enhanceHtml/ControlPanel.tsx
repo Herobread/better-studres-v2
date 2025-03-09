@@ -88,6 +88,7 @@ export function ControlPanel() {
                     onClick={handleGoToParent}
                 >
                     🔙 ../
+                    <span className="sr-only">Parent directory</span>
                 </Button>
                 <Separator orientation="vertical" />
                 <ToggleGroup
@@ -110,10 +111,18 @@ export function ControlPanel() {
                         }
                     }}
                 >
-                    <ToggleGroupItem size="sm" value="default" className="text-nowrap">
+                    <ToggleGroupItem
+                        size="sm"
+                        value="default"
+                        className="text-nowrap"
+                    >
                         📝 Default
                     </ToggleGroupItem>
-                    <ToggleGroupItem size="sm" value="centered" className="text-nowrap">
+                    <ToggleGroupItem
+                        size="sm"
+                        value="centered"
+                        className="text-nowrap"
+                    >
                         📐 Centered
                     </ToggleGroupItem>
                 </ToggleGroup>
