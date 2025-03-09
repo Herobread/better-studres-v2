@@ -110,10 +110,10 @@ export function ControlPanel() {
                         }
                     }}
                 >
-                    <ToggleGroupItem size="sm" value="default">
+                    <ToggleGroupItem size="sm" value="default" className="text-nowrap">
                         📝 Default
                     </ToggleGroupItem>
-                    <ToggleGroupItem size="sm" value="centered">
+                    <ToggleGroupItem size="sm" value="centered" className="text-nowrap">
                         📐 Centered
                     </ToggleGroupItem>
                 </ToggleGroup>
