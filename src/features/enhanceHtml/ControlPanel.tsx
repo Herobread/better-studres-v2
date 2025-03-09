@@ -45,15 +45,10 @@ export function ControlPanel() {
     useEffect(() => {
         if (isEnhancedRemote !== undefined) {
             setIsEnhanced(isEnhancedRemote)
+            setSelected(isEnhancedRemote ? "centered" : "default")
             applyEnhancements(isEnhancedRemote)
         }
     }, [isEnhancedRemote])
-
-    const handleEnhance = async (pressed: boolean) => {
-        setIsEnhanced(pressed)
-        await saveFileData(fileKey, HTML_ENHANCED_FILE_DATA_KEY, pressed)
-        applyEnhancements(pressed)
-    }
 
     const applyEnhancements = (enhanced: boolean) => {
         const body = document.body
@@ -86,32 +81,34 @@ export function ControlPanel() {
                     variant={"outline"}
                     onClick={handleGoToParent}
                 >
-                    🔙 Parent Directory
+                    🔙 ../
                 </Button>
+                <Separator orientation="vertical" />
                 <ToggleGroup
-                    size={"sm"}
+                    size="sm"
                     type="single"
                     className="grid grid-cols-2"
-                    onValueChange={(value) => {
+                    value={selected}
+                    onValueChange={async (value) => {
                         if (value) {
-                            console.log(value)
+                            setSelected(value as "default" | "centered")
+
+                            const isEnhanced = value === "centered"
+
+                            setIsEnhanced(isEnhanced)
+                            await saveFileData(
+                                fileKey,
+                                HTML_ENHANCED_FILE_DATA_KEY,
+                                isEnhanced
+                            )
+                            applyEnhancements(isEnhanced)
                         }
                     }}
                 >
-                    <ToggleGroupItem
-                        size={"sm"}
-                        value="default"
-                        onSelect={() => setSelected("default")}
-                    >
+                    <ToggleGroupItem size="sm" value="default">
                         📝 Default
                     </ToggleGroupItem>
-                    <ToggleGroupItem
-                        size={"sm"}
-                        value="centered"
-                        onSelect={() => {
-                            setSelected("centered")
-                        }}
-                    >
+                    <ToggleGroupItem size="sm" value="centered">
                         📐 Centered
                     </ToggleGroupItem>
                 </ToggleGroup>
