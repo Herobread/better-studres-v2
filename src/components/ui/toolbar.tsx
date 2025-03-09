@@ -11,7 +11,14 @@ export function Toolbar({
     onToggleMinimized: () => void
 }) {
     return (
-        <div className="_tailwind_preflight_reset fixed bottom-3 left-1/2 -translate-x-1/2 transform text-base text-foreground">
+        <div
+            id="toolbar"
+            tabIndex={-1}
+            aria-label="Toolbar"
+            aria-expanded={!isMinimized}
+            aria-live="polite"
+            className="_tailwind_preflight_reset fixed bottom-3 left-1/2 -translate-x-1/2 transform text-base text-foreground"
+        >
             <div
                 data-minimized={isMinimized}
                 className="group/minimized grid grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background p-3 shadow-lg transition-all 
@@ -32,12 +39,14 @@ export function Toolbar({
                     size="icon"
                     variant="ghost"
                     onClick={onToggleMinimized}
+                    aria-controls="toolbar"
+                    aria-expanded={!isMinimized}
                     className="relative"
                 >
                     <Minimize2 className="absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all duration-500 group-data-[minimized=true]/minimized:-rotate-90 group-data-[minimized=true]/minimized:scale-50 group-data-[minimized=true]/minimized:opacity-0" />
                     <PencilRulerIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all duration-500 group-data-[minimized=true]/minimized:rotate-0 group-data-[minimized=true]/minimized:scale-100" />
                     <span className="sr-only">
-                        {isMinimized ? "Maximize" : "Minimize"}
+                        {isMinimized ? "Maximize Toolbar" : "Minimize Toolbar"}
                     </span>
                 </Button>
             </div>
