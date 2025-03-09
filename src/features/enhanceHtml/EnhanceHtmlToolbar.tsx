@@ -25,7 +25,7 @@ export function EnhanceHtmlToolbar() {
     const currentUrlSegments = extractUrlSegments(currentUrl)
 
     const fileKey = generateFileKey(currentUrlSegments)
-    const [isMinimized, setIsMinimized] = useState(false)
+    const [isMinimized, setIsMinimized] = useState(true)
 
     const [textStyle, setTextStyle] = useState<"default" | "centered">(
         "default"
