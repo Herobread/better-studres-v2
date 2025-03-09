@@ -18,7 +18,7 @@ import { useEffect, useState } from "react"
 
 export const HTML_ENHANCED_FILE_DATA_KEY = "is-html-enhanced"
 
-export function ControlPanel() {
+export function EnhanceHtmlToolbar() {
     const { navigateToPage } = useSmoothRouter()
 
     const currentUrl = window.location.toString()
