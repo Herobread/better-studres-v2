@@ -1,26 +1,33 @@
+import { Button } from "@src/components/ui/button"
+import { Separator } from "@src/components/ui/separator"
 import { Toggle } from "@src/components/ui/toggle"
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from "@src/components/ui/tooltip"
+import { ToggleGroup, ToggleGroupItem } from "@src/components/ui/toggle-group"
+import { Toolbar } from "@src/components/ui/toolbar"
 import {
     GET_FILE_DATA_QUERY_KEY,
+    convertUrlSegmentsToUrl,
     extractUrlSegments,
     generateFileKey,
     getFileData,
     saveFileData,
 } from "@src/features/files"
+import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import { useQuery } from "@tanstack/react-query"
-import { SparklesIcon } from "lucide-react"
+import { ChevronDown, SparklesIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export const HTML_ENHANCED_FILE_DATA_KEY = "is-html-enhanced"
 
 export function ControlPanel() {
-    const fileKey = generateFileKey(extractUrlSegments(location.href))
+    const { navigateToPage } = useSmoothRouter()
+
+    const currentUrl = window.location.toString()
+    const currentUrlSegments = extractUrlSegments(currentUrl)
+
+    const fileKey = generateFileKey(currentUrlSegments)
 
     const [isEnhanced, setIsEnhanced] = useState(false)
+    const [selected, setSelected] = useState<"default" | "centered">("default")
 
     const { isLoading, data: isEnhancedRemote } = useQuery({
         queryKey: [
@@ -65,22 +72,73 @@ export function ControlPanel() {
         )
     }
 
+    const handleGoToParent = () => {
+        currentUrlSegments.pop()
+
+        navigateToPage(convertUrlSegmentsToUrl(currentUrlSegments))
+    }
+
     return (
-        <Tooltip>
-            <TooltipTrigger>
-                <Toggle
-                    className="bg-background-layer-1 opacity-25 transition-opacity hover:opacity-100"
-                    onPressedChange={handleEnhance}
-                    pressed={isEnhanced}
+        <>
+            <Toolbar>
+                <Button
+                    size={"default"}
+                    variant={"outline"}
+                    onClick={handleGoToParent}
                 >
-                    <SparklesIcon />
-                </Toggle>
-            </TooltipTrigger>
-            <TooltipContent>
-                Applies basic css styles to potentially improve page appearance.
-            </TooltipContent>
-        </Tooltip>
+                    🔙 Parent Directory
+                </Button>
+                <ToggleGroup
+                    size={"sm"}
+                    type="single"
+                    className="grid grid-cols-2"
+                    onValueChange={(value) => {
+                        if (value) {
+                            console.log(value)
+                        }
+                    }}
+                >
+                    <ToggleGroupItem
+                        size={"sm"}
+                        value="default"
+                        onSelect={() => setSelected("default")}
+                    >
+                        📝 Default
+                    </ToggleGroupItem>
+                    <ToggleGroupItem
+                        size={"sm"}
+                        value="centered"
+                        onSelect={() => {
+                            setSelected("centered")
+                        }}
+                    >
+                        📐 Centered
+                    </ToggleGroupItem>
+                </ToggleGroup>
+                <Separator orientation="vertical" />
+                <Button size={"icon"} variant={"ghost"}>
+                    <ChevronDown />
+                </Button>
+            </Toolbar>
+        </>
     )
+
+    // return (
+    //     <Tooltip>
+    //         <TooltipTrigger>
+    //             <Toggle
+    //                 className="bg-background-layer-1 opacity-25 transition-opacity hover:opacity-100"
+    //                 onPressedChange={handleEnhance}
+    //                 pressed={isEnhanced}
+    //             >
+    //                 <SparklesIcon />
+    //             </Toggle>
+    //         </TooltipTrigger>
+    //         <TooltipContent>
+    //             Applies basic css styles to potentially improve page appearance.
+    //         </TooltipContent>
+    //     </Tooltip>
+    // )
 }
 
 const styles = `
