@@ -13,7 +13,7 @@ import {
 } from "@src/features/files"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import { useQuery } from "@tanstack/react-query"
-import { ChevronDown, SparklesIcon } from "lucide-react"
+import { SparklesIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export const HTML_ENHANCED_FILE_DATA_KEY = "is-html-enhanced"
@@ -25,9 +25,11 @@ export function ControlPanel() {
     const currentUrlSegments = extractUrlSegments(currentUrl)
 
     const fileKey = generateFileKey(currentUrlSegments)
+    const [isMinimized, setIsMinimized] = useState(false)
 
-    const [isEnhanced, setIsEnhanced] = useState(false)
-    const [selected, setSelected] = useState<"default" | "centered">("default")
+    const [textStyle, setTextStyle] = useState<"default" | "centered">(
+        "default"
+    )
 
     const { isLoading, data: isEnhancedRemote } = useQuery({
         queryKey: [
@@ -44,8 +46,7 @@ export function ControlPanel() {
 
     useEffect(() => {
         if (isEnhancedRemote !== undefined) {
-            setIsEnhanced(isEnhancedRemote)
-            setSelected(isEnhancedRemote ? "centered" : "default")
+            setTextStyle(isEnhancedRemote ? "centered" : "default")
             applyEnhancements(isEnhancedRemote)
         }
     }, [isEnhancedRemote])
@@ -75,7 +76,12 @@ export function ControlPanel() {
 
     return (
         <>
-            <Toolbar>
+            <Toolbar
+                isMinimized={isMinimized}
+                onToggleMinimized={() => {
+                    setIsMinimized(!isMinimized)
+                }}
+            >
                 <Button
                     size={"default"}
                     variant={"outline"}
@@ -88,14 +94,13 @@ export function ControlPanel() {
                     size="sm"
                     type="single"
                     className="grid grid-cols-2"
-                    value={selected}
+                    value={textStyle}
                     onValueChange={async (value) => {
                         if (value) {
-                            setSelected(value as "default" | "centered")
+                            setTextStyle(value as "default" | "centered")
 
                             const isEnhanced = value === "centered"
 
-                            setIsEnhanced(isEnhanced)
                             await saveFileData(
                                 fileKey,
                                 HTML_ENHANCED_FILE_DATA_KEY,
@@ -113,29 +118,9 @@ export function ControlPanel() {
                     </ToggleGroupItem>
                 </ToggleGroup>
                 <Separator orientation="vertical" />
-                <Button size={"icon"} variant={"ghost"}>
-                    <ChevronDown />
-                </Button>
             </Toolbar>
         </>
     )
-
-    // return (
-    //     <Tooltip>
-    //         <TooltipTrigger>
-    //             <Toggle
-    //                 className="bg-background-layer-1 opacity-25 transition-opacity hover:opacity-100"
-    //                 onPressedChange={handleEnhance}
-    //                 pressed={isEnhanced}
-    //             >
-    //                 <SparklesIcon />
-    //             </Toggle>
-    //         </TooltipTrigger>
-    //         <TooltipContent>
-    //             Applies basic css styles to potentially improve page appearance.
-    //         </TooltipContent>
-    //     </Tooltip>
-    // )
 }
 
 const styles = `
