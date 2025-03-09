@@ -21,12 +21,12 @@ export function Toolbar({
                 data-[minimized=true]/minimized:hover:opacity-100"
             >
                 <div
-                    className="grid grid-cols-[1fr] transition-all 
-                group-data-[minimized=true]/minimized:grid-cols-[0fr]
-                group-data-[minimized=true]/minimized:opacity-0
-                "
+                    className={`grid grid-cols-[1fr] transition-all 
+                    group-data-[minimized=true]/minimized:grid-cols-[0fr]
+                    group-data-[minimized=true]/minimized:opacity-0
+                    ${isMinimized ? "pointer-events-none select-none" : ""}`}
                 >
-                    <div className="flex min-w-0 gap-2 ">{children}</div>
+                    <div className="flex min-w-0 gap-2">{children}</div>
                 </div>
                 <Button
                     size="icon"
