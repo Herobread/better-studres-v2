@@ -1,5 +1,5 @@
 import ShadowWrapper from "@src/components/layouts/ShadowWrapper"
-import { EnhanceHtmlToolbar } from "@src/features/enhanceHtml/EnhanceHtmlToolbar"
+import { EnhanceHtmlToolbar } from "@src/features/tools/EnhanceHtmlToolbar"
 
 export function EnhanceHtml() {
     return (

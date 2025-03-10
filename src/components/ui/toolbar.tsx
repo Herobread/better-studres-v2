@@ -18,14 +18,23 @@ export function Toolbar({
             aria-expanded={!isMinimized}
             aria-live="polite"
             className="_tailwind_preflight_reset fixed bottom-4 right-4 transform text-base text-foreground"
+            onMouseLeave={() => {
+                if (!isMinimized) {
+                    onToggleMinimized()
+                }
+            }}
+            onMouseEnter={() => {
+                if (isMinimized) {
+                    onToggleMinimized()
+                }
+            }}
         >
             <div
                 data-minimized={isMinimized}
-                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background px-3 py-2 opacity-100 
+                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background p-1 opacity-100 
                 shadow-lg
                 transition-all
                 data-[minimized=true]/minimized:gap-0
-                data-[minimized=true]/minimized:p-0
                 data-[minimized=true]/minimized:opacity-50
                 data-[minimized=true]/minimized:hover:opacity-100"
             >

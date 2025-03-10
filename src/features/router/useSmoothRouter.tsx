@@ -10,7 +10,13 @@ const useSmoothRouter = () => {
     const { setIsLoading, setPageData } = useContext(PageStateContext)
 
     const isSmoothNavigationSupported = (pageType: PageType) => {
-        const supportedPageTypes: PageType[] = ["folder", "not found", "forbidden", "root"]
+        const supportedPageTypes: PageType[] = [
+            "folder",
+            "not found",
+            "forbidden",
+            "root",
+            "file",
+        ]
         return supportedPageTypes.includes(pageType)
     }
 

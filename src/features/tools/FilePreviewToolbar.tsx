@@ -3,30 +3,18 @@ import { Button } from "@src/components/ui/button"
 import { Separator } from "@src/components/ui/separator"
 import { Toolbar } from "@src/components/ui/toolbar"
 import { useToast } from "@src/components/ui/use-toast"
-import {
-    convertUrlSegmentsToUrl,
-    extractUrlSegments,
-    generateFileKey,
-} from "@src/features/files"
-import useSmoothRouter from "@src/features/router/useSmoothRouter"
+import { extractUrlSegments, generateFileKey } from "@src/features/files"
 import DownloadUsingScpDialog from "@src/features/shared/dialogs/DownloadUsingScpDialog"
 import { downloadFile } from "@src/lib/utils"
 import { useState } from "react"
 
 export function FilePreviewToolbar() {
     const { toast } = useToast()
-    const { navigateToPage } = useSmoothRouter()
 
     const currentUrl = window.location.toString()
     const currentUrlSegments = extractUrlSegments(currentUrl)
 
     const [isMinimized, setIsMinimized] = useState(true)
-
-    const handleGoToParent = () => {
-        currentUrlSegments.pop()
-
-        navigateToPage(convertUrlSegmentsToUrl(currentUrlSegments))
-    }
 
     const handleWebDownload = async () => {
         toast({
@@ -64,27 +52,10 @@ export function FilePreviewToolbar() {
                     setIsMinimized(!isMinimized)
                 }}
             >
-                <Button
-                    size={"default"}
-                    variant={"outline"}
-                    onClick={handleGoToParent}
-                >
-                    🔙 ../
-                    <span className="sr-only">Parent directory</span>
-                </Button>
-                <Separator orientation="vertical" />
-                <Button
-                    size={"default"}
-                    variant={"outline"}
-                    onClick={handleWebDownload}
-                >
+                <Button variant={"outline"} onClick={handleWebDownload}>
                     ⬇️ Web Download
                 </Button>
-                <Button
-                    size={"default"}
-                    variant={"outline"}
-                    onClick={handleSshDownload}
-                >
+                <Button variant={"outline"} onClick={handleSshDownload}>
                     ☁️ SSH Download
                 </Button>
                 <Separator orientation="vertical" />
