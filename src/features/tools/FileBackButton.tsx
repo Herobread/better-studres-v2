@@ -5,6 +5,7 @@ import {
     extractUrlSegments,
 } from "@src/features/files"
 import useSmoothRouter from "@src/features/router/useSmoothRouter"
+import { ArrowLeftIcon } from "lucide-react"
 
 export function FileBackButton() {
     const { navigateToPage } = useSmoothRouter()
@@ -20,8 +21,12 @@ export function FileBackButton() {
 
     return (
         <ShadowWrapper classname="fixed bottom-4 left-4 p-1 bg-background text-foreground opacity-75 hover:opacity-100 rounded-md transition-all">
-            <Button variant={"outline"} onClick={handleGoToParent}>
-                🔙 Parent Directory
+            <Button
+                variant={"outline"}
+                size={"icon"}
+                onClick={handleGoToParent}
+            >
+                <ArrowLeftIcon />
             </Button>
         </ShadowWrapper>
     )
