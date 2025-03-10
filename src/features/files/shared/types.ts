@@ -1,5 +1,5 @@
-import { HTML_ENHANCED_FILE_DATA_KEY } from "@src/features/enhanceHtml/EnhanceHtmlToolbar"
 import { NOTE_FILE_DATA_KEY, NoteData } from "@src/features/note/noteManager"
+import { HTML_ENHANCED_FILE_DATA_KEY } from "@src/features/tools/EnhanceHtmlToolbar"
 import { TAGS_FILE_DATA_KEY, Tag } from "../tags/storage"
 import {
     TrackedFileLinkData,

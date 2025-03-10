@@ -3,8 +3,9 @@ import {
     SupportedShikiFileFormats,
 } from "@src/constants/fileExtensionToShikiLangMap"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
-import { FilePreviewToolbar } from "@src/features/filePreviewToolbar/FilePreviewToolbar"
 import { FileContent, splitFileName } from "@src/features/parser"
+import { FileBackButton } from "@src/features/tools/FileBackButton"
+import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { highlighter } from "@src/pages/content"
 
 export function FilePreview({ content }: { content: FileContent }) {
@@ -23,6 +24,7 @@ export function FilePreview({ content }: { content: FileContent }) {
     return (
         <>
             <CommandsShortcutMount />
+            <FileBackButton />
             <div className="w-full">
                 <div
                     dangerouslySetInnerHTML={{ __html: html }}
