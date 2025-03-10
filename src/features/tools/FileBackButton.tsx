@@ -19,7 +19,7 @@ export function FileBackButton() {
     }
 
     return (
-        <ShadowWrapper classname="fixed bottom-4 left-4 p-1 bg-background text-foreground opacity-50 hover:opacity-100 rounded-md">
+        <ShadowWrapper classname="fixed bottom-4 left-4 p-1 bg-background text-foreground opacity-75 hover:opacity-100 rounded-md transition-all">
             <Button variant={"outline"} onClick={handleGoToParent}>
                 🔙 Parent Directory
             </Button>

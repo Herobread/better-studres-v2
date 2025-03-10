@@ -1,12 +1,11 @@
-import ShadowWrapper from "@src/components/layouts/ShadowWrapper"
 import { EnhanceHtmlToolbar } from "@src/features/tools/EnhanceHtmlToolbar"
+import { FileBackButton } from "@src/features/tools/FileBackButton"
 
 export function EnhanceHtml() {
     return (
         <>
-            <ShadowWrapper>
-                <EnhanceHtmlToolbar />
-            </ShadowWrapper>
+            <FileBackButton />
+            <EnhanceHtmlToolbar />
         </>
     )
 }

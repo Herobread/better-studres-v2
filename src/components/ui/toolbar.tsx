@@ -35,7 +35,7 @@ export function Toolbar({
                 shadow-lg
                 transition-all
                 data-[minimized=true]/minimized:gap-0
-                data-[minimized=true]/minimized:opacity-50
+                data-[minimized=true]/minimized:opacity-75
                 data-[minimized=true]/minimized:hover:opacity-100"
             >
                 <div
