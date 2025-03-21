@@ -48,7 +48,7 @@ export default NiceModal.create(() => {
                         <CarouselContent className="overflow-visible">
                             <PremiumContent
                                 header="Delete and Add Files™"
-                                description="Remove unnecessary files and upload memes."
+                                description="Remove unnecessary files and easily upload memes."
                                 emoji="✨📂"
                             />
 
@@ -71,21 +71,21 @@ export default NiceModal.create(() => {
                             />
 
                             <PremiumContent
-                                header="isitdarkoutside.com Integration"
+                                header="Is it dark outside™"
                                 description="Tells you if it’s dark outside (because you haven’t seen sunlight in weeks)."
                                 emoji="🌙🔍"
                             />
-
-                            {/* <PremiumContent
-                                header="Bee Movie Overlay™"
-                                description="Plays the Bee Movie script in a semi-transparent overlay over every page."
-                                emoji="🐝🎥"
-                            /> */}
 
                             <PremiumContent
                                 header="File Shuffler™"
                                 description="Randomly renames and reorganizes your files every time you open Studres for peak productivity."
                                 emoji="📂🎲"
+                            />
+
+                            <PremiumContent
+                                header="April fools!"
+                                description="Better studres will always be free to use."
+                                emoji="🎉"
                             />
                         </CarouselContent>
                         <CarouselNext />
@@ -93,7 +93,7 @@ export default NiceModal.create(() => {
                     </Carousel>
                 </div>
                 <div className="text-center text-muted-foreground">
-                    {current}/6
+                    {current}/7
                 </div>
             </DialogContent>
         </Dialog>
@@ -112,10 +112,10 @@ export function PremiumContent({
     return (
         <CarouselItem>
             <div className="p-1">
-                <div className="flex aspect-square flex-col justify-center gap-2 rounded-md bg-gradient-to-tr from-purple-400 to-purple-700 p-6 text-white shadow-lg">
+                <div className="flex aspect-square flex-col justify-center gap-2 rounded-md bg-gradient-to-tr from-purple-600 to-purple-900 p-6 text-white shadow-lg">
                     <span className="text-3xl">{emoji}</span>
                     <h3 className="text-xl font-bold">{header}</h3>
-                    <p>{description}</p>
+                    <p className="text-pretty">{description}</p>
                 </div>
             </div>
         </CarouselItem>

@@ -9,12 +9,6 @@ import { getFileEmojiId } from "./getFileEmojiId"
 export function getFileEmoji(filename: string): string {
     const FALLBACK_EMOJI = "📄"
 
-    // // Check if today is a special day
-    // const specialEmoji = getSpecialDayEmoji()
-    // if (specialEmoji) {
-    //     return specialEmoji
-    // }
-
     const emojiId = getFileEmojiId(filename)
 
     return EMOJI_MAP[emojiId] || FALLBACK_EMOJI
