@@ -48,31 +48,44 @@ export default NiceModal.create(() => {
                         <CarouselContent className="overflow-visible">
                             <PremiumContent
                                 header="Delete and Add Files™"
-                                description="Take control of your Studres experience. Delete unnecessary files and upload new ones with ease."
+                                description="Remove unnecessary files and upload memes."
+                                emoji="✨📂"
                             />
+
                             <PremiumContent
                                 header="Hello Kitty Pet™"
-                                description="Now with sudo privileges! Watch her rm -rf / all your files! So cute!"
+                                description="Watch her rm -rf / all your files! So cute!"
+                                emoji="🐱💻"
                             />
+
                             <PremiumContent
                                 header="AI Teammate™"
-                                description="Can you just do my part? Thx :)’"
+                                description="Can you just do my part? Thx :)"
+                                emoji="🤖📝"
                             />
+
                             <PremiumContent
-                                header="SkipMaster 3000™"
-                                description="Automatically generates excuses for missing class and tracks your skip streaks: ‘5 skips in a row! Achievement unlocked!’."
+                                header="SkipTrack 3000™"
+                                description="Track your lecture skip streaks! 5 skips in a row? Achievement unlocked!"
+                                emoji="🚀📅"
                             />
+
                             <PremiumContent
                                 header="isitdarkoutside.com Integration"
                                 description="Tells you if it’s dark outside (because you haven’t seen sunlight in weeks)."
+                                emoji="🌙🔍"
                             />
-                            <PremiumContent
+
+                            {/* <PremiumContent
                                 header="Bee Movie Overlay™"
                                 description="Plays the Bee Movie script in a semi-transparent overlay over every page."
-                            />
+                                emoji="🐝🎥"
+                            /> */}
+
                             <PremiumContent
                                 header="File Shuffler™"
                                 description="Randomly renames and reorganizes your files every time you open Studres for peak productivity."
+                                emoji="📂🎲"
                             />
                         </CarouselContent>
                         <CarouselNext />
@@ -80,7 +93,7 @@ export default NiceModal.create(() => {
                     </Carousel>
                 </div>
                 <div className="text-center text-muted-foreground">
-                    {current}/7
+                    {current}/6
                 </div>
             </DialogContent>
         </Dialog>
