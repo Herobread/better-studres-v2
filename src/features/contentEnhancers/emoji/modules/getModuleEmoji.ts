@@ -8,10 +8,6 @@ import { MODULE_EMOJI_MAP } from "./moduleEmojiMap"
 export function getModuleEmoji(moduleCode: string): string {
     const FALLBACK_EMOJI = "🖥"
 
-    if (isSpecialDay()) {
-        return "🧀"
-    }
-
     if (!moduleCode) {
         return FALLBACK_EMOJI
     }
@@ -25,7 +21,7 @@ export function getModuleEmoji(moduleCode: string): string {
  * Checks if today is April 1st (Cheese Day).
  * @returns {boolean} True if today is April 1st, false otherwise.
  */
-function isSpecialDay() {
+export function isSpecialDay() {
     const now = new Date()
     const month = now.getMonth() // 0-11 (Jan-Dec)
     const day = now.getDate()

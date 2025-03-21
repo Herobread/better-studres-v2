@@ -1,4 +1,5 @@
 import H3 from "@src/components/typography/H3"
+import { PremiumMessage } from "@src/features/easterEgg/PremiumMessage"
 import { RootContent } from "@src/features/parser"
 import { QuickLinkContainer } from "@src/features/quickLinks/components"
 import { QuickLinkLink } from "@src/features/quickLinks/components/quickLink/QuickLinkLink"
@@ -22,6 +23,8 @@ export default function MainSection({ content }: MainSectionProps) {
 
     return (
         <div className="space-y-6">
+            <PremiumMessage />
+
             <div className="space-y-2">
                 <H3>Postgraduate research students</H3>
                 <QuickLinkContainer>
