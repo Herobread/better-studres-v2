@@ -8,7 +8,14 @@ import { SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
 import { ModuleContent, parseRootPage } from "./root/parseRootPageContent"
 
-export type PageType = "folder" | "not found" | "forbidden" | "root" | "file" | "unknown"
+export type PageType =
+    | "folder"
+    | "not found"
+    | "forbidden"
+    | "markdown"
+    | "root"
+    | "file"
+    | "unknown"
 
 export interface BasePageData {
     type: PageType
@@ -54,6 +61,11 @@ export interface FilePreviewPageData extends BasePageData {
     content: FileContent
 }
 
+export interface MarkdownPreviewPageData extends BasePageData {
+    type: "markdown"
+    content: FileContent
+}
+
 export interface UnknownPageData extends BasePageData {
     type: "unknown"
 }
@@ -65,6 +77,7 @@ export type PageData =
     | RootPageData
     | UnknownPageData
     | FilePreviewPageData
+    | MarkdownPreviewPageData
 
 /**
  * Parses the content of a page to extract its title, file links, and sort links.
