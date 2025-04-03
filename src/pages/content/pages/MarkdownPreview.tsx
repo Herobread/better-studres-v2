@@ -4,14 +4,17 @@ import {
 } from "@src/constants/fileExtensionToShikiLangMap"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { FileContent } from "@src/features/parser"
+import { useTheme } from "@src/features/theme"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { cn } from "@src/lib/utils"
 import { highlighter } from "@src/pages/content"
 import Markdown from "react-markdown"
 import githubDark from "shiki/themes/github-dark.mjs"
+import githubLight from "shiki/themes/github-light.mjs"
 
-const customTheme = { ...githubDark }
+const customGithubDark = { ...githubDark }
+const customGithubLight = { ...githubLight }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function replaceColors(theme: any, colorMap: { [key: string]: string }) {
@@ -43,12 +46,19 @@ function replaceColors(theme: any, colorMap: { [key: string]: string }) {
     }
 }
 
-const colorMap = {
+const darkColorRemap = {
     "#24292e": "transparent",
 }
 
+const lightColorRemap = {
+    "#fff": "transparent",
+}
+
 export function MarkdownPreview({ content }: { content: FileContent }) {
-    replaceColors(customTheme, colorMap)
+    replaceColors(customGithubDark, darkColorRemap)
+    replaceColors(customGithubLight, lightColorRemap)
+
+    const { actualTheme } = useTheme()
 
     return (
         <div className="min-h-screen bg-background text-foreground">
@@ -95,7 +105,10 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
                                 childrenString,
                                 {
                                     lang,
-                                    theme: customTheme,
+                                    theme:
+                                        actualTheme === "dark"
+                                            ? customGithubDark
+                                            : customGithubLight,
                                 }
                             )
 
