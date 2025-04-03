@@ -91,8 +91,6 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
                                     extension as SupportedShikiFileFormats
                                 ] || "plaintext"
 
-                            console.log(customTheme)
-
                             const html = highlighter.codeToHtml(
                                 childrenString,
                                 {
