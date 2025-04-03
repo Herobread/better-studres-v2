@@ -20,12 +20,10 @@ const pageStateFallback: PageStateTypes = {
         throw new Error("setTransitionData not initialized")
     },
     isLoading: false,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setIsLoading: () => {
         throw new Error("setIsLoading not initialized")
     },
     pageData: undefined,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setPageData: () => {
         throw new Error("setPageData not initialized")
     },

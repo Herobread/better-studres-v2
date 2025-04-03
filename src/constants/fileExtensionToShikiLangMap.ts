@@ -42,6 +42,13 @@ export const fileExtensionToShikiLangMap: Record<
     rs: "rust",
 }
 
+/**
+ * check if format is supported before converting it to the shiki naming scheme
+ */
+export function isFileFormatShikiSupported(format: string) {
+    return Object.keys(fileExtensionToShikiLangMap).includes(format)
+}
+
 export function getShikiLanguage(extension: string): string {
     return (
         fileExtensionToShikiLangMap[extension as SupportedShikiFileFormats] ||

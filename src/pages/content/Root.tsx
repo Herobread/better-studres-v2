@@ -1,6 +1,7 @@
 import { PageData } from "@src/features/parser"
 import { PageStateContext } from "@src/features/router/PageStateContext"
 import { FilePreview } from "@src/pages/content/pages/FilePreview"
+import { MarkdownPreview } from "@src/pages/content/pages/MarkdownPreview"
 import { useContext } from "react"
 import Folder from "./pages/Folder"
 import Forbidden from "./pages/Forbidden"
@@ -24,6 +25,12 @@ export default function Root({ initialPageData }: RootProps) {
     }
 
     if (pageData.type === "file") {
+        const currentUrl = window.location.toString()
+
+        if (currentUrl.endsWith(".md")) {
+            return <MarkdownPreview content={pageData.content} />
+        }
+
         return <FilePreview content={pageData.content} />
     }
 
