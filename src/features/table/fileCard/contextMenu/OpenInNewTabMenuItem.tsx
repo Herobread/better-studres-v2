@@ -3,7 +3,7 @@ import { ExternalLinkIcon } from "lucide-react"
 
 export function OpenInNewTabMenuItem({ href }: { href: string }) {
     const onSelect = () => {
-        window.open(href, "_blank")
+        window.open(href, "_blank", "noopener,noreferrer")
     }
 
     return (
