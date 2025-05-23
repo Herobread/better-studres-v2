@@ -14,6 +14,7 @@ import { AddNoteContextMenuItem } from "@src/features/table/fileCard/contextMenu
 import { AddQuickLinkMenuItem } from "@src/features/table/fileCard/contextMenu/AddQuickLinkMenuItem"
 import { CopyMenuSub } from "@src/features/table/fileCard/contextMenu/CopyMenuSub"
 import DownloadUsingScpContextMenuItem from "@src/features/table/fileCard/contextMenu/DownloadUsingScpContextMenuItem"
+import { OpenInNewTabMenuItem } from "@src/features/table/fileCard/contextMenu/OpenInNewTabMenuItem"
 import { FolderIcon, FolderRootIcon } from "lucide-react"
 import { forwardRef } from "react"
 import DownloadFileMenuItem from "./DownloadFileMenuItem"
@@ -61,6 +62,9 @@ const FileCardContextMenuContent = forwardRef<
             <ContextMenuSeparator />
 
             <AddQuickLinkMenuItem href={fileLink.href} />
+
+            <OpenInNewTabMenuItem href={fileLink.href}/>
+
             <UpdatesMenuItem fileLink={fileLink} />
 
             <CopyMenuSub fileLink={fileLink} />
