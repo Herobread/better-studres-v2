@@ -46,7 +46,7 @@ export default function NotFound() {
     if (urlSegments.length !== 0) {
         suggestedLinks.push({
             href: parentUrl,
-            icon: "🔙",
+            icon: "⬅️",
             id: 2,
             name: "Parent directory",
         })

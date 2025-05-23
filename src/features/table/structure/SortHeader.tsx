@@ -52,8 +52,8 @@ export default function SortHeader({
     const currentOrder = orders[rawOrder]
 
     const sortEmoji: { [key: string]: string } = {
-        asc: "⬆",
-        desc: "⬇",
+        asc: "⬆️",
+        desc: "⬇️",
     }
 
     let emoji = ""

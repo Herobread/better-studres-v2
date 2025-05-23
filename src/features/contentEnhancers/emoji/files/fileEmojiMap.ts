@@ -1,6 +1,6 @@
 export const EMOJI_MAP: { [key: string]: string } = {
     // special
-    "Parent Directory": "🔙",
+    "Parent Directory": "⬅️",
     "ThinkingInJava/": "🧠",
     "javascript-101/": "🌐",
     "0-General/": "🌟",

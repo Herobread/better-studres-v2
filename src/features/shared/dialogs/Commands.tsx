@@ -230,7 +230,7 @@ export function Commands() {
                         {!isRootPage && (
                             <CommandGroup heading="Navigation">
                                 <CommandItem onSelect={handleGoToParent}>
-                                    🔙 Parent Directory
+                                    ⬅️ Parent Directory
                                 </CommandItem>
                                 {currentUrlSegments.length > 1 && (
                                     <CommandItem
