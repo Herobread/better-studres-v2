@@ -31,11 +31,12 @@ export function Toolbar({
         >
             <div
                 data-minimized={isMinimized}
-                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md bg-background p-1 opacity-100 
-                shadow-lg
+                className="group/minimized grid w-full grid-cols-[1fr_auto] items-stretch gap-2 rounded-md p-1 opacity-100 
                 transition-all
                 data-[minimized=true]/minimized:gap-0
+                data-[minimized=false]/minimized:bg-background
                 data-[minimized=true]/minimized:opacity-75
+                data-[minimized=false]/minimized:shadow-lg
                 data-[minimized=true]/minimized:hover:opacity-100"
             >
                 <div
@@ -52,7 +53,7 @@ export function Toolbar({
                 </div>
                 <Button
                     size="icon"
-                    variant="ghost"
+                    variant="outline"
                     onClick={onToggleMinimized}
                     aria-controls="toolbar"
                     aria-expanded={!isMinimized}

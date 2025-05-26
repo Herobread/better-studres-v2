@@ -20,13 +20,13 @@ export function FileBackButton() {
     }
 
     return (
-        <ShadowWrapper classname="fixed bottom-4 left-4 p-1 bg-background text-foreground opacity-75 hover:opacity-100 rounded-md transition-all">
+        <ShadowWrapper classname="fixed bottom-5 left-5 bg-background text-foreground opacity-75 hover:opacity-100 rounded-md transition-all">
             <Button
                 variant={"outline"}
                 size={"icon"}
                 onClick={handleGoToParent}
             >
-                <ArrowLeftIcon />
+                <ArrowLeftIcon className="h-[1.2rem] w-[1.2rem]" />
             </Button>
         </ShadowWrapper>
     )
