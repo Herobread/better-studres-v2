@@ -41,10 +41,12 @@ export function Toolbar({
                 <div
                     className={`grid grid-cols-[1fr] transition-all 
                     
+                    group-data-[minimized=true]/minimized:pointer-events-none
+                    group-data-[minimized=true]/minimized:invisible
                     group-data-[minimized=true]/minimized:scale-x-0
                     group-data-[minimized=true]/minimized:grid-cols-[0fr]
-                    group-data-[minimized=true]/minimized:opacity-0
-                    ${isMinimized ? "pointer-events-none select-none" : ""}`}
+                    group-data-[minimized=true]/minimized:opacity-0`}
+                    aria-hidden={isMinimized}
                 >
                     <div className="flex min-w-0 gap-2">{children}</div>
                 </div>
