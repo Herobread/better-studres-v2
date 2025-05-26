@@ -25,12 +25,10 @@ export function FilePreview({ content }: { content: FileContent }) {
         <>
             <CommandsShortcutMount />
             <FileBackButton />
-            <div className="w-full">
-                <div
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    className="w-max min-w-full"
-                />
-            </div>
+            <div
+                dangerouslySetInnerHTML={{ __html: html }}
+                className="min-h-screen w-max min-w-full bg-[#24292e] p-4 pb-20"
+            />
             <FilePreviewToolbar />
         </>
     )
