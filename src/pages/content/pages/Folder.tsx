@@ -8,6 +8,7 @@ import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
 import { FileMetricsTracker } from "@src/features/files"
+import { generateFileTitle } from "@src/features/head"
 import ModuleHeader from "@src/features/header/ModuleHeader"
 import SubheaderBreadcrumbs from "@src/features/header/SubheaderBreadCrumbs"
 import { FolderContent } from "@src/features/parser"
@@ -22,6 +23,7 @@ import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { Table } from "@src/features/table/structure/Table"
 import parse from "html-react-parser"
 import { useContext } from "react"
+import { Helmet } from "react-helmet-async"
 
 interface FolderProps {
     content: FolderContent
@@ -38,8 +40,13 @@ export default function Folder({ content }: FolderProps) {
         NiceModal.show(CommandsDialog)
     }
 
+    const url = location.href.toString()
+
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
+            <Helmet>
+                <title>{generateFileTitle(url)}</title>
+            </Helmet>
             <CommandsShortcutMount />
             <SkipToMainContent />
             {showCommandButton && (

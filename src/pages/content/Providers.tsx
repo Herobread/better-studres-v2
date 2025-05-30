@@ -8,6 +8,7 @@ import { PageStateContextProvider } from "@src/features/router/PageStateContext"
 import { SmoothRouterListener } from "@src/features/router/SmoothRouterListener"
 import { PreferredTheme, ThemeProvider } from "@src/features/theme"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { HelmetProvider } from "react-helmet-async"
 
 interface ProvidersProps {
     children: React.ReactNode
@@ -35,17 +36,19 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
                     storageKey="vite-ui-theme"
                 >
                     <PageStateContextProvider>
-                        <SmoothRouterListener />
-                        <NiceModal.Provider>
-                            <TooltipProvider delayDuration={0}>
-                                <ConfigContextProvider>
-                                    <DownloadInfoProvider>
-                                        {children}
-                                    </DownloadInfoProvider>
-                                    <Toaster />
-                                </ConfigContextProvider>
-                            </TooltipProvider>
-                        </NiceModal.Provider>
+                        <HelmetProvider>
+                            <SmoothRouterListener />
+                            <NiceModal.Provider>
+                                <TooltipProvider delayDuration={0}>
+                                    <ConfigContextProvider>
+                                        <DownloadInfoProvider>
+                                            {children}
+                                        </DownloadInfoProvider>
+                                        <Toaster />
+                                    </ConfigContextProvider>
+                                </TooltipProvider>
+                            </NiceModal.Provider>
+                        </HelmetProvider>
                     </PageStateContextProvider>
                 </ThemeProvider>
             </QueryClientProvider>

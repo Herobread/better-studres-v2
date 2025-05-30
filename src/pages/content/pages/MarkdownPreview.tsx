@@ -3,12 +3,14 @@ import {
     SupportedShikiFileFormats,
 } from "@src/constants/fileExtensionToShikiLangMap"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
+import { generateFileTitle } from "@src/features/head"
 import { FileContent } from "@src/features/parser"
 import { useTheme } from "@src/features/theme"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { cn } from "@src/lib/utils"
 import { highlighter } from "@src/pages/content"
+import { Helmet } from "react-helmet-async"
 import Markdown from "react-markdown"
 import githubDark from "shiki/themes/github-dark.mjs"
 import githubLight from "shiki/themes/github-light.mjs"
@@ -60,8 +62,13 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
 
     const { actualTheme } = useTheme()
 
+    const url = location.href.toString()
+
     return (
         <div className="min-h-screen bg-background text-foreground">
+            <Helmet>
+                <title>{generateFileTitle(url)}</title>
+            </Helmet>
             <CommandsShortcutMount />
             <FileBackButton />
             <div className="prose mx-auto max-w-prose py-12 dark:prose-invert ">
