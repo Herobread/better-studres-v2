@@ -25,6 +25,7 @@ import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
 import { ShieldAlert } from "lucide-react"
 import { useContext } from "react"
+import { Helmet } from "react-helmet-async"
 
 export default function Forbidden() {
     const { data: quickLinks } = useQuery({
@@ -63,6 +64,9 @@ export default function Forbidden() {
 
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
+            <Helmet>
+                <title>Forbidden</title>
+            </Helmet>
             <CommandsShortcutMount />
             {showCommandButton && (
                 <WideLayout>
@@ -75,7 +79,9 @@ export default function Forbidden() {
                         <ShieldAlert />
                         <H1>Forbidden</H1>
                     </div>
-                    <p>You don&apos;t have permission to access this resource.</p>
+                    <p>
+                        You don&apos;t have permission to access this resource.
+                    </p>
                     <p className="font-mono">{location.href.toString()}</p>
                     <p className="text-muted-foreground">
                         If you believe you should have access:
@@ -84,11 +90,10 @@ export default function Forbidden() {
                         <li>
                             Check if you are logged in with the correct account.
                         </li>
+                        <li>Contact the resource owner to request access.</li>
                         <li>
-                            Contact the resource owner to request access.
-                        </li>
-                        <li>
-                            The resource might have been moved or its permissions changed.
+                            The resource might have been moved or its
+                            permissions changed.
                         </li>
                     </ul>
                     <p className="text-muted-foreground">
@@ -132,4 +137,4 @@ export default function Forbidden() {
             </MainLayout>
         </div>
     )
-} 
+}

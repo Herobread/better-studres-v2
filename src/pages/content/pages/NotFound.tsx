@@ -25,6 +25,7 @@ import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useQuery } from "@tanstack/react-query"
 import { TriangleAlert } from "lucide-react"
 import { useContext } from "react"
+import { Helmet } from "react-helmet-async"
 
 export default function NotFound() {
     const { data: quickLinks } = useQuery({
@@ -63,6 +64,9 @@ export default function NotFound() {
 
     return (
         <div className="min-h-screen bg-background py-2 text-foreground">
+            <Helmet>
+                <title>Not Found</title>
+            </Helmet>
             <CommandsShortcutMount />
             {showCommandButton && (
                 <WideLayout>

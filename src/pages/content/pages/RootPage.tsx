@@ -16,6 +16,7 @@ import { EmptyQuickLinksMessage } from "@src/features/quickLinks/components/Empt
 import MainSection from "@src/features/root/MainSection"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useContext } from "react"
+import { Helmet } from "react-helmet-async"
 
 interface RootProps {
     content: RootContent
@@ -29,6 +30,9 @@ export function RootPage({ content }: RootProps) {
 
     return (
         <div className="flex min-h-screen flex-col bg-background py-2 text-foreground">
+            <Helmet>
+                <title>Student Resources</title>
+            </Helmet>
             <CommandsShortcutMount />
             <SkipToMainContent />
             {showCommandButton && (

@@ -3,10 +3,12 @@ import {
     SupportedShikiFileFormats,
 } from "@src/constants/fileExtensionToShikiLangMap"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
+import { generateFileTitle } from "@src/features/head"
 import { FileContent, splitFileName } from "@src/features/parser"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { highlighter } from "@src/pages/content"
+import { Helmet } from "react-helmet-async"
 
 // The following styles are for line numbering.
 // This approach is used because CSS counters are
@@ -46,8 +48,13 @@ export function FilePreview({ content }: { content: FileContent }) {
         theme: "github-dark",
     })
 
+    const url = location.href.toString()
+
     return (
         <>
+            <Helmet>
+                <title>{generateFileTitle(url)}</title>
+            </Helmet>
             <CommandsShortcutMount />
             <FileBackButton />
             <style>{codeLineNumberingStyles}</style>
