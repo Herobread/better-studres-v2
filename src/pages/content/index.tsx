@@ -10,7 +10,6 @@ import { PageData, parsePageContent } from "@src/features/parser"
 import { THEME_STORAGE_KEY } from "@src/features/theme"
 import { EnhanceHtml } from "@src/pages/content/pages/EnhanceHtml"
 import { createRoot } from "react-dom/client"
-import CommandsRoot from "./CommandsRoot"
 import Providers from "./Providers"
 import Root from "./Root"
 
@@ -30,6 +29,7 @@ import rust from "shiki/langs/rust.mjs"
 import shellscript from "shiki/langs/shellscript.mjs"
 import typescript from "shiki/langs/typescript.mjs"
 
+import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import ghdark from "shiki/themes/github-dark.mjs"
 
 export const highlighter = await createHighlighterCore({
@@ -92,7 +92,7 @@ async function initialize() {
             root.render(
                 <Providers overrideTheme={theme}>
                     <EnhanceHtml />
-                    <CommandsRoot />
+                    <CommandsShortcutMount />
                 </Providers>
             )
             return
@@ -152,7 +152,7 @@ async function initialize() {
 
         root.render(
             <Providers overrideTheme={theme}>
-                <CommandsRoot />
+                <CommandsShortcutMount />
             </Providers>
         )
     }
