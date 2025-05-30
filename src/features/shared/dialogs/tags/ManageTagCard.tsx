@@ -53,11 +53,6 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
             queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
             queryClient.refetchQueries({ queryKey: [TAGS_QUERY_KEY] })
             setIsEditing(false)
-
-            toast({
-                title: "✅ Success",
-                description: `Renamed tag from ${name} to ${newTagName}.`,
-            })
         } catch (error) {
             toast({
                 title: "❌ Error",
@@ -129,10 +124,6 @@ export function ManageTagCard({ tag, files }: ManageTagCardProps) {
             await deleteTag(id)
             queryClient.invalidateQueries({ queryKey: [TAGS_QUERY_KEY] })
             queryClient.refetchQueries({ queryKey: [TAGS_QUERY_KEY] })
-            toast({
-                title: "✅ Success",
-                description: `Deleted tag ${name}`,
-            })
         } catch (error) {
             toast({
                 title: "❌ Error",
