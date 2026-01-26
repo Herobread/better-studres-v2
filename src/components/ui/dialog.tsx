@@ -4,7 +4,6 @@ import { X } from "lucide-react"
 import * as React from "react"
 
 import { NiceModalHandler } from "@ebay/nice-modal-react"
-import ShadowWrapper from "@src/components/layouts/ShadowWrapper"
 import { cn } from "@src/lib/utils"
 
 type ExtendedDialogProps = {
@@ -63,11 +62,11 @@ const DialogContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
     <DialogPortal>
         <DialogOverlay />
-        <ShadowWrapper>
+        <div className="fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] max-h-[85vh] overflow-y-auto">
             <DialogPrimitive.Content
                 ref={ref}
                 className={cn(
-                    "_tailwind_preflight_reset fixed left-[50%] top-[50%] z-50 grid max-h-screen w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 overflow-y-scroll border border-none bg-background p-6 text-foreground shadow-lg outline-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+                    "w-full grid gap-4 border border-none bg-background p-6 text-foreground shadow-lg outline-none duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
                     className
                 )}
                 {...props}
@@ -78,7 +77,7 @@ const DialogContent = React.forwardRef<
                     <span className="sr-only">Close</span>
                 </DialogPrimitive.Close>
             </DialogPrimitive.Content>
-        </ShadowWrapper>
+        </div>
     </DialogPortal>
 ))
 DialogContent.displayName = DialogPrimitive.Content.displayName
