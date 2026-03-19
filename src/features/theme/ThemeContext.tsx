@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-export const THEMES = ["light", "dark", "dark-classic"] as const
-export const DARK_THEMES = ["dark", "dark-classic"]
+export const THEMES = ["light", "dark", "dark-amoled", "grey"] as const
+export const DARK_THEMES = ["dark", "dark-amoled", "grey"]
 export type Theme = (typeof THEMES)[number]
 export type PreferredTheme = Theme | "system"
 

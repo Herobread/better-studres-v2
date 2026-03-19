@@ -11,7 +11,7 @@ import { useTheme } from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
 
-const DARK_THEMES = ["dark", "dark-classic"]
+const DARK_THEMES = ["dark", "dark-amoled"]
 
 export function ThemeToggle() {
     const { theme, setTheme, actualTheme } = useTheme()
@@ -52,11 +52,18 @@ export function ThemeToggle() {
                 >
                     Dark
                 </DropdownMenuCheckboxItem>
+                <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
-                    checked={theme === "dark-classic"}
-                    onCheckedChange={() => setTheme("dark-classic")}
+                    checked={theme === "dark-amoled"}
+                    onCheckedChange={() => setTheme("dark-amoled")}
                 >
-                    Dark Classic
+                    Dark Amoled
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                    checked={theme === "grey"}
+                    onCheckedChange={() => setTheme("grey")}
+                >
+                    Grey
                 </DropdownMenuCheckboxItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
