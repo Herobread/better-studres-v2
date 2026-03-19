@@ -7,5 +7,9 @@ export function FileExtension({ extension }: FileExtensionProps) {
         return null
     }
 
-    return <div className="text-center font-mono leading-5">{extension}</div>
+    return (
+        <div className="text-center font-mono leading-5 !text-foreground">
+            {extension}
+        </div>
+    )
 }

@@ -39,7 +39,7 @@ const FileCardDetails = forwardRef<HTMLAnchorElement, FileCardDetailsProps>(
             <Link
                 ref={ref}
                 data-downloading={isDownloading}
-                className="col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-background-layer-1 p-3 hover:bg-accent"
+                className="col-span-full grid cursor-pointer grid-cols-subgrid items-center gap-3 rounded-xl bg-background-layer-1 p-3 hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                 href={href}
                 transitionData={transitionData}
                 {...props}

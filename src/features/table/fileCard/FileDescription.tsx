@@ -7,5 +7,5 @@ export function FileDescription({ description }: FileDescriptionProps) {
         return null
     }
 
-    return <div className="break-words">{description}</div>
+    return <div className="break-words  !text-foreground">{description}</div>
 }

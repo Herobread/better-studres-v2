@@ -11,8 +11,10 @@ export function FileSize({ size }: FileSizeProps) {
 
     return (
         <>
-            <div className="text-right">{size.value.toFixed(1)}</div>
-            <div className="ml-[-8px]">{size.measure}</div>
+            <div className="text-right  !text-foreground">
+                {size.value.toFixed(1)}
+            </div>
+            <div className="ml-[-8px]  !text-foreground">{size.measure}</div>
         </>
     )
 }

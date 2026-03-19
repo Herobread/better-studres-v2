@@ -14,5 +14,5 @@ export function FileModifiedDate({ lastModified }: FileModifiedDateProps) {
         content = lastModified.difference
     }
 
-    return <div className="text-right">{content}</div>
+    return <div className="text-right  !text-foreground">{content}</div>
 }
