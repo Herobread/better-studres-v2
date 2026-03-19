@@ -73,6 +73,29 @@
         --ring: 0 0% 80%;
     }
 
+    .black-pink {
+        --background: 0 0% 7%;
+        --background-layer-1: 0 0% 10%;
+        --foreground: 0 0% 98%;
+        --card: 0 0% 9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 0 0% 8%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 330 45% 65%;
+        --primary-foreground: 0 0% 5%;
+        --secondary: 0 0% 15%;
+        --secondary-foreground: 0 0% 90%;
+        --muted: 0 0% 12%;
+        --muted-foreground: 0 0% 65%;
+        --accent: 0 0% 14%;
+        --accent-foreground: 330 45% 75%;
+        --destructive: 0 62% 50%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 18%;
+        --input: 0 0% 18%;
+        --ring: 330 45% 65%;
+    }
+
     .dark-amoled {
         --background: 0 0% 3.9%;
         --background-layer-1: 0 0% 7%;

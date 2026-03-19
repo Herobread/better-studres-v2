@@ -65,6 +65,12 @@ export function ThemeToggle() {
                 >
                     Grey
                 </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                    checked={theme === "black-pink"}
+                    onCheckedChange={() => setTheme("black-pink")}
+                >
+                    Black Pink
+                </DropdownMenuCheckboxItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuCheckboxItem
                     checked={theme === "system"}
