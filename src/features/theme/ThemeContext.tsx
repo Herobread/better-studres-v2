@@ -1,14 +1,9 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-export type Theme = "dark" | "light"
-export type PreferredTheme = "dark" | "light" | "system"
-
-type ThemeProviderProps = {
-    children: React.ReactNode
-    defaultTheme?: PreferredTheme
-    overrideTheme?: PreferredTheme
-    storageKey?: string
-}
+export const THEMES = ["light", "dark", "dark-classic"] as const
+export const DARK_THEMES = ["dark", "dark-classic"]
+export type Theme = (typeof THEMES)[number]
+export type PreferredTheme = Theme | "system"
 
 type ThemeProviderState = {
     theme: PreferredTheme
@@ -16,13 +11,9 @@ type ThemeProviderState = {
     actualTheme: Theme
 }
 
-const initialState: ThemeProviderState = {
-    theme: "system",
-    setTheme: () => null,
-    actualTheme: "dark",
-}
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
+    undefined
+)
 
 export function getCurrentTheme(theme: PreferredTheme): Theme {
     if (theme === "system") {
@@ -30,79 +21,48 @@ export function getCurrentTheme(theme: PreferredTheme): Theme {
             ? "dark"
             : "light"
     }
-    return theme
+    return theme as Theme
 }
 
 export const THEME_STORAGE_KEY = "vite-ui-theme"
 
-function applyTheme(theme: Theme) {
-    const root = window.document.getElementById("__better_studres_theme_root")
-
-    if (!root) {
-        return
-    }
-
-    root.classList.remove("light", "dark")
-    root.classList.add(theme)
-    root.style.colorScheme = theme
-}
-
 export function ThemeProvider({
     children,
     defaultTheme = "system",
-    overrideTheme,
     storageKey = THEME_STORAGE_KEY,
-}: ThemeProviderProps) {
+}: {
+    children: React.ReactNode
+    defaultTheme?: PreferredTheme
+    storageKey?: string
+}) {
     const [theme, setTheme] = useState<PreferredTheme>(() => {
-        if (overrideTheme) {
-            return overrideTheme
-        }
         return (
             (localStorage.getItem(storageKey) as PreferredTheme) || defaultTheme
         )
     })
-    const [actualTheme, setActualTheme] = useState<Theme>(() => {
-        return getCurrentTheme(theme)
-    })
+
+    const actualTheme = useMemo(() => getCurrentTheme(theme), [theme])
 
     useEffect(() => {
-        const appliedTheme = getCurrentTheme(theme)
-        applyTheme(appliedTheme)
-        setActualTheme(appliedTheme)
-    }, [theme])
+        const root =
+            window.document.getElementById("__better_studres_theme_root") ||
+            window.document.documentElement
 
-    useEffect(() => {
-        const onSystemThemeChange = (e: MediaQueryListEvent) => {
-            const newTheme = e.matches ? "dark" : "light"
-            setActualTheme(newTheme)
-            applyTheme(newTheme)
-        }
-
-        const darkModeMediaQuery = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        )
-
-        if (theme === "system") {
-            darkModeMediaQuery.addEventListener("change", onSystemThemeChange)
-        }
-
-        return () => {
-            darkModeMediaQuery.removeEventListener(
-                "change",
-                onSystemThemeChange
-            )
-        }
-    }, [theme])
+        root.classList.remove(...THEMES)
+        root.classList.add(actualTheme)
+        root.style.colorScheme = actualTheme
+    }, [actualTheme])
 
     const value = {
         theme,
+        actualTheme,
         setTheme: async (newTheme: PreferredTheme) => {
             localStorage.setItem(storageKey, newTheme)
-            await chrome.storage.local.set({ [storageKey]: newTheme })
+            if (typeof chrome !== "undefined" && chrome.storage) {
+                chrome.storage.local.set({ [storageKey]: newTheme })
+            }
             setTheme(newTheme)
-            setActualTheme(getCurrentTheme(newTheme))
         },
-        actualTheme,
     }
 
     return (
@@ -114,10 +74,7 @@ export function ThemeProvider({
 
 export const useTheme = () => {
     const context = useContext(ThemeProviderContext)
-
-    if (context === undefined) {
+    if (!context)
         throw new Error("useTheme must be used within a ThemeProvider")
-    }
-
     return context
 }
