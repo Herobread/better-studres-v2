@@ -6,8 +6,15 @@ export const THEMES = [
     "dark-amoled",
     "grey",
     "black-pink",
+    "black-cyan",
 ] as const
-export const DARK_THEMES = ["dark", "dark-amoled", "grey", "black-pink"]
+export const DARK_THEMES = [
+    "dark",
+    "dark-amoled",
+    "grey",
+    "black-pink",
+    "black-cyan",
+]
 export type Theme = (typeof THEMES)[number]
 export type PreferredTheme = Theme | "system"
 
