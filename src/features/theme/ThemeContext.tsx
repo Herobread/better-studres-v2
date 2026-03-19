@@ -7,6 +7,7 @@ export const THEMES = [
     "grey",
     "black-pink",
     "black-cyan",
+    "light-pink",
 ] as const
 export const DARK_THEMES = [
     "dark",
