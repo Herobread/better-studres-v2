@@ -13,6 +13,10 @@ const UNIQUE_THEME_CONFIG = {
         type: "dark",
         displayName: "Dark+",
     },
+    grey: {
+        type: "dark",
+        displayName: "Grey",
+    },
     "grey-orange": {
         type: "dark",
         displayName: "Grey Orange",

@@ -35,19 +35,39 @@ export function ThemeToggle() {
                     <span className="sr-only">Toggle theme</span>
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Appearance</DropdownMenuLabel>
-                <DropdownMenuSeparator />
+            <DropdownMenuContent
+                align="end"
+                className="grid min-w-[240px] grid-cols-2 gap-x-1"
+            >
+                <DropdownMenuLabel className="col-span-2 px-3 py-2">
+                    Appearance
+                </DropdownMenuLabel>
+
+                <DropdownMenuSeparator className="col-span-2 mx-1" />
+
                 <ThemeOption themeOption="dark" />
                 <ThemeOption themeOption="light" />
-                <DropdownMenuSeparator />
-                <ThemeOption themeOption="black-pink" />
-                <ThemeOption themeOption="black-cyan" />
-                <ThemeOption themeOption="light-pink" />
-                <ThemeOption themeOption="light-blue" />
-                <ThemeOption themeOption="grey-orange" />
+
+                <DropdownMenuSeparator className="col-span-2 mx-1" />
+
                 <ThemeOption themeOption="dark-plus" />
-                <DropdownMenuSeparator />
+                <div></div>
+                <ThemeOption themeOption="grey" />
+                <div></div>
+
+                <DropdownMenuSeparator className="col-span-2 mx-1" />
+
+                <ThemeOption themeOption="black-pink" />
+                <ThemeOption themeOption="light-pink" />
+
+                <ThemeOption themeOption="black-cyan" />
+                <ThemeOption themeOption="light-blue" />
+
+                <ThemeOption themeOption="grey-orange" />
+                <div></div>
+
+                <DropdownMenuSeparator className="col-span-2 mx-1" />
+
                 <ThemeOption themeOption="system" />
             </DropdownMenuContent>
         </DropdownMenu>
