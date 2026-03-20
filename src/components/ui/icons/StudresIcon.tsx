@@ -1,11 +1,13 @@
 import { StudresDarkIcon } from "@src/components/ui/icons/StudresDarkIcon"
 import { StudresLightIcon } from "@src/components/ui/icons/StudresLightIcon"
-import { DARK_THEMES, useTheme } from "@src/features/theme"
+import { THEME_CONFIG, useTheme } from "@src/features/theme"
 
 export function StudresIcon() {
     const { actualTheme } = useTheme()
 
-    if (DARK_THEMES.includes(actualTheme)) {
+    const isDark = THEME_CONFIG[actualTheme].type === "dark"
+
+    if (isDark) {
         return <StudresDarkIcon />
     }
 

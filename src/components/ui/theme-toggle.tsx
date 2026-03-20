@@ -1,22 +1,20 @@
 import { Button } from "@src/components/ui/button"
 import {
     DropdownMenu,
-    DropdownMenuCheckboxItem,
     DropdownMenuContent,
+    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@src/components/ui/dropdown-menu"
-import { useTheme } from "@src/features/theme"
+import { PreferredTheme, THEME_CONFIG, useTheme } from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
 
-const DARK_THEMES = ["dark", "dark-amoled"]
-
 export function ThemeToggle() {
-    const { theme, setTheme, actualTheme } = useTheme()
+    const { actualTheme } = useTheme()
 
-    const isDark = DARK_THEMES.includes(actualTheme)
+    const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
     return (
         <DropdownMenu>
@@ -40,63 +38,60 @@ export function ThemeToggle() {
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Appearance</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                    checked={theme === "light"}
-                    onCheckedChange={() => setTheme("light")}
-                >
-                    Light
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "dark"}
-                    onCheckedChange={() => setTheme("dark")}
-                >
-                    Dark
-                </DropdownMenuCheckboxItem>
+                <ThemeOption themeOption="dark" />
+                <ThemeOption themeOption="light" />
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                    checked={theme === "dark-amoled"}
-                    onCheckedChange={() => setTheme("dark-amoled")}
-                >
-                    Dark Amoled
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "grey"}
-                    onCheckedChange={() => setTheme("grey")}
-                >
-                    Grey Orange
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "black-pink"}
-                    onCheckedChange={() => setTheme("black-pink")}
-                >
-                    Black Pink
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "light-pink"}
-                    onCheckedChange={() => setTheme("light-pink")}
-                >
-                    Light Pink
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "black-cyan"}
-                    onCheckedChange={() => setTheme("black-cyan")}
-                >
-                    Black Cyan
-                </DropdownMenuCheckboxItem>
-                <DropdownMenuCheckboxItem
-                    checked={theme === "light-blue"}
-                    onCheckedChange={() => setTheme("light-blue")}
-                >
-                    Light Blue
-                </DropdownMenuCheckboxItem>
+                <ThemeOption themeOption="black-pink" />
+                <ThemeOption themeOption="black-cyan" />
+                <ThemeOption themeOption="light-pink" />
+                <ThemeOption themeOption="light-blue" />
+                <ThemeOption themeOption="grey-orange" />
+                <ThemeOption themeOption="dark-plus" />
                 <DropdownMenuSeparator />
-                <DropdownMenuCheckboxItem
-                    checked={theme === "system"}
-                    onCheckedChange={() => setTheme("system")}
-                >
-                    System
-                </DropdownMenuCheckboxItem>
+                <ThemeOption themeOption="system" />
             </DropdownMenuContent>
         </DropdownMenu>
+    )
+}
+
+function ThemeOption({ themeOption }: { themeOption: PreferredTheme }) {
+    const { setTheme, theme: currentSelection } = useTheme()
+    const isSelected = currentSelection === themeOption
+
+    const ui =
+        themeOption === "system"
+            ? {
+                  label: "System",
+                  left: "bg-white",
+                  right: "bg-black",
+                  preview: "",
+              }
+            : {
+                  label: THEME_CONFIG[themeOption].displayName,
+                  left:
+                      THEME_CONFIG[themeOption].type === "dark"
+                          ? "bg-black"
+                          : "bg-white",
+                  right: "bg-ring",
+                  preview: themeOption,
+              }
+
+    return (
+        <DropdownMenuItem
+            onSelect={() => setTheme(themeOption)}
+            className={`flex gap-2 transition-colors ${ui.preview}`}
+        >
+            <div
+                className={`flex ${isSelected ? "rounded-full outline outline-2 outline-offset-1 outline-ring" : ""}`}
+            >
+                <div
+                    className={`h-4 w-2 rounded-s-full border border-e-0 border-muted ${ui.left}`}
+                />
+                <div
+                    className={`h-4 w-2 rounded-e-full border border-s-0 border-muted ${ui.right}`}
+                />
+            </div>
+            <span className="text-sm font-medium">{ui.label}</span>
+        </DropdownMenuItem>
     )
 }

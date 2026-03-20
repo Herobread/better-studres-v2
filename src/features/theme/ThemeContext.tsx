@@ -1,24 +1,52 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-export const THEMES = [
-    "light",
-    "dark",
-    "dark-amoled",
-    "grey",
-    "black-pink",
-    "black-cyan",
-    "light-pink",
-    "light-blue",
-] as const
-export const DARK_THEMES = [
-    "dark",
-    "dark-amoled",
-    "grey",
-    "black-pink",
-    "black-cyan",
-]
-export type Theme = (typeof THEMES)[number]
-export type PreferredTheme = Theme | "system"
+const UNIQUE_THEME_CONFIG = {
+    light: {
+        type: "light",
+        displayName: "Light",
+    },
+    dark: {
+        type: "dark",
+        displayName: "Dark",
+    },
+    "dark-plus": {
+        type: "dark",
+        displayName: "Dark+",
+    },
+    "grey-orange": {
+        type: "dark",
+        displayName: "Grey Orange",
+    },
+    "black-pink": {
+        type: "dark",
+        displayName: "Blackpink",
+    },
+    "black-cyan": {
+        type: "dark",
+        displayName: "Dark Cyan",
+    },
+    "light-pink": {
+        type: "light",
+        displayName: "Light pink",
+    },
+    "light-blue": {
+        type: "light",
+        displayName: "Light Blue",
+    },
+} as const
+
+export type Theme = keyof typeof UNIQUE_THEME_CONFIG
+
+export const THEME_CONFIG = {
+    ...UNIQUE_THEME_CONFIG,
+    system: {
+        type: "system",
+        displayName: "System",
+    },
+} as const
+
+export type PreferredTheme = keyof typeof THEME_CONFIG
+export const THEME_OPTIONS = Object.keys(THEME_CONFIG) as PreferredTheme[]
 
 type ThemeProviderState = {
     theme: PreferredTheme
@@ -63,13 +91,14 @@ export function ThemeProvider({
             window.document.getElementById("__better_studres_theme_root") ||
             window.document.documentElement
 
-        root.classList.remove(...THEMES)
+        root.classList.remove(...THEME_OPTIONS)
         root.classList.add(actualTheme)
         root.style.colorScheme = actualTheme
     }, [actualTheme])
 
     const value = {
         theme,
+
         actualTheme,
         setTheme: async (newTheme: PreferredTheme) => {
             localStorage.setItem(storageKey, newTheme)
