@@ -54,27 +54,42 @@ export function ThemeToggle() {
     )
 }
 
+const STANDARDS: Record<
+    string,
+    { label: string; left: string; right: string; preview: string }
+> = {
+    system: {
+        label: "System",
+        left: "bg-white",
+        right: "bg-black",
+        preview: "",
+    },
+    light: {
+        label: "Light",
+        left: "bg-white",
+        right: "bg-zinc-200",
+        preview: "light",
+    },
+    dark: {
+        label: "Dark",
+        left: "bg-black",
+        right: "bg-zinc-800",
+        preview: "dark",
+    },
+}
+
 function ThemeOption({ themeOption }: { themeOption: PreferredTheme }) {
     const { setTheme, theme: currentSelection } = useTheme()
-    const isSelected = currentSelection === themeOption
 
-    const ui =
-        themeOption === "system"
-            ? {
-                  label: "System",
-                  left: "bg-white",
-                  right: "bg-black",
-                  preview: "",
-              }
-            : {
-                  label: THEME_CONFIG[themeOption].displayName,
-                  left:
-                      THEME_CONFIG[themeOption].type === "dark"
-                          ? "bg-black"
-                          : "bg-white",
-                  right: "bg-ring",
-                  preview: themeOption,
-              }
+    const ui = STANDARDS[themeOption] || {
+        label: THEME_CONFIG[themeOption].displayName,
+        left:
+            THEME_CONFIG[themeOption].type === "dark" ? "bg-black" : "bg-white",
+        right: "bg-ring",
+        preview: themeOption,
+    }
+
+    const isSelected = currentSelection === themeOption
 
     return (
         <DropdownMenuItem
