@@ -34,7 +34,10 @@ const BreadcrumbItem = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <li
         ref={ref}
-        className={cn("inline-flex items-center gap-1.5", className)}
+        className={cn(
+            "inline-flex items-center gap-1.5 hover:text-accent-foreground focus:text-accent-foreground",
+            className
+        )}
         {...props}
     />
 ))
@@ -51,7 +54,10 @@ const BreadcrumbLink = React.forwardRef<
     return (
         <Comp
             ref={ref}
-            className={cn("transition-colors hover:text-foreground", className)}
+            className={cn(
+                "transition-colors hover:text-accent-foreground focus:text-accent-foreground",
+                className
+            )}
             {...props}
         />
     )
