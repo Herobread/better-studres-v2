@@ -50,6 +50,29 @@
         --ring: 0 0% 83.1%;
     }
 
+    .grey {
+        --background: 0 0% 12%;
+        --background-layer-1: 0 0% 15%;
+        --card: 0 0% 17%;
+        --card-foreground: 0 0% 95%;
+        --foreground: 0 0% 95%;
+        --popover: 0 0% 12%;
+        --popover-foreground: 0 0% 95%;
+        --primary: 0 0% 90%;
+        --primary-foreground: 0 0% 12%;
+        --secondary: 0 0% 20%;
+        --secondary-foreground: 0 0% 95%;
+        --muted: 0 0% 22%;
+        --muted-foreground: 0 0% 65%;
+        --accent: 0 0% 24%;
+        --accent-foreground: 0 0% 100%;
+        --border: 0 0% 22%;
+        --input: 0 0% 22%;
+        --ring: 0 0% 50%;
+        --destructive: 0 62.8% 50%;
+        --destructive-foreground: 0 0% 95%;
+    }
+
     .grey-orange {
         --background: 30 3% 15%;
         --foreground: 45 31% 95%;
