@@ -28,8 +28,6 @@ module.exports = {
         extend: {
             fontFamily: {
                 fira: ["Fira Code", "monospace"],
-                sans: ["Fira Code", "sans-serif"],
-                mono: ["Fira Code", "monospace"],
             },
             typography: {
                 DEFAULT: {

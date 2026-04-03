@@ -12,6 +12,7 @@ import {
     FontFamily,
     THEME_STORAGE_KEY,
 } from "@src/features/theme"
+import { storage } from "webextension-polyfill"
 import { EnhanceHtml } from "@src/pages/content/pages/EnhanceHtml"
 import { createRoot } from "react-dom/client"
 import Providers from "./Providers"
@@ -68,7 +69,7 @@ async function initialize() {
         return
     }
 
-    const fontObject = await chrome.storage.local.get(FONT_STORAGE_KEY)
+    const fontObject = await storage.local.get(FONT_STORAGE_KEY)
     const font = fontObject[FONT_STORAGE_KEY] as FontFamily
 
     chrome.storage.local.onChanged.addListener((changes) => {

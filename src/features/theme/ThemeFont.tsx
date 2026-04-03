@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
+import { Storage, storage } from "webextension-polyfill"
 
 export type FontFamily = "default" | "fira"
 
@@ -24,27 +25,22 @@ export function FontProvider({
     storageKey?: string
     overrideFont?: FontFamily
 }) {
-    const [fontFamily, setFontFamilyState] = useState<FontFamily>(() => {
-        if (overrideFont) return overrideFont
-        return (localStorage.getItem(storageKey) as FontFamily) || defaultFont
-    })
+    const [fontFamily, setFontFamilyState] = useState<FontFamily>(
+        overrideFont || defaultFont
+    )
 
     useEffect(() => {
         const handleStorageChange = (
-            changes: Record<string, chrome.storage.StorageChange>
+            changes: Record<string, Storage.StorageChange>
         ) => {
             if (changes[storageKey]) {
                 setFontFamilyState(changes[storageKey].newValue as FontFamily)
             }
         }
 
-        if (typeof chrome !== "undefined" && chrome.storage) {
-            chrome.storage.onChanged.addListener(handleStorageChange)
-        }
+        storage.onChanged.addListener(handleStorageChange)
         return () => {
-            if (typeof chrome !== "undefined" && chrome.storage) {
-                chrome.storage.onChanged.removeListener(handleStorageChange)
-            }
+            storage.onChanged.removeListener(handleStorageChange)
         }
     }, [storageKey])
 
@@ -66,14 +62,14 @@ export function FontProvider({
         } else {
             root.classList.remove("font-fira")
             body.classList.remove("font-fira")
+            // Extra safety to ensure fira is removed
+            root.style.fontFamily = ""
+            body.style.fontFamily = ""
         }
     }, [fontFamily])
 
     const setFontFamily = async (newFont: FontFamily) => {
-        localStorage.setItem(storageKey, newFont)
-        if (typeof chrome !== "undefined" && chrome.storage) {
-            chrome.storage.local.set({ [storageKey]: newFont })
-        }
+        await storage.local.set({ [storageKey]: newFont })
         setFontFamilyState(newFont)
     }
 
