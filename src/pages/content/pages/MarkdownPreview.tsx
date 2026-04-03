@@ -5,7 +5,7 @@ import {
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { generateFileTitle } from "@src/features/head"
 import { FileContent } from "@src/features/parser"
-import { useTheme } from "@src/features/theme"
+import { useTheme, useFont } from "@src/features/theme"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { cn } from "@src/lib/utils"
@@ -61,11 +61,17 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
     replaceColors(customGithubLight, lightColorRemap)
 
     const { actualTheme } = useTheme()
+    const { fontFamily } = useFont()
 
     const url = location.href.toString()
 
     return (
-        <div className="min-h-screen bg-background text-foreground">
+        <div
+            className={cn(
+                "min-h-screen bg-background text-foreground",
+                fontFamily === "fira" && "font-fira"
+            )}
+        >
             <Helmet>
                 <title>{generateFileTitle(url)}</title>
             </Helmet>
