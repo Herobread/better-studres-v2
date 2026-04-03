@@ -9,33 +9,11 @@ import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { highlighter } from "@src/pages/content"
 import { Helmet } from "react-helmet-async"
-
-// The following styles are for line numbering.
-// This approach is used because CSS counters are
-// not directly supported by Tailwind CSS and shiki.js
-//
-// shiki.js generates HTML structure that requires
-// these specific CSS rules to target the code lines for numbering.
-//
-// https://github.com/shikijs/shiki/issues/3
-const codeLineNumberingStyles = `
-  .code-container code {
-    counter-reset: step;
-    counter-increment: step 0;
-  }
-
-  .code-container code .line::before {
-    content: counter(step);
-    counter-increment: step;
-    width: 1rem;
-    margin-right: 1.5rem;
-    display: inline-block;
-    text-align: right;
-    color: #9097A0;
-  }
-`
+import { useFont } from "@src/features/theme"
 
 export function FilePreview({ content }: { content: FileContent }) {
+    const { fontFamily } = useFont()
+
     const extension = (
         splitFileName(window.location.toString()).extension || ""
     ).toLowerCase()
@@ -49,6 +27,32 @@ export function FilePreview({ content }: { content: FileContent }) {
     })
 
     const url = location.href.toString()
+
+    // The following styles are for line numbering.
+    // This approach is used because CSS counters are
+    // not directly supported by Tailwind CSS and shiki.js
+    //
+    // shiki.js generates HTML structure that requires
+    // these specific CSS rules to target the code lines for numbering.
+    //
+    // https://github.com/shikijs/shiki/issues/3
+    const codeLineNumberingStyles = `
+      .code-container code {
+        counter-reset: step;
+        counter-increment: step 0;
+        ${fontFamily === "fira" ? "font-family: 'Fira Code', monospace !important;" : ""}
+      }
+
+      .code-container code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        width: 1rem;
+        margin-right: 1.5rem;
+        display: inline-block;
+        text-align: right;
+        color: #9097A0;
+      }
+    `
 
     return (
         <>

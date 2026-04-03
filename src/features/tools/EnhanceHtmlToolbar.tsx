@@ -18,11 +18,13 @@ import { downloadFile } from "@src/lib/utils"
 import { useQuery } from "@tanstack/react-query"
 import { SparklesIcon } from "lucide-react"
 import { useEffect, useState } from "react"
+import { useFont } from "../theme"
 
 export const HTML_ENHANCED_FILE_DATA_KEY = "is-html-enhanced"
 
 export function EnhanceHtmlToolbar() {
     const { toast } = useToast()
+    const { fontFamily } = useFont()
 
     const currentUrl = window.location.toString()
     const currentUrlSegments = extractUrlSegments(currentUrl)
@@ -52,7 +54,7 @@ export function EnhanceHtmlToolbar() {
             setTextStyle(isEnhancedRemote ? "centered" : "default")
             applyEnhancements(isEnhancedRemote)
         }
-    }, [isEnhancedRemote])
+    }, [isEnhancedRemote, fontFamily])
 
     const applyEnhancements = (enhanced: boolean) => {
         const body = document.body
@@ -160,7 +162,6 @@ const styles = `
     max-width: 80ch !important;
     margin: auto !important;
     margin-top: 50px !important;
-    font-family: math, serif !important;
 }
 `
 

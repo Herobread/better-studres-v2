@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -209,5 +211,12 @@
         --border: 0 0% 18%;
         --input: 0 0% 18%;
         --ring: 0 0% 80%;
+    }
+}
+
+@layer utilities {
+    .font-fira,
+    .font-fira * {
+        font-family: "Fira Code", monospace !important;
     }
 }

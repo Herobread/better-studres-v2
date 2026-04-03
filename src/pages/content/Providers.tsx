@@ -6,18 +6,28 @@ import ConfigContextProvider from "@src/features/config/ConfigContext"
 import { DownloadInfoProvider } from "@src/features/fileDownload/DownloadInfoContext"
 import { PageStateContextProvider } from "@src/features/router/PageStateContext"
 import { SmoothRouterListener } from "@src/features/router/SmoothRouterListener"
-import { PreferredTheme, ThemeProvider } from "@src/features/theme"
+import {
+    FontFamily,
+    FontProvider,
+    PreferredTheme,
+    ThemeProvider,
+} from "@src/features/theme"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { HelmetProvider } from "react-helmet-async"
 
 interface ProvidersProps {
     children: React.ReactNode
     overrideTheme?: PreferredTheme
+    overrideFont?: FontFamily
 }
 
 const queryClient = new QueryClient()
 
-export default function Providers({ children, overrideTheme }: ProvidersProps) {
+export default function Providers({
+    children,
+    overrideTheme,
+    overrideFont,
+}: ProvidersProps) {
     overrideTheme ??= "system"
 
     return (
@@ -30,27 +40,32 @@ export default function Providers({ children, overrideTheme }: ProvidersProps) {
                 .
             </div>
             <QueryClientProvider client={queryClient}>
-                <ThemeProvider
-                    defaultTheme={"system"}
-                    overrideTheme={overrideTheme}
-                    storageKey="vite-ui-theme"
+                <FontProvider
+                    defaultFont={"default"}
+                    overrideFont={overrideFont}
                 >
-                    <PageStateContextProvider>
-                        <HelmetProvider>
-                            <SmoothRouterListener />
-                            <NiceModal.Provider>
-                                <TooltipProvider delayDuration={0}>
-                                    <ConfigContextProvider>
-                                        <DownloadInfoProvider>
-                                            {children}
-                                        </DownloadInfoProvider>
-                                        <Toaster />
-                                    </ConfigContextProvider>
-                                </TooltipProvider>
-                            </NiceModal.Provider>
-                        </HelmetProvider>
-                    </PageStateContextProvider>
-                </ThemeProvider>
+                    <ThemeProvider
+                        defaultTheme={"system"}
+                        overrideTheme={overrideTheme}
+                        storageKey="vite-ui-theme"
+                    >
+                        <PageStateContextProvider>
+                            <HelmetProvider>
+                                <SmoothRouterListener />
+                                <NiceModal.Provider>
+                                    <TooltipProvider delayDuration={0}>
+                                        <ConfigContextProvider>
+                                            <DownloadInfoProvider>
+                                                {children}
+                                            </DownloadInfoProvider>
+                                            <Toaster />
+                                        </ConfigContextProvider>
+                                    </TooltipProvider>
+                                </NiceModal.Provider>
+                            </HelmetProvider>
+                        </PageStateContextProvider>
+                    </ThemeProvider>
+                </FontProvider>
             </QueryClientProvider>
         </div>
     )

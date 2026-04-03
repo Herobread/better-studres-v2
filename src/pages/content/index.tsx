@@ -7,7 +7,11 @@ import {
     getExtensionState,
 } from "@src/features/extensionToggle/extensionState"
 import { PageData, parsePageContent } from "@src/features/parser"
-import { THEME_STORAGE_KEY } from "@src/features/theme"
+import {
+    FONT_STORAGE_KEY,
+    FontFamily,
+    THEME_STORAGE_KEY,
+} from "@src/features/theme"
 import { EnhanceHtml } from "@src/pages/content/pages/EnhanceHtml"
 import { createRoot } from "react-dom/client"
 import Providers from "./Providers"
@@ -64,6 +68,9 @@ async function initialize() {
         return
     }
 
+    const fontObject = await chrome.storage.local.get(FONT_STORAGE_KEY)
+    const font = fontObject[FONT_STORAGE_KEY] as FontFamily
+
     chrome.storage.local.onChanged.addListener((changes) => {
         if (changes[EXTENSION_STATE_STORAGE_KEY]) {
             location.reload()
@@ -81,6 +88,9 @@ async function initialize() {
     try {
         const rootContainer = document.body
 
+        addHeadMeta()
+        addHtmlLang()
+
         const themeObject = await chrome.storage.local.get(THEME_STORAGE_KEY)
         const theme = themeObject[THEME_STORAGE_KEY]
 
@@ -90,7 +100,7 @@ async function initialize() {
             rootContainer.appendChild(enhancerRoot)
             const root = createRoot(enhancerRoot)
             root.render(
-                <Providers overrideTheme={theme}>
+                <Providers overrideTheme={theme} overrideFont={font}>
                     <EnhanceHtml />
                     <CommandsShortcutMount />
                 </Providers>
@@ -123,13 +133,11 @@ async function initialize() {
         rootContainer.setAttribute("id", "__better_studres_theme_root")
 
         resetStyles()
-        addHeadMeta()
-        addHtmlLang()
 
         rootContainer.style.overflowY = "scroll" // show scroll bar
 
         root.render(
-            <Providers overrideTheme={theme}>
+            <Providers overrideTheme={theme} overrideFont={font}>
                 <Root initialPageData={pageData} />
             </Providers>
         )
@@ -151,7 +159,7 @@ async function initialize() {
         const root = createRoot(rootContainer)
 
         root.render(
-            <Providers overrideTheme={theme}>
+            <Providers overrideTheme={theme} overrideFont={font}>
                 <CommandsShortcutMount />
             </Providers>
         )
@@ -172,6 +180,23 @@ function resetStyles() {
 }
 
 function addHeadMeta() {
+    const link = document.createElement("link")
+    link.rel = "preconnect"
+    link.href = "https://fonts.googleapis.com"
+    document.head.appendChild(link)
+
+    const link2 = document.createElement("link")
+    link2.rel = "preconnect"
+    link2.href = "https://fonts.gstatic.com"
+    link2.crossOrigin = "anonymous"
+    document.head.appendChild(link2)
+
+    const link3 = document.createElement("link")
+    link3.rel = "stylesheet"
+    link3.href =
+        "https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+    document.head.appendChild(link3)
+
     const meta = document.createElement("meta")
     meta.name = "viewport"
     meta.content = "width=device-width, initial-scale=1"

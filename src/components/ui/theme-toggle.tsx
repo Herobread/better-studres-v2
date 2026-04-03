@@ -7,12 +7,20 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@src/components/ui/dropdown-menu"
-import { PreferredTheme, THEME_CONFIG, useTheme } from "@src/features/theme"
+import { ToggleGroup, ToggleGroupItem } from "@src/components/ui/toggle-group"
+import {
+    FontFamily,
+    PreferredTheme,
+    THEME_CONFIG,
+    useFont,
+    useTheme,
+} from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
 
 export function ThemeToggle() {
     const { actualTheme } = useTheme()
+    const { fontFamily, setFontFamily } = useFont()
 
     const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
@@ -45,6 +53,12 @@ export function ThemeToggle() {
 
                 <DropdownMenuSeparator className="col-span-2 mx-1" />
 
+                <div className="col-span-2 px-2 py-1.5">
+                    <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Theme
+                    </p>
+                </div>
+
                 <ThemeOption themeOption="dark" />
                 <ThemeOption themeOption="light" />
 
@@ -69,6 +83,33 @@ export function ThemeToggle() {
                 <DropdownMenuSeparator className="col-span-2 mx-1" />
 
                 <ThemeOption themeOption="system" />
+                <div></div>
+
+                <DropdownMenuSeparator className="col-span-2 mx-1" />
+
+                <div className="col-span-2 px-2 py-1.5 pb-3">
+                    <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                        Font Family
+                    </p>
+                    <ToggleGroup
+                        type="single"
+                        size="sm"
+                        className="grid grid-cols-2"
+                        value={fontFamily}
+                        onValueChange={(value) => {
+                            if (value) {
+                                setFontFamily(value as FontFamily)
+                            }
+                        }}
+                    >
+                        <ToggleGroupItem value="default">
+                            📝 Default
+                        </ToggleGroupItem>
+                        <ToggleGroupItem value="fira">
+                            💻 Fira Code
+                        </ToggleGroupItem>
+                    </ToggleGroup>
+                </div>
             </DropdownMenuContent>
         </DropdownMenu>
     )
