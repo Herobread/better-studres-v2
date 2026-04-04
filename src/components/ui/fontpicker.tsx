@@ -16,6 +16,12 @@ import { cn } from "@src/lib/utils"
 import { useGoogleFonts } from "@src/features/theme/googleFonts"
 import { useFont } from "@src/features/theme"
 
+
+// I tried using built in combobox in shadcn
+// https://ui.shadcn.com/docs/components/radix/combobox
+// But it's broken as of now https://github.com/shadcn-ui/ui/issues/9400
+// and I think it would require us to migrate to tailwind v4
+// FIXME: refactor to use shadcn combobox
 export function FontPicker() {
     const [open, setOpen] = React.useState(false)
     const { fontFamily: value, setFontFamily: setValue } = useFont()
