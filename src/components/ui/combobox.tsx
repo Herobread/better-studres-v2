@@ -59,7 +59,7 @@ export function FontPicker() {
                         <CommandEmpty>
                             {isError ? "Error loading fonts." : "No font found."}
                         </CommandEmpty>
-                        <CommandGroup>
+                        <CommandGroup heading="System Fonts">
                             <CommandItem
                                 value="default"
                                 onSelect={() => {
@@ -94,29 +94,33 @@ export function FontPicker() {
                                     )}
                                 />
                             </CommandItem>
-                            {fonts?.map((font) => (
-                                <CommandItem
-                                    key={font.value}
-                                    value={font.value}
-                                    onSelect={(currentValue) => {
-                                        setValue(currentValue)
-                                        setOpen(false)
-                                    }}
-                                >
-                                    <span className="flex-grow">
-                                        {font.label}
-                                    </span>
-                                    <Check
-                                        className={cn(
-                                            "ml-2 h-4 w-4",
-                                            value === font.value
-                                                ? "opacity-100"
-                                                : "opacity-0"
-                                        )}
-                                    />
-                                </CommandItem>
-                            ))}
                         </CommandGroup>
+                        {fonts && fonts.length > 0 && (
+                            <CommandGroup heading="Google Fonts">
+                                {fonts.map((font) => (
+                                    <CommandItem
+                                        key={font.value}
+                                        value={font.value}
+                                        onSelect={(currentValue) => {
+                                            setValue(currentValue)
+                                            setOpen(false)
+                                        }}
+                                    >
+                                        <span className="flex-grow">
+                                            {font.label}
+                                        </span>
+                                        <Check
+                                            className={cn(
+                                                "ml-2 h-4 w-4",
+                                                value === font.value
+                                                    ? "opacity-100"
+                                                    : "opacity-0"
+                                            )}
+                                        />
+                                    </CommandItem>
+                                ))}
+                            </CommandGroup>
+                        )}
                     </CommandList>
                 </Command>
             </PopoverContent>

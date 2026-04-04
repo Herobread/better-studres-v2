@@ -8,7 +8,7 @@ export interface GoogleFont {
 }
 
 const FONTS_URL =
-    "https://raw.githubusercontent.com/r0m80/google-fonts-metadata/master/data/google-fonts.json"
+    "https://raw.githubusercontent.com/fontsource/google-font-metadata/main/data/google-fonts-v1.json"
 
 export function useGoogleFonts() {
     return useQuery({
