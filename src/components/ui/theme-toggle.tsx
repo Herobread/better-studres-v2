@@ -7,21 +7,13 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@src/components/ui/dropdown-menu"
-import { ToggleGroup, ToggleGroupItem } from "@src/components/ui/toggle-group"
-import {
-    FontFamily,
-    PreferredTheme,
-    THEME_CONFIG,
-    useFont,
-    useTheme,
-} from "@src/features/theme"
+import { PreferredTheme, THEME_CONFIG, useTheme } from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
-import { FontPicker } from "./combobox"
+import { FontPicker } from "./fontpicker"
 
 export function ThemeToggle() {
     const { actualTheme } = useTheme()
-    const { fontFamily, setFontFamily } = useFont()
 
     const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
