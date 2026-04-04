@@ -24,6 +24,6 @@ export function useGoogleFonts() {
                 label: font.family,
             }))
         },
-        staleTime: 1000 * 60 * 60 * 24, // 24 hours
+        staleTime: Infinity, // we're caching fonts without timeout cuz they're basically static
     })
 }
