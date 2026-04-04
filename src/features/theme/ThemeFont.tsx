@@ -69,22 +69,16 @@ export function FontProvider({
             window.document.documentElement
         const body = window.document.body
 
-        if (fontFamily === "fira") {
-            root.classList.add("font-fira")
-            body.classList.add("font-fira")
-            root.style.fontFamily = ""
-            body.style.fontFamily = ""
-        } else if (fontFamily === "default") {
-            root.classList.remove("font-fira")
-            body.classList.remove("font-fira")
+        if (fontFamily === "default") {
+            root.style.setProperty("--font-family", "inherit")
             root.style.fontFamily = ""
             body.style.fontFamily = ""
         } else {
-            root.classList.remove("font-fira")
-            body.classList.remove("font-fira")
             loadGoogleFont(fontFamily)
-            root.style.fontFamily = `'${fontFamily}', sans-serif`
-            body.style.fontFamily = `'${fontFamily}', sans-serif`
+            const fontValue = `'${fontFamily}', sans-serif`
+            root.style.setProperty("--font-family", fontValue)
+            root.style.setProperty("font-family", fontValue, "important")
+            body.style.setProperty("font-family", fontValue, "important")
         }
     }, [fontFamily])
 
