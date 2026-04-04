@@ -67,7 +67,7 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
     const url = location.href.toString()
 
     return (
-        <div className={cn("min-h-screen bg-background text-foreground")}>
+        <div className="min-h-screen bg-background text-foreground">
             <Helmet>
                 <title>{generateFileTitle(url)}</title>
             </Helmet>
