@@ -17,6 +17,7 @@ import {
 } from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
+import { ComboboxDemo } from "./combobox"
 
 export function ThemeToggle() {
     const { actualTheme } = useTheme()
@@ -25,7 +26,7 @@ export function ThemeToggle() {
     const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
     return (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
                     <Sun
@@ -109,6 +110,13 @@ export function ThemeToggle() {
                             💻 Fira Code
                         </ToggleGroupItem>
                     </ToggleGroup>
+                </div>
+                <div
+                    className="col-span-2 px-2 py-1.5 pb-3"
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onKeyDown={(e) => e.stopPropagation()}
+                >
+                    <ComboboxDemo />
                 </div>
             </DropdownMenuContent>
         </DropdownMenu>

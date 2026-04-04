@@ -169,7 +169,7 @@ const CommandItem = React.forwardRef<
             )}
             {...props}
         >
-            <span className="flex-grow">{children}</span>
+            <span className="flex flex-grow items-center justify-between">{children}</span>
             {onTab && (
                 <div className="invisible absolute right-1 space-x-1 rounded-sm bg-background p-2 group-data-[selected=true]:visible">
                     <kbd className="whitespace-nowrap rounded-sm bg-primary px-[6px] py-[2px] font-sans text-base font-medium leading-[1rem] text-primary-foreground">
