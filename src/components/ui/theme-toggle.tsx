@@ -17,7 +17,7 @@ import {
 } from "@src/features/theme"
 import { cn } from "@src/lib/utils"
 import { Moon, Sun } from "lucide-react"
-import { ComboboxDemo } from "./combobox"
+import { FontPicker } from "./combobox"
 
 export function ThemeToggle() {
     const { actualTheme } = useTheme()
@@ -92,31 +92,12 @@ export function ThemeToggle() {
                     <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         Font Family
                     </p>
-                    <ToggleGroup
-                        type="single"
-                        size="sm"
-                        className="grid grid-cols-2"
-                        value={fontFamily}
-                        onValueChange={(value) => {
-                            if (value) {
-                                setFontFamily(value as FontFamily)
-                            }
-                        }}
+                    <div
+                        onPointerDown={(e) => e.stopPropagation()}
+                        onKeyDown={(e) => e.stopPropagation()}
                     >
-                        <ToggleGroupItem value="default">
-                            📝 Default
-                        </ToggleGroupItem>
-                        <ToggleGroupItem value="fira">
-                            💻 Fira Code
-                        </ToggleGroupItem>
-                    </ToggleGroup>
-                </div>
-                <div
-                    className="col-span-2 px-2 py-1.5 pb-3"
-                    onPointerDown={(e) => e.stopPropagation()}
-                    onKeyDown={(e) => e.stopPropagation()}
-                >
-                    <ComboboxDemo />
+                        <FontPicker />
+                    </div>
                 </div>
             </DropdownMenuContent>
         </DropdownMenu>

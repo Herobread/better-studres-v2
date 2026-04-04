@@ -40,7 +40,13 @@ export function FilePreview({ content }: { content: FileContent }) {
       .code-container code {
         counter-reset: step;
         counter-increment: step 0;
-        ${fontFamily === "fira" ? "font-family: 'Fira Code', monospace !important;" : ""}
+        ${
+            fontFamily === "fira"
+                ? "font-family: 'Fira Code', monospace !important;"
+                : fontFamily !== "default"
+                  ? `font-family: '${fontFamily}', sans-serif !important;`
+                  : ""
+        }
       }
 
       .code-container code .line::before {

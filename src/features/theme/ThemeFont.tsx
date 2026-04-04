@@ -1,9 +1,22 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { Storage, storage } from "webextension-polyfill"
 
-export type FontFamily = "default" | "fira"
+export type FontFamily = string
 
 export const FONT_STORAGE_KEY = "vite-ui-font"
+
+export function loadGoogleFont(fontName: string) {
+    if (fontName === "default" || fontName === "fira") return
+
+    const fontId = `google-font-${fontName.replace(/\s+/g, "-").toLowerCase()}`
+    if (document.getElementById(fontId)) return
+
+    const link = document.createElement("link")
+    link.id = fontId
+    link.rel = "stylesheet"
+    link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/\s+/g, "+")}:wght@400;500;700&display=swap`
+    document.head.appendChild(link)
+}
 
 type FontProviderState = {
     fontFamily: FontFamily
@@ -59,12 +72,19 @@ export function FontProvider({
         if (fontFamily === "fira") {
             root.classList.add("font-fira")
             body.classList.add("font-fira")
+            root.style.fontFamily = ""
+            body.style.fontFamily = ""
+        } else if (fontFamily === "default") {
+            root.classList.remove("font-fira")
+            body.classList.remove("font-fira")
+            root.style.fontFamily = ""
+            body.style.fontFamily = ""
         } else {
             root.classList.remove("font-fira")
             body.classList.remove("font-fira")
-            // Extra safety to ensure fira is removed
-            root.style.fontFamily = ""
-            body.style.fontFamily = ""
+            loadGoogleFont(fontFamily)
+            root.style.fontFamily = `'${fontFamily}', sans-serif`
+            body.style.fontFamily = `'${fontFamily}', sans-serif`
         }
     }, [fontFamily])
 
