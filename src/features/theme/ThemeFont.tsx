@@ -6,7 +6,7 @@ export type FontFamily = string
 export const FONT_STORAGE_KEY = "vite-ui-font"
 
 export function loadGoogleFont(fontName: string) {
-    if (fontName === "default" || fontName === "fira") return
+    if (fontName === "default") return
 
     const fontId = `google-font-${fontName.replace(/\s+/g, "-").toLowerCase()}`
     if (document.getElementById(fontId)) return

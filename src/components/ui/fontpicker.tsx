@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import { Check, ChevronsUpDown, Loader2 } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "./popover"
 import { Button } from "@src/components/ui/button"
@@ -15,7 +14,7 @@ import {
 import { cn } from "@src/lib/utils"
 import { useGoogleFonts } from "@src/features/theme/googleFonts"
 import { useFont } from "@src/features/theme"
-
+import { useState } from "react"
 
 // I tried using built in combobox in shadcn
 // https://ui.shadcn.com/docs/components/radix/combobox
@@ -23,15 +22,14 @@ import { useFont } from "@src/features/theme"
 // and I think it would require us to migrate to tailwind v4
 // FIXME: refactor to use shadcn combobox
 export function FontPicker() {
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const { fontFamily: value, setFontFamily: setValue } = useFont()
     const { data: fonts, isLoading, isError } = useGoogleFonts()
 
-    const selectedFontLabel = React.useMemo(() => {
-        if (value === "default") return "Default"
-        if (value === "fira") return "Fira Code"
-        return fonts?.find((font) => font.value === value)?.label || value
-    }, [value, fonts])
+    const selectedFontLabel =
+        value === "default"
+            ? "Default"
+            : fonts?.find((font) => font.value === value)?.label || value
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -63,46 +61,29 @@ export function FontPicker() {
                     <CommandInput placeholder="Search font..." />
                     <CommandList>
                         <CommandEmpty>
-                            {isError ? "Error loading fonts." : "No font found."}
+                            {isError
+                                ? "Error loading fonts."
+                                : "No font found."}
                         </CommandEmpty>
-                        <CommandGroup heading="System Fonts">
-                            <CommandItem
-                                value="default"
-                                onSelect={() => {
-                                    setValue("default")
-                                    setOpen(false)
-                                }}
-                            >
-                                <span className="flex-grow">Default</span>
-                                <Check
-                                    className={cn(
-                                        "ml-2 h-4 w-4",
-                                        value === "default"
-                                            ? "opacity-100"
-                                            : "opacity-0"
-                                    )}
-                                />
-                            </CommandItem>
-                            <CommandItem
-                                value="fira"
-                                onSelect={() => {
-                                    setValue("fira")
-                                    setOpen(false)
-                                }}
-                            >
-                                <span className="flex-grow">Fira Code</span>
-                                <Check
-                                    className={cn(
-                                        "ml-2 h-4 w-4",
-                                        value === "fira"
-                                            ? "opacity-100"
-                                            : "opacity-0"
-                                    )}
-                                />
-                            </CommandItem>
-                        </CommandGroup>
                         {fonts && fonts.length > 0 && (
                             <CommandGroup heading="Google Fonts">
+                                <CommandItem
+                                    value="default"
+                                    onSelect={() => {
+                                        setValue("default")
+                                        setOpen(false)
+                                    }}
+                                >
+                                    <span className="flex-grow">Default</span>
+                                    <Check
+                                        className={cn(
+                                            "ml-2 h-4 w-4",
+                                            value === "default"
+                                                ? "opacity-100"
+                                                : "opacity-0"
+                                        )}
+                                    />
+                                </CommandItem>
                                 {fonts.map((font) => (
                                     <CommandItem
                                         key={font.value}

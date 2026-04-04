@@ -44,11 +44,9 @@ export function FilePreview({ content }: { content: FileContent }) {
         counter-reset: step;
         counter-increment: step 0;
         ${
-            fontFamily === "fira"
-                ? "font-family: 'Fira Code', monospace !important;"
-                : fontFamily !== "default"
-                  ? `font-family: '${fontFamily}', sans-serif !important;`
-                  : ""
+            fontFamily !== "default"
+                ? `font-family: '${fontFamily}', sans-serif !important;`
+                : ""
         }
       }
 

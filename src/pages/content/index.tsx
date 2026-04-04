@@ -192,12 +192,6 @@ function addHeadMeta() {
     link2.crossOrigin = "anonymous"
     document.head.appendChild(link2)
 
-    const link3 = document.createElement("link")
-    link3.rel = "stylesheet"
-    link3.href =
-        "https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
-    document.head.appendChild(link3)
-
     const meta = document.createElement("meta")
     meta.name = "viewport"
     meta.content = "width=device-width, initial-scale=1"

@@ -61,19 +61,13 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
     replaceColors(customGithubLight, lightColorRemap)
 
     const { actualTheme } = useTheme()
-    const { fontFamily } = useFont()
 
     const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
     const url = location.href.toString()
 
     return (
-        <div
-            className={cn(
-                "min-h-screen bg-background text-foreground",
-                fontFamily === "fira" && "font-fira"
-            )}
-        >
+        <div className={cn("min-h-screen bg-background text-foreground")}>
             <Helmet>
                 <title>{generateFileTitle(url)}</title>
             </Helmet>

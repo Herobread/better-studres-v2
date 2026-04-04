@@ -2,7 +2,6 @@ import {
     isolateInsideOfContainer,
     scopedPreflightStyles,
 } from "tailwindcss-scoped-preflight"
-
 ;/ @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: ["class"],
@@ -26,9 +25,6 @@ module.exports = {
             },
         },
         extend: {
-            fontFamily: {
-                fira: ["Fira Code", "monospace"],
-            },
             typography: {
                 DEFAULT: {
                     css: {
