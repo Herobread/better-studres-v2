@@ -20,6 +20,8 @@ import { useState } from "react"
 // https://ui.shadcn.com/docs/components/radix/combobox
 // But it's broken as of now https://github.com/shadcn-ui/ui/issues/9400
 // and I think it would require us to migrate to tailwind v4
+// So, for now I just used https://v3.shadcn.com/docs/components/combobox
+// their v3 suggestion with popover and command
 // FIXME: refactor to use shadcn combobox
 export function FontPicker() {
     const [open, setOpen] = useState(false)
@@ -55,7 +57,6 @@ export function FontPicker() {
                 side="bottom"
                 align="start"
                 avoidCollisions={false}
-                onPointerDown={(e) => e.stopPropagation()}
             >
                 <Command>
                     <CommandInput placeholder="Search font..." />

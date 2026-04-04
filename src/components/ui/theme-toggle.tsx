@@ -84,12 +84,7 @@ export function ThemeToggle() {
                     <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
                         Font Family
                     </p>
-                    <div
-                        onPointerDown={(e) => e.stopPropagation()}
-                        onKeyDown={(e) => e.stopPropagation()}
-                    >
-                        <FontPicker />
-                    </div>
+                    <FontPicker />
                 </div>
             </DropdownMenuContent>
         </DropdownMenu>

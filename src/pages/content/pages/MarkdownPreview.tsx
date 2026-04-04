@@ -5,7 +5,7 @@ import {
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { generateFileTitle } from "@src/features/head"
 import { FileContent } from "@src/features/parser"
-import { useTheme, useFont, THEME_CONFIG } from "@src/features/theme"
+import { useTheme, THEME_CONFIG } from "@src/features/theme"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { cn } from "@src/lib/utils"
