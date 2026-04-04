@@ -5,7 +5,7 @@ import {
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { generateFileTitle } from "@src/features/head"
 import { FileContent } from "@src/features/parser"
-import { useTheme, useFont } from "@src/features/theme"
+import { useTheme, useFont, THEME_CONFIG } from "@src/features/theme"
 import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { cn } from "@src/lib/utils"
@@ -63,6 +63,8 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
     const { actualTheme } = useTheme()
     const { fontFamily } = useFont()
 
+    const isDark = THEME_CONFIG[actualTheme].type === "dark"
+
     const url = location.href.toString()
 
     return (
@@ -77,7 +79,12 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
             </Helmet>
             <CommandsShortcutMount />
             <FileBackButton />
-            <div className="prose mx-auto max-w-prose py-12 dark:prose-invert ">
+            <div
+                className={cn(
+                    "prose mx-auto max-w-prose py-12",
+                    isDark && "prose-invert"
+                )}
+            >
                 <Markdown
                     components={{
                         pre: ({ children }) => <>{children}</>,
@@ -118,10 +125,9 @@ export function MarkdownPreview({ content }: { content: FileContent }) {
                                 childrenString,
                                 {
                                     lang,
-                                    theme:
-                                        actualTheme === "dark"
-                                            ? customGithubDark
-                                            : customGithubLight,
+                                    theme: isDark
+                                        ? customGithubDark
+                                        : customGithubLight,
                                 }
                             )
 

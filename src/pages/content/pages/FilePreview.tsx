@@ -9,10 +9,13 @@ import { FileBackButton } from "@src/features/tools/FileBackButton"
 import { FilePreviewToolbar } from "@src/features/tools/FilePreviewToolbar"
 import { highlighter } from "@src/pages/content"
 import { Helmet } from "react-helmet-async"
-import { useFont } from "@src/features/theme"
+import { useFont, useTheme, THEME_CONFIG } from "@src/features/theme"
 
 export function FilePreview({ content }: { content: FileContent }) {
     const { fontFamily } = useFont()
+    const { actualTheme } = useTheme()
+
+    const isDark = THEME_CONFIG[actualTheme].type === "dark"
 
     const extension = (
         splitFileName(window.location.toString()).extension || ""
@@ -23,7 +26,7 @@ export function FilePreview({ content }: { content: FileContent }) {
 
     const html = highlighter.codeToHtml(content.text, {
         lang,
-        theme: "github-dark",
+        theme: isDark ? "github-dark" : "github-light",
     })
 
     const url = location.href.toString()
