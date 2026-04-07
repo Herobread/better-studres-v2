@@ -11,10 +11,12 @@ interface DownloadFileMenuItemProps {
     isFolder: boolean
     fileName: string
     fileKey: string
+    disabled?: boolean
 }
 
 export default function DownloadFileMenuItem({
     href,
+    disabled,
     isFolder,
     fileName,
     fileKey,
@@ -52,7 +54,10 @@ export default function DownloadFileMenuItem({
 
     if (isFolder) {
         return (
-            <ContextMenuItem onSelect={handleFolderDownload}>
+            <ContextMenuItem
+                disabled={disabled}
+                onSelect={handleFolderDownload}
+            >
                 <DownloadIcon className="h-4 w-4" /> Web download
             </ContextMenuItem>
         )
@@ -63,7 +68,7 @@ export default function DownloadFileMenuItem({
     }
 
     return (
-        <ContextMenuItem onSelect={handleSelect}>
+        <ContextMenuItem disabled={disabled} onSelect={handleSelect}>
             <DownloadIcon className="h-4 w-4" /> Web download
         </ContextMenuItem>
     )
