@@ -109,9 +109,11 @@ function ModulesSection({ modules }: { modules: ModuleContent[][] }) {
             <p className="text-secondary-foreground">
                 Directories containing materials for each module.
             </p>
-            {modules.map((row, i) => {
-                return <ModuleRow row={row} key={i} />
-            })}
+            <div className="space-y-10">
+                {modules.map((row, i) => {
+                    return <ModuleRow row={row} key={i} />
+                })}
+            </div>
         </section>
     )
 }
