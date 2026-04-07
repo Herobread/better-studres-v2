@@ -92,5 +92,4 @@ export const MODULE_EMOJI_MAP: { [key: string]: string } = {
     Honours: "🎖️",
     MSci: "🔬",
     Masters: "🎓",
-    More_about_Student_Resources: "🛠️",
 }
