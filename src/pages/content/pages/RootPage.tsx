@@ -51,9 +51,11 @@ export function RootPage({ content }: RootProps) {
             )}
             <MainLayout>
                 <HeaderSection />
-                <ModulesSection modules={content.modules} />
-                <ResourcesSection taughtStudents={content.taughtStudents} />
-                <SessionArchiveSection archivedFolders={content.sessions} />
+                <div className="space-y-8">
+                    <ModulesSection modules={content.modules} />
+                    <ResourcesSection taughtStudents={content.taughtStudents} />
+                    <SessionArchiveSection archivedFolders={content.sessions} />
+                </div>
             </MainLayout>
         </div>
     )
