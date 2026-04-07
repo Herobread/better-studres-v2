@@ -2,6 +2,7 @@ import NiceModal from "@ebay/nice-modal-react"
 import MainLayout from "@src/components/layouts/MainLayout"
 import WideLayout from "@src/components/layouts/WideLayout"
 import H2 from "@src/components/typography/H2"
+import { Separator } from "@src/components/ui/separator"
 import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent"
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
@@ -20,6 +21,7 @@ import {
 } from "@src/features/quickLinks/components"
 import { EmptyQuickLinksMessage } from "@src/features/quickLinks/components/EmptyQuickLinksMessage"
 import { BigLink } from "@src/features/root/BigLink"
+import { BigModuleLink } from "@src/features/root/BigModuleLink"
 import { SessionLink } from "@src/features/root/SessionLink"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
 import { useContext } from "react"
@@ -83,7 +85,36 @@ function ModulesSection({ modules }: { modules: ModuleContent[][] }) {
             <p className="text-secondary-foreground">
                 Directories containing materials for each module.
             </p>
+            {modules.map((row, i) => {
+                return <ModuleRow row={row} key={i} />
+            })}
         </section>
+    )
+}
+
+function ModuleRow({ row }: { row: ModuleContent[] }) {
+    const module = row[0].code
+    const sectionHeader = module.substring(0, 3) + "000"
+
+    return (
+        <div className="space-y-4">
+            <div className="mx-auto mb-4 mt-5 flex max-w-full items-center gap-4">
+                <Separator className="shrink flex-grow" />
+                <span className="shrink-0 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    {sectionHeader}
+                </span>
+                <Separator className="shrink flex-grow" />
+            </div>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-3">
+                {row.map((module) => (
+                    <BigModuleLink
+                        key={module.url}
+                        href={module.url}
+                        name={module.code}
+                    />
+                ))}
+            </div>
+        </div>
     )
 }
 
