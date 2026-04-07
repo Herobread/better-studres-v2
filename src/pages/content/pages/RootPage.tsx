@@ -23,7 +23,9 @@ import { EmptyQuickLinksMessage } from "@src/features/quickLinks/components/Empt
 import { BigLink } from "@src/features/root/BigLink"
 import { BigModuleLink } from "@src/features/root/BigModuleLink"
 import { SessionLink } from "@src/features/root/SessionLink"
+import { PageStateContext } from "@src/features/router/PageStateContext"
 import CommandsDialog from "@src/features/shared/dialogs/CommandsDialog"
+import TableSkeleton from "@src/features/table/structure/TableSkeleton"
 import { useContext } from "react"
 import { Helmet } from "react-helmet-async"
 
@@ -33,8 +35,30 @@ interface RootProps {
 
 export function RootPage({ content }: RootProps) {
     const { showCommandButton } = useContext(ConfigContext)
+    const { isLoading } = useContext(PageStateContext)
+
     const handleCommandActivation = () => {
         NiceModal.show(CommandsDialog)
+    }
+
+    if (isLoading) {
+        return (
+            <div className="flex min-h-screen flex-col bg-background py-2 text-foreground">
+                <Helmet>
+                    <title>Student Resources</title>
+                </Helmet>
+                <CommandsShortcutMount />
+                <SkipToMainContent />
+                {showCommandButton && (
+                    <WideLayout>
+                        <CommandInput onSelect={handleCommandActivation} />
+                    </WideLayout>
+                )}
+                <MainLayout>
+                    <TableSkeleton />
+                </MainLayout>
+            </div>
+        )
     }
 
     return (
