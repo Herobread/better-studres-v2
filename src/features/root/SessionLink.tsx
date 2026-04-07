@@ -14,9 +14,13 @@ export function SessionLink({ folder }: { folder: ArchivedFolderItem }) {
         yearsAgoString = `current`
     }
 
+    if (yearsAgo == 1) {
+        yearsAgoString = `1 year ago`
+    }
+
     return (
         <Link
-            className="group bg-background-layer-1 p-1 text-center hover:bg-accent"
+            className="group bg-background-layer-1 p-2 text-center hover:bg-accent"
             href={url}
         >
             <p className="font-mono text-sm text-muted-foreground group-hover:text-accent-foreground group-focus:text-accent-foreground">

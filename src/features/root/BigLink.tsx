@@ -8,9 +8,14 @@ interface BigLinkProps {
 
 export function BigLink({ children, emoji, href }: BigLinkProps) {
     return (
-        <Link className="flex gap-4" href={href}>
+        <Link
+            className="group flex gap-2 bg-background-layer-1 p-4 hover:bg-accent"
+            href={href}
+        >
             <p>{emoji}</p>
-            <p>{children}</p>
+            <p className="group-hover:text-accent-foreground group-focus:text-accent-foreground">
+                {children}
+            </p>
         </Link>
     )
 }

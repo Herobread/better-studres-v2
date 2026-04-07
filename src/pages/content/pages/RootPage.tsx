@@ -6,6 +6,7 @@ import { SkipToMainContent } from "@src/features/accessibility/SkipToMainContent
 import CommandInput from "@src/features/command/CommandInput"
 import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMount"
 import { ConfigContext } from "@src/features/config"
+import { getModuleEmoji } from "@src/features/contentEnhancers/emoji/modules"
 import RootHeader from "@src/features/header/RootHeader"
 import { RootContent } from "@src/features/parser"
 import {
@@ -49,7 +50,7 @@ export function RootPage({ content }: RootProps) {
             <MainLayout>
                 <HeaderSection />
                 <ModulesSection modules={content.modules} />
-                <ResourcesSection />
+                <ResourcesSection taughtStudents={content.taughtStudents} />
                 <SessionArchiveSection archivedFolders={content.sessions} />
             </MainLayout>
         </div>
@@ -79,20 +80,69 @@ function ModulesSection({ modules }: { modules: ModuleContent[][] }) {
     return (
         <section className="space-y-2">
             <H2>Modules</H2>
-            <p>Directories containing materials for each module.</p>
+            <p className="text-secondary-foreground">
+                Directories containing materials for each module.
+            </p>
         </section>
     )
 }
 
-function ResourcesSection() {
+function ResourcesSection({
+    taughtStudents,
+}: {
+    taughtStudents: ModuleContent[]
+}) {
     return (
         <section className="space-y-2">
             <H2>Resources</H2>
-            <p>Additional reference materials and support.</p>
-            <div className="grid grid-cols-2">
-                <BigLink>Cheese</BigLink>
-                <BigLink>Cheese</BigLink>
-                <BigLink>Cheese</BigLink>
+            <p className="text-secondary-foreground">
+                Additional reference materials and support.
+            </p>
+            <div className="flex flex-col gap-3 md:flex-row">
+                <div className="flex flex-1 flex-col gap-3">
+                    {taughtStudents.map((folder) => (
+                        <BigLink
+                            emoji={getModuleEmoji(folder.code)}
+                            href={folder.url}
+                            key={folder.url}
+                        >
+                            {folder.code}
+                        </BigLink>
+                    ))}
+                </div>
+
+                <div className="flex flex-1 flex-col gap-3">
+                    <BigLink
+                        emoji="🧪"
+                        href="https://studres.cs.st-andrews.ac.uk/PGR/"
+                    >
+                        Materials for PGR students
+                    </BigLink>
+                    <BigLink
+                        emoji="🗓️"
+                        href="https://studres.cs.st-andrews.ac.uk/timetables/"
+                    >
+                        Timetables
+                    </BigLink>
+                    <BigLink
+                        emoji="📖"
+                        href="https://wiki.cs.st-andrews.ac.uk/index.php"
+                    >
+                        CS Wiki
+                    </BigLink>
+                    <BigLink
+                        emoji="📚"
+                        href="https://studres.cs.st-andrews.ac.uk/library/"
+                    >
+                        Library
+                    </BigLink>
+                    <BigLink
+                        emoji="ℹ️"
+                        href="https://wiki.cs.st-andrews.ac.uk/index.php?title=StudRes"
+                    >
+                        About Studres
+                    </BigLink>
+                </div>
             </div>
         </section>
     )
@@ -106,7 +156,9 @@ function SessionArchiveSection({
     return (
         <section className="space-y-2">
             <H2>Session Archive</H2>
-            <p>View past papers/courseworks/class tests/lectures:</p>
+            <p className="text-secondary-foreground">
+                View past papers/courseworks/class tests/lectures:
+            </p>
             <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
                 {archivedFolders.map((folder) => (
                     <SessionLink folder={folder} key={folder.url} />
