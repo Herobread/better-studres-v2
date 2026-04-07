@@ -131,7 +131,7 @@ function ModuleRow({ row }: { row: ModuleContent[] }) {
                     <BigModuleLink
                         key={module.url}
                         href={module.url}
-                        name={module.code}
+                        moduleCode={module.code}
                     />
                 ))}
             </div>
