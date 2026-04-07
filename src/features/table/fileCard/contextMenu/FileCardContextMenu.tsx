@@ -13,10 +13,11 @@ import useSmoothRouter from "@src/features/router/useSmoothRouter"
 import { AddNoteContextMenuItem } from "@src/features/table/fileCard/contextMenu/AddNoteContextMenuItem"
 import { AddQuickLinkMenuItem } from "@src/features/table/fileCard/contextMenu/AddQuickLinkMenuItem"
 import { CopyMenuSub } from "@src/features/table/fileCard/contextMenu/CopyMenuSub"
-import { DownloadMenuSub } from "@src/features/table/fileCard/contextMenu/DownloadMenuSub"
 import { OpenInNewTabMenuItem } from "@src/features/table/fileCard/contextMenu/OpenInNewTabMenuItem"
 import { FolderIcon, FolderRootIcon } from "lucide-react"
 import { forwardRef } from "react"
+import DownloadFileMenuItem from "./DownloadFileMenuItem"
+import DownloadUsingScpContextMenuItem from "./DownloadUsingScpContextMenuItem"
 import { MenuLabel } from "./MenuLabel"
 import { TagsMenuSub } from "./TagsMenuSub"
 import { UpdatesMenuItem } from "./UpdatesMenuItem"
@@ -68,7 +69,14 @@ const FileCardContextMenuContent = forwardRef<
 
             <CopyMenuSub fileLink={fileLink} />
 
-            <DownloadMenuSub fileLink={fileLink} />
+            <DownloadFileMenuItem
+                fileKey={fileLink.fileKey}
+                href={fileLink.href}
+                isFolder={fileLink.isFolder}
+                fileName={fileLink.fullName}
+            />
+
+            <DownloadUsingScpContextMenuItem fileKey={fileLink.fileKey} />
 
             <AddNoteContextMenuItem fileKey={fileLink.fileKey} />
 
