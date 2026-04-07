@@ -35,7 +35,7 @@ export function CopyMenuSub({ fileLink }: { fileLink: FullFileLink }) {
     )
 }
 
-function generateLabPcPath(urlSegments: UrlSegments) {
+export function generateLabPcPath(urlSegments: UrlSegments) {
     const isCurrentModuleRegex = /[A-Z]{2}\d{4}/
 
     if (isCurrentModuleRegex.test(urlSegments[0])) {
