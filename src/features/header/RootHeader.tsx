@@ -30,11 +30,12 @@ function SpecialEmoji() {
     const specialMessage = getSpecialDayMessage()
 
     return (
-        specialEmoji &&
-        specialMessage && (
-            <span title={specialMessage} className="text-2xl">
-                {specialEmoji}
-            </span>
-        )
+        <>
+            {specialEmoji && specialMessage && (
+                <span title={specialMessage} className="text-2xl">
+                    {specialEmoji}
+                </span>
+            )}
+        </>
     )
 }

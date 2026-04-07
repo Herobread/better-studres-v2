@@ -3,6 +3,13 @@ export interface ModuleContent {
     url: string
 }
 
+export interface ArchivedFolderItem {
+    startYear: number
+    endYear: number
+    url: string
+    fullYearName: string
+}
+
 /**
  * Ensures the URL has a trailing slash.
  * @param {string} url - The URL to modify.
@@ -20,7 +27,7 @@ export const ensureTrailingSlash = (url: string) =>
 export function parseRootPage(content: HTMLElement): {
     modules: ModuleContent[][]
     taughtStudents: ModuleContent[]
-    sessions: ModuleContent[]
+    sessions: ArchivedFolderItem[]
 } {
     const taughtStudents = extractTaughtStudentsLinks(content)
     const modules = extractModulesLinks(content)
@@ -82,8 +89,8 @@ export function extractTaughtStudentsLinks(
     return modules
 }
 
-export function extractSessions(content: HTMLElement): ModuleContent[] {
-    const modules: ModuleContent[] = []
+export function extractSessions(content: HTMLElement): ArchivedFolderItem[] {
+    const archivedFolders: ArchivedFolderItem[] = []
 
     const sessionHeader = Array.from(
         content.querySelectorAll("h2, h3, p")
@@ -100,11 +107,18 @@ export function extractSessions(content: HTMLElement): ModuleContent[] {
 
             if (links.length > 0) {
                 links.forEach((link) => {
-                    const moduleCode = link.textContent?.trim() || ""
+                    const fullYearName = link.textContent?.trim() || ""
                     const moduleUrl = ensureTrailingSlash(link.href)
-                    if (moduleCode && moduleUrl) {
-                        modules.push({
-                            code: moduleCode,
+
+                    const startYear =
+                        parseInt(fullYearName.substring(0, 4)) || 0
+                    const endYear = parseInt(fullYearName.substring(6, 10)) || 0
+
+                    if (fullYearName && moduleUrl) {
+                        archivedFolders.push({
+                            startYear,
+                            endYear,
+                            fullYearName,
                             url: moduleUrl,
                         })
                     }
@@ -112,7 +126,7 @@ export function extractSessions(content: HTMLElement): ModuleContent[] {
             }
 
             // If we find links, we assume this is the correct block and can stop
-            if (modules.length > 0) {
+            if (archivedFolders.length > 0) {
                 break
             }
 
@@ -121,7 +135,7 @@ export function extractSessions(content: HTMLElement): ModuleContent[] {
         }
     }
 
-    return modules
+    return archivedFolders.reverse()
 }
 
 /**

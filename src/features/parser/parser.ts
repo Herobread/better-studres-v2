@@ -6,7 +6,11 @@ import { isNotFoundPage } from "@src/features/router/isNotFoundPage"
 import { isRootPage } from "@src/features/router/isRootPage"
 import { SortLinks } from "../../types/pageContentTypes"
 import { getPageHeader } from "./getPageHeader"
-import { ModuleContent, parseRootPage } from "./root/parseRootPageContent"
+import {
+    ArchivedFolderItem,
+    ModuleContent,
+    parseRootPage,
+} from "./root/parseRootPageContent"
 
 export type PageType =
     | "folder"
@@ -44,7 +48,7 @@ export interface ForbiddenPageData extends BasePageData {
 export interface RootContent {
     modules: ModuleContent[][]
     taughtStudents: ModuleContent[]
-    sessions: ModuleContent[]
+    sessions: ArchivedFolderItem[]
 }
 
 export interface RootPageData extends BasePageData {

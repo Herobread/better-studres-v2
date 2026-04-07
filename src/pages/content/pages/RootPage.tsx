@@ -8,7 +8,10 @@ import { CommandsShortcutMount } from "@src/features/command/CommandsShortcutMou
 import { ConfigContext } from "@src/features/config"
 import RootHeader from "@src/features/header/RootHeader"
 import { RootContent } from "@src/features/parser"
-import { ModuleContent } from "@src/features/parser/root/parseRootPageContent"
+import {
+    ArchivedFolderItem,
+    ModuleContent,
+} from "@src/features/parser/root/parseRootPageContent"
 import {
     AddQuickLinkButton,
     QuickLinkContainer,
@@ -98,21 +101,21 @@ function ResourcesSection() {
 function SessionArchiveSection({
     archivedFolders,
 }: {
-    archivedFolders: ModuleContent[]
+    archivedFolders: ArchivedFolderItem[]
 }) {
-    console.log(archivedFolders)
-
     return (
         <section className="space-y-2">
             <H2>Session Archive</H2>
             <p>View past papers/courseworks/class tests/lectures:</p>
-            <div className="grid grid-cols-2">
-                <SessionLink year="2020_2021" />
-                <SessionLink year="2020_2021" />
-                <SessionLink year="2020_2021" />
-                <SessionLink year="2020_2021" />
-                <SessionLink year="2020_2021" />
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-3">
+                {archivedFolders.map((folder) => (
+                    <SessionLink folder={folder} key={folder.url} />
+                ))}
             </div>
+            <p className="text-muted-foreground">
+                Pro Tip: In any folder, press Ctrl+K and search for “Time
+                travel”
+            </p>
         </section>
     )
 }
