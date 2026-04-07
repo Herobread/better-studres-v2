@@ -6,12 +6,14 @@ import React from "react"
 interface CopyTextMenuItemProps {
     icon?: React.ReactNode
     textToCopy: string
+    messageItemName?: string
     name: string
 }
 
 export default function CopyTextMenuItem({
     icon,
     textToCopy,
+    messageItemName,
     name,
 }: CopyTextMenuItemProps) {
     const { toast } = useToast()
@@ -21,7 +23,7 @@ export default function CopyTextMenuItem({
 
         toast({
             title: "✅ Success",
-            description: `Copied ${name} to clipboard.`,
+            description: `Copied ${messageItemName || name} to clipboard.`,
         })
     }
 

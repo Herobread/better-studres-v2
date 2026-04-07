@@ -31,18 +31,21 @@ export function BasicContextMenu({
             <ContextMenuSeparator />
 
             <CopyTextMenuItem
+                messageItemName="URL"
                 icon={<LinkIcon className="h-4 w-4" />}
                 name="Copy URL"
                 textToCopy={href}
             />
 
             <CopyTextMenuItem
+                messageItemName="name"
                 icon={<FileTextIcon className="h-4 w-4" />}
                 name={`Copy "${name}"`}
                 textToCopy={name}
             />
 
             <CopyTextMenuItem
+                messageItemName="path"
                 icon={<TerminalIcon className="h-4 w-4" />}
                 name="Copy Lab PC Path"
                 textToCopy={generateLabPcPath(extractUrlSegments(href))}
