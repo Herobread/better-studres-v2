@@ -79,8 +79,6 @@ function HeaderSection() {
 }
 
 function ModulesSection({ modules }: { modules: ModuleContent[][] }) {
-    console.log(modules)
-
     return (
         <section className="space-y-2">
             <H2>Modules</H2>
