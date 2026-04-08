@@ -52,7 +52,7 @@ export default function BlacklistToggle() {
     }
 
     return (
-        <Tooltip>
+        <Tooltip disableHoverableContent>
             <TooltipTrigger>
                 <Toggle
                     onPressedChange={handleChange}

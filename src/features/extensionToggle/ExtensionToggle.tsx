@@ -48,7 +48,7 @@ export default function ExtensionToggle() {
     }
 
     return (
-        <Tooltip>
+        <Tooltip disableHoverableContent>
             <TooltipTrigger>
                 <Toggle
                     size={"sm"}
